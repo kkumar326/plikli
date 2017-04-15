@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="Robots" content="none" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./templates/admin/css/style.css" media="screen" />
+	<style type="text/css">
+	body {
+		padding-top: 75px;
+		background-color: #ffffff;
+		background-image: url(./templates/admin/img/grid-18px-masked.png);
+		background-repeat: repeat-x;
+		background-position: 0 46px;
+	}
+	</style>
+	
+	<title>Kliqqi Readme</title>
+
+</head>
+<body>
+<header role="banner" class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button data-target=".bs-navbar-collapse" data-toggle="collapse" type="button" class="navbar-toggle">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="http://kliqqi.com/"><img src="./templates/admin/img/kliqqi.png" height="20px;" alt="Kliqqi CMS" title="Kliqqi CMS"/></a>
+		</div>
+		<nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="./index.php" title="Home">Home</a></li>
+				<li class="active"><a href="#" title="Readme">Readme</a></li>
+				<li><a href="./install/install.php" title="Install">Install</a></li>
+				<li><a href="./install/upgrade.php" title="Upgrade">Upgrade</a></li>
+				<li><a href="./install/troubleshooter.php" title="Troubleshooter">Troubleshooter</a></li>
+				<li><a href="./admin/" title="Admin">Admin</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<div class="container">
+	<section id="maincontent">
+		<div class="row">
+			
+			<div class="col-md-9">
+				
+				<legend><a href="#install" name="welcome">Welcome to Kliqqi!</a></legend>
+				<p>You are just a few steps away from starting your very first Kliqqi website! This page will guide you through installing Kliqqi for the first time, upgrading an existing Kliqqi website to the latest version, troubleshooting common issues, and backing up your Kliqqi site for safe keeping. </p>
+			
+				<p><strong>About Kliqqi:</strong> Kliqqi is an open source CMS that powers news and and user feedback websites. It is available to download for free from the project homepage: <a href="http://kliqqi.com/">http://kliqqi.com</a>.</p>
+				
+				<legend><a href="#install" name="install">Installation</a></legend>
+				<p><strong>Requirements:</strong> Kliqqi requires a modern version of PHP and MySQL and some PHP functions. To test if your server is capable of running Kliqqi please view the <a href="./install/troubleshooter.php">Troubleshooter</a>. If any errors appear on that page you may have a problem with either installing or running Kliqqi.</p>
+				
+				<ol>
+					<li>Create a mysql database. If you are unfamiliar with how to create a mysql database, please contact your web host or search their support site. Please pay careful attention when creating a database and write down your database name, username, password, and host somewhere.</li>
+					<li>Rename the /favicon.ico.default to /favicon.ico</li>
+					<li>Rename the /settings.php.default to /settings.php</li>
+					<li>Rename the /languages/lang_english.conf.default file to lang_english.conf. Same instructions apply to any other language file that you might use that are located in the /languages directory.</li>
+					<li>Rename the /libs/dbconnect.php.default file to dbconnect.php</li>
+					<li>Rename the directory /logs.default to /logs</li>
+					<li>Upload the files to your server.</li>
+					<li>CHMOD 755 the following directories and files. If you experience any errors try 777.
+						<ul>
+							<li>/admin/backup/</li>
+							<li>/avatars/groups_uploaded/</li>
+							<li>/avatars/user_uploaded/</li>
+							<li>/cache/</li>
+							<li>/languages/ (all files contained in this folder should be CHMOD 777)</li>
+							<li>/logs/ (all files contained should be CHMOD 777)</li>
+						</ul>
+					</li>
+					<li>CHMOD 666 the following files
+						<ul>
+							<li>/libs/dbconnect.php</li>
+							<li>/settings.php</li>
+						</ul>
+					</li>
+					<li>Open /install/index.php in your web browser. If you are reading this document after you uploaded it to your server, click on the install link at the top of the page.
+						<ul>
+							<li>Select a language from the list. </li>
+							<li>Fill out your database name, username, password, host, and your desired table prefix.</li>
+							<li>Create an admin account. Please write down the login credentials for future reference.</li>
+							<li>Make sure there are no error messages! If you see an error message, or if installation fails, <a href="http://www.kliqqi.com/forum/">report it here</a>.</li>
+						</ul>
+					</li>
+					<li>Delete your /install folder.</li>
+					<li>CHMOD 644 libs/dbconnect.php</li>
+					<li>Open /index.php</li>
+					<li>Log in to the admin account using the credentials generated during the install process.</li>
+					<li>Log in to the admin panel ( /admin ).</li>
+					<li>Configure your Kliqqi site to your liking.</li> 
+				</ol>
+				<br />
+		
+				<legend><a href="#backup" name="backup">Backup</a></legend>
+				<ol>
+					<li>Log into your site as admin</li>
+					<li>Click on admin panel link</li>
+					<li>Click on File and MySQL backup link</li>
+					<li>Backup your files, avatars, and MySQL database</li>
+					<li>Download the backup .zip files to your computer</li>
+					<li>Delete the files from the backup manager</li>
+				</ol>
+				<br />
+				
+				<legend><a href="#version" name="version">Version</a></legend>
+				<p><strong>Kliqqi CMS Version</strong></p>
+				<p>For easy access, the Kliqqi Admin Panel's "Statistics" widget displays your Kliqqi CMS Version. Kliqqi stores your version number in a MySQL database under the kliqqi_misc_data table. If you have access to a tool to view your MySQL database, like PhpMyAdmin, you will find that the data is stored under the name "kliqqi_version". </p>
+				<p>To upgrade to the latest version of Kliqqi CMS, make sure that you run the file /install/upgrade.php in your browser after uploading the latest version Kliqqi files to your server. If you forget to take this step your database may not be up to date with the latest version, causing the version number displayed in the Admin Panel to be incorrect.</p>
+
+				<br />
+
+				<legend><a href="#upgrade" name="upgrade">Upgrading</a></legend>
+				<div class="well">
+				Please be sure to <strong>make a backup of your MySQL databases	and files before upgrading</strong> to the latest version of Kliqqi. Some upgrades might require that you upgrade your MySQL database, so please make backups whenever upgrading.<br />
+				These instructions do not support upgrading your template. Template upgrades require manual changes and should be carefully handled by the template author.<br />
+				The directions below are recommendations that we have come up with to mininimize the number of problems that might come from upgrading your site.
+				</div>
+				<ol>
+					<li>Backup your MySQL database</li>
+					<li>Backup your old Kliqqi CMS files.</li>
+					<li>Rename your template folder so that the data is not overwritten by upgrade files. If you use a template name that is not included with Kliqqi, skip this step.</li>
+					<li> Disable all of the modules from your admin panel. <br />
+					You will need to re-enable them after upgrade.</li>
+					<li>Delete all of the files from your server EXCEPT:
+					   <ol>
+						   <li>/avatars/ (entire directory)</li>
+						   <li>/libs/dbconnect.php</li>
+						   <li>/favicon.ico</li>
+						   <li>/settings.php</li>
+					   </ol>
+					</li>
+					<li>Upload all of the new files to your server. <br />
+					If you are able to, I suggest uploading a zip file to the server and extracting it server-side. This will minimize the chances of files being corrupted during FTP transfer, which is a common issue.<br />
+					<li>Confirm that the CHMOD permissions for the following files or directories are all set to 777.</li>
+						<ul>
+							<li>/settings.php</li>
+							<li>/admin/backup/</li>
+							<li>/avatars/groups_uploaded/</li>
+							<li>/avatars/user_uploaded/</li>
+							<li>/cache/</li>
+							<li>/languages/ (and all of the content within this directory)</li>
+						</ul>
+					</li>
+					<li>Run the upgrade from /install/upgrade.php<br />
+						If there are no error messages, delete the /install directory from your web server.</li>
+					<li>Navigate to your homepage and log in as an "admin" level user.<br />
+						In some cases you may already be logged in from your previous version of Kliqqi.</li>
+					<li>Either update your template to work with the latest version or navigate to /admin/admin_config.php?page=Template and change the template name to "bootstrap"</li>
+					<li>Re-activate the disabled modules from step 4</li>
+				</ol>
+				
+				<br />
+				
+				<legend><a href="#support" name="support">Support</a></legend>
+				<p>Kliqqi is an Open source project, but that doesn't stop us from having a rock-solid support team. Users from all across the world are watching the forum 24 hours a day helping each other out. If you have any questions, ideas, modifications or bugs to discuss please let us know through the Kliqqi forum.</p>
+				
+				<legend><a href="#credits" name="credits">Credits</a></legend>
+				<p>This code was originally written by Ricardo Galli for the open source project known as <a href="http://www.meneame.net">Meneame</a>.</p>
+				<p>Many thanks to those who donated time and money to the Kliqqi project. Without their support we wouldn't be able to keep this project going. If you are interested in becoming a part of the development team please <a href="http://kliqqi.com/contact/">contact us through kliqqi.com</a>.</p>
+				
+				<p>Graphic design elements by the following authors or projects:
+					<ul>
+						<li><a href="http://glyphicons.com/" rel="nofollow" target="_blank">Bootstrap icons by Glyphicons.com</a></li>
+						<li><a href="http://vervex.deviantart.com/art/Somacro-29-300DPI-Social-Media-Icons-267955425?" rel="nofollow" target="_blank">Social Media Icons by Vervex</a></li>
+					</ul>
+				</p>
+				
+				<p><strong>A special thank you to all of the Kliqqi developers and translators.</strong></p>
+				
+				<legend><a href="#license" name="license">License</a></legend>
+				<p>Kliqqi's source code is published under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported Copyright</a>. You can view the license in the file LICENSE.txt. Kliqqi is based on The Open Source Pligg CMS.</p>
+				
+				
+				<legend>Questions / Comments?</legend>
+				<p>General questions and comments can be posted to the <a href="http://kliqqi.com/forums/">Kliqqi Support</a> website.</p>
+				<p>Please report security flaws through our <a href="http://kliqqi.com/contact/">Contact Form</a> on kliqqi.com. You may also use the contact form to offer your help in developing the project. Do not contact us directly for any other purposes, as we will ignore any messages outside of those two categories.</p>
+				<p>Bugs can be reported using our <a href="http://www.kliqqi.com/forums/">forum</a>.</p>
+				
+			</div>
+			
+			<div class="col-md-3">
+				<div id="slider" style="position:absolute;padding-top:80px;">
+					<div class="well readme-sidebar-nav">
+						<ul class="nav nav-list not-admin-sidebar">
+							<li class="nav-header readme_shortcuts">Readme Shortcuts</li>
+							<li><a href="#welcome">Welcome</a></li>
+							<li><a href="#install">Installation</a></li>
+							<li><a href="#backup">Backup</a></li>
+							<li><a href="#version">Version</a></li>
+							<li><a href="#upgrade">Upgrade</a></li>
+							<li><a href="#support">Support</a></li>
+							<li><a href="#credits">Credits</a></li>
+							<li class="nav-header kliqqi_resources">Kliqqi CMS Resources</li>
+							<li><a href="http://kliqqi.com/">Kliqqi Homepage</a></li>
+							<li><a href="http://kliqqi.com/forums/">General Support</a></li>
+							
+						</ul>
+					</div>
+					
+					<script type="text/javascript"><!--
+					/* Script by: www.jtricks.com
+					 * Version: 20071017
+					 * Latest version:
+					 * www.jtricks.com/javascript/navigation/floating.html
+					 */
+					var floatingMenuId = 'slider';
+					var floatingMenu =
+					{
+						targetY: 0,
+
+						hasInner: typeof(window.innerWidth) == 'number',
+						hasElement: typeof(document.documentElement) == 'object'
+							&& typeof(document.documentElement.clientWidth) == 'number',
+
+						menu:
+							document.getElementById
+							? document.getElementById(floatingMenuId)
+							: document.all
+							  ? document.all[floatingMenuId]
+							  : document.layers[floatingMenuId]
+					};
+
+					floatingMenu.move = function ()
+					{
+						floatingMenu.menu.style.left = floatingMenu.nextX + 'px';
+						floatingMenu.menu.style.top = floatingMenu.nextY + 'px';
+					}
+
+					floatingMenu.computeShifts = function ()
+					{
+						var de = document.documentElement;
+
+						floatingMenu.shiftX =  
+							floatingMenu.hasInner  
+							? pageXOffset  
+							: floatingMenu.hasElement  
+							  ? de.scrollLeft  
+							  : document.body.scrollLeft;  
+						if (floatingMenu.targetX < 0)
+						{
+							floatingMenu.shiftX +=
+								floatingMenu.hasElement
+								? de.clientWidth
+								: document.body.clientWidth;
+						}
+
+						floatingMenu.shiftY = 
+							floatingMenu.hasInner
+							? pageYOffset
+							: floatingMenu.hasElement
+							  ? de.scrollTop
+							  : document.body.scrollTop;
+						if (floatingMenu.targetY < 0)
+						{
+							if (floatingMenu.hasElement && floatingMenu.hasInner)
+							{
+								// Handle Opera 8 problems
+								floatingMenu.shiftY +=
+									de.clientHeight > window.innerHeight
+									? window.innerHeight
+									: de.clientHeight
+							}
+							else
+							{
+								floatingMenu.shiftY +=
+									floatingMenu.hasElement
+									? de.clientHeight
+									: document.body.clientHeight;
+							}
+						}
+					}
+
+					floatingMenu.calculateCornerX = function()
+					{
+						if (floatingMenu.targetX != 'center')
+							return floatingMenu.shiftX + floatingMenu.targetX;
+
+						var width = parseInt(floatingMenu.menu.offsetWidth);
+
+						var cornerX =
+							floatingMenu.hasElement
+							? (floatingMenu.hasInner
+							   ? pageXOffset
+							   : document.documentElement.scrollLeft) + 
+							  (document.documentElement.clientWidth - width)/2
+							: document.body.scrollLeft + 
+							  (document.body.clientWidth - width)/2;
+						return cornerX;
+					};
+
+					floatingMenu.calculateCornerY = function()
+					{
+						if (floatingMenu.targetY != 'center')
+							return floatingMenu.shiftY + floatingMenu.targetY;
+
+						var height = parseInt(floatingMenu.menu.offsetHeight);
+
+						// Handle Opera 8 problems
+						var clientHeight = 
+							floatingMenu.hasElement && floatingMenu.hasInner
+							&& document.documentElement.clientHeight 
+								> window.innerHeight
+							? window.innerHeight
+							: document.documentElement.clientHeight
+
+						var cornerY =
+							floatingMenu.hasElement
+							? (floatingMenu.hasInner  
+							   ? pageYOffset
+							   : document.documentElement.scrollTop) + 
+							  (clientHeight - height)/2
+							: document.body.scrollTop + 
+							  (document.body.clientHeight - height)/2;
+						return cornerY;
+					};
+
+					floatingMenu.doFloat = function()
+					{
+						var stepX, stepY;
+
+						floatingMenu.computeShifts();
+
+						var cornerX = floatingMenu.calculateCornerX();
+
+						var stepX = (cornerX - floatingMenu.nextX) * .07;
+						if (Math.abs(stepX) < .5)
+						{
+							stepX = cornerX - floatingMenu.nextX;
+						}
+
+						var cornerY = floatingMenu.calculateCornerY();
+
+						var stepY = (cornerY - floatingMenu.nextY) * .07;
+						if (Math.abs(stepY) < .5)
+						{
+							stepY = cornerY - floatingMenu.nextY;
+						}
+
+						if (Math.abs(stepX) > 0 ||
+							Math.abs(stepY) > 0)
+						{
+							floatingMenu.nextX += stepX;
+							floatingMenu.nextY += stepY;
+							floatingMenu.move();
+						}
+
+						setTimeout('floatingMenu.doFloat()', 20);
+					};
+
+					// addEvent designed by Aaron Moore
+					floatingMenu.addEvent = function(element, listener, handler)
+					{
+						if(typeof element[listener] != 'function' || 
+						   typeof element[listener + '_num'] == 'undefined')
+						{
+							element[listener + '_num'] = 0;
+							if (typeof element[listener] == 'function')
+							{
+								element[listener + 0] = element[listener];
+								element[listener + '_num']++;
+							}
+							element[listener] = function(e)
+							{
+								var r = true;
+								e = (e) ? e : window.event;
+								for(var i = element[listener + '_num'] -1; i >= 0; i--)
+								{
+									if(element[listener + i](e) == false)
+										r = false;
+								}
+								return r;
+							}
+						}
+
+						//if handler is not already stored, assign it
+						for(var i = 0; i < element[listener + '_num']; i++)
+							if(element[listener + i] == handler)
+								return;
+						element[listener + element[listener + '_num']] = handler;
+						element[listener + '_num']++;
+					};
+
+					floatingMenu.init = function()
+					{
+						floatingMenu.initSecondary();
+						floatingMenu.doFloat();
+					};
+
+					// Some browsers init scrollbars only after
+					// full document load.
+					floatingMenu.initSecondary = function()
+					{
+						floatingMenu.computeShifts();
+						floatingMenu.nextX = floatingMenu.calculateCornerX();
+						floatingMenu.nextY = floatingMenu.calculateCornerY();
+						floatingMenu.move();
+					}
+
+					if (document.layers)
+						floatingMenu.addEvent(window, 'onload', floatingMenu.init);
+					else
+					{
+						floatingMenu.init();
+						floatingMenu.addEvent(window, 'onload',
+							floatingMenu.initSecondary);
+					}
+
+					//--></script>
+		
+				</div>
+			</div>
+		</div><!--/.row-->
+	</section><!--/#maincontent-->
+	
+	<hr />
+
+	<footer class="footer">
+		<div id="footer">
+			<span class="subtext"> 
+				<a href="http://kliqqi.com/" target="_blank">Kliqqi Content Management System</a> 
+			</span>
+		</div>
+	</footer>
+</div><!--/.container-->
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" media="all" rel="stylesheet" type="text/css" />
+
+<!--[if lt IE 7]>
+<script type="text/javascript" src="../templates/admin/js/jquery/jquery.dropdown.js"></script>
+<![endif]-->
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+</html>

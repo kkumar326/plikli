@@ -1,0 +1,54 @@
+
+/************** WIDGETS **************/
+
+.column {
+width: 445px;
+float: left;
+}
+
+.portlet { 
+margin: 0 1em 1em 0; 
+}
+
+.portlet a {
+color:#428BCA;
+}
+
+.portlet-header .ui-icon {
+float: right;
+}
+
+.portlet-header {
+font-size:13px;
+font-weight:bold;
+margin: 1px 0 0 0;
+padding: 2px 0 4px 8px;
+}
+
+.portlet-content {
+padding:0 6px 6px 6px;
+}
+
+.panel-wrapper {
+font-size:12px;
+font-weight:normal;
+margin-top:4px;
+}
+.panel-wrapper ul {
+	list-style-type:none;
+	padding:0;
+	margin:0 !important;
+}
+
+.panel-wrapper ul li {
+	line-height:16px;
+}
+
+.ui-sortable-placeholder {
+border: 1px dotted black;
+visibility: visible !important;
+height: 50px !important;
+}
+.ui-sortable-placeholder * {
+visibility: hidden;
+}

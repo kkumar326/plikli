@@ -1,0 +1,1 @@
+{config_load file=anonymous_story_kliqqi_lang_conf}

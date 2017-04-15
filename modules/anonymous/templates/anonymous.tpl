@@ -1,0 +1,1 @@
+{config_load file=anonymous_kliqqi_lang_conf}

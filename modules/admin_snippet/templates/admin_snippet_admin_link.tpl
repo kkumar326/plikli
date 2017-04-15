@@ -1,0 +1,1 @@
+<li{if $modulename eq "admin_snippet"} class="active"{/if}><a href="{$my_kliqqi_base}/module.php?module=admin_snippet">Snippet</a></li>

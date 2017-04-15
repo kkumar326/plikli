@@ -1,0 +1,19 @@
+<h2>Karma Module</h2>
+
+<h3>Description</h3>
+<p>The Karma module recalculates user karma scores when common actions are performed, such as when a user submits an article, leaves a comment, or performs a voting action. Karma scores are a good indicator of how active an account is on a Kliqqi website, and Kliqqi CMS makes use of karma scores when displaying the "Top Users" page.</p>
+
+<h3>Revision History</h3>
+<p>
+<ul>
+	<li>Redwine, Apr 17, 2015. <a href="https://github.com/Pligg/pligg-cms/commit/737770202d22ec938465fe66e52f2ae7cdcf5240">fix to some bugs in the Karma system</a></li>
+	<li>The code, as is, updates twice the user_karma in the users table upon up-voting a story.
+	<li>Does nothing when downvoting a story.</li>
+	<li>If a user repeatedly votes a story up and down, they accumulate karma on up-voting and is not offset by the downvoting. Therefore, the "Vote on an article is removed" value must always be set as a negative value equal to what is set in "Voted on an article"</li>
+</ul>
+<ul>
+	<li>v1.0 07/17/2013 - Pligg 2</li>
+	<li>v0.2 08/11/2011 i4g - You can now subtract a value when a vote is removed</li>
+	<li>v0.10 08/20/2010 DB - First version</li>
+</ul>
+</p>
