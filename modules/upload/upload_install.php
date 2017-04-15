@@ -1,7 +1,7 @@
 <?php
 	$module_info['name'] = 'Upload';
 	$module_info['desc'] = 'Attach images and files to an article';
-	$module_info['version'] = 2.00;
+	$module_info['version'] = 2.0;
 	$module_info['update_url'] = '';
 	$module_info['homepage_url'] = 'http://www.kliqqi.com/mods/upload.zip';
 	$module_info['settings_url'] = '../module.php?module=upload';

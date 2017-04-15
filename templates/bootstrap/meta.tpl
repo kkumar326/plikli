@@ -36,7 +36,12 @@
 	<meta property="og:url" content="{$my_base_url}{$navbar_where.link1}" />
 	<meta name="twitter:url" content="{$my_base_url}{$navbar_where.link1}" />
 {/if}
-<meta property="og:image" content="{php} if ($_SESSION['uploaded_image'] != '') {echo $_SESSION['uploaded_image'];}else{echo my_base_url.my_kliqqi_base."/".str_replace("/","",my_kliqqi_base)."-og.jpg";}{/php}" />
+	{******* One method *******}
+<meta property="og:image" content="{php} if ($_SESSION['uploaded_image'] != '') {echo $_SESSION['uploaded_image'];}else{echo my_base_url.my_kliqqi_base.'/'.str_replace('/','',my_kliqqi_base).'-og.jpg';}{/php}" />	
+	{******* END One method *******}
+	{******* Another method *******}
+<!--<meta property="og:image" content="{php}global $current_user; if ($_SESSION['uploaded_image'] != '') {echo $_SESSION['uploaded_image'];}elseif ($current_user->authenticated) {{/php}{$Current_User_Avatar.large}{php}}else{{/php}{$my_base_url}{$my_kliqqi_base}{$Default_Gravatar_Large}{php}}{/php}" /> -->
+	{******* END Another method *******}
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="{php} if ($_SESSION['uploaded_image'] != '') {echo $_SESSION['uploaded_image'];}else{echo my_base_url.my_kliqqi_base.'/'.str_replace('/','',my_kliqqi_base).'-og.jpg';}{/php}" />

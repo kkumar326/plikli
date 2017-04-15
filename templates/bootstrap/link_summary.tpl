@@ -112,6 +112,9 @@
 				 {else}
 					{if $pagename eq "story" && $url_short neq "http://" && $url_short neq "://"}
 						<a href="{$url}" {if $open_in_new_window eq true} target="_blank"{/if} {if $story_status neq "published"}rel="nofollow"{/if}>{$title_short}</a>
+{*Redwine: to only link the title when the story content is not empty*}
+					{elseif $pagename neq "story" && $story_content eq ''} 
+					  {$title_short}
 					{else} 
 					  <a href="{$story_url}">{$title_short}</a>
 					{/if}
