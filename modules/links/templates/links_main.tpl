@@ -21,8 +21,20 @@
 				<td><label>{#KLIQQI_links_Convert_Stories#}</label></td>
 			</tr>
 			<tr>
-				<td width="20"><input type="checkbox" name="links_nofollow" value="1" {if $settings.nofollow}checked{/if}/></td>
-				<td><label>{#KLIQQI_links_Convert_Nofollow#}</label></td>
+				<td width="20"><input type="checkbox" name="links_yt_stories" value="1" {if $settings.yt_stories}checked{/if}/></td>
+				<td><label>{#KLIQQI_links_Convert_Youtube_Stories#}</label></td>
+			</tr>
+			<tr>
+				<td width="20"><input type="checkbox" name="links_yt_comments" value="1" {if $settings.yt_comments}checked{/if}/></td>
+				<td><label>{#KLIQQI_links_Convert_Youtube_Comments#}</label></td>
+			</tr>
+			<tr>
+				<td width="20"><input type="checkbox" name="links_fb_stories" value="1" {if $settings.fb_stories}checked{/if}/></td>
+				<td><label>{#KLIQQI_links_Convert_Facebook_Stories#}</label></td>
+			</tr>
+			<tr>
+				<td width="20"><input type="checkbox" name="links_fb_comments" value="1" {if $settings.fb_comments}checked{/if}/></td>
+				<td><label>{#KLIQQI_links_Convert_Facebook_Comments#}</label></td>
 			</tr>
 			<tr>
 				<td colspan="2" class="alert-danger"><p>{#KLIQQI_links_Instructions_3#}</p><p><strong style="text-decoration:underline;">{#KLIQQI_links_Convert_All_Users#}</strong> {#KLIQQI_links_Instructions_all_users#}</p><p><strong style="text-decoration:underline;">{#KLIQQI_links_Convert_Moderators#}</strong> {#KLIQQI_links_Instructions_just_moderators#}</p><p><strong style="text-decoration:underline;">{#KLIQQI_links_Convert_Admins#}</strong> {#KLIQQI_links_Instructions_just_admins#}</p></td>
