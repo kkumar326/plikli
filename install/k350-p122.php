@@ -1264,11 +1264,11 @@ echo '<fieldset><legend>Updating data in Widgets table.</legend><ul>';
 			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '1.0' WHERE `name` = '" .$module['name'] ."';";
 			$warnings[] = "Check the Links module because we added few settings to it <strong style=\"text-decoration:underline;background-color:#0100ff\">YOU HAVE TO GO TO ITS SETTINGS AND SELECT THE NEW OPTIONS THAT YOU WANT; OTHERWISE IT WILL NOT WORK UNTIL YOU DO SO!</strong>!";
 		}elseif ($module['name'] == 'Sidebar Comments') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.0' WHERE `name` = '" .$module['name'] ."';";
+			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.1' WHERE `name` = '" .$module['name'] ."';";
 		}elseif ($module['name'] == 'Sidebar Saved') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.1' WHERE `name` = '" .$module['name'] ."';";
+			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.2' WHERE `name` = '" .$module['name'] ."';";
 		}elseif ($module['name'] == 'Sidebar Stories') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.1' WHERE `name` = '" .$module['name'] ."';";
+			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.2' WHERE `name` = '" .$module['name'] ."';";
 		}elseif ($module['name'] == 'Simple Private Messaging') {
 			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '3.0' WHERE `name` = '" .$module['name'] ."';";
 		}elseif ($module['name'] == 'Social Bookmark') {
