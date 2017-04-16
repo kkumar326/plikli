@@ -9,6 +9,7 @@
 			{$errorMsg}
 		</div>
 	{/if}
+	{if $errorMsg eq ""}
 	<div class="col-md-4 left">
 		<form action="recover.php" id="thisform2" method="post">
 			<div class="control-group">	
@@ -50,5 +51,6 @@
 				{/if}
 		</form>
 	</div>
+	{/if}
 </div>
 <!--/recover_password_center.tpl -->
