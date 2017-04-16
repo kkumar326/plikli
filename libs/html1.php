@@ -701,7 +701,7 @@ function getmyurl($x, $var1="", $var2="", $var3="") {
 		elseif ($x == "search_url") $ret = "/search.php?search=" . $var1;
 		elseif ($x == "admin_login") $ret = "/admin/admin_login.php?return=" . $var1;
 		elseif ($x == "login") $ret = "/login.php?return=" . $var1;
-		elseif ($x == "logout") $ret = "/login.php?op=logout&return=" . $var1;
+		elseif ($x == "logout") $ret = "/login.php?op=logout&return=".my_kliqqi_base; //return=" . $var1; /*Redwine: making both URL method 1 and 2 consistent by setting the return to the root.*/
 		elseif ($x == "user_edit") $ret = "/profile.php?login=$var1";
 		elseif ($x == "register") $ret = "/register.php";
 		elseif ($x == "category") $ret = "/index.php?category=" . $var1;
