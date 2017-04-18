@@ -21,6 +21,10 @@
 				<td><label>{#KLIQQI_links_Convert_Stories#}</label></td>
 			</tr>
 			<tr>
+				<td width="20"><input type="checkbox" name="links_nofollow" value="1" {if $settings.nofollow}checked{/if}/></td>
+				<td><label>{#KLIQQI_links_Convert_Nofollow#}</label></td>
+			</tr>
+			<tr>
 				<td width="20"><input type="checkbox" name="links_yt_stories" value="1" {if $settings.yt_stories}checked{/if}/></td>
 				<td><label>{#KLIQQI_links_Convert_Youtube_Stories#}</label></td>
 			</tr>
