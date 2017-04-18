@@ -20,7 +20,7 @@
 	  `cmt_date` timestamp NOT NULL default CURRENT_TIMESTAMP,
 	  `cmt_parent` int(20) NOT NULL default '0',
 		PRIMARY KEY  (`auto_id`)
-		) ENGINE=MyISAM ");
+		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
 
 	$module_info['db_add_table'][]=array(
 	'name' => table_prefix . "spam_links",
@@ -29,7 +29,7 @@
 	  `userid` int(20) NOT NULL default '0',
 	  `linkid` int(20) NOT NULL default '0',
 		PRIMARY KEY  (`auto_id`)
-		) ENGINE=MyISAM ");
+		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
 
 	$module_info['db_sql'][] = "INSERT INTO ".table_widgets." (`name`, `version`, `latest_version`, `folder`, `enabled`, `column`, `position`, `display`) VALUES ('Akismet', 0.1, 0, 'akismet', 1, 'right', 7, '')";
 

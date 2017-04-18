@@ -25,7 +25,7 @@
 		`file_hide_file` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
 		`file_comment_id` int(11) NOT NULL DEFAULT '0',
 	  PRIMARY KEY  (`file_id`)
-	) ENGINE=MyISAM ");
+	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
 
 	// these are seperate because most people will have the tables already
 	// created from a previous install

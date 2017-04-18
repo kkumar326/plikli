@@ -17,5 +17,5 @@
 	  `snippet_order` int(11) NOT NULL,
 	  `snippet_content` text,
 	  PRIMARY KEY  (`snippet_id`)
-	) ENGINE=MyISAM DEFAULT CHARSET=utf8");
+	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
 ?>
