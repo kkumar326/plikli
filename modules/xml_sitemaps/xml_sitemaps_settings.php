@@ -19,7 +19,7 @@
 */
 // the path to the module. the probably shouldn't be changed unless you rename the xml_sitemaps folder(s)
 define('xml_sitemaps_path', my_kliqqi_base . '/modules/xml_sitemaps/');
-
+define('xml_sitemaps_tpl_path', '../modules/xml_sitemaps/templates/');
 // the path to the module. the probably shouldn't be changed unless you rename the xml_sitemaps folder(s)
 define('xml_sitemaps_lang_conf', '/modules/xml_sitemaps/lang.conf');
 
@@ -28,6 +28,7 @@ define('xml_sitemaps_lang_conf', '/modules/xml_sitemaps/lang.conf');
 if(is_object($main_smarty)){
 	$main_smarty->assign('xml_sitemaps_path', xml_sitemaps_path);
 	$main_smarty->assign('xml_sitemaps_conf', xml_sitemaps_lang_conf);
+	$main_smarty->assign('xml_sitemaps_tpl_path', xml_sitemaps_tpl_path);
 }
 
 ?>

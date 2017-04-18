@@ -24,6 +24,8 @@ if(defined('mnminclude')){
 	$do_not_include_in_pages = array();
 
 	if( do_we_load_module() ) {
+		//Redwine: this below is needed to show the module's name and link in the left sidebar.
+		module_add_action_tpl('tpl_header_admin_main_links', xml_sitemaps_tpl_path . 'xml_sitemaps_admin_link.tpl');
                 if($moduleName == 'xml_sitemaps_show_sitemap'){
                         module_add_action('module_page', 'xml_sitemaps_show_sitemap', '');
                         include_once(mnmmodules . 'xml_sitemaps/xml_sitemaps_main.php');
