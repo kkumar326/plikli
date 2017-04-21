@@ -11,11 +11,11 @@ if($do_check == true){
 	if (strpos($_SERVER['SCRIPT_NAME'], "install.php") == 0){
 		$errors = array();
 		$file = dirname(__FILE__) . '/../settings.php'; 
-		if (!file_exists($file)) { $errors[]="<strong>/settings.php was not found!</strong><br /> Try renaming 'settings.php.default' to 'settings.php'"; }
+		if (!file_exists($file)) { $errors[]="<strong>/settings.php was not found!</strong><br /> Needs to be renamed from 'settings.php.default' to 'settings.php'"; }
 		elseif (filesize($file) <= 0) { $errors[]="/settings.php is 0 bytes!"; }
 
 		$file = dirname(__FILE__) . '/../libs/dbconnect.php'; 
-		if (!file_exists($file)) { $errors[]="<strong>/libs/dbconnect.php was not found!</strong><br />Try renaming '/libs/dbconnect.php.default' to '/libs/dbconnect.php'"; }
+		if (!file_exists($file)) { $errors[]="<strong>/libs/dbconnect.php was not found!</strong><br />Needs to be renamed from '/libs/dbconnect.php.default' to '/libs/dbconnect.php'"; }
 
 		$file= dirname(__FILE__) . '/../cache'; 
 		if (!file_exists($file)) { $errors[]="<strong>/cache/ was not found!</strong> Create a directory called cache in your root directory and CHMOD it to 777."; }
@@ -54,14 +54,15 @@ if($do_check == true){
 							<div class="row">
 								<div class="col-md-12">
 									<legend>Error Loading Site!</legend>
-									<p>Have you installed your website yet? Please fix the errors below and proceed to the <a href="./readme.html">Kliqqi Readme</a> or the <a href="./install/">Kliqqi Installation</a> which will attempt to rename the .default files for you.</p>
+									<p>Have you installed your website yet? Please fix the errors below by proceeding to the  <a href="./install/troubleshooter.php">Kliqqi Troubleshooter</a> which will set all the required files and persmissions for you!<br />Also, check <a href="./readme.html">Kliqqi Readme</a> to learn more about the required files and their permissions (CHMOD) </p>
 									';
+									echo '<strong>The below are just warnings that some files need to be renamed. You don\'t have to do anything, JUST CLICK ON THE <a href="./install/troubleshooter.php">Kliqqi Troubleshooter</a> TO FIX ALL THE WARNINGS!</strong>';
 									foreach ($errors as $error) {
 										echo "<div class='alert alert-info'>";
 										echo "$error \n";
 										echo "</div>";
 									}
-									echo '<div class="alert alert-danger">Please fix the above error(s) before proceeding to the installation page.</div>';
+									//echo '<div class="alert alert-danger">Please fix the above error(s) before proceeding to the installation page.</div>';
 								echo '
 								</div>
 							</div><!--/.row-->

@@ -51,11 +51,11 @@ if(!defined('mnminclude')){header('Location: ../error_404.php');die();}
 							<div class="col-md-12">
 								<legend>Error establishing a database connection!</legend>
 								<ol>
-									<li>Have you run the <a href = "./install/install.php">Kliqqi Installer</a> yet?</li>
-									<li>Does the file /libs/dbconnect.php exist?</li>
+									<li>Run the <a href = "./install/troubleshooter.php">Kliqqi Installer</a> Troubleshooter</a> to fix all errors and set all the required files and persmissions!</li>
+									<!--<li>Does the file /libs/dbconnect.php exist?</li>
 									<li>Does the above file have the correct database username and password combination?</li>
 									<li>Are you sure that you have typed the correct hostname? Typically this value is set to "localhost".</li>
-									<li>Are you sure that the database server is running?</li>
+									<li>Are you sure that the database server is running?</li>-->
 								</ol>
 							</div>
 						</div><!--/.row-->
