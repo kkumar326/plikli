@@ -67,7 +67,7 @@ function getfiles($dirname=".") {
 	if($handle = opendir($dirname)) {
 	   while(false !== ($file = readdir($handle))){
 			if(preg_match('/'.$pattern.'/i', $file)){
-				echo "<li>$file</li>";
+				echo "<li><input type=\"checkbox\" name=\"language[]\" id=\"color\" value=\"$file\">$file</li>";
 			}
 	   }
 		closedir($handle);
