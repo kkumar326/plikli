@@ -1,7 +1,7 @@
 <?php
 session_start();
 //include('../config.php');
-
+include('db-mysqli.php');
 echo '<style type="text/css">
 h2 {
 margin:0 0 5px 0;
@@ -65,12 +65,12 @@ $ok = 'ok.png';
 $warnings = array();
 
 	/* Redwine: creating a mysqli connection */
-	$handle = new mysqli(EZSQL_DB_HOST,EZSQL_DB_USER,EZSQL_DB_PASSWORD,EZSQL_DB_NAME);
+	//$handle = new mysqli(EZSQL_DB_HOST,EZSQL_DB_USER,EZSQL_DB_PASSWORD,EZSQL_DB_NAME);
 	/* check connection */
-	if (mysqli_connect_errno()) {
+	/*if (mysqli_connect_errno()) {
 		printf("Connect failed: %s\n", mysqli_connect_error());
 		exit();
-	}
+	}*/
 
 echo '<fieldset><legend>Converting all the Tables to utf8_general_ci and Engine MyISAM</legend><ul>';
 	$sql = "SELECT CONCAT( GROUP_CONCAT( table_name ) ,  ';' ) AS statement FROM information_schema.tables WHERE table_schema = '" . EZSQL_DB_NAME. "' AND table_name LIKE  '" .table_prefix."%'";
@@ -338,9 +338,10 @@ echo '</ul></fieldset><br />';
 
 echo '<fieldset><legend>Changing Columns in Links table.</legend><ul>';
 	$sql = "ALTER TABLE  `" . table_prefix."links`  
-	CHANGE 	`link_status` `link_status` enum('discard','new','published','abuse','duplicate','page','spam','moderated') NOT NULL DEFAULT 'discard';";
+	CHANGE 	`link_status` `link_status` enum('discard','new','published','abuse','duplicate','page','spam','moderated') NOT NULL DEFAULT 'discard',
+	CHANGE  `link_url`  `link_url` VARCHAR( 512 ) NOT NULL DEFAULT '';";
 	$sql_alter_links - $handle->query($sql);
-	echo '<li>Updated links Table</li>';
+	echo '<li>Updated links Table link_status enum and link_url to VARCHAR 512</li>';
 	
 	$sql = "INSERT INTO `".table_prefix."links` (`link_id`, `link_author`, `link_status`, `link_randkey`, `link_votes`, `link_reports`, `link_comments`, `link_karma`, `link_modified`, `link_date`, `link_published_date`, `link_category`, `link_lang`, `link_url`, `link_url_title`, `link_title`, `link_title_url`, `link_content`, `link_summary`, `link_tags`, `link_field1`, `link_field2`, `link_field3`, `link_field4`, `link_field5`, `link_field6`, `link_field7`, `link_field8`, `link_field9`, `link_field10`, `link_field11`, `link_field12`, `link_field13`, `link_field14`, `link_field15`, `link_group_id`, `link_group_status`, `link_out`) VALUES
 	(NULL, 1, 'page', 0, 0, 0, 0, '0.00', '2016-10-06 17:19:46', '2016-10-06 17:19:46', '0000-00-00 00:00:00', 0, 1, '', NULL, 'About', 'about', '<legend><strong>About Us</strong></legend>\r\n<p>Our site allows you to submit an article that will be voted on by other members. The most popular posts will be published to the front page, while the less popular articles are left in an ''New'' page until they acquire the set number of votes to move to the published page. This site is dependent on user contributed content and votes to determine the direction of the site.</p>\r\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'new', 0);";
@@ -439,19 +440,6 @@ if ($sql_adcopy) {
 	}
 	echo '<li>Inserted karma_story_unvote value in "Misc_data" table <img src="'.$marks.'" class="iconalign" /></li>';
 
-	// Insert new Links module settings.
-	$sql = "INSERT INTO `" . table_prefix."misc_data` ( `name` , `data` ) VALUES 
-	('links_all', ''),
-	('links_moderators', ''),
-	('links_admins', '');";
-	$sql_new_links_module_settings = $handle->query($sql);
-	if (!$sql_new_links_module_settings) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	echo '<li>Inserted new Links module settings in "Misc_data" table. (See instructions at the end of upgrade <img src="'.$marks.'" class="iconalign" /></li>';
-	
 	// Update data column to replace all instances of tpl_pligg with tpl_kliqqi.
 	$sql = "UPDATE `" . table_prefix."misc_data` SET `data` = REPLACE(`data`, 'tpl_pligg', 'tpl_kliqqi');";
 	$sql_update_data_column = $handle->query($sql);
@@ -503,7 +491,7 @@ if ($sql_adcopy) {
 echo '</ul></fieldset><br />';
 
 echo '<fieldset><legend>Updating data in Modules table.</legend><ul>';
-	$sql = "select `name` from `" . table_prefix."modules`";
+	$sql = "select `name`,`folder` from `" . table_prefix."modules`";
 	$sql_modules = $handle->query($sql);
 	$to_delete = array('Human Check','Google Adsense Revenue Sharing','Status', 'Status Update Module');
 	while ($module = $sql_modules->fetch_assoc()) {
@@ -528,6 +516,7 @@ echo '<fieldset><legend>Updating data in Modules table.</legend><ul>';
 				$marks = $notok;
 			}else{
 				$marks = $ok;
+				$warnings[] = "We detected 'Google Adsense Revenue Sharing' module installed. This module is not supported by Kliqqi, so we removed it from the installed modules and we deleted the related columns from the users table. Just in case you need the id/channel/percent for your own ussage, you can get them from your database backup!";
 			}
 			echo '<li class="warn-delete">Deleted obsolete columns in users table belonging to '.$module['name'] . ' module <img src="'.$marks.'" class="iconalign" /></li>';
 		}elseif ($module['name'] == 'Status' || $module['name'] == 'Status Update Module') {
@@ -560,54 +549,76 @@ echo '<fieldset><legend>Updating data in Modules table.</legend><ul>';
 			echo '<li class="warn-delete">Deleted all the status module entries <img src="'.$marks.'" class="iconalign" /></li>';
 		}
 	}
+	$filename = 'version-update.txt';
+	$lines = file($filename, FILE_IGNORE_NEW_LINES);
+	$modules_array = array();
+	foreach($lines as $line) {
+		$modules_array[] = explode(',', $line);
+	}
+	
 	$sql_modules->data_seek(0);
 	while ($module = $sql_modules->fetch_assoc()) {
-		if ($module['name'] == 'Admin Modify Language') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.1' WHERE `name` = '" .$module['name'] ."';";
-		}elseif ($module['name'] == 'Admin Snippets') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '1.1' WHERE `name` = '" .$module['name'] ."';";
-		}elseif ($module['name'] == 'Akismet') {
-			echo '<li>You have '.$module['name'] . ' installed. You have to copy the WordPress key from the old module settings to the new one!</li>';
-			$warnings[] = "You have ".$module['name'] . " installed. You have to copy the WordPress key from the old module settings to the new one!";
-		}elseif ($module['name'] == 'Anonymous Mode') {
-			$sql = "UPDATE `" . table_prefix."users` SET `user_email` = 'anonymous@kliqqi.com' WHERE `user_login` = 'anonymous';";
-		}elseif ($module['name'] == 'Captcha') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.5' WHERE `name` = '" .$module['name'] ."';";
-		}elseif ($module['name'] == 'Karma module') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '1.0' WHERE `name` = '" .$module['name'] ."';";
-		}elseif ($module['name'] == 'Links') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '1.0' WHERE `name` = '" .$module['name'] ."';";
-			$warnings[] = "Check the Links module because we added few settings to it. <strong style=\"text-decoration:underline;background-color:#0100ff\">YOU HAVE TO GO TO ITS SETTINGS AND SELECT THE NEW OPTIONS THAT YOU WANT; OTHERWISE IT WILL NOT WORK UNTIL YOU DO SO!</strong>!";
-		}elseif ($module['name'] == 'Sidebar Saved') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.1' WHERE `name` = '" .$module['name'] ."';";
-		}elseif ($module['name'] == 'Sidebar Stories') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.1' WHERE `name` = '" .$module['name'] ."';";
-		}elseif ($module['name'] == 'Simple Private Messaging') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '3.0' WHERE `name` = '" .$module['name'] ."';";
-		}elseif ($module['name'] == 'Spam Trigger') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '3.0' WHERE `name` = '" .$module['name'] ."';";
-		}elseif ($module['name'] == 'Upload') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.0' WHERE `name` = '" .$module['name'] ."';";
-			$warnings[] = "We noticed you have the UPLOAD module installed. You have to copy the files from the old Pligg folder, in /modules/upload/attachments to the same folder in the new Kliqqi.";
-		}elseif ($module['name'] == 'Send Welcome Private Message') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '2.0' WHERE `name` = '" .$module['name'] ."';";
-		}elseif ($module['name'] == 'Xml sitemaps') {
-			$sql = "UPDATE `" . table_prefix."modules` SET `version` = '3.0' WHERE `name` = '" .$module['name'] ."';";
-		}
+		foreach($modules_array as $modules) {
+			if ($module['folder'] == $modules[0]) {
+				$sql = "UPDATE `" . table_prefix."modules` SET `version` = '". $modules[1] ."' WHERE `folder` = '" .$module['folder'] ."';";
+				$sql_update = $handle->query($sql);
+				if (!$sql_update) {
+					$marks = $notok;
+				}else{
+					$marks = $ok;
+					echo '<li>Updated '.$module['name'] . ' module Version <img src="'.$marks.'" class="iconalign" /></li>';
+				}
+			}	
+		}	
 
-		$sql_update = $handle->query($sql);
-		if (!$sql_update) {
+		if ($module['folder'] == "links") {
+			// Insert new Links module settings.
+			$sql = "INSERT INTO `" . table_prefix."misc_data` ( `name` , `data` ) VALUES 
+			('links_all', '1'),
+			('links_moderators', ''),
+			('links_admins', '');";
+			$sql_new_links_module_settings = $handle->query($sql);
+			if (!$sql_new_links_module_settings) {
+				$marks = $notok;
+			}else{
+				$marks = $ok;
+			}
+			echo '<li>Inserted new Links module settings in "Misc_data" table. (See instructions at the end of upgrade <img src="'.$marks.'" class="iconalign" /></li>';
+			$warnings[] = "Check the Links module because we added few settings to it <strong style=\"text-decoration:underline;background-color:#0100ff\">YOU HAVE TO GO TO ITS SETTINGS AND SELECT THE NEW OPTIONS THAT YOU WANT; OTHERWISE IT WILL NOT WORK UNTIL YOU DO SO!</strong>!";
+		}		
+		if ($module['folder'] == "upload") {
+			$warnings[] = "We noticed you have the UPLOAD module installed. You have to copy the files from the old Pligg folder, in /modules/upload/attachments to the same folder in the new Kliqqi.";
+			/*Redwine: correcting the default upload fileplace!*/
+			$sql_upload_fileplace = "select `data` from `" . table_prefix."misc_data` WHERE `name` = 'upload_fileplace'";
+			$sql_fileplace = mysqli_fetch_assoc($handle->query($sql_upload_fileplace));
+			if ($sql_fileplace['data'] == 'tpl_kliqqi_story_who_voted_start') {
+				$sql_upload_fileplace_correct = $handle->query("UPDATE `" . table_prefix."misc_data` set `data` = 'upload_story_list_custom' WHERE `name` = 'upload_fileplace'");
+				echo "<li>We corrected the upload_fileplace default to 'upload_story_list_custom'.</li>";
+				$warnings[] = "We corrected the upload_fileplace default to 'upload_story_list_custom'.";
+			}
+		}
+		if ($module['folder'] == 'anonymous') {
+			$sql = "UPDATE `" . table_prefix."users` SET `user_email` = 'anonymous@kliqqi.com' WHERE `user_login` = 'anonymous';";
+			$sql_update_email = $handle->query($sql);
+			if (!$sql_update_email) {
 			$marks = $notok;
 		}else{
 			$marks = $ok;
+				echo '<li>Updated '.$module['folder'] . ' module Version <img src="'.$marks.'" class="iconalign" /></li>';
 		}
-		if ($module['name'] == 'Anonymous Mode') {
-			echo '<li>Updated email in the Users table for '.$module['name'] . ' user <img src="'.$marks.'" class="iconalign" /></li>';
+			echo '<li>Updated email in the Users table for '.$module['folder'] . ' user <img src="'.$marks.'" class="iconalign" /></li>';
+		}
+		if ($module['folder'] == 'akismet') {
+			$sql = "select `data` from `" . table_prefix."misc_data` WHERE `name` = 'wordpress_key'";
+			$sql_key = mysqli_fetch_assoc($handle->query($sql));
+			if ($sql_key['data'] != '') {
+				echo "<li>We detected you are using the Akismet module and found its key in the misc_data table!</li>";
 		}else{
-			echo '<li>Updated '.$module['name'] . ' module Version <img src="'.$marks.'" class="iconalign" /></li>';
+				echo '<li class="warn-delete">We detected you are using the Akismet module but did not find its key in the misc_data table!';
+				$warnings[] = "You have Akismet module installed but its has no Wordpress key!";
 		}
-
-		if ($module['name'] == 'Xml sitemaps') {
+		}
+		if ($module['folder'] == 'xml_sitemaps') {
 			$sql = "DELETE FROM `" . table_prefix."config` WHERE (`var_page`,`var_name`) IN (('XmlSitemaps','XmlSitemaps_ping_google'),('XmlSitemaps','XmlSitemaps_ping_ask'),('XmlSitemaps','XmlSitemaps_ping_yahoo'),('XmlSitemaps','XmlSitemaps_yahoo_key'),('XmlSitemaps','XmlSitemaps_use_cache'),('XmlSitemaps','XmlSitemaps_cache_ttl'));";
 			$sql_delete_xml_entries = $handle->query($sql);
 			if (!$sql_delete_xml_entries) {
@@ -735,6 +746,16 @@ echo '<fieldset><legend>Updating data in Widgets table.</legend><ul>';
 						$marks = $ok;
 					}
 					echo '<li>Update table widgets; changing the name of Pligg News to Kliqqi News <img src="'.$marks.'" class="iconalign" /></li>';
+					
+					// Update misc_data table; setting the news count in case it does not exist.
+					$sql = "UPDATE IGNORE `" . table_prefix."misc_data` SET `name` = 'news_count', `data` = '3';";
+					$sql_news_count = $handle->query($sql);
+					if (!$sql_news_count) {
+						$marks = $notok;
+					}else{
+						$marks = $ok;
+					}
+					echo '<li>Update misc_data table setting the new_count to 3 for Kliqqi News widgets <img src="'.$marks.'" class="iconalign" /></li>';
 				}elseif (in_array('New products',$widget) || in_array('New Products',$widget)) {
 					// Update table widgets; changing the name of Pligg News to Kliqqi News
 					$sql = "DELETE FROM `" . table_prefix."widgets` WHERE `name` = 'New products' OR `name` = 'New Products';";

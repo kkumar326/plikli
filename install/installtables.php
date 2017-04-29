@@ -10,7 +10,7 @@ function kliqqi_createtables($conn) {
 	  `ac_link_id` int(11) NOT NULL,
 	  `ac_cat_id` int(11) NOT NULL,
 	  UNIQUE KEY `ac_link_id` (`ac_link_id`,`ac_cat_id`)
-	) ENGINE=MyISAM;";
+	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysql_query( $sql, $conn );
 	echo '<li>Created table: \'additional_categories\'...</li><br />';
 
@@ -221,7 +221,7 @@ function kliqqi_createtables($conn) {
 	  `link_published_date` timestamp NOT NULL,
 	  `link_category` int(11) NOT NULL default '0',
 	  `link_lang` int(11) NOT NULL default '1',
-	  `link_url` varchar(200) collate utf8_general_ci NOT NULL default '',
+	  `link_url` varchar(512) collate utf8_general_ci NOT NULL default '',
 	  `link_url_title` text collate utf8_general_ci,
 	  `link_title` text collate utf8_general_ci NOT NULL,
 	  `link_title_url` varchar(255) collate utf8_general_ci default NULL,
@@ -297,7 +297,7 @@ function kliqqi_createtables($conn) {
 	
 	
 	$sql = "INSERT INTO `" . table_misc_data . "` ( `name` , `data` ) VALUES
-	('kliqqi_version', '3.5.2'),
+	('kliqqi_version', '4.0.0'),
 	('adcopy_lang', 'en'),
 	('adcopy_theme', 'white'),
 	('adcopy_pubkey', '1G9ho6tcbpytfUxJ0SlrSNt0MjjOB0l2'),
@@ -320,6 +320,7 @@ function kliqqi_createtables($conn) {
 	('modules_update_date',DATE_FORMAT(NOW(),'%Y/%m/%d')),
 	('modules_update_url','https://kliqqi.com/mods/version-update.txt'),
 	('kliqqi_update',''),
+	('kliqqi_update_url','http://www.kliqqi.com/download_kliqqi/'),
 	('modules_update_unins',''),
 	('modules_upd_versions','');";
 	mysql_query( $sql, $conn );

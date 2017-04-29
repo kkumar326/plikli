@@ -148,7 +148,7 @@ if (!$errors) {
 			}elseif ($cms_name == 'kliqqi_version' && $old_version == '300') {
 				echo "<li>upgrading from Kliqqi $old_version to Kliqqi " . $lang['kliqqi_version'] . "</li></ul></fieldset>";
 				include_once('k350-k3005.php');
-			}elseif ($cms_name == 'kliqqi_version' && $old_version == '350') {
+			}elseif ($cms_name == 'kliqqi_version' && $old_version == '350' || $cms_name == 'kliqqi_version' && $old_version == '352') {
 				echo "<li>upgrading from Kliqqi $old_version to Kliqqi " . $lang['kliqqi_version'] . "</li></ul></fieldset>";
 				include_once('k352-k350.php');
 			}

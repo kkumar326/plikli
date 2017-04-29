@@ -1,6 +1,6 @@
 ﻿<?php
 // header
-	$lang['kliqqi_version'] = '3.5.2';
+	$lang['kliqqi_version'] = '4.0.0';
 	$lang['installer'] = 'Installer';
 	$lang['Welcome'] = 'Welcome';
 	$lang['Install'] = 'Install';

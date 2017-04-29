@@ -2,7 +2,7 @@
 session_start();
 $language = addslashes(strip_tags($_REQUEST['language']));
 include ('header.php');
-
+include('db-mysqli.php');
 echo '<style type="text/css">
 h2 {
 margin:0 0 5px 0;
@@ -98,11 +98,24 @@ $tbl_prefix = $_SESSION['table_prefix'];
 			$old_version = str_replace('.', '' , $plv->data);
 			$_SESSION['cms_name'] = $plv->name;
 			if ($old_version == '200') {
+				/*Redwine: we want to find out if the pligg version is 2.0.0rc1 because this particular version is registered as 2.0.0, to be able to apply the correct upgrade file!*/
+				$rc1 = 'false';	
+				$sql_group_member_role = $handle->query('DESCRIBE ' . table_prefix.'group_member`');
+				while($row =$sql_group_member_role->fetch_assoc()) {
+					if ($row['Field'] == 'member_role' && $row['Type'] == "enum('admin','moderator','admin','flagged','banned')") {
+						$rc1 = 'true';
+					}elseif ($row['Field'] == 'member_role' && $row['Type'] == "enum('admin','normal','moderator','flagged','banned')"){
+						$rc1 = 'false';
+					}
+				}
+				if ($_SESSION['version_name'] == '') {
+					$_SESSION['version_name'] = 'rc1';
+				}
 				$sql = "SELECT `var_defaultvalue` FROM " . $tbl_prefix . "config WHERE `var_name` = '\$MAIN_SPAM_RULESET'";
 				$ruleSet = $db->get_var($sql);
 				$sql = "SELECT `var_defaultvalue` FROM " . $tbl_prefix . "config WHERE `var_name` = '\$FRIENDLY_DOMAINS'";
 				$friendly_domain = $db->get_var($sql);
-				if ($ruleSet == 'antispam.log' && $friendly_domain == '') {
+				if ($ruleSet == 'antispam.log' && $friendly_domain == '' && $rc1 == 'true') {
 					echo '<fieldset><legend>ATTENTION!</legend><div class="alert-success">Confirmed version 2.0.0rc1</div><br /></fieldset>';
 					$_SESSION['old_version'] = $old_version . $_SESSION['version_name'];
 				}elseif ($ruleSet == 'logs/antispam.log' && $friendly_domain == 'logs/domain-whitelist.log') {
@@ -120,7 +133,7 @@ $tbl_prefix = $_SESSION['table_prefix'];
 			}elseif ($_SESSION['cms_name'] == 'kliqqi_version' && $old_version < '300') {
 				echo '<br /><fieldset><legend>ATTENTION!</legend><div class="alert-danger">Sorry, your CMS is ' . $plv->name . ' ' . $plv->data. ' There is no Kliqqi version '. $old_version . '</div><br /></fieldset>';
 				die();
-			}elseif ($_SESSION['cms_name'] == 'kliqqi_version' && $old_version == '352') {
+			}elseif ($_SESSION['cms_name'] == 'kliqqi_version' && $old_version == '400') {
 				echo '<br /><fieldset><legend>ATTENTION!</legend><div class="alert-danger">Your CMS is ' . $plv->name . ' ' . $plv->data. ' You already have the latest Kliqqi version '. $old_version . '</div><br /></fieldset>';
 				die();
 				}

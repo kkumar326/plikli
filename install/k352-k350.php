@@ -1,7 +1,7 @@
 <?php
 session_start();
 //include('../config.php');
-
+include('db-mysqli.php');
 echo '<style type="text/css">
 h2 {
 margin:0 0 5px 0;
@@ -64,15 +64,215 @@ $notok = 'notok.png';
 $ok = 'ok.png';
 $warnings = array();
 
-	/* Redwine: creating a mysqli connection */
-	$handle = new mysqli(EZSQL_DB_HOST,EZSQL_DB_USER,EZSQL_DB_PASSWORD,EZSQL_DB_NAME);
-	/* check connection */
-	if (mysqli_connect_errno()) {
-		printf("Connect failed: %s\n", mysqli_connect_error());
-		exit();
+echo '<fieldset><legend>Updating the misc_data table</legend><ul>';
+	$sql = "select * from `" . table_prefix."misc_data` where name like '%adcopy%'";
+	$sql_adcopy = $handle->query($sql);
+	if ($sql_adcopy) {
+		$row_cnt = $sql_adcopy->num_rows;
+		if ($row_cnt) {
+			while ($adcopy = $sql_adcopy->fetch_assoc()) {
+				if (in_array('adcopy_lang',$adcopy)) {
+						$sql_adcopy_lang = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = 'en' WHERE `name` = 'adcopy_lang';");
+					$marks = $ok;
+					echo '<li>updated adcopy_lang <img src="'.$marks.'" class="iconalign" /></li>';
+				}elseif (in_array('adcopy_theme',$adcopy)) {
+						$sql_adcopy_theme = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = 'white' WHERE `name` = 'adcopy_theme';");
+					$marks = $ok;
+					echo '<li>Updated adcopy_theme <img src="'.$marks.'" class="iconalign" /></li>';
+				}elseif (in_array('adcopy_pubkey',$adcopy)) {
+						$sql_adcopy_pubkey = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = '1G9ho6tcbpytfUxJ0SlrSNt0MjjOB0l2' WHERE `name` = 'adcopy_pubkey';");
+					$marks = $ok;
+					echo '<li>Updated adcopy_pubkey <img src="'.$marks.'" class="iconalign" /></li>';
+				}elseif (in_array('adcopy_privkey',$adcopy)) {
+						$sql_adcopy_privkey = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = 'PjH8h3gpjQrBKihJ8dlLN8sbcmvW1nv-' WHERE `name` = 'adcopy_privkey';");
+					$marks = $ok;
+					echo '<li>Updated adcopy_privkey <img src="'.$marks.'" class="iconalign" /></li>';
+				}elseif (in_array('adcopy_hashkey',$adcopy)) {
+						$sql_adcopy_hashkey = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = 'eq1xxSfyG55k4ll7CxPCO6XP9-cIWnTf' WHERE `name` = 'adcopy_hashkey';");
+					$marks = $ok;
+					echo '<li>Updated adcopy_hashkey <img src="'.$marks.'" class="iconalign" /></li>';
+				}
+			}
+		}else{
+			$sql = "INSERT INTO  `" . table_prefix."misc_data` ( `name` , `data` )
+					VALUES ('adcopy_lang', 'en'),
+					('adcopy_theme', 'white'),
+					('adcopy_pubkey', '1G9ho6tcbpytfUxJ0SlrSNt0MjjOB0l2'),
+					('adcopy_privkey', 'PjH8h3gpjQrBKihJ8dlLN8sbcmvW1nv-'),
+					('adcopy_hashkey', 'eq1xxSfyG55k4ll7CxPCO6XP9-cIWnTf');";
+			$sql_captcha_data = $handle->query($sql);
+			if (!$sql_captcha_data) {
+				$marks = $notok;
+			}else{
+				$marks = $ok;
+			}
+			echo '<li>Inserted captcha lang, theme, public, private and hash keys <img src="'.$marks.'" class="iconalign" /></li>';			
+		}
+	}
+	$sql = "select * from `" . table_prefix."misc_data` where name like 'captcha%'";
+	$sql_captcha = $handle->query($sql);
+	$toCheck = array('captcha_method','captcha_reg_en','captcha_comment_en','captcha_story_en');
+	if ($sql_captcha) {
+		$row_cnt_captcha = $sql_captcha->num_rows;
+		if ($row_cnt_captcha) {
+			while ($captcha = $sql_captcha->fetch_assoc()) {
+				$all_captcha[] = $captcha['name'];
+			}
+
+			$cap_imploded = implode(",",$all_captcha);
+			// find the matches in the arrays
+			$matches = array_intersect($toCheck, $all_captcha);
+			// find the differences in the arrays
+			$diff = array_diff($toCheck, $all_captcha);
+			if ($matches) {
+				foreach($matches as $method) {
+					if ($method == 'captcha_method') {
+						$sql_captcha_method = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = 'solvemedia' where `name` = 'captcha_method';");
+						if (!$sql_captcha_method) {
+							$marks = $notok;
+						}else{
+							$marks = $ok;
+						}
+						echo '<li>updated captcha_method <img src="'.$marks.'" class="iconalign" /></li>';
+					}elseif ($method == 'captcha_reg_en') {
+						$sql_captcha_reg_en = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = 'true' where `name` = 'captcha_reg_en';");
+						if (!$sql_captcha_reg_en) {
+							$marks = $notok;
+						}else{
+							$marks = $ok;
+						}
+						echo '<li>updated captcha_reg_en <img src="'.$marks.'" class="iconalign" /></li>';
+					}elseif ($method == 'captcha_comment_en') {
+						$sql_captcha_comment_en = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = 'true' where `name` = 'captcha_comment_en';");
+						if (!$sql_captcha_comment_en) {
+							$marks = $notok;
+						}else{
+							$marks = $ok;
+						}
+						echo '<li>updated captcha_comment_en <img src="'.$marks.'" class="iconalign" /></li>';
+					}elseif ($method == 'captcha_story_en') {
+						$sql_captcha_story_en = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = 'true' where `name` = 'captcha_story_en';");
+						if (!$sql_captcha_story_en) {
+							$marks = $notok;
+						}else{
+							$marks = $ok;
+						}
+						echo '<li>updated captcha_comment_en <img src="'.$marks.'" class="iconalign" /></li>';
+					}
+				}
+			}
+			if ($diff) {
+				foreach($diff as $difference) {
+					if ($difference == 'captcha_method') {
+						$sql = "INSERT INTO  `" . table_prefix."misc_data` ( `name` , `data` )
+								VALUES ('captcha_method', 'solvemedia');";
+						$sql_captcha_method = $handle->query($sql);
+						if (!$sql_captcha_method) {
+							$marks = $notok;
+						}else{
+							$marks = $ok;
+						}
+						echo '<li>Inserted captcha method <img src="'.$marks.'" class="iconalign" /></li>';
+					}elseif ($difference == 'captcha_reg_en') {
+						$sql = "INSERT INTO  `" . table_prefix."misc_data` ( `name` , `data` )
+								VALUES ('captcha_reg_en', 'true');";
+						$sql_captcha_reg_en = $handle->query($sql);
+						if (!$sql_captcha_reg_en) {
+							$marks = $notok;
+						}else{
+							$marks = $ok;
+						}
+						echo '<li>Inserted captcha_reg_en <img src="'.$marks.'" class="iconalign" /></li>';
+					}elseif ($difference == 'captcha_comment_en') {
+						$sql = "INSERT INTO  `" . table_prefix."misc_data` ( `name` , `data` )
+								VALUES ('captcha_comment_en', 'true');";
+						$sql_captcha_comment_en = $handle->query($sql);
+						if (!$sql_captcha_comment_en) {
+							$marks = $notok;
+						}else{
+							$marks = $ok;
+						}
+						echo '<li>Inserted captcha_comment_en <img src="'.$marks.'" class="iconalign" /></li>';
+					}elseif ($difference == 'captcha_story_en') {
+						$sql = "INSERT INTO  `" . table_prefix."misc_data` ( `name` , `data` )
+								VALUES ('captcha_story_en', 'true');";
+						$sql_captcha_story_en = $handle->query($sql);
+						if (!$sql_captcha_story_en) {
+							$marks = $notok;
+						}else{
+							$marks = $ok;
+						}
+						echo '<li>Inserted captcha_story_en <img src="'.$marks.'" class="iconalign" /></li>';
+					}
+				}
+			}
+		}else{
+			$sql = "INSERT INTO  `" . table_prefix."misc_data` ( `name` , `data` )
+					VALUES 
+						('captcha_method', 'solvemedia'),
+						('captcha_comment_en', 'true'),
+						('captcha_reg_en', 'true'),
+						('captcha_story_en', 'true');";
+			$sql_captcha_data = $handle->query($sql);
+			if (!$sql_captcha_data) {
+				$marks = $notok;
+			}else{
+				$marks = $ok;
+			}
+			echo '<li>Inserted captcha_method, captcha_comment_en, captcha_reg_en, captcha_story_en <img src="'.$marks.'" class="iconalign" /></li>';		
+		}
+	}
+	
+	// Delete all reCaptcha entries
+	$sql = "DELETE FROM `" . table_prefix."misc_data` WHERE `name` like 'reCaptcha_%';";
+	$sql_delete_recaptcha_entries = $handle->query($sql);
+	if (!$sql_delete_recaptcha_entries) {
+		$marks = $notok;
+	}else{
+		$marks = $ok;
+	}
+	echo '<li>Deleted all reCaptcha entries <img src="'.$marks.'" class="iconalign" /></li>';
+	
+	// updating and installing kliqqi and module updates
+	$sql = "select * from `" . table_prefix."misc_data` where `name` like 'kliqqi_%' or `name` like 'module_%'";
+	$sql_kliqqi_modules_update = $handle->query($sql);
+	if ($sql_kliqqi_modules_update) {
+		$row_cnt = $sql_kliqqi_modules_update->num_rows;
+		if ($row_cnt) {
+			while ($kliqqi_modules_update = $sql_kliqqi_modules_update->fetch_assoc()) {
+				if (in_array('modules_update_date',$kliqqi_modules_update)) {
+					$sql_modules_update_date = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` =  DATE_FORMAT(NOW(),'%Y/%m/%d')  WHERE `name` = 'modules_update_date';");
+					$marks = $ok;
+					echo '<li>updated modules_update_date <img src="'.$marks.'" class="iconalign" /></li>';
+				}elseif (in_array('modules_update_url',$kliqqi_modules_update)) {
+					$sql_modules_update_url = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = 'http://mymonalisasmile.com/mods/version-update.txt' WHERE `name` = 'modules_update_url';");
+					$marks = $ok;
+					echo '<li>updated modules_update_url <img src="'.$marks.'" class="iconalign" /></li>';
+				}elseif (in_array('kliqqi_update',$kliqqi_modules_update)) {
+					$sql_kliqqi_update = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = '' WHERE `name` = 'kliqqi_update';");
+					$marks = $ok;
+					echo '<li>updated kliqqi_update <img src="'.$marks.'" class="iconalign" /></li>';
+				}elseif (in_array('modules_update_unins',$kliqqi_modules_update)) {
+					$sql_modules_update_unins = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = '' WHERE `name` = 'modules_update_unins';");
+					$marks = $ok;
+					echo '<li>updated modules_update_unins <img src="'.$marks.'" class="iconalign" /></li>';
+				}elseif (in_array('modules_upd_versions',$kliqqi_modules_update)) {
+					$sql_modules_upd_versions = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = '' WHERE `name` = 'modules_upd_versions';");
+					$marks = $ok;
+					echo '<li>updated modules_upd_versions <img src="'.$marks.'" class="iconalign" /></li>';
+				}elseif (in_array('kliqqi_update_url',$kliqqi_modules_update)) {
+					$sql_kliqqi_update_url = $handle->query("UPDATE `" . table_prefix."misc_data` SET `data` = 'http://www.kliqqi.com/download_kliqqi/' WHERE `name` = 'kliqqi_update_url';");
+					$marks = $ok;
+					echo '<li>updated kliqqi_update_url <img src="'.$marks.'" class="iconalign" /></li>';
+				}elseif (!in_array('kliqqi_update_url',$kliqqi_modules_update)) {
+					$sql_kliqqi_update_url = $handle->query("INSERT INTO `" . table_prefix."misc_data` SET `name` = 'kliqqi_update_url', `data` = 'http://www.kliqqi.com/download_kliqqi/';");
+					$marks = $ok;
+					echo '<li>Inserted kliqqi_update_url <img src="'.$marks.'" class="iconalign" /></li>';
+				}
+			}
+		}
 	}
 
-echo '<fieldset><legend>Converting all the Tables to utf8_general_ci and Engine MyISAM</legend><ul>';
 	// Update CMS version.
 	$sql = "UPDATE `" . table_prefix."misc_data` SET `data` = '" . $lang['kliqqi_version'] . "' where `name` = 'kliqqi_version';";
 	$sql_CMS_version = $handle->query($sql);
@@ -84,23 +284,55 @@ echo '<fieldset><legend>Converting all the Tables to utf8_general_ci and Engine 
 	echo '<li>Updated CMS_version to '. $lang['kliqqi_version'] .' <img src="'.$marks.'" class="iconalign" /></li>';	
 echo '</ul></fieldset><br />';
 
+echo '<fieldset><legend>Changing Columns in Links table.</legend><ul>';
+	$sql = "ALTER TABLE  `" . table_prefix."links`  
+	CHANGE  `link_url` `link_url` VARCHAR( 512 ) NOT NULL DEFAULT '';";
+	$sql_alter_links - $handle->query($sql);
+	echo '<li>Updated links Table link_url to VARCHAR 512</li>';
+	
+echo '</ul></fieldset><br />';
+
 /* Redwine: checking if we have to detect certain settings and modules or not, to give further instructions. */
-if ($_SESSION['upgrade_dir'] != $_SESSION['initial_dir']) {
+//if ($_SESSION['upgrade_dir'] != $_SESSION['initial_dir']) {
 	echo '<fieldset><legend>Checking the installed modules and certain config settings!</legend><ul>';
-		$sql = "select `name` from `" . table_prefix."modules`";
+		$sql = "select `name`,`folder` from `" . table_prefix."modules`";
 		$sql_modules = $handle->query($sql);
-		/*$to_delete = array('Human Check','Google Adsense Revenue Sharing','Status', 'Status Update Module');
+
+	$filename = 'version-update.txt';
+	$lines = file($filename, FILE_IGNORE_NEW_LINES);
+	$modules_array = array();
+	foreach($lines as $line) {
+		$modules_array[] = explode(',', $line);
+	}
+	
+	$sql_modules->data_seek(0);
 		while ($module = $sql_modules->fetch_assoc()) {
-			if (in_array($module['name'],$to_delete)) {
-				$warnings[] = "We detected that " . $module['name'] . " is installed. This module is not supported by Kliqqi and we cannot support it or support any problem resulting from its usage";
+		foreach($modules_array as $modules) {
+			if ($module['folder'] == $modules[0]) {
+				$sql = "UPDATE `" . table_prefix."modules` SET `version` = '". $modules[1] ."' WHERE `folder` = '" .$module['folder'] ."';";
+				$sql_update = $handle->query($sql);
+				if (!$sql_update) {
+					$marks = $notok;
+				}else{
+					$marks = $ok;
+					echo '<li>Updated '.$module['name'] . ' module Version <img src="'.$marks.'" class="iconalign" /></li>';
 			}
 		}
-		$sql_modules->data_seek(0);*/
-		while ($module = $sql_modules->fetch_assoc()) {
-			if ($module['name'] == 'Upload') {
+		}	
+
+		if ($module['folder'] == "links") {
+			$warnings[] = "Check the Links module because we added few settings to it <strong style=\"text-decoration:underline;background-color:#0100ff\">YOU HAVE TO GO TO ITS SETTINGS AND SELECT THE NEW OPTIONS THAT YOU WANT; OTHERWISE IT WILL NOT WORK UNTIL YOU DO SO!</strong>!";
+		}		
+		if ($module['folder'] == "upload") {
 				$warnings[] = "We noticed you have the UPLOAD module installed. You have to copy the files from the old Pligg folder, in /modules/upload/attachments to the same folder in the new Kliqqi.";
-			}elseif ($module['name'] == 'Links') {
-				$warnings[] = "Check the Links module because we added few settings to it <strong style=\"text-decoration:underline;background-color:#0100ff\">YOU HAVE TO GO TO ITS SETTINGS AND SELECT THE NEW OPTIONS THAT YOU WANT; OTHERWISE IT WILL NOT WORK UNTIL YOU DO SO!</strong>!";			
+			/*Redwine: correcting the default upload fileplace!*/
+			$sql_upload_fileplace = "select `data` from `" . table_prefix."misc_data` WHERE `name` = 'upload_fileplace'";
+			$sql_fileplace = mysqli_fetch_assoc($handle->query($sql_upload_fileplace));
+			if ($sql_fileplace['data'] == 'tpl_kliqqi_story_who_voted_start') {
+				$sql_upload_fileplace_correct = $handle->query("UPDATE `" . table_prefix."misc_data` set `data` = 'upload_story_list_custom' WHERE `name` = 'upload_fileplace'");
+				echo "<li>We corrected the upload_fileplace default to 'upload_story_list_custom'.</li>";
+				$warnings[] = "We corrected the upload_fileplace default to 'upload_story_list_custom'.";
+			}
 			}
 		}
 	echo '</ul></fieldset><br />';	
@@ -231,9 +463,9 @@ if ($_SESSION['upgrade_dir'] != $_SESSION['initial_dir']) {
 		echo "<br />";
 		$warnings[] = "you have to manually rename the current folder from:<br />". $path . " to " . $_SERVER["DOCUMENT_ROOT"] . $result['var_value'];
 	echo '</ul></fieldset><br />';
-}else{
+/*}else{
 	$warnings[] = "It seems that you copied the new kliqqi ". $lang['kliqqi_version'] ." files and pasted them over in your initial directory " . $_SESSION['initial_dir'] . " So we just updated the version number in the misc_data table. No further instructions is required!";
-}	
+}*/	
 
 	
 echo '<fieldset><legend>Additional Instructions to follow!</legend><div class="alert alert-danger"><ul>';
