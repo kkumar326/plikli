@@ -102,7 +102,7 @@ if (isset($_POST['language'])) {
 		if (file_exists("../languages/$sel_lang")) {
 			$torename = str_replace(".default", "", $sel_lang);
 			rename("../languages/$sel_lang", "../languages/$torename");
-			chmod("../languages/$torename", 777);
+			chmod("../languages/$torename", 0777);
 			
 		}
 	}
@@ -144,7 +144,7 @@ if (file_exists($settings)) {
 } else {
 	if (file_exists($settingsdefault)) {
 		rename("$settingsdefault", "$settings");
-		chmod("$settings", 666);
+		chmod("$settings", 0666);
 		echo '<tr><td class="good"><i class="fa fa-check"></i></td><td>We renamed '.$settingsdefault. ' to '.$settings. ' for you and set the CHMOD to 666!</td></tr>';
 	}
 }
@@ -155,7 +155,7 @@ if (file_exists($dbconnect)) {
 } else {
 	if (file_exists($dbconnectdefault)) {
 		rename("$dbconnectdefault", "$dbconnect");
-		chmod("$dbconnect", 666);
+		chmod("$dbconnect", 0666);
 		echo '<tr><td class="good"><i class="fa fa-check"></i></td><td>We renamed '.$dbconnectdefault. ' to '.$dbconnect. ' for you and set the CHMOD to 666!</td></tr>';
 	}
 }
@@ -167,21 +167,21 @@ if (is_dir($logs)) {
 $file = '../logs/bannedips.log';
 if (file_exists($file)) {
 	if (!is_writable($file)) {
-		chmod("$file", 666);
+		chmod("$file", 0666);
 	}
 	echo '<tr><td class="good"><i class="fa fa-check"></i></td><td>'.$file.'</td></tr>';
 }
 $file='../logs/domain-blacklist.log';
 if (file_exists($file)) {
 	if (!is_writable($file)) {
-		chmod("$file", 666);
+		chmod("$file", 0666);
 	}
 	echo '<tr><td class="good"><i class="fa fa-check"></i></td><td>'.$file.'</span></td></tr>';
 }
 $file='../logs/domain-whitelist.log';
 if (file_exists($file)) {
 	if (!is_writable($file)) {
-		chmod("$file", 666);
+		chmod("$file", 0666);
 	}
 	if (is_writable($file)) { echo '<tr><td class="good"><i class="fa fa-check"></i></td><td>'.$file.'</span></td></tr>'; }
 }
