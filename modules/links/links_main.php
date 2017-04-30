@@ -11,9 +11,7 @@ function embed_videos($text, $type) {
 			$text = str_replace($regs[0], "<div class=\"videoWrapper\">".$regs[0]."</div>", $text);
 		}
 	}
-//match facebook video urldecode
-// The Regular Expression filter
-//$reg_facebook = "/(https?:\/\/www\.facebook\.com\/(?:video\.php\?v=\d+|.*?\/videos\/\d+))/";
+
 	$reg_facebook = "~https?://www.facebook.com/.*/videos/(?:t\.\d+/)?(\d+/)(\?type=\d+)?~i";
 // Check if there is a url in the text
 	if ($type == "articles") {
@@ -21,6 +19,7 @@ function embed_videos($text, $type) {
 	}elseif ($type == 'comms') {
 		$correct_settings = $the_settings['fb_comments'];
 	}
+//match facebook video url
 	if ($correct_settings) {
 		if(preg_match($reg_facebook, $text, $facebookurl)) {
 			$text = preg_replace($reg_facebook, "<iframe style=\"border: none; overflow: hidden;\" src=\"https://www.facebook.com/plugins/video.php?href=$facebookurl[0]&show_text=0\" frameborder=\"0\" scrolling=\"no\" width=\"560\" height=\"375\"></iframe>",$text);
@@ -31,7 +30,7 @@ function embed_videos($text, $type) {
 	}elseif ($type == 'comms') {
 		$correct_settings = $the_settings['yt_comments'];
 	}
-// Youtube
+// match Youtube video url
 	if ($correct_settings) {
 		$reg_youtube = '~(?#!js YouTubeId Rev:20160125_1800)
 				# Match non-linked youtube URL in the wild. (Rev:20130823)
@@ -60,6 +59,25 @@ function embed_videos($text, $type) {
 			$text = preg_replace($reg_youtube, '<br /><div class="videoWrapper"><iframe width="560" height="315" src="http://www.youtube.com/embed/'.$youtubeurl[1].'" frameborder="0" allowfullscreen></iframe></div><br />',
 				$text);
 		}
+		$findlinks = preg_match_all('$(https?://[a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$i', $text, $matches);
+		foreach($matches[1] as $match) {
+			// matching any of the audio extensions
+			$ogg = stripos($match, '.ogg');
+			$mp3 = stripos($match, '.mp3');
+			$wav = stripos($match, '.wav');
+			if ( $ogg !== false || $mp3 !== false || $wav !== false) {
+				
+				$text = preg_replace("#$match#i", " <!--[if lt IE 9]><script>document.createElement(\"audio\");</script><![endif]-->
+		<br /><audio preload=\"none\" style=\"width: 50%;\" controls=\"controls\"><source type=\"audio/mpeg\" src=\"$match\" /></audio><br />",$text);
+			}else{
+				// matching all other urls that are not within html tags
+				if ($the_settings['nofollow'] == "1") {
+					$text = preg_replace('$(\s|^)(https?://[a-z0-9_./?=&-]+)(?![^<>]*>)$i', " <a href=\"$match\" target=\"_blank\" rel=\"nofollow\">$match</a> ",$text);
+				}else{
+					$text = preg_replace('$(\s|^)(https?://[a-z0-9_./?=&-]+)(?![^<>]*>)$i', " <a href=\"$match\" target=\"_blank\">$match</a> ",$text);
+				}
+			}
+		}
 	}
 	return $text;
 }
@@ -68,9 +86,8 @@ function links_show_comment_content(&$vars) {
 	global $smarty, $current_user, $to_convert, $converted, $converted_nofollow,$the_settings;
 	if ($the_settings['comments']) {
 		$to_convert = $vars['comment_text'];
-		$check_embed = embed_videos($to_convert, 'comms');
-			$converted = preg_replace('$(https?://[a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$i', ' <a href="$1" target="_blank">$1</a> ',$check_embed);
-			$converted_nofollow = preg_replace('$(https?://[a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$i', ' <a href="$1" target="_blank" rel="nofollow">$1</a> ',$check_embed);
+		$converted = embed_videos($to_convert, 'comms');
+			
 
 		/* Redwine: The below code is an extra layer of security to prevent any XSS by not converting any link when a javascript: or window.open or alert() are detected in the text. */
 		if (strpos($to_convert, "javascript:") !== false || strpos($to_convert, "window.") !== false || strpos($to_convert, "alert(") !== false) {
@@ -79,36 +96,19 @@ function links_show_comment_content(&$vars) {
 		}
 		/* Redwine: checking if the links module is granted to all user levels. */
 		if ($the_settings['all']) {
-		/* Redwine: the line of code below must be deleted because it conflicts with urls that are inside an html tag like iframe and converts them to links, which breaks the iframe */
-	    //$vars['comment_text'] = text_to_html($vars['comment_text']);
-			if ($the_settings['nofollow']) {
-		/* Redwine: Changed the regex to skip urls that inside an html tag, like iframe. Als added open the link in a new window */
-				$vars['comment_text'] = $converted_nofollow;
-	}else{
 				$vars['comment_text'] = $converted;
-			}
 		}else{
 			$vars['comment_text'] = $to_convert;
 		}
 		
 		if ($the_settings['all'] == "") {
 			if ($the_settings['moderators'] && $current_user->user_level == "moderator") {
-				if ($the_settings['nofollow']) {
-					/* Redwine: Changed the regex to skip urls that inside an html tag, like iframe. Als added open the link in a new window */
-					$vars['comment_text'] = $converted_nofollow;
-				}else{
 					$vars['comment_text'] = $converted;
-				}
 			}elseif ($the_settings['admins'] && $current_user->user_level == "admin") {
-				if ($the_settings['nofollow']) {
-					/* Redwine: Changed the regex to skip urls that inside an html tag, like iframe. Als added open the link in a new window */
-					$vars['comment_text'] = $converted_nofollow;
-				}else{
 					$vars['comment_text'] = $converted;
 				}
 			}
 	}
-}
 }
 function links_summary_fill_smarty(&$vars) {
 	global $smarty, $current_user, $to_convert, $converted, $converted_nofollow,$the_settings;
@@ -116,9 +116,8 @@ function links_summary_fill_smarty(&$vars) {
 		$to_convert = $vars['smarty']->_vars['story_content'];
 
 
-			$check_embed = embed_videos($to_convert, 'articles');
-			$converted = preg_replace('$(https?://[a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$i', ' <a href="$1" target="_blank">$1</a> ',$check_embed);
-			$converted_nofollow = preg_replace('$(https?://[a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$i', ' <a href="$1" target="_blank" rel="nofollow">$1</a> ',$check_embed);
+			$converted = embed_videos($to_convert, 'articles');
+
 
 		/* Redwine: The below code is an extra layerr of security to prevent any XSS by not converting any link when a javascript: or window.open or alert() are detected in the text. */
 		if (strpos($to_convert, "javascript:") !== false || strpos($to_convert, "window.") !== false || strpos($to_convert, "alert(") !== false) {
@@ -127,37 +126,20 @@ function links_summary_fill_smarty(&$vars) {
 		}
 		/* Redwine: checking if the links module is granted to all user levels. */
 		if ($the_settings['all']) {
-	/* Redwine: the line of code below must be deleted because it conflicts with urls that are inside an html tag like iframe and converts them to links, which breaks the iframe */
-	    //$vars['smarty']->_vars['story_content'] = text_to_html($vars['smarty']->_vars['story_content']);
-			if ($the_settings['nofollow']) {
-				/* Redwine: Changed the regex to skip urls that inside an html tag, like iframe. Also added open the link in a new window */
-				$vars['smarty']->_vars['story_content'] = $converted_nofollow;
-	}else{	
 				$vars['smarty']->_vars['story_content'] = $converted;
-			}
 		}else{
 			$vars['smarty']->_vars['story_content'] = $to_convert;
 		}
 		
 		if ($the_settings['all'] == "") {
 			if ($the_settings['moderators'] && $current_user->user_level == "moderator") {
-				if ($the_settings['nofollow']) {
-					/* Redwine: Changed the regex to skip urls that inside an html tag, like iframe. Also added open the link in a new window */
-					$vars['smarty']->_vars['story_content'] = $converted_nofollow;
-				}else{	
 					$vars['smarty']->_vars['story_content'] = $converted;
-				}
 			}elseif ($the_settings['admins'] && $current_user->user_level == "admin") {
-				if ($the_settings['nofollow']) {
-					/* Redwine: Changed the regex to skip urls that inside an html tag, like iframe. Also added open the link in a new window */
-					$vars['smarty']->_vars['story_content'] = $converted_nofollow;
-	}else{	
 					$vars['smarty']->_vars['story_content'] = $converted;
 				}
 			}
 		}
 	}
-}
 
 // 
 // Read module settings
@@ -172,20 +154,6 @@ function links_settings()
 		$settings1[str_replace('links_', '', $misc_setting->name)] = $misc_setting->data;
 	}
 	return $settings1;
-	
-	
-    /*return array(
-		'comments' => get_misc_data('links_comments'),
-		'stories' => get_misc_data('links_stories'),
-		'yt_stories' => get_misc_data('links_yt_stories'),
-		'yt_comments' => get_misc_data('links_yt_comments'),
-		'fb_stories' => get_misc_data('links_fb_stories'),
-		'fb_comments' => get_misc_data('links_fb_comments'),
-		'nofollow' => get_misc_data('links_nofollow'),
-		'all' => get_misc_data('links_all'),
-		'moderators' => get_misc_data('links_moderators'),
-		'admins' => get_misc_data('links_admins')
-		);*/
 }
 
 //
