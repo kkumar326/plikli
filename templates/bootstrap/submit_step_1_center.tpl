@@ -20,6 +20,9 @@
 	{checkActionsTpl location="tpl_kliqqi_submit_step1_middle"}
 	<form action="{if isset($UrlMethod) && $UrlMethod == "2"}{$URL_submit}{else}submit.php{/if}" method="post" class="form-inline" id="thisform">
 		<h3>{#KLIQQI_Visual_Submit1_NewsSource#}</h3>
+		{if $Submit_Require_A_URL eq ''}
+			<h4 class="alert alert-warning">{#KLIQQI_Visual_Submit_Editorial#}</h4>
+		{/if}
 		<label for="url">{#KLIQQI_Visual_Submit1_NewsURL#}:</label>
 		<div class="row">
 			<div class="col-md-5 form-group">
