@@ -51,6 +51,9 @@ if(is_numeric($_GET['id'])) {
 			$main_smarty->assign('the_comment', $comment->print_summary($link, true));
 			$link->thecomment = $comment->quickread();
 			$main_smarty->assign('TheComment', $comment->quickread());
+			/* Redwine, saving one query */ 
+			$main_smarty->assign('TheComment', $link->thecomment);
+			//$main_smarty->assign('TheComment', $comment->quickread());
 		}
 	} else {
 		$current_user->owncomment = "NO";
@@ -79,7 +82,7 @@ if(is_numeric($_GET['id'])) {
 
 // display comment for for editing
 function print_comment_form($fetch = false) {
-	global $link, $current_user, $main_smarty, $the_template;
+	global $link, $current_user, $main_smarty, $the_template, $Story_Content_Tags_To_Allow;
 
 	// misc smarty
 	$main_smarty->assign('randkey', rand(1000000,100000000));
@@ -88,14 +91,16 @@ function print_comment_form($fetch = false) {
 
 	if($fetch == false){
 		// show the template
+		$main_smarty->assign('Story_Content_Tags_To_Allow', htmlspecialchars($Story_Content_Tags_To_Allow));
 		$main_smarty->display($the_template . '/comment_form.tpl');
 	} else {
+		$main_smarty->assign('Story_Content_Tags_To_Allow', htmlspecialchars($Story_Content_Tags_To_Allow));
 		return $main_smarty->fetch($the_template . '/comment_form.tpl');
 	}
 }
 
 function insert_comment () {
-	global $commentownerid, $link, $db, $current_user, $main_smarty, $the_template;
+	global $commentownerid, $link, $db, $current_user, $main_smarty, $the_template, $Story_Content_Tags_To_Allow; 
         check_actions('story_edit_comment',$vars);
 
 	// Check if is a POST of a comment
@@ -104,7 +109,7 @@ function insert_comment () {
 			sanitize($_POST['user_id'], 3) == $current_user->user_id &&
 			is_numeric(sanitize($_POST['randkey'], 3)) &&
 			sanitize($_POST['randkey'], 3) > 0 && 
-			sanitize($_POST['comment_content'], 4) != '' ) {
+			sanitize($_POST['comment_content'], 4, $Story_Content_Tags_To_Allow) != '' ) {
 		require_once(mnminclude.'comment.php');
 		$comment = new Comment;
 		$comment->id=$link->commentid;
@@ -112,7 +117,7 @@ function insert_comment () {
 		$comment->link=$link->id;
 		$comment->randkey=sanitize($_POST['randkey'], 3);
 		$comment->author=$commentownerid;
-		$comment->content=sanitize($_POST['comment_content'], 4);
+		$comment->content=sanitize($_POST['comment_content'], 4, $Story_Content_Tags_To_Allow);
 		if (strlen($comment->content) > maxCommentLength)
 		{
 			$main_smarty->assign('url', $_SERVER['REQUEST_URI']);

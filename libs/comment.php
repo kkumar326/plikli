@@ -151,7 +151,7 @@ class Comment {
 	}
 	
 	function fill_smarty($smarty){
-		global $current_user, $the_template, $comment_counter, $link, $ranklist, $db;  
+		global $current_user, $the_template, $comment_counter, $link, $ranklist, $db, $Story_Content_Tags_To_Allow;  
 	    if (!$ranklist)
 	    {
 		$users = $db->get_results("SELECT user_karma, COUNT(*) FROM ".table_users." WHERE user_level NOT IN ('Spammer') AND user_karma>0 GROUP BY user_karma ORDER BY user_karma DESC",ARRAY_N);
@@ -167,7 +167,11 @@ class Comment {
 
 		$smarty->assign('comment_counter', $comment_counter);
 
+		if ($Story_Content_Tags_To_Allow == ''){
 		$text = save_text_to_html($this->content);
+		}else{
+			$text =  nl2br($this->content);
+		}
 		$vars = array('comment_text' => $text, 'comment_id' => $this->id, 'smarty' => $smarty);
 		check_actions('show_comment_content', $vars); 
 		$smarty->assign('comment_content', $vars['comment_text']); 

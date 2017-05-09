@@ -65,10 +65,16 @@ function embed_videos($text, $type) {
 			$ogg = stripos($match, '.ogg');
 			$mp3 = stripos($match, '.mp3');
 			$wav = stripos($match, '.wav');
+			$jpg = stripos($match, '.jpg');
+			$png = stripos($match, '.png');
+			$gif = stripos($match, '.gif');
 			if ( $ogg !== false || $mp3 !== false || $wav !== false) {
 				
 				$text = preg_replace("#$match#i", " <!--[if lt IE 9]><script>document.createElement(\"audio\");</script><![endif]-->
 		<br /><audio preload=\"none\" style=\"width: 50%;\" controls=\"controls\"><source type=\"audio/mpeg\" src=\"$match\" /></audio><br />",$text);
+			}elseif ( $jpg !== false || $png !== false || $gif !== false) {
+				
+				$text = preg_replace("#$match#i", " <div class=\"videoWrapper\"><img src=\"$match\" /></div>", $text);
 			}else{
 				// matching all other urls that are not within html tags
 				if ($the_settings['nofollow'] == "1") {

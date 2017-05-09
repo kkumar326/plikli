@@ -127,7 +127,7 @@ if(is_numeric($requestID)) {
 	$main_smarty->assign('link_id', $link->id);
 	$main_smarty->assign('user_id', $current_user->user_id);
 	$main_smarty->assign('randmd5', md5($current_user->user_id.$randkey));
-	
+	$main_smarty->assign('Story_Content_Tags_To_Allow', htmlspecialchars($Story_Content_Tags_To_Allow)); 
 	if(!$current_user->authenticated){
 		$vars = '';
 		check_actions('anonymous_user_id', $vars);
@@ -272,7 +272,7 @@ function get_comments ($fetch = false, $parent = 0, $comment_id=0, $show_parent=
 
 
 function insert_comment () {
-	global $link, $db, $current_user, $main_smarty, $the_template, $story_url;
+	global $link, $db, $current_user, $main_smarty, $the_template, $story_url, $Story_Content_Tags_To_Allow;
 
 /* Redwine: Spam Trigger Module was not working as intended. Fix provided by modifying 8 files.">Spam Trigger Module was not working as intended. https://github.com/Pligg/pligg-cms/commit/2faf855793814f82d7c61a8745a93998c13967e0 */        
 		$main_smarty->assign('TheComment',$_POST['comment_content']);
@@ -289,7 +289,7 @@ function insert_comment () {
 	//anonymous comment
 	$cancontinue_anon = false;
 	if (isset($_POST['anon'])) $anon = $_POST['anon'];
-
+	$comment->content=sanitize($_POST['comment_content'], 4, $Story_Content_Tags_To_Allow); 
 	$comment->content=sanitize($_POST['comment_content'], 4);
 	if (strlen($comment->content) > maxCommentLength)
 	{
@@ -303,7 +303,7 @@ function insert_comment () {
 
 	if(sanitize($_POST['link_id'], 3) == $link->id && $current_user->authenticated && sanitize($_POST['user_id'], 3) == $current_user->user_id &&	sanitize($_POST['randkey'], 3) > 0) 
 	{
-		if(sanitize($_POST['comment_content'], 4) != '')
+		if(sanitize($_POST['comment_content'], 4, $Story_Content_Tags_To_Allow) != '')
 			// this is a normal new comment
 			$cancontinue = true;
 		if (isset($_POST['reply_comment_content']) && is_array($_POST['reply_comment_content']))
@@ -328,7 +328,7 @@ function insert_comment () {
 				$error = true;
 			elseif(!$current_user->authenticated)
 			{
-				$vars = array('link_id' => $link->id,'randkey' => $_POST['randkey'],'user_id' => $_POST['user_id'],'a_email' => $_POST['a_email'],'a_username' => $_POST['a_username'],'a_website' => $_POST['a_website'],'comment_content' => sanitize($_POST['comment_content'],4));
+				$vars = array('link_id' => $link->id,'randkey' => $_POST['randkey'],'user_id' => $_POST['user_id'],'a_email' => $_POST['a_email'],'a_username' => $_POST['a_username'],'a_website' => $_POST['a_website'],'comment_content' => sanitize($_POST['comment_content'],4, $Story_Content_Tags_To_Allow));
 				check_actions('anonymous_comment', $vars);
 			}
 		}

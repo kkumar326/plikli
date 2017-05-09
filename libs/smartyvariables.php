@@ -46,6 +46,15 @@ $main_smarty->assign('user_logged_in', $current_user->user_login);
 $main_smarty->assign('user_id', $current_user->user_id);
 if ($current_user->authenticated == true) {
 	$main_smarty->assign('user_level', $current_user->user_level);
+	if ($current_user->user_level == 'admin') {
+		$Story_Content_Tags_To_Allow = Story_Content_Tags_To_Allow_God;
+	}elseif ($current_user->user_level == 'moderator') {
+		$Story_Content_Tags_To_Allow = Story_Content_Tags_To_Allow_Admin;
+	}elseif ($current_user->user_level == 'normal') {
+		$Story_Content_Tags_To_Allow = Story_Content_Tags_To_Allow_Normal;
+	}
+	$main_smarty->assign('Story_Content_Tags_To_Allow', htmlspecialchars($Story_Content_Tags_To_Allow));
+	define(Story_Content_Tags_To_Allow, htmlspecialchars($Story_Content_Tags_To_Allow));
 	$current_user_level = $current_user->user_level; /* Redwine: user_level is not part oof the $current_user array when user is not auhtenticated (logged in), hence this variable to be used on line 74. otherwise, generating a Notice in case user is not authenticated. */
 }else{
 	$main_smarty->assign('user_level', "");
