@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<style>
+li{margin: 0 0 10px 0;}
+.code{background:#eeeeee;border:1px solid #cccccc;padding:5px 10px;}
+pre {
+  white-space: pre-wrap;
+  overflow-x: auto;
+  background:#eeeeee;border:1px solid #cccccc;padding:5px 10px;
+}
+
+</style>
+</head>
+
+<body>
+<h2>CKEditor v2.0 CKEditor v4.62</h2>
+
+<h3>Description</h3>
+<p>Integrates CKEditor with your description Textarea on the <u>submit</u> and <u>edit story</u> pages as well as the <u>comment form</u> on the story page.<br /></p>
+
+<p><strong style="background-color:#ffff00">In order to use CKEditor Module, you have to have HTML allowed in Dashboard -> Settings -> Submit. Enter the HTML tags that you want to allow in:</strong></p>
+<ul>
+	<li>HTML tags to allow to Normal users</li>
+	<li>HTML tags to allow for Moderators</li>
+	<li>HTML tags to allow for Admins</li>
+</ul>
+<hr />
+<h3>Revision History</h3>
+<h4>Redwine - May 08, 2017 added/modified the following:</h4>
+<ul>
+	<li>Updated the folder /modules/ckeditor/<strong>ckeditor</strong> to the latest CKEditor Version 4.6.2 Standard package</li>
+	<li>Customized the CKEditor settings to exclude some unneccessary features and HTML tags <em>that must never be allowed, due to security risks and/or compliance with the CMS settings and style.</em></li>
+	<li>The HTML tags that are safe to use and most needed for rich text that you can enter in the 3 fields mentioned above, are:<br /><br />
+	<pre>&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;u&gt;&lt;s&gt;&lt;sub&gt;&lt;sup&gt;&lt;ol&gt;&lt;ul&gt;&lt;li&gt;&lt;blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;big&gt;&lt;small&gt;&lt;tt&gt;&lt;code&gt;&lt;kbd&gt;&lt;samp&gt;&lt;var&gt;&lt;del&gt;&lt;ins&gt;&lt;hr&gt;&lt;pre&gt;&lt;q&gt;</pre><br />
+	
+	<em><u>If you want to use the full potential of the customized CKEditor module, enter all the above HTML in the 3 fields of the settings in the Dashboard</u></em><br /><br />
+	Otherwise, you can enter the ones of your choice from this list, <u>and the module's settings will be updated dynamically!</u>
+	<br /><br />
+	<strong>DO NOT USE ANY OF THE FOLLOWING HTML ELEMENTS AT ALL!</strong><br />
+	<pre><code>
+<strong>&lt;form&gt;</strong> and any of its elements like <strong>&lt;input&gt;</strong> all types, <strong>&lt;textarea&gt;</strong>, <strong>&lt;button&gt;</strong>
+<strong>&lt;table&gt;</strong> and all its elements.
+<strong>&lt;a&gt;</strong> link and anchor
+<strong>&lt;iframe&gt;</strong>
+<strong>&lt;img&gt;</strong>
+<strong>&lt;script&gt;</strong>
+</code></pre><br />
+
+	<strong>NOTE:</strong>
+	<p>When you want to include an Image, Youtube or Facebook video and audio URLs, just paste or type the URL in the content and the <strong>Links Module</strong> will Embed video and audio URLs and if the URL is for an image (gif, png, jpg), it will be wrapped with the image tag to render it. Any other loose URL will be converted to a link!<br />All this is done upon displaying the story and the content will not be modified and therefore no risks of having an iframe in the saved description, thus no need to add <strong>&lt;iframe&gt;</strong>, <strong>&lt;img&gt;</strong> and <strong>&lt;a&gt;</strong> in the allowed HTML tags!</p>
+	</li>
+	<li>module_add_action_tpl in the init.php file to make it work on the comment form.</li>
+	<li>Created ckeditor-comment.tpl in the templates folder</li>
+	<li>Modified ckeditor1.tpl and ckeditor2.tpl to only run if HTML is allowed as mentioned above.</li>
+	<li>Modified ckeditor2.tpl and ckeditor-comment.tpl to update the CKEditor settings when HTML tags are added/removed from the dashboard settings.</li>
+
+</ul>
+<hr />
+</body>
+</html>
