@@ -18,7 +18,7 @@
 							<p class="help-inline"><strong>{#KLIQQI_Visual_Submit2_HTMLTagsAllowed#}:</strong> {$Story_Content_Tags_To_Allow}</p>
 					{/if }
 				<textarea autofocus="autofocus" name="comment_content" id="comment_content" class="form-control comment-form" rows="6" />{if isset($TheComment)}{$TheComment}{/if}</textarea>
-				<p class="help-inline">{#KLIQQI_Visual_Comment_NoHTML#}</p>
+				<p class="help-inline">&nbsp;<hr /></p>
 			</div>
 		</div>
         
