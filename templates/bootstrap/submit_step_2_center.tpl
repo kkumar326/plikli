@@ -73,10 +73,18 @@
 					{/if }
 					<textarea name="bodytext" tabindex="15" rows="6" class="form-control bodytext col-md-4" id="bodytext" maxlength="{$maxStoryLength}" WRAP="SOFT">{if $submit_url_description}{$submit_url_description}{/if}{$submit_content}</textarea>
 					<br />
-					<p class="help-inline">{#KLIQQI_Visual_Submit2_DescInstruct#}</p>
+					
 				</div>
 			</div>
 			{if $SubmitSummary_Allow_Edit eq 1}
+				<hr />
+				<p class="help-inline">{#KLIQQI_Visual_Submit2_DescInstruct#}</p>
+				<p class="help-inline">{#KLIQQI_Visual_Submit2_SummaryInstruct#}</p>
+				<p class="help-inline">
+					{#KLIQQI_Visual_Submit2_SummaryLimit#}
+					{$StorySummary_ContentTruncate}
+					{#KLIQQI_Visual_Submit2_SummaryLimitCharacters#}
+				</p>
 				<div class="control-group">
 					<label for="input01" class="control-label">{#KLIQQI_Visual_Submit2_Summary#}</label>
 					<div class="controls">
@@ -86,15 +94,9 @@
 						{else}
 							<p class="help-inline"><strong>{#KLIQQI_Visual_Submit2_HTMLTagsAllowed#}:</strong> {$Story_Content_Tags_To_Allow}</p>
 						{/if }
-						<textarea name="summarytext" rows="5" maxlength="{$maxSummaryLength}" id="summarytext" class="col-md-4" WRAP="SOFT">{$submit_summary}</textarea>
-						<br />
-						<p class="help-inline">
-							{#KLIQQI_Visual_Submit2_SummaryInstruct#}
-							{#KLIQQI_Visual_Submit2_SummaryLimit#}
-							{$StorySummary_ContentTruncate}
-							{#KLIQQI_Visual_Submit2_SummaryLimitCharacters#}
-						</p>
+						<textarea name="summarytext" rows="6" maxlength="{$maxSummaryLength}" id="summarytext" class="form-control bodytext col-md-4" maxlength="{$StorySummary_ContentTruncate}" WRAP="SOFT">{$submit_summary}</textarea>
 					</div>
+					<p>&nbsp;<hr /></p>
 				</div>
 			{/if}
 			{*
