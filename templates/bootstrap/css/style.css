@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* CSS Document */
 p {
-font-size: 0.85em;
+font-size: 1.0em;
 }
 a:hover {
 text-decoration:none;
@@ -296,7 +296,7 @@ margin: 7px 4px;
     display: block;
 }
 .nav-tabs {
-	font-size:0.85em;
+	font-size:1.0em;
 }
 .nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
     margin-top: 0;
@@ -405,7 +405,7 @@ color: #aaa;
 #footer>.subtext> a {padding:5px}
 .storycontent {margin-left: 73px;}
 .news-body-text {
-font-size:0.85em;
+font-size:1.0em;
 padding:2px 10px 0 10px;
 /* Redwine: to prevent long urls from pushing the page to the right. Now the content wraps properly */
 word-wrap:break-word;
@@ -450,7 +450,7 @@ position:absolute;
 display:block;
 background:#fff;
 padding:10px 15px;
-font-size:0.85em;
+font-size:1.0em;
 white-space:nowrap;
 border-radius: 4px;
 box-shadow: 0 1px 2px rgba(0,0,0,.5);
@@ -529,7 +529,7 @@ margin-bottom: 8px;
 }
 
 .comment-author p, .comment-negative p , .comment-moderated p {
-font-size: 0.85em;
+font-size: 1.0em;
 font-weight:normal;
 color:#000;
 }
@@ -643,7 +643,7 @@ margin-bottom:15px;
 margin-bottom:20px;
 }
 #aboutcontent p{
-font-size:0.85em;
+font-size:1.0em;
 }
 #navlist{
 margin:0 0 10px 0;
@@ -713,7 +713,7 @@ border-bottom:1px dotted #ddd;
 }
 .simple_message_menu ul li a {
 color:#4E4E4E;
-font-size:0.85em;
+font-size:1.0em;
 }
 .simple_message_menu ul.nav-tabs li a{
 padding: 6px 10px 5px 10px;
@@ -1003,13 +1003,13 @@ font-weight:bold;
 font-size:1.2em;
 }
 .group_created_by {
-font-size:0.85em;
+font-size:1.0em;
 }
 .group_created_on {
-font-size:0.85em;
+font-size:1.0em;
 }
 .group_members {
-font-size:0.85em;
+font-size:1.0em;
 }
 .group_description {
 

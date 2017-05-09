@@ -123,7 +123,7 @@
 			</h2>
 		</span>	
 			<span class="subtext">
-				{if $UseAvatars neq "0"}<span id="ls_avatar-{$link_shakebox_index}"><img itemprop="image" src="{$Avatar_ImgSrcs}" width="16px" height="16px" alt="{$link_submitter}" title="{$link_submitter}" /></span>{else}<i class="fa fa-user"></i>{/if}
+				{if $UseAvatars neq "0"}<span id="ls_avatar-{$link_shakebox_index}"><img itemprop="image" src="{$Avatar_ImgSrcs}" width="32px" height="32px" alt="{$link_submitter}" title="{$link_submitter}" /></span>{else}<i class="fa fa-user"></i>{/if}
 				<span itemprop="author" itemscope itemtype="http://schema.org/Person">
 				<span itemprop="name">
 				<a href="{$submitter_profile_url}">{$link_submitter}{if $submitter_rank neq ''} (#{$submitter_rank}){/if}</a> 
