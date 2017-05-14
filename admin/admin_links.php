@@ -72,6 +72,9 @@ if($canIhaveAccess == 1) {
 		 	case 'new':
 				$filter_sql = " link_status = 'new' ";
 				break;
+			case 'draft':
+				$filter_sql = " link_status = 'draft' ";
+				break;
 			case 'all':
 				$filter_sql = " link_status <> 'page' AND link_status <> 'discard' AND link_status <> 'spam' ";
 				break;
@@ -89,6 +92,9 @@ if($canIhaveAccess == 1) {
 			 	break;
 			case 'spam':
 			 	$filter_sql = " link_status = 'spam' ";
+			 	break;
+			case 'moderated':
+			 	$filter_sql = " link_status = 'moderated' ";
 			 	break;
 			case 'page':
 			 	$filter_sql = " link_status = 'page' ";
@@ -162,7 +168,7 @@ if($canIhaveAccess == 1) {
             		
 			foreach ($_POST["link"] as $key => $v) {
 			    
-				if($admin_acction=="published" || $admin_acction=="new" || $admin_acction=="discard" || $admin_acction=="spam"){
+				if($admin_acction=="published" || $admin_acction=="new" || $admin_acction=="discard" || $admin_acction=="moderated" || $admin_acction=="spam"){
 					$link_status=$db->get_var('select link_status from ' . table_links . '  WHERE link_id = "'.$key.'"');
 					if($link_status!=$admin_acction){
 								
@@ -173,6 +179,9 @@ if($canIhaveAccess == 1) {
 						}
 						elseif ($admin_acction == "new") {
 							$db->query('UPDATE `' . table_links . '` SET `link_status` = "new", link_published_date=0 WHERE `link_id` = "'.$key.'"');
+						}
+						elseif ($admin_acction == "moderated") {
+							$db->query('UPDATE `' . table_links . '` SET `link_status` = "moderated", link_published_date=0 WHERE `link_id` = "'.$key.'"');
 						}
 						elseif ($admin_acction == "discard") {
 							$db->query('UPDATE `' . table_links . '` SET `link_status` = "discard" WHERE `link_id` = "'.$key.'"');

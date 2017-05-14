@@ -115,6 +115,7 @@ $stats = $db->get_results('select link_status, count(*) total from '.table_links
 $total_submissions = 0;
 $published_submissions_count = 0;
 $new_submissions_count = 0;
+$draft_submissions_count = 0;
 $moderated_submissions_count = 0;
 $abuse_submissions_count = 0;
 $discarded_submissions_count = 0;
@@ -133,6 +134,10 @@ if ($stats) {
 			$main_smarty->assign('new_submissions_count', $new_submissions_count);
 			$total_submissions += $row->total;
 			$sidebar_stats_stories += $row->total;
+		}elseif ($row->link_status == 'draft') {
+			$draft_submissions_count = $row->total;
+			$main_smarty->assign('draft_submissions_count', $draft_submissions_count);
+			$total_submissions += $row->total;
 		}elseif ($row->link_status == 'moderated') {
 			$moderated_submissions_count = $row->total;
 			$main_smarty->assign('moderated_submissions_count', $moderated_submissions_count);
@@ -620,6 +625,7 @@ if ($current_user->user_id > 0 && $current_user->authenticated)
 	$main_smarty->assign('user_url_news_sent', getmyurl('user2', $login, 'history'));
 	$main_smarty->assign('user_url_news_published', getmyurl('user2', $login, 'published'));
 	$main_smarty->assign('user_url_news_unpublished', getmyurl('user2', $login, 'new'));
+	$main_smarty->assign('user_url_draft', getmyurl('user2', $login, 'draft'));
 	$main_smarty->assign('user_url_news_voted', getmyurl('user2', $login, 'voted'));
 	$main_smarty->assign('user_url_news_upvoted', getmyurl('user2', $login, 'upvoted'));
 	$main_smarty->assign('user_url_news_downvoted', getmyurl('user2', $login, 'downvoted'));

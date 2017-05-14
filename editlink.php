@@ -194,6 +194,12 @@ if ($link) {
 				return;
 			}
 
+			if ($linkres->status == 'draft') {
+				if (isset($_POST['draft'])) {
+					$linkres->status = sanitize($_POST['draft'], 3);
+					$linkres->check_should_publish();
+				}
+			}
 			tags_insert_string($linkres->id, $dblang, $linkres->tags);
 			$linkres->store();
 			
@@ -240,6 +246,7 @@ if ($link) {
 			$main_smarty->assign('submit_url', $linkres->url);
 			$main_smarty->assign('submit_url_title', $linkres->url_title);
 			$main_smarty->assign('submit_id', $linkres->id);
+			$main_smarty->assign('submit_stat', $linkres->status);
 			$main_smarty->assign('submit_type', $linkres->type());
 			$main_smarty->assign('submit_title', htmlspecialchars($link_title));
 			$main_smarty->assign('submit_content', $link_content);

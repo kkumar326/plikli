@@ -112,6 +112,7 @@ function validate_all_user_action(){
 				<option value="all" {if $templatelite.get.filter == "all"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_All#}</option>
 				<option value="published" {if $templatelite.get.filter == "published"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Published#}</option>
 				<option value="new" {if $templatelite.get.filter == "new"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_New#}</option>
+				<option value="draft" {if $templatelite.get.filter == "draft"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Draft#}</option>
 				<option value="discard" {if $templatelite.get.filter == "discard"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Discarded#}</option>
 				<option value="moderated" {if $templatelite.get.filter == "moderated"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Moderated#}</option>
 				<option value="spam" {if $templatelite.get.filter == "spam"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Spam#}</option>
@@ -169,6 +170,10 @@ function validate_all_user_action(){
 					{#KLIQQI_Visual_AdminPanel_Discarded#}
 				{elseif $template_stories[id].link_status=='spam'} 
 					{#KLIQQI_Visual_AdminPanel_Spam#}
+				{elseif $template_stories[id].link_status=='draft'} 
+					{#KLIQQI_Visual_AdminPanel_Draft#}
+				{elseif $template_stories[id].link_status=='moderated'} 
+					{#KLIQQI_Visual_AdminPanel_Moderated#}
 				{/if}
 			</td>
 			{checkActionsTpl location="tpl_kliqqi_admin_submissions_td_end"}

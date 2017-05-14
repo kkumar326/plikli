@@ -146,6 +146,15 @@
 	{checkActionsTpl location="submit_step_2_pre_extrafields"}
 	{include file=$tpl_extra_fields.".tpl"}
 	<br />
+		{if $submit_stat eq 'draft'}
+			{#KLIQQI_Visual_Submit2_Edit_Draft_Notice#}
+			<ul class="notify_option_list alert alert-warning">
+				<li><input type="radio" name="draft" value="draft" checked /> {#KLIQQI_Visual_Submit2_Edit_Draft#}</li>
+				<li><input type="radio" name="draft" value="new" /> {#KLIQQI_Visual_Submit2_Edit_Draft_Post#}</li>
+				<li><input type="radio" name="draft" value="discard" /> {#KLIQQI_Visual_Submit2_Edit_Draft_Discard#}</li>
+			</ul>
+			</br />
+		{/if} 
 	<input type="submit" value="{#KLIQQI_Visual_Submit2_Continue#}" class="btn btn-primary" />
 </form>
 {checkActionsTpl location="tpl_kliqqi_submit_step2_after_form"}

@@ -121,7 +121,9 @@
 				<input type="hidden" name="id" value="{$submit_id}" />
 				{* Redwine: I added ; return false; to the onlclick event to fix the bug in Firefox that was taking the user back to an error message...when clicking the cancel the submission button. https://github.com/redwinefireplace/kliqqi-cms/commit/bcc2b717bd8196c32126380706bf2f5ae4ff9b90 *}
 				<button class="btn btn-default" tabindex="30" onclick="history.go(-1); return false;">Cancel</button>
-				{checkActionsTpl location="tpl_kliqqi_submit_step2_end"}
+				{checkActionsTpl location="tpl_kliqqi_submit_step2_end"}<br />
+				<input type="checkbox" id="draft" name="draft" value="draft" />
+				<label for="draft">{#KLIQQI_Visual_Submit2_Draft#}</label>
 				<input class="btn btn-primary" tabindex="31" type="submit" value="{#KLIQQI_Visual_Submit2_Continue#}" />
 			</div>
 		</div>

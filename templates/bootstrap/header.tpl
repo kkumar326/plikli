@@ -100,6 +100,7 @@
 						<li><a href="{$URL_userNoVar}">{#KLIQQI_Visual_Profile#}</a></li>
 						<li><a href="{$URL_Profile}"><span>{#KLIQQI_Visual_User_Setting#}</a></li>
 						<li><a href="{$user_url_news_sent}">{#KLIQQI_Visual_User_NewsSent#}</a></li>
+						<li><a href="{$user_url_draft}">{#KLIQQI_Visual_User_NewsDraft#}</a></li>
 						<li><a href="{$user_url_commented}">{#KLIQQI_Visual_User_NewsCommented#}</a></li>
 						<li><a href="{$user_url_news_upvoted}">{#KLIQQI_Visual_UpVoted#}</a></li>
 						<li><a href="{$user_url_news_downvoted}">{#KLIQQI_Visual_DownVoted#}</a></li>

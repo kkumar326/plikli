@@ -172,6 +172,18 @@
 	{/if}
 		{if $sw_members eq "1"}
 		<tr>
+			<td style="{if $draft_submissions_count gt 0}background-color:#d9534f;{/if}padding-left:40px">
+				<strong>
+				{#KLIQQI_Statistics_Widget_Front_Draft#}:
+				</strong>
+			</td>
+			<td {if $draft_submissions_count gt 0}style="background-color:#d9534f"{/if}>
+				{if $draft_submissions_count ne ''}{$draft_submissions_count}{else} 0{/if}
+			</td>
+		</tr>
+	{/if}
+	{if $sw_members eq "1"}
+		<tr>
 			<td style="{if $moderated_submissions_count gt 0}background-color:#d9534f;{/if}padding-left:40px">
 				<strong>
 				{#KLIQQI_Statistics_Widget_Front_Moderated#}:

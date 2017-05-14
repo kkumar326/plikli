@@ -532,12 +532,16 @@ function do_submit3() {
 	if(!Submit_Complete_Step2 && $_SESSION['step']!=2)die('Wrong step');
 	
 	$linkres->read();
-
+	if (isset($_REQUEST['draft'])) {
+		totals_adjust_count($linkres->status, -1);
+		totals_adjust_count('draft', 1);
+		$linkres->status = 'draft';
+	}else{
 	totals_adjust_count($linkres->status, -1);
 	totals_adjust_count('new', 1);
 
 	$linkres->status='new';
-
+	}
 	$vars = array('linkres'=>&$linkres);
 	check_actions('do_submit3', $vars);
 /* Redwine: Tag data inserted later in the submission process so that incomplete stories don't add extra data to the tag db tables. https://github.com/Pligg/pligg-cms/commit/2930e716be8f9ce3fcf71ba9289fc280f8f2f4e7 */

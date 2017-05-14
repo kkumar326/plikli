@@ -66,6 +66,7 @@ $main_smarty->assign('user_url_personal_data2', getmyurl('user2', $login));
 $main_smarty->assign('user_url_news_sent2', getmyurl('user2', $login, 'history'));
 $main_smarty->assign('user_url_news_published2', getmyurl('user2', $login, 'published'));
 $main_smarty->assign('user_url_news_unpublished2', getmyurl('user2', $login, 'new'));
+$main_smarty->assign('user_url_draft2', getmyurl('user2', $login, 'draft'));
 $main_smarty->assign('user_url_news_voted2', getmyurl('user2', $login, 'voted'));
 $main_smarty->assign('user_url_news_upvoted2', getmyurl('user2', $login, 'upvoted'));
 $main_smarty->assign('user_url_news_downvoted2', getmyurl('user2', $login, 'downvoted'));	
