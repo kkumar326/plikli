@@ -22,13 +22,11 @@ if(!defined('lang_loc')){
 	}
 }
 
-// Check if a .maintenance file exists in the Kliqqi root directory
-$maintenance_file = "./.maintenance";
-if(file_exists($maintenance_file)){
-	$main_smarty->assign('maintenance_mode', 'true');
-} else {
-	$main_smarty->assign('maintenance_mode', 'false');
-}
+// Check maintenance mode
+$maintenance = $main_smarty->get_template_vars('maintenance_mode');
+$main_smarty->assign('maintenance_mode', $maintenance);
+
+
 
 $main_smarty->config_dir = "";
 $main_smarty->force_compile = false; // has to be off to use cache
