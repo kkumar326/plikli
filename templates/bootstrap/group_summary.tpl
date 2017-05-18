@@ -54,12 +54,15 @@
 			{*Redwine: Roles and permissions and Groups fixes. Provide permissions according to Group Roles and Site level Roles - Group Moderator cannot edit the group info or image*}
 			{if !empty($is_group_admin) && $is_group_admin eq '1' || $isAdmin eq '1' || $isModerator eq '1' || $is_gr_Admin eq '1'}
 				<a class="btn btn-default" href="{$group_edit_url}"><i class="fa fa-edit"></i> {#KLIQQI_Visual_Group_Text_edit#}</a>
+				{if $allow_groups_avatar eq 'true'}
 				<a class="btn btn-default" href="#groupavatar" data-toggle="modal"><i class="fa fa-picture-o"></i> {#KLIQQI_Visual_Group_Avatar_Upload#}</a>
+				{/if}
 				{*Redwine: Roles and permissions and Groups fixes. Only Group Creator and Site Admin can delete a group*}
 				{if !empty($is_group_admin) && $is_group_admin eq '1' || $isAdmin eq '1'}
 				<a class="btn btn-danger" onclick="return confirm('{#KLIQQI_Visual_Group_Delete_Confirm#}')" href={$group_delete_url}><i class="fa fa-white fa-trash-o"></i> {#KLIQQI_Visual_Group_Text_Delete#}</a>
 {* Redwine: Roles and permissions and Groups fixes *}
 				{/if}
+				{if $allow_groups_avatar eq 'true'}
 				{if !empty($Avatar_uploaded)}
 					<br />
 					<div class="alert alert-warning">
@@ -92,6 +95,7 @@
 						</form>
 					</div><!-- /.modal-dialog -->
 				</div><!-- /.modal -->
+				{/if}
 			{/if}
 		{elseif $group_status eq 'disable'}
 			<div class='group_approve'>

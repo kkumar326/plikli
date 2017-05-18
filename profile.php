@@ -97,6 +97,9 @@ $main_smarty->assign('user_following', $user->getFollowingCount());
 			$imagename = basename($myfile);
 
 			$mytmpfile = $_FILES['image_file']['tmp_name'];
+			if ($_FILES['image_file']["size"]/1024 > max_avatar_size) {
+				$error['Type'] = 'Maximum file size '. max_avatar_size . 'Kb exceeded';
+			}
 
 			if(!in_array($_FILES['image_file']['type'],$allowedFileTypes)){
 				$error['Type'] = 'Only these file types are allowed : jpeg, gif, png';
@@ -114,6 +117,8 @@ $main_smarty->assign('user_following', $user->getFollowingCount());
 				$result = move_uploaded_file($_FILES['image_file']['tmp_name'], $newimage);
 				if(empty($result))
 					$error["result"] = "There was an error moving the uploaded file.";
+			}else{
+				$main_smarty->assign('error', $error); 
 			}			
 		
 			// create large avatar

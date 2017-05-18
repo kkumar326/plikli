@@ -2,6 +2,9 @@
 ****** Registration Template ********
 *************************************}
 <!-- register_center.tpl -->
+{if $allow_registration neq '1'}
+<div class="alert alert-danger">{$disallow_registration_message}</div>
+{else}
 <div class="row register-wrapper">
 	<div class="col-md-4 register-left">
 		{checkActionsTpl location="tpl_kliqqi_register_start"}
@@ -79,4 +82,5 @@
 	</div>
 	{checkActionsTpl location="tpl_kliqqi_register_end"}
 </div><!--/.register-wrapper -->
+{/if}
 <!--/register_center.tpl -->

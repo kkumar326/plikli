@@ -238,7 +238,7 @@ function group_display($requestID)
 		$main_smarty->assign('group_vote_to_publish', $group_vote_to_publish);
 		
 		//get group avatar path
-		if($group_avatar == "uploaded" && file_exists(mnmpath."avatars/groups_uploaded/".$group_id."_".group_avatar_size_width.".jpg"))
+		if($group_avatar == "uploaded" && allow_groups_avatar == 'true' && file_exists(mnmpath."avatars/groups_uploaded/".$group_id."_".group_avatar_size_width.".jpg"))
 			$imgsrc = my_base_url . my_kliqqi_base."/avatars/groups_uploaded/".$group_id."_".group_avatar_size_width.".jpg";
 		else
 			$imgsrc = my_base_url . my_kliqqi_base."/templates/".$the_template."/img/group_large.gif";

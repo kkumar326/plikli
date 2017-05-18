@@ -52,6 +52,7 @@
 											<img src="{$Avatar.large}" title="{#KLIQQI_Visual_Profile_CurrentAvatar#}" />
 										</div>
 										<div class="fileupload-preview fileupload-exists img-thumbnail" style="max-width:{$Avatar_Large}px;max-height:{$Avatar_Large}px;"></div>
+										{if $error.Type neq ""}<span class="alert alert-danger" style="font-size:0.6em">{$error.Type}</span>{/if}
 										<div>
 											<span class="btn btn-default btn-file">
 												<span class="fileupload-new"><i class="fa fa-picture"></i> Browse</span>
@@ -84,6 +85,11 @@
 					{/if}
 				</div>
 				{if $user_login eq $user_logged_in}</a>{/if}
+			{else}
+				<div class="img-thumbnail avatar_thumb">
+					<img class="profile_avatar" src="{$Avatar.large}" alt="Avatar" />
+					
+				</div>
 			{/if}
 			{checkActionsTpl location="tpl_kliqqi_profile_username_start"}{$user_username|capitalize}{checkActionsTpl location="tpl_kliqqi_profile_username_end"}
 		</h1>

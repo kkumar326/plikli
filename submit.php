@@ -36,9 +36,6 @@ if (checklevel('admin')) {
 }
 $main_smarty->assign('Story_Content_Tags_To_Allow', htmlspecialchars($Story_Content_Tags_To_Allow));
 
-#print_r($_SESSION);
-#exit;
-
 // breadcrumbs and page titles
 $navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Submit');
 $navwhere['link1'] = getmyurl('submit', '');

@@ -2,6 +2,9 @@
 ****** Submit Step 1 Template *******
 *************************************}
 <!-- submit_step_1_center.tpl -->
+{if $Enable_Submit  neq '1'}
+<div class="alert alert-danger">{$disable_Submit_message}</div>
+{else}
 <legend>{#KLIQQI_Visual_Submit1_Header#}</legend>
 <div class="submit">
 	<h3>{#KLIQQI_Visual_Submit1_Instruct#}:</h3>
@@ -48,4 +51,5 @@
 		</p>
 	</div>
 </div>
+{/if}
 <!-- submit_step_1_center.tpl -->

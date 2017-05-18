@@ -467,6 +467,7 @@ class Link {
 		$main_smarty = $this->fill_smarty($main_smarty, $type);
 
 		$main_smarty->assign('use_title_as_link', use_title_as_link);
+		$main_smarty->assign('link_nofollow', link_nofollow);
 		$main_smarty->assign('open_in_new_window', open_in_new_window);
 		$main_smarty->assign('the_template', The_Template);
 

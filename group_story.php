@@ -173,6 +173,9 @@ if(isset($_POST["avatar"]) && $_POST["avatar"] == "uploaded")
 	$myfile = $_FILES['image_file']['name'];
 	$imagename = basename($myfile);
 	$mytmpfile = $_FILES['image_file']['tmp_name'];
+	if ($_FILES['image_file']["size"]/1024 > max_group_avatar_size) {
+		$error['Type'] = 'Maximum file size '. max_group_avatar_size . 'Kb exceeded';
+	}
 	if(!in_array($_FILES['image_file']['type'],$allowedFileTypes))
 	{
 		$error['Type'] = 'Only these file types are allowed : jpeg, gif, png';
@@ -203,6 +206,8 @@ if(isset($_POST["avatar"]) && $_POST["avatar"] == "uploaded")
 			//$user->avatar_source=$avatar_source;
 			//$user->store();
 		}
+	}else{
+		$main_smarty->assign('Avatar_uploaded', $error['Type']);
 	}
 	// create large avatar
 	include mnminclude . "class.pThumb.php";
