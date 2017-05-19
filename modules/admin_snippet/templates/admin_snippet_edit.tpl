@@ -28,6 +28,15 @@
 						</select>
 					</td>
 				</tr>
+				<tr>
+					<td><label><strong>{#KLIQQI_Admin_Snippet_Status#}<br />{#KLIQQI_Admin_Snippet_Status_active_inactive#} &nbsp;</strong></label></td>
+					<td>
+						<select name="snippet_status" class="form-control">
+							<option value='1' {if $snippet.snippet_status==1}selected{/if}>Active</option>
+							<option value='0' {if $snippet.snippet_status==0}selected{/if}>Inactive</option>
+						</select>
+					</td>
+				</tr>
 				{if $snippet.snippet_updated}
 					<tr>
 						<td><label><strong>{#KLIQQI_Admin_Snippet_Updated#}: &nbsp;</strong></label></td>

@@ -16,6 +16,7 @@
 	  `snippet_updated` datetime NOT NULL,
 	  `snippet_order` int(11) NOT NULL,
 	  `snippet_content` text,
+	  `snippet_status` int(1) NOT NULL DEFAULT '1',
 	  PRIMARY KEY  (`snippet_id`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
 ?>

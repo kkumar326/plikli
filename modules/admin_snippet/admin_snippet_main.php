@@ -73,7 +73,8 @@ function admin_snippet_showpage(){
 					$snippet_name = $db->escape(sanitize($_POST['snippet_name'],4));
 					$snippet_location = $db->escape(sanitize($_POST['snippet_location'],4));
 					$snippet_content  = $db->escape($_POST['snippet_content']);
-					$db->query("UPDATE ".table_prefix."snippets SET snippet_name='$snippet_name', snippet_location='$snippet_location', snippet_content='$snippet_content', snippet_updated=NOW() WHERE snippet_id='$snippet_id'");
+					$snippet_status  = $db->escape($_POST['snippet_status']);
+					$db->query("UPDATE ".table_prefix."snippets SET snippet_name='$snippet_name', snippet_location='$snippet_location', snippet_content='$snippet_content', snippet_updated=NOW(), snippet_status=$snippet_status WHERE snippet_id='$snippet_id'");
 					header("Location: ".my_kliqqi_base."/module.php?module=admin_snippet");
 					die();
 			    }

@@ -38,6 +38,7 @@ array("tpl_kliqqi_banner_top","Before the main content area starts and after any
 array("tpl_kliqqi_banner_bottom","Between body content and footer"),
 array("tpl_kliqqi_content_start","Top of the content area"),
 array("tpl_kliqqi_content_end","Bottom of the content area"),
+array("tpl_kliqqi_main_col_start","Top of the left column"),
 array("tpl_kliqqi_breadcrumb_end","End of the breadcrumbs"),
 array("tpl_kliqqi_sort_start","Beginning of sort (day, week, month, etc.) buttons"),
 array("tpl_kliqqi_sort_end","End of sort (day, week, month, etc.) buttons"),

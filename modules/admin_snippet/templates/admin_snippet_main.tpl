@@ -19,6 +19,7 @@
 				<th>{#KLIQQI_Admin_Snippet_Location#}</th>
 				<th>{#KLIQQI_Admin_Snippet_Updated#}</th>
 				<th style="width:75px;">{#KLIQQI_Admin_Snippet_Order#}</th>
+				<th style="width:75px;">{#KLIQQI_Admin_Snippet_Status#}</th>
 				<th style="width:50px;">{#KLIQQI_Admin_Snippet_Delete#}</th>	
 			</tr>
 		<tbody>
@@ -28,6 +29,7 @@
 				<td>{$template_snippets[id].snippet_location}</td>
 				<td>{$template_snippets[id].snippet_updated}</td>
 				<td><center><input type="text" name="snippet_order[{$template_snippets[id].snippet_id}]" id="order-{$template_snippets[id].snippet_id}" value="{$template_snippets[id].snippet_order}" class="form-control"></center></td>
+				<td><center><input type="text" name="snippet_status[{$template_snippets[id].snippet_id}]" id="status-{$template_snippets[id].snippet_id}" value="{$template_snippets[id].snippet_status}" class="form-control"></center></td>
 				<td><center><input type="checkbox" name="snippet_delete[{$template_snippets[id].snippet_id}]" id="delete-{$template_snippets[id].snippet_id}" value="1"></center></td>
 			</tr>	
 		{/section}
