@@ -6,7 +6,7 @@
 		</div>
 	{/if}
 		<h3>{#KLIQQI_Visual_AdminPanel_Extra_Fields_Instructions#}</h3>
-		<table>
+		<table class="table table-bordered table-striped">
 		<form action="" method="post">	
 			{$xtra_content}
 			<input type="submit" class="btn btn-primary" name="save" value="Save Changes" class="btn btn-default"/>

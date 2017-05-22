@@ -65,9 +65,7 @@ $lines = file($file);
 $index = '';
 $thefield = '';
 $style = '';
-//echo "<table>\n";
-//echo '<form name="extrafields" method="post">'."\n";
-//$xtra_content = array();
+
 foreach ($lines as $line) {	
 	if (preg_match("/(Enable_Extra_Field_)(\d+)/", $line, $n)) {
 		$index = $n[2];
@@ -80,7 +78,7 @@ foreach ($lines as $line) {
 		$thefield = $f[1];
 	}
 	if (preg_match($pattern, $line, $m)) {
-		$extra_content = '<tr>'."\n".'<td><input type="text" name="link_field['.$thearray.$index.']['.$thefield.']" class="form-control" value="'.$m[1].'" size="60"' .$style.' /></td>'."\n".'<td><input type="text" name="link_field['.$thearray.$index.']['.$thefield.']" class="form-control" value="'.$m[2].'" size="60"' .$style.' /></td>'."\n".'</tr>'."\n";
+		$extra_content = '<tr>'."\n".'<td' .$style.'>'.$m[1].'</td>'."\n".'<td><input type="text" name="link_field['.$thearray.$index.']['.$thefield.']" class="form-control admin_config_input emptytext" value="'.$m[2].'" size="60"' .$style.' /></td>'."\n".'</tr>'."\n";
 		$xtra_content .= $extra_content;
 	}
 }

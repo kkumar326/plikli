@@ -211,8 +211,19 @@
 									<ul class="accordion-inner">
 										<li{if $pagename eq "admin_config" && $templatelite.get.page eq "Template"} class="active"{/if} id="template_settings"><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_config.php?page=Template">Template Settings</a></li>
 										<li{if $pagename eq "admin_editor"} class="active"{/if} id="template_editor"><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_editor.php">{#KLIQQI_Visual_AdminPanel_Template_Nav#} Editor</a></li>
-										<li{if $pagename eq "extra_fields_editor"} class="active"{/if} id="xtra_fields_editor"><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_xtra_fields_editor.php">{#KLIQQI_Visual_AdminPanel_Extra_Fields_Nav#} Editor</a></li>
 									    {checkActionsTpl location="tpl_kliqqi_admin_template_sidebarnav_end"}
+                                    </ul>
+								</div>
+							</div>
+							<div class="accordion-group">
+								<div class="btn btn-default col-md-12 accordion-heading">
+									<span class="accordion-heading-title">
+										<li class="nav-header"><i class="fa fa-file-o"></i>&nbsp; Extra Fields</li>
+									</span>
+								</div>
+								<div class="accordion-body " id="CollapseXtraFields">
+									<ul class="accordion-inner">
+										<li{if $pagename eq "extra_fields_editor"} class="active"{/if} id="xtra_fields_editor"><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_xtra_fields_editor.php">{#KLIQQI_Visual_AdminPanel_Extra_Fields_Nav#} Editor</a></li>
                                     </ul>
 								</div>
 							</div>
