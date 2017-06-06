@@ -91,10 +91,10 @@ INSERT INTO `table_config` (`var_id`, `var_page`, `var_name`, `var_value`, `var_
 (NULL, 'Misc', '$dblang', 'en', 'en', 'Text', 'Database Language', 'Database language.', 'normal', ''''),
 (NULL, 'Misc', '$page_size', '8', '8', 'number', 'Page Size', 'How many stories to show on a page.', 'normal', NULL),
 (NULL, 'Misc', '$top_users_size', '25', '25', 'number', 'Top Users Size', 'How many users to display in top users.', 'normal', NULL),
-(NULL, 'Misc', 'table_prefix', 'kliqqi_', 'kliqqi_', 'Text', 'MySQL Table Prefix', 'Table prefix. Ex: kliqqi_ makes the users table become kliqqi_users. Note: changing this will not automatically rename your tables!', 'define', "'"),
+(NULL, 'Misc', 'table_prefix', 'kliqqi_', 'kliqqi_', 'Text', 'MySQL Table Prefix', 'Table prefix. Ex: kliqqi_ makes the users table become kliqqi_users. Note: changing this will not automatically rename your tables!', 'define', ''''),
 (NULL, 'Misc', 'misc_validate', 'false', 'false', 'true / false', 'Validate user email', 'Require users to validate their email address?<br />If you set to true, then click on the link below to also set the email to be used for sending the message.<br /><a href="../module.php?module=admin_language">Set the email</a>. Type @ in the filter box and click Filter to get the value to modify. Do not forget to click save.', 'define', ''),
 (NULL, 'Misc', 'misc_timezone', '0', '0', 'number', 'Timezone offset', 'Should be a number between -12 and 12 for GMT -1200 through GMT +1200 timezone', 'define', ''),
 (NULL, 'Misc', 'Independent_Subcategories', 'false', 'false', 'true / false', 'Show subcategories', 'Top level categories remain independent from subcategory content', 'define', NULL),
 (NULL, 'Misc', 'Auto_scroll', '1', '1', '1', 'Pagination Mode', '<strong>1.</strong> Use normal pagination links.', 'define', NULL),
 (NULL, 'Misc', '\$language', '{$_SESSION[\'language\']}', 'english', 'text', 'Site Language', 'Site Language', 'normal', '\''),
-(NULL, 'Misc', 'user_language', '0', '0', '1 = yes / 0 = no', 'Select Language', 'Allow users to change Kliqqi language', 'normal', '\'');
+(NULL, 'Misc', 'user_language', '0', '0', '1 = yes / 0 = no', 'Select Language', 'Allow users to change Kliqqi language', 'normal', '''');
