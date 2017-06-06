@@ -237,6 +237,29 @@ echo '<fieldset><legend>Updating data in Config table.</legend><ul>';
 	}
 	echo '<li>INSERTED "LOGO" settings <img src="'.$marks.'" class="iconalign" /></li>';	
 
+//Inserting new rows 
+	$sql = "INSERT INTO `" . table_prefix."config` (`var_id`, `var_page`, `var_name`, `var_value`, `var_defaultvalue`, `var_optiontext`, `var_title`, `var_desc`, `var_method`, `var_enclosein`)VALUES
+	(NULL, 'Location Installed', 'allow_registration', 'true', 'true', 'true / false', 'Allow registration?', 'If for a reason you want to suspend registration, permanently or definitely, set it to false!', 'define', ''),
+	(NULL, 'Location Installed', 'disallow_registration_message', 'Registration is temporarily suspended!', '', 'Text', 'Message to display when Registration is suspended', 'Enter the message you want to display.', 'define', ''),
+	(NULL, 'Location Installed', '\$maintenance_mode', 'false', 'false', 'true / false', 'Maintenance Mode', 'Set the mode to true when you want to notify the users of the unavailabilty of the site (upgrade, downtime, etc.)<br /><strong>NOTE that only admin can still access the site during maintenance mode!</strong>', 'normal', ''''),
+	(NULL, 'Submit', 'Enable_Submit', 'true', 'true', 'true / false', 'Allow Submit', 'Allow users to submit articles?', 'define', NULL),
+	(NULL, 'Submit', 'disable_Submit_message', 'Submitting articles is temporarily disabled!', '', 'Text', 'Message to display when Submitting articles is disallowed', 'Enter the message you want to display.', 'define', NULL),
+	(NULL, 'Submit', 'Allow_Draft', 'false', 'false', 'true / false', 'Allow Draft Articles?', 'Set it to true to allow users to save draft articles', 'define', ''),
+	(NULL, 'Story', 'link_nofollow', 'true', 'true', 'true / false', 'Use rel=\"nofollow\"', 'nofollow is a value that can be assigned to the rel attribute of an HTML a element to instruct some search engines that the hyperlink should not influence the ranking of the link''s target in the search engine''s index.<br /><a href=\"https://support.google.com/webmasters/answer/96569?hl=en\" target=\"_blank\">Google: policies</a>', 'define', NULL),
+	(NULL, 'Comments', 'Enable_Comments', 'true', 'true', 'true / false', 'Allow Comments', 'Allow users to comment on articles?', 'define', NULL),
+	(NULL, 'Comments', 'disable_Comments_message', 'Comments are temporarily disabled!', '', 'Text', 'Message to display when Comments are disallowed', 'Enter the message you want to display.', 'define', NULL),
+	(NULL, 'Groups', 'allow_groups_avatar', 'true', 'true', 'true/false', 'Allow Groups to upload own avatar', 'Should groups be allowed to upload own avatar?', 'define', 'NULL'),
+	(NULL, 'Groups', 'max_group_avatar_size', '200', '200KB', 'number', 'Maximum image size allowed to upload', 'Set the maximum image size for the group avatar to upload.', 'define', 'NULL'),
+	(NULL, 'Avatars', 'max_avatar_size', '200', '200KB', 'number', 'Maximum image size allowed to upload', 'Set the maximum image size a user can upload.', 'define', '''');";
+	$sql_new_config = $handle->query($sql);
+	if (!$sql_new_config) {
+		$marks = $notok;
+	}else{
+		$marks = $ok;
+	}
+	$warnings[] = "Added new settings to the config table:<ol><strong>Under Location Installed Section</strong><li>Allow/Disallow Registration</li><li>Disallow Registration message</li><li>Set the maintenance Mode for the site</li><strong>Under Submit Section</strong><li>Enable/Disable Submit</li><li>Disable Submit message</li><li>Enable/disable Allow Draft; users can save articles as draft for later publishing</li><strong>Under Story Section</strong><li>Enable/disable link nofollow for the story URL that is linked in the title on the Story page and the original site that appears in the toolsbar under the title</li><strong>Under Comments Section</strong><li>Enable/Disable Comments</li><li>Disable Comments message</li><strong>Under Groups Section</strong><li>Allow Groups Avatar change</li><li>Set Maximum Group Avatar size to upload</li><strong>Under Avatars Section</strong><li>Set Maximum Avatar size to upload</li></ol>";
+	echo '<li>INSERTED many new settings in the config table (read the notes at the end of the upgrade process) <img src="'.$marks.'" class="iconalign" /></li>';	
+	
 	//deleting obsolete User_Upload_Avatar_Folder
 	$sql = "DELETE FROM `" . table_prefix."config` Where `var_name` = 'User_Upload_Avatar_Folder';";
 	$sql_delete_User_Upload_Avatar_Folder = $handle->query($sql);
@@ -287,7 +310,7 @@ echo '<fieldset><legend>Updating data in Config table.</legend><ul>';
 	}
 	echo '<li>Updated auto_scroll <img src="'.$marks.'" class="iconalign" /></li>';
 
-// Update site's language.
+	// Update site's language.
 	$sql = "UPDATE `" . table_prefix."config` SET `var_value` ='" .$language. "' where `var_name` = '\$language';";
 	$sql_site_language = $handle->query($sql);
 	if (!$sql_site_language) {
@@ -306,6 +329,46 @@ echo '<fieldset><legend>Updating data in Config table.</legend><ul>';
 		$marks = $ok;
 	}
 	echo '<li>Updated desc of user_language. <img src="'.$marks.'" class="iconalign" /></li>';	
+	
+	// Update urlmethod desc.
+	$sql = "UPDATE `" . table_prefix."config` SET `var_desc` ='<strong>1</strong> = Non-SEO Links.<br /> Example: /story.php?title=Example-Title<br /><strong>2</strong> SEO Method. <br />Example: /Category-Title/Story-title/.<br /><strong>Note:</strong> You must rename htaccess.default to .htaccess <strong>AND EDIT IT WHERE THE NOTES ARE!</strong>' where `var_name` = '\$URLMethod';";
+	$sql_urlmethod = $handle->query($sql);
+	if (!$sql_urlmethod) {
+		$marks = $notok;
+	}else{
+		$marks = $ok;
+	}
+	echo '<li>Updated title and desc for the "urlmethod" <img src="'.$marks.'" class="iconalign" /></li>';
+	
+	// Update Story_Content_Tags_To_Allow_Normal title.
+	$sql = "UPDATE `" . table_prefix."config` SET `var_desc` = 'leave blank to not allow tags. Examples are: &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;u&gt;&lt;s&gt;&lt;sub&gt;&lt;sup&gt;&lt;ol&gt;&lt;ul&gt;&lt;li&gt;&lt;blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;big&gt;&lt;small&gt;&lt;tt&gt;&lt;code&gt;&lt;kbd&gt;&lt;samp&gt;&lt;var&gt;&lt;del&gt;&lt;ins&gt;&lt;hr&gt;&lt;pre&gt;' where `var_name` = 'Story_Content_Tags_To_Allow_Normal';";
+	$sql_Story_Content_Tags_To_Allow_Normal = $handle->query($sql);
+	if (!$sql_Story_Content_Tags_To_Allow_Normal) {
+		$marks = $notok;
+	}else{
+		$marks = $ok;
+	}
+	echo '<li>Updated desc for the "Story_Content_Tags_To_Allow_Normal" <img src="'.$marks.'" class="iconalign" /></li>';
+	
+	// Update the title of Story_Content_Tags_To_Allow_Admin
+	$sql = "UPDATE `" . table_prefix."config` set `var_desc` = 'leave blank to not allow tags. Examples are: &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;u&gt;&lt;s&gt;&lt;sub&gt;&lt;sup&gt;&lt;ol&gt;&lt;ul&gt;&lt;li&gt;&lt;blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;big&gt;&lt;small&gt;&lt;tt&gt;&lt;code&gt;&lt;kbd&gt;&lt;samp&gt;&lt;var&gt;&lt;del&gt;&lt;ins&gt;&lt;hr&gt;&lt;pre&gt;' WHERE `var_name` =  'Story_Content_Tags_To_Allow_Admin';";
+	$sql_Story_Content_Tags_To_Allow_Admin = $handle->query($sql);
+	if (!$sql_Story_Content_Tags_To_Allow_Admin) {
+		$marks = $notok;
+	}else{
+		$marks = $ok;
+	}
+	echo '<li>Updated title of Story_Content_Tags_To_Allow_Admin. <img src="'.$marks.'" class="iconalign" /></li>';
+	
+	// Update the title of Story_Content_Tags_To_Allow_God
+	$sql = "UPDATE `" . table_prefix."config` set `var_desc` = 'leave blank to not allow tags. Examples are: &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;u&gt;&lt;s&gt;&lt;sub&gt;&lt;sup&gt;&lt;ol&gt;&lt;ul&gt;&lt;li&gt;&lt;blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;big&gt;&lt;small&gt;&lt;tt&gt;&lt;code&gt;&lt;kbd&gt;&lt;samp&gt;&lt;var&gt;&lt;del&gt;&lt;ins&gt;&lt;hr&gt;&lt;pre&gt;' WHERE `var_name` =  'Story_Content_Tags_To_Allow_God';";
+	$sql_Story_Content_Tags_To_Allow_God = $handle->query($sql);
+	if (!$sql_Story_Content_Tags_To_Allow_God) {
+		$marks = $notok;
+	}else{
+		$marks = $ok;
+	}
+	echo '<li>Updated title of Story_Content_Tags_To_Allow_God. <img src="'.$marks.'" class="iconalign" /></li>';
 echo '</ul></fieldset><br />';
 
 echo '<fieldset><legend>Updating the Groups member role</legend><ul>';
@@ -338,7 +401,7 @@ echo '</ul></fieldset><br />';
 
 echo '<fieldset><legend>Changing Columns in Links table.</legend><ul>';
 	$sql = "ALTER TABLE  `" . table_prefix."links`  
-	CHANGE 	`link_status` `link_status` enum('discard','new','published','abuse','duplicate','page','spam','moderated') NOT NULL DEFAULT 'discard',
+	CHANGE 	`link_status` `link_status` enum('discard','new','published','abuse','duplicate','page','spam','moderated','draft') NOT NULL DEFAULT 'discard',
 	CHANGE  `link_url`  `link_url` VARCHAR( 512 ) NOT NULL DEFAULT '';";
 	$sql_alter_links - $handle->query($sql);
 	echo '<li>Updated links Table link_status enum and link_url to VARCHAR 512</li>';
@@ -597,15 +660,26 @@ echo '<fieldset><legend>Updating data in Modules table.</legend><ul>';
 				$warnings[] = "We corrected the upload_fileplace default to 'upload_story_list_custom'.";
 			}
 		}
+		if ($module['folder'] == "admin_snippet") {
+			$sql = "ALTER TABLE `" . table_prefix."snippets` ADD `snippet_status` int(1) NOT NULL DEFAULT '1';";
+			$sql_add_status = $handle->query($sql);
+			if (!$sql_add_status) {
+				$marks = $notok;
+			}else{
+				$marks = $ok;
+			}
+			echo '<li>Altered `'.table_prefix.'snippets` table to add a status column <img src="'.$marks.'" class="iconalign" /></li>';
+			$warnings[] = "Added a Status column to allow Admins to activate/deactivate snippets!</strong>!";
+		}
 		if ($module['folder'] == 'anonymous') {
 			$sql = "UPDATE `" . table_prefix."users` SET `user_email` = 'anonymous@kliqqi.com' WHERE `user_login` = 'anonymous';";
 			$sql_update_email = $handle->query($sql);
 			if (!$sql_update_email) {
-			$marks = $notok;
-		}else{
-			$marks = $ok;
+				$marks = $notok;
+			}else{
+				$marks = $ok;
 				echo '<li>Updated '.$module['folder'] . ' module Version <img src="'.$marks.'" class="iconalign" /></li>';
-		}
+			}
 			echo '<li>Updated email in the Users table for '.$module['folder'] . ' user <img src="'.$marks.'" class="iconalign" /></li>';
 		}
 		if ($module['folder'] == 'akismet') {
@@ -613,10 +687,10 @@ echo '<fieldset><legend>Updating data in Modules table.</legend><ul>';
 			$sql_key = mysqli_fetch_assoc($handle->query($sql));
 			if ($sql_key['data'] != '') {
 				echo "<li>We detected you are using the Akismet module and found its key in the misc_data table!</li>";
-		}else{
+			}else{
 				echo '<li class="warn-delete">We detected you are using the Akismet module but did not find its key in the misc_data table!';
 				$warnings[] = "You have Akismet module installed but its has no Wordpress key!";
-		}
+			}
 		}
 		if ($module['folder'] == 'xml_sitemaps') {
 			$sql = "DELETE FROM `" . table_prefix."config` WHERE (`var_page`,`var_name`) IN (('XmlSitemaps','XmlSitemaps_ping_google'),('XmlSitemaps','XmlSitemaps_ping_ask'),('XmlSitemaps','XmlSitemaps_ping_yahoo'),('XmlSitemaps','XmlSitemaps_yahoo_key'),('XmlSitemaps','XmlSitemaps_use_cache'),('XmlSitemaps','XmlSitemaps_cache_ttl'));";
@@ -727,7 +801,7 @@ echo '<fieldset><legend>Updating data in Widgets table.</legend><ul>';
 					}
 					echo '<li>Updated table widgets; changing the version of statistics widget <img src="'.$marks.'" class="iconalign" /></li>';
 				}elseif (in_array('Pligg CMS',$widget)) {
-	// Update table widgets; changing the name of Pligg CMS to Kliqqi CMS
+					// Update table widgets; changing the name of Pligg CMS to Kliqqi CMS
 					$sql = "UPDATE `" . table_prefix."widgets` SET `name` = 'Kliqqi CMS', `folder` = 'kliqqi_cms', `version` = '1.0' WHERE `name` = 'Pligg CMS';";
 					$sql_widget_kliqqi_cms = $handle->query($sql);
 					if (!$sql_widget_kliqqi_cms) {
