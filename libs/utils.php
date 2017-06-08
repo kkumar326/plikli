@@ -285,12 +285,24 @@ function makeUrlFriendly($output, $isPage=false) {
 	if ($isPage===true) return $output;
    
 	// check to see if the story title already exists. If so, add an integer to the end of the title
-	$n = $db->get_var("SELECT COUNT(*) FROM " . table_links . " WHERE link_title_url like '$output%'" .
+	$n = $db->get_var("SELECT `link_title_url` FROM " . table_links . " WHERE link_title_url like '$output%'" .
 				($isPage > 0 ? " AND link_id!=$isPage" : ''));
-	if ($n > 0)
-		return $output . '-' . ($n+1);
-	else
+	if ($n) {
+		$numbers = array();
+		$title_array =  object_2_array($n);
+		foreach($title_array as $key => $val) {
+			foreach($val as $ntitle) {
+				$end_number = substr($ntitle, -1);
+				if (is_numeric($end_number)) {
+					$numbers[] = $end_number;
+				}
+			}
+		}
+		while( in_array( ($num = rand(1,9)), $numbers ) );
+		return $output . '-' . ($num);
+	}else{
 		return $output;
+	}
 }
 
 function utils_makeUrlFriendly($output)
