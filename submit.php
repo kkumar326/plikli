@@ -167,7 +167,7 @@ function do_submit1() {
 	{
 	    $linkres->get($url);
 	    if (isset($_POST['title']) && !empty($_POST['title']))
-	    	$linkres->title = stripslashes(sanitize($_POST['title'], 4, $Story_Content_Tags_To_Allow));
+	    	$linkres->title = $db->escape(stripslashes(sanitize($_POST['title'], 4, $Story_Content_Tags_To_Allow)));
 	    if (isset($_POST['tags']) && !empty($_POST['tags']))
 	    	$linkres->tags = stripslashes(sanitize($_POST['tags'], 4));
 	    if (isset($_POST['description']) && !empty($_POST['description']))
