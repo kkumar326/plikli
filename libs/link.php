@@ -621,6 +621,7 @@ class Link {
 			}
 		}
 		$smarty->assign('get_group_membered', $this->get_group_membered()); 
+		$smarty->assign('get_group_shared_membered', $this->get_group_shared_membered());
 		if($this->status == "published"){$smarty->assign('category_url', getmyurl("maincategory", $catvar));}
 		if($this->status == "new"){$smarty->assign('category_url', getmyurl("newcategory", $catvar));}
 		if($this->status == "discard"){$smarty->assign('category_url', getmyurl("discardedcategory", $catvar));}
@@ -675,11 +676,28 @@ class Link {
 					}
 				}
 			}
+		}else{
+			//Redwine: we want to find out if the user is a group admin to use it in the group unshare, because we want to allow group admins and group link sharer to unshare it.
+			
+			$ismember = $db->get_var("SELECT  distinct t1.member_role
+			FROM `".table_group_member."` t1
+			LEFT JOIN `".table_group_shared."` t2
+			ON t1.member_group_id=t2.share_group_id WHERE t1.member_group_id IN (SELECT `share_group_id` from `". table_group_shared."` where `share_link_id` = ".$this->id.")");
+
+			if (!empty($ismember)) {
+				if ($ismember != "") {
+					if ($ismember == "admin") {
+						$is_gr_Admin = 1;
+					}
+				}
 		}
+		}
+		//Rediwne: find if the link was shared by a group member
+		$link_sharer = $db->get_var("SELECT `share_user_id` FROM `" . table_group_shared."` WHERE `share_link_id` = " .$this->id . " AND `share_user_id` = ". $current_user->user_id);
 		$smarty->assign('is_gr_Creator', $is_gr_Creator);
 		$smarty->assign('is_gr_Admin', $is_gr_Admin);
 		$smarty->assign('is_gr_Moderator', $is_gr_Moderator);
-
+		$smarty->assign('is_link_sharer', $link_sharer);
 		/*Redwine: Roles and permissions and Groups fixes. We need the user_level to determine the site wide Admin & Moderators to give access according to their permissions */
 		global $main_smarty;
 			$smarty->assign('isAdmin', $main_smarty->get_template_vars('isAdmin'));
@@ -852,16 +870,37 @@ class Link {
 	{
 		global $db, $main_smarty, $rows,$current_user;
 		$current_userid = $current_user->user_id;
-		if (!isset($this->group_membered) && $current_userid)
-//		    $this->group_membered = $db->get_results("SELECT group_id,group_name FROM " . table_groups . " WHERE group_creator = $current_userid and group_status = 'Enable'");
-			/*Redwine: modified the query to exclude members that are banned or flagged.*/
-		    $this->group_membered = $db->get_results("SELECT DISTINCT group_id,group_name FROM " . table_groups . " LEFT JOIN ".table_group_member." ON member_group_id=group_id AND member_user_id = $current_userid WHERE group_status = 'Enable' AND member_status='active' AND `member_role` !='banned' AND `member_role` !='flagged'");
+		/***********
+		Redwine: 1- modified the query to exclude members that are banned or flagged and inactive.
+		2- to also accurately get what a group member can share. the modifications will only pull the groups where a group member can share a story that has not been shared by the user or any other group member; a story will not be shared twice to the same group.
+		***********/
+		if ($current_userid)
+			$this->group_membered = $db->get_results("SELECT  DISTINCT t1.group_id,t1.group_name FROM `" . table_groups . "` t1 LEFT JOIN `" .table_group_member."` t2 ON t2.member_group_id=t1.group_id and t2.member_user_id = $current_userid left join   `".table_group_shared."` t3 on t3.share_user_id = t2.member_user_id WHERE t2.member_user_id = $current_userid AND t2.member_role !='banned' AND t2.member_role !='flagged' AND t2.member_status !='inactive' AND t1.group_id NOT IN (SELECT `share_group_id` from `" .table_group_shared."` where `share_link_id` = ".$this->id.")");
 
 		$output = '';
 		/* Redwine: added !empty to eliminate the Undefined property: Link::$group_membered. */
-		if (!empty($this->group_membered))
+		if (!empty($this->group_membered)) {
+			if ($this->group_membered != NULL) {
 			foreach($this->group_membered as $results)
 				$output .= "<a class='group_member_share' href='".my_base_url.my_kliqqi_base."/group_share.php?link_id=".$this->id."&group_id=".$results->group_id."&user_id=".$current_user->user_id."' >".$results->group_name."</a><br />";
+			}
+		}
+
+		return $output;
+
+	}
+	/*Redwine: I created get_group_shared_membered function to allow a group member who shared a story to unshare it. Group admins also have the same privilege to unshare a story shared by group members.*/
+	function get_group_shared_membered()
+	{
+		global $db, $main_smarty, $rows,$current_user;
+		$current_userid = $current_user->user_id;
+		if (!isset($this->group_shared_membered) && $current_userid)
+		    $this->group_shared_membered = $db->get_results("SELECT DISTINCT t1.group_id,t1.group_name FROM premium_groups t1 LEFT JOIN `".table_group_member."` t2 ON t2.member_group_id=t1.group_id AND t2.member_user_id = $current_userid LEFT JOIN `".table_group_shared."` t3 ON t3.share_group_id = t1.group_id WHERE t2.member_user_id = $current_userid AND t2.member_role !='banned' AND t2.member_role !='flagged' AND t2.member_status !='inactive' AND group_status = 'Enable' AND `share_user_id` = 4 AND `share_link_id` = " . $this->id);
+
+		$output = '';
+		if (!empty($this->group_shared_membered))
+			foreach($this->group_shared_membered as $results)
+				$output .= "<a class='group_member_share' href='".my_base_url.my_kliqqi_base."/group_share.php?link_id=".$this->id."&group_id=".$results->group_id."&user_id=".$current_user->user_id."&action=unshare'>".$results->group_name."</a><br />";
 
 		return $output;
 

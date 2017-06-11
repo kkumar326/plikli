@@ -27,13 +27,19 @@ if (isset($_GET['link_id']) && isset($_GET['group_id']))
     {
 		global $db, $current_user;
 		$current_userid = $current_user->user_id;
-
+		if (isset($_GET['action']) && $_GET['action'] == 'unshare') {
+			$sql = "DELETE FROM ". table_group_shared ." WHERE `share_link_id` = ".$link_id. " AND `share_group_id` = ".$group_id ." AND `share_user_id` = ".$current_userid;
+			$results = $db->query($sql);
+			$redirect = getmyurl("group_story", $group_id);
+			header("Location: $redirect");
+		}else{
 		$sql = "INSERT IGNORE INTO ". table_group_shared ." ( `share_link_id` , `share_group_id`, `share_user_id` ) VALUES ('".$link_id."', '".$group_id."','".$current_userid."' ) ";
 		//echo $sql;
 		$results = $db->query($sql);
 		$redirect = '';
 		$redirect = getmyurl("group_story", $group_id);
 		header("Location: $redirect");
+		}
     } else {
 		$redirect = getmyurl("groups");
 		header("Location: $redirect");

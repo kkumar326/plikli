@@ -189,12 +189,25 @@
 				{/if}
 				{if $enable_group eq "true" && $user_logged_in}
 					<span class="group-tool-wrapper">
+						{if $get_group_membered neq ''}
 						<i class="fa fa-group"></i> 
 						<span class="group_sharing"><a href="javascript://" onclick="{if $get_group_membered}var replydisplay=document.getElementById('group_share-{$link_shakebox_index}').style.display ? '' : 'none';document.getElementById('group_share-{$link_shakebox_index}').style.display = replydisplay;{else}alert('{#KLIQQI_Visual_No_Groups#}');{/if}">{#KLIQQI_Visual_Group_Share#}</a></span>
 						<span id = "group_share-{$link_shakebox_index}" style="display:none;">
 							<div class="group-share-popup">{$get_group_membered}</div>
 						</span>
 					</span>
+				{/if}
+					{if $get_group_shared_membered neq ''}
+					{if $is_link_sharer eq 1 || $is_gr_Admin eq 1}
+					<span class="group-tool-wrapper">
+					<i class="fa fa-group"></i>
+					<span class="group_sharing"><a class="group-unshare" href="javascript://" onclick="{if $get_group_shared_membered}var replydisplay=document.getElementById('group_unshare-{$link_shakebox_index}').style.display ? '' : 'none';document.getElementById('group_unshare-{$link_shakebox_index}').style.display = replydisplay;{else}alert('{#KLIQQI_Visual_No_Groups#}');{/if}">Group Unshare</a></span>
+					<span id = "group_unshare-{$link_shakebox_index}" style="display:none;">
+						<div class="group-unshare-popup">{$get_group_shared_membered}</div>
+					</span>
+					{/if}
+					</span>
+					{/if}
 				{/if}
 				{checkActionsTpl location="tpl_kliqqi_story_tools_end"}
 				<iframe height="0" width="0" frameborder="0" name="story_status" class="invisible"></iframe>

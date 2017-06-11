@@ -721,6 +721,7 @@ KLIQQI_Visual_Group_Unjoin = "ยกเลิกการเข้าร่ว�
 KLIQQI_Visual_Group_Withdraw_Request = "ยกเลิกการร้องขอเข้าร่วมกลุ่ม"
 KLIQQI_Visual_Group_Delete_Confirm = "คุณแน่ใจหรือเปล่าว่าต้องการลบกลุ่มนี้แบบถาวร?"
 KLIQQI_Visual_Group_Share = "กลุ่มแชร์"
+KLIQQI_Visual_Group_Unshare = "Group Unshare"
 KLIQQI_Visual_Group_Member = "สมาชิก"
 KLIQQI_Visual_Group_Topics = "ลิงก์"
 KLIQQI_Visual_Group_Published = "เผยแพร่แล้ว"
