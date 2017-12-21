@@ -119,9 +119,13 @@ if($my_base_url == ''){echo '<div style="text-align:center;"><span class=error>E
 
 // sidebar
 $main_smarty = do_sidebar($main_smarty);
-$sql = "SELECT user_login FROM " . table_users . " ORDER BY user_id DESC LIMIT 1";
-$last_user = $db->get_var($sql);
-$main_smarty->assign('last_user', $last_user);
+/*Redwine: the below 3 lines must not be there because:
+1- last_user is already assigned in smartyvariables.php
+2- in here, it is queryed incorrectly as it must exclude user spammer accounts.
+*/
+//$sql = "SELECT user_login FROM " . table_users . " ORDER BY user_id DESC LIMIT 1";
+//$last_user = $db->get_var($sql);
+//$main_smarty->assign('last_user', $last_user);
 
 // misc smarty
 
