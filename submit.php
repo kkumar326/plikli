@@ -520,7 +520,7 @@ function do_submit2() {
 
 // submit step 3
 function do_submit3() {
-	global $db, $dblang;
+	global $db, $dblang, $current_user;
 
 	$linkres=new Link;
 	$linkres->id = sanitize($_POST['id'], 3);
@@ -533,6 +533,103 @@ function do_submit3() {
 		totals_adjust_count($linkres->status, -1);
 		totals_adjust_count('draft', 1);
 		$linkres->status = 'draft';
+	}elseif (isset($_REQUEST['date_schedule']) && $_REQUEST['date_schedule'] != '') {
+
+		
+/*********************************
+Redwine: the user's scheduled date, given that it is only composed from the date portion without the time. In order to accurately make a date of it, we have to go through the following process to avoid the discrepancy resulting from the scheduled date entered and the computed date , which is done based on the server timezone calculated by the GMT time.
+*********************************/
+
+/* Redwine: now is the the Epoch time in seconds of the current time function */
+$now = time();
+
+/* Redwine: make a full date time of the Epoch time  */
+$current_date_time = date('Y-m-d H:i:s', $now);
+//echo "<br />current_date_time is<br />$current_date_time<br />";
+
+/* Redwine: current date is the epoch time $now converted to date without the time portion */
+$currentDate = date('Y-m-d', $now);
+
+
+/* Redwine: make_current_date is used to calculate the days difference below. */
+$make_current_date = date_create($currentDate);
+
+/* Redwine: This is the scheduled date entered by the user (notice that no time portion) */
+$scheduled = $_REQUEST['date_schedule'];
+/* Redwine: we create a date of it. It would be like this 2017-08-27 00:00:00 */
+$scheduled_date = date_create($scheduled);
+
+/*Redwine: the object(DateTime) is an array
+object(DateTime)[2]
+  public 'date' => string '2017-08-27 00:00:00' (length=19)
+  public 'timezone_type' => int 3
+  public 'timezone' => string 'UTC' (length=3)
+  
+  we are interrested in the 'date' string.
+*/
+$scheduled_current_date = '';
+foreach($scheduled_date as $key => $value) {
+	if ($key == 'date') {
+		$scheduled_current_date = $value;
+	}
+}
+
+
+/*Redwine: convert the date string to a date object. */
+$make_scheduled_date = date_create($scheduled_current_date);
+
+/*Redwine: caculating the date difference (returns an object) 
+object(DateInterval)[4]
+  public 'y' => int 0
+  public 'm' => int 0
+  public 'd' => int 1
+  public 'h' => int 0
+  public 'i' => int 0
+  public 's' => int 0
+  public 'invert' => int 1
+  public 'days' => int 1 	*** we are interrested in this one ***
+*/
+$days_diff = date_diff($make_scheduled_date,$make_current_date);
+
+/*Redwine: now we make a new date from the current_date_time calculated above, added to it the days difference. 
+NOTE: this calculated date is based on the server timezone calculated by the GMT time.
+*/
+$new_scheduled_date = date('Y-m-d H:i:s', strtotime($current_date_time. " + $days_diff->days days"));
+
+/*Redwine: if we leave it at the step above, we end up with a discrepancy. Ex: the user enters 2017-08-29. after calculation all the above steps, and based on the time portion of the day he is submitting, the scheduled date ends up being 2017-08-28.
+So, we have to also make a date based on the user's timezone detected by the javascript.
+*/
+
+/*Redwine: we create the user's timezone and we make a new DateTime object based on time() of the new timezone
+The end result is a full date equivalent to the server's time() added to it the days difference. EX: the time() converted to a date object was 2017-08-27 13:45:01 and the days difference was +1 day (the user's scheduled date) then the final scheduled date will be 2017-08-28 13:45:01. This final scheduled date is the $_REQUEST['date_schedule'] from the submit_step_2_center.tpl and passed on to /submit.php do_submit3(), which in turn sends it to be the date to assign to link_date and link_published_date in /libs/link.php
+*/
+$userTimeZone = $_REQUEST['timezone'];
+
+$userDateTimeZone = new DateTimeZone($userTimeZone);
+$userDateTime = new DateTime("now", $userDateTimeZone);
+
+$new_accurate_scheduled_date = '';
+foreach($userDateTime as $key => $value) {
+	if ($key == 'date') {
+		$new_accurate_scheduled_date = $value;
+	}
+}
+
+/*Redwine: the below code will bring the user's scheduled date to be equal to the current date created from the time() function. */
+$userDateTime = $userDateTime->format('Y-m-d H:i:s');
+
+/*Redwine: now we add the days difference calculated above to make it a full user's scheduled accurate date */
+$new_accurate_scheduled_date = date('Y-m-d H:i:s', strtotime($userDateTime. " + $days_diff->days days"));		
+		
+$new_accurate_scheduled_date = strtotime($new_accurate_scheduled_date);		
+		
+		
+		
+		totals_adjust_count($linkres->status, -1);
+		totals_adjust_count('scheduled', 1);
+		$linkres->status = 'scheduled';
+		$linkres->published_date = $new_accurate_scheduled_date;
+		$linkres->date = $new_accurate_scheduled_date;
 	}else{
 	totals_adjust_count($linkres->status, -1);
 	totals_adjust_count('new', 1);
@@ -578,7 +675,18 @@ function do_submit3() {
 	} elseif($linkres->link_group_id == 0){
 		/* Redwine: Making sure that the index or New page load appropriately depensing on the settings.
 		If votes to publish, in the dashboard voting section is set to 0 or 1, and auto vote in the submit section is set to true, then the story will automatically appear in the published page. Users may get confused with that when the new.php page loads and it's empty. */
-		if ( (int) votes_to_publish == 0 || ((int) votes_to_publish == 1 && auto_vote == true)) {
+
+		if ($linkres->status == 'draft') {
+			$redirect_url = getmyurl('user2', $current_user->user_login, 'draft');
+			
+			$redirect_url = $my_base_url.str_replace("&amp;", "&", $redirect_url);
+			header("Location: " . $redirect_url);
+		}elseif ($linkres->status == 'scheduled') {
+			$redirect_url = getmyurl('user2', $current_user->user_login, 'scheduled');
+			$redirect_url = $my_base_url.str_replace("&amp;", "&", $redirect_url);
+			//echo $redirect_url;die();
+			header("Location: " . $redirect_url);
+		}elseif ( ((int) votes_to_publish == 0 || (int) votes_to_publish == 1 && auto_vote == true) && $linkres->status != 'draft') {
 			header("Location: " . getmyurl('root'));
 		}else{
 			header("Location: " . getmyurl('new'));

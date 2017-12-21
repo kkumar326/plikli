@@ -119,13 +119,27 @@
 				<input type="hidden" name="phase" value="2" />
 				<input type="hidden" name="randkey" value="{$randkey}" />
 				<input type="hidden" name="id" value="{$submit_id}" />
+				
+				{if $Allow_Draft eq 1}
+					<div class="draft-scheduled">
+				<input type="checkbox" id="draft" name="draft" value="draft" />
+						<label for="draft">{#KLIQQI_Visual_Submit2_Draft#}</label><br />
+					</div><br />
+				{/if}
+				{if $Allow_Scheduled eq 1}
+					<div class="draft-scheduled">
+						<label for="calendar" class="control-label">{#KLIQQI_Visual_Submit2_Draft_Scheduled#}</label>
+						<div class="input-group" id="date-picker">
+							<input type="text" id="calendar" class="form-control datepicker" name="date_schedule" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+							<input type="hidden" name="timezone" id="timezone" value="" />
+						</div><br />
+						<div id="wrong-date" class="alert-danger" style="display:none">scheduled date cannot be lesser than or equal to the current date. Change the date or press &nbsp;&nbsp;<input type="button" value="OK to continue" onclick="getValue();" />
+						</div>
+					</div><br />
+				{/if}
 				{* Redwine: I added ; return false; to the onlclick event to fix the bug in Firefox that was taking the user back to an error message...when clicking the cancel the submission button. https://github.com/redwinefireplace/kliqqi-cms/commit/bcc2b717bd8196c32126380706bf2f5ae4ff9b90 *}
 				<button class="btn btn-default" tabindex="30" onclick="history.go(-1); return false;">Cancel</button>
-				{checkActionsTpl location="tpl_kliqqi_submit_step2_end"}<br />
-				{if $Allow_Draft eq 1}
-				<input type="checkbox" id="draft" name="draft" value="draft" />
-				<label for="draft">{#KLIQQI_Visual_Submit2_Draft#}</label>
-				{/if}
+				{checkActionsTpl location="tpl_kliqqi_submit_step2_end"}<br /><br />
 				<input class="btn btn-primary" tabindex="31" type="submit" value="{#KLIQQI_Visual_Submit2_Continue#}" />
 			</div>
 		</div>
@@ -279,5 +293,45 @@
 		});
 	});
 	</script>
+	
+<script type="text/javascript">
+$(document).ready(function(){
+	var zone = jstz.determine().name();
+	$("#timezone").val(zone);
+
+//making sure that the draft is unchecked if the scheduled date is set
+$('#draft').change(function() {
+	if($(this).is(":checked") && $('#calendar').val() != '') {
+		$('#draft').attr('checked', false);
+	}
+}); 	
+
+$('#calendar').datepicker({
+     onSelect: function(d,i){
+          if(d !== i.lastVal){
+              $(this).change();
+          }
+     }
+});
+	
+	$('#calendar').change(function() {
+	  var d1 = new Date();
+	  var d2 = new Date($('#calendar').val());
+	  if (d2.getTime() <= d1.getTime()) { 
+		$("#wrong-date").css("display", "block");
+		
+		
+	  }else{
+		  $('#wrong-date').css("display", "none");
+		  $('#draft').attr('checked', false);
+	  }
+	});
+	
+});
+function getValue(){
+			$('#calendar').val('');
+			$('#wrong-date').css("display", "none");
+		}
+</script>
 {/literal}
 <!--/submit_step_2_center.tpl -->

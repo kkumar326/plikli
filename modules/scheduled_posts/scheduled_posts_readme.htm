@@ -1,0 +1,25 @@
+<style>
+li{margin: 0 0 10px 0;}
+</style>
+<h2>Scheduled Posts Module v1.0</h2>
+
+<h3>Description</h3>
+<p>This module MUST be installed when you set to TRUE "Allow Scheduled Articles" in<br />Dashboard -> Settings -> Submit -> Allow Scheduled Articles.</p>
+<h4>How it works?</h4>
+<p>The module runs only once a day, to save queries and strain on the server. It runs whenever the Index (Publishe) and New pages are accessed, and the process is as follows:</p>
+
+<ul>
+	<li>First, we check if the Allow_Scheduled is set to true in the dashboard, Submit Settings.</li>
+	<li>If it is true, then we check, in the misc_data table, for the date the module last ran. If the value is empty or not equal to today's date, then the module will run</li>
+	<li>If scheduled posts to be posted on the current date are found in the links table, the module calls a function to check whether the status of these posts should be set to Published or New and then it updates their status and adjusts the totals table accordingly.</li>
+	<li>Updates the date value of "scheduled_run" in the misc_data table to the CURRENT date to prevent the module from keep running on that day.</li>
+	<li>If no scheduled posts were found, it also updates the date value to prevent it from running again in the same day.</li>
+	<li>If it is false, then we save the queries and the module won't run.</li>
+</ul>
+<h3>Revision History</h3>
+
+<h4 style="text-decoration:underline;">Created by Redwine for PliKli 4.0</h4>
+<hr />
+<ul>
+	<li>v1.0 2017/07/01 - PliKli 4.0</li>
+</ul>

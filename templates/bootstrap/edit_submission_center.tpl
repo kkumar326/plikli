@@ -146,15 +146,20 @@
 	{checkActionsTpl location="submit_step_2_pre_extrafields"}
 	{include file=$tpl_extra_fields.".tpl"}
 	<br />
-		{if $submit_stat eq 'draft'}
-			{#KLIQQI_Visual_Submit2_Edit_Draft_Notice#}
+
+			{$warning_message}
 			<ul class="notify_option_list alert alert-warning">
-				<li><input type="radio" name="draft" value="draft" checked /> {#KLIQQI_Visual_Submit2_Edit_Draft#}</li>
-				<li><input type="radio" name="draft" value="new" /> {#KLIQQI_Visual_Submit2_Edit_Draft_Post#}</li>
-				<li><input type="radio" name="draft" value="discard" /> {#KLIQQI_Visual_Submit2_Edit_Draft_Discard#}</li>
+				<li><input type="radio" id="rd_{$submit_stat}" name="change_status" value="{$submit_stat}" checked /> <label for="rd_{$submit_stat}">{#KLIQQI_Visual_Submit2_Edit_Keep_As_Status#$submit_stat}</label></li>
+				{if $submit_stat eq 'draft' || $submit_stat eq 'scheduled'}
+					<li><input type="radio" id="rd_tonew" name="change_status" value="to_new" /> <label for="rd_tonew">{#KLIQQI_Visual_Submit2_Edit_Draft_Post#}</li>
+				{/if}
+				{if $submit_stat eq 'new' || $submit_stat eq 'published'}
+					<li><input type="radio" id="rd_todraft" name="change_status" value="to_draft" title="WARNING: &#10;if your article is published, when you change it to draft &#10;and want to re-post it later, &#10;it might not go back to 'published' page; &#10;it dependds on the settings in the dashboard!" /> <label for="rd_todraft" title="WARNING: &#10;if your article is published, when you change it to draft &#10;and want to re-post it later, &#10;it might not go back to 'published' page; &#10;it dependds on the settings in the dashboard!">{#KLIQQI_Visual_Submit2_Edit_Draft#}</label></li>
+				{/if}
+				<li><input type="radio" id="rd_discard" name="change_status" value="discard" /> <label for="rd_discard">{#KLIQQI_Visual_Submit2_Edit_Draft_Discard#}</li>
 			</ul>
 			</br />
-		{/if} 
+
 	<input type="submit" value="{#KLIQQI_Visual_Submit2_Continue#}" class="btn btn-primary" />
 </form>
 {checkActionsTpl location="tpl_kliqqi_submit_step2_after_form"}

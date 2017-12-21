@@ -170,6 +170,7 @@ $main_smarty->assign('user_url_news_sent2', getmyurl('user2', $login, 'history')
 $main_smarty->assign('user_url_news_published2', getmyurl('user2', $login, 'published'));
 $main_smarty->assign('user_url_news_unpublished2', getmyurl('user2', $login, 'new'));
 $main_smarty->assign('user_url_draft2', getmyurl('user2', $login, 'draft'));
+$main_smarty->assign('user_url_scheduled2', getmyurl('user2', $login, 'scheduled'));
 $main_smarty->assign('user_url_news_voted2', getmyurl('user2', $login, 'voted'));
 $main_smarty->assign('user_url_news_upvoted2', getmyurl('user2', $login, 'upvoted'));
 $main_smarty->assign('user_url_news_downvoted2', getmyurl('user2', $login, 'downvoted'));	
@@ -321,6 +322,16 @@ if ($view == 'draft') {
 	$main_smarty->assign('nav_dr', 3);
 }
 
+if ($view == 'scheduled') {
+	$page_header .= $main_smarty->get_config_vars('KLIQQI_Visual_User_NewsScheduled');
+	$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_User_NewsScheduled');
+	$post_title .= " | " . $main_smarty->get_config_vars('KLIQQI_Visual_User_NewsScheduled');
+	$main_smarty->assign('view_href', 'scheduled');
+	$main_smarty->assign('nav_dr', 4);
+ } else {
+	$main_smarty->assign('nav_dr', 3);
+}
+
 if ($view == 'commented') {
 	$page_header .= $main_smarty->get_config_vars('KLIQQI_Visual_User_NewsCommented');
 	$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_User_NewsCommented');
@@ -442,6 +453,15 @@ switch ($view) {
 		$main_smarty->display($the_template . '/kliqqi.tpl');
 		break;
 		
+	case 'scheduled':
+		do_scheduled();
+		$main_smarty->assign('user_pagination', do_pages($rows, $page_size, $the_page, true));
+
+		// display the template
+		$main_smarty->assign('tpl_center', $the_template . '/user_history_center');
+		$main_smarty->display($the_template . '/kliqqi.tpl');
+		break;	
+	
 	case 'commented':
 		do_commented();
 		if(Auto_scroll==2 || Auto_scroll==3){
@@ -700,6 +720,23 @@ function do_draft () {
 	$link = new Link;
 	$rows = $db->get_var("SELECT count(*) FROM " . table_links . " WHERE link_author=$user->id AND link_status='draft'");
 	$links = $db->get_results("SELECT * FROM " . table_links . " WHERE link_author=$user->id AND link_status='draft' ORDER BY link_date DESC LIMIT $offset,$page_size");
+	if ($links) {
+		foreach($links as $dblink) {
+			$link->id=$dblink->link_id;
+			$cached_links[$dblink->link_id] = $dblink;
+			$link->read();
+			$output .= $link->print_summary('summary', true);
+		}
+	}
+	$main_smarty->assign('user_page', $output);
+}
+
+function do_scheduled () {
+	global $db, $main_smarty, $rows, $user, $offset, $page_size,$cached_links;
+	$output = '';
+	$link = new Link;
+	$rows = $db->get_var("SELECT count(*) FROM " . table_links . " WHERE link_author=$user->id AND link_status='scheduled'");
+	$links = $db->get_results("SELECT * FROM " . table_links . " WHERE link_author=$user->id AND link_status='scheduled' ORDER BY link_date DESC LIMIT $offset,$page_size");
 	if ($links) {
 		foreach($links as $dblink) {
 			$link->id=$dblink->link_id;

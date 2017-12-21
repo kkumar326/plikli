@@ -113,6 +113,7 @@ function validate_all_user_action(){
 				<option value="published" {if $templatelite.get.filter == "published"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Published#}</option>
 				<option value="new" {if $templatelite.get.filter == "new"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_New#}</option>
 				<option value="draft" {if $templatelite.get.filter == "draft"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Draft#}</option>
+				<option value="scheduled" {if $templatelite.get.filter == "scheduled"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Scheduled#}</option>
 				<option value="discard" {if $templatelite.get.filter == "discard"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Discarded#}</option>
 				<option value="moderated" {if $templatelite.get.filter == "moderated"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Moderated#}</option>
 				<option value="spam" {if $templatelite.get.filter == "spam"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Spam#}</option>
@@ -172,6 +173,8 @@ function validate_all_user_action(){
 					{#KLIQQI_Visual_AdminPanel_Spam#}
 				{elseif $template_stories[id].link_status=='draft'} 
 					{#KLIQQI_Visual_AdminPanel_Draft#}
+				{elseif $template_stories[id].link_status=='scheduled'} 
+					{#KLIQQI_Visual_AdminPanel_Scheduled#}	
 				{elseif $template_stories[id].link_status=='moderated'} 
 					{#KLIQQI_Visual_AdminPanel_Moderated#}
 				{/if}

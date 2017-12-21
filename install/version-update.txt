@@ -6,7 +6,7 @@ anonymous_comments,0.1
 anonymous_story,0.1
 captcha,2.5
 karma,1.0
-links,1.0
+links,2.0
 send_announcement,0.2
 sidebar_comments,2.1
 sidebar_saved,2.2

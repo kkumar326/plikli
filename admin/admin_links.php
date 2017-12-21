@@ -75,6 +75,9 @@ if($canIhaveAccess == 1) {
 			case 'draft':
 				$filter_sql = " link_status = 'draft' ";
 				break;
+			case 'scheduled':
+				$filter_sql = " link_status = 'scheduled' ";
+				break;
 			case 'all':
 				$filter_sql = " link_status <> 'page' AND link_status <> 'discard' AND link_status <> 'spam' ";
 				break;

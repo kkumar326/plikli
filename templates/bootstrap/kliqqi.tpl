@@ -18,7 +18,9 @@
 	
 	<script type="text/javascript" src="{$my_kliqqi_base}/templates/{$the_template}/js/modernizr.js"></script>	
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	
+	{if $pagename eq 'editlink' || $pagename eq 'submit'}
+		<script type="text/javascript" src="{$my_kliqqi_base}/templates/{$the_template}/js/jstz.min.js"></script>
+	{/if}
 	{checkForCss}
 	{checkForJs}
 	
@@ -188,9 +190,9 @@
 	<script type="text/javascript" src="{$my_kliqqi_base}/templates/{$the_template}/js/bootstrap-fileupload.js"></script>
 	<script type="text/javascript" src="{$my_kliqqi_base}/templates/{$the_template}/js/jquery/jquery.pnotify.min.js"></script>
 	
-	{if $pagename eq 'advancedsearch'}
-		<script type="text/javascript" src="{$my_kliqqi_base}/templates/{$the_template}/js/bootstrap-datepicker.js"></script>
+	{if $pagename eq 'advancedsearch' || $pagename eq 'submit'}
 		<link type="text/css" rel="stylesheet" media="all" href="{$my_kliqqi_base}/templates/{$the_template}/css/datepicker.css" />
+		<script type="text/javascript" src="{$my_kliqqi_base}/templates/{$the_template}/js/bootstrap-datepicker.js"></script>
 	{/if}
 	
     {if $pagename eq "topusers"}

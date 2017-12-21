@@ -11,6 +11,7 @@ class Link {
 	var $valid = true;
 	var $date = false;
 	var $published_date = 0;
+	var $scheduled_date = 0;
 	var $modified = 0;
 	var $url = '';
 	var $url_title = '';
@@ -895,7 +896,7 @@ class Link {
 		global $db, $main_smarty, $rows,$current_user;
 		$current_userid = $current_user->user_id;
 		if (!isset($this->group_shared_membered) && $current_userid)
-		    $this->group_shared_membered = $db->get_results("SELECT DISTINCT t1.group_id,t1.group_name FROM premium_groups t1 LEFT JOIN `".table_group_member."` t2 ON t2.member_group_id=t1.group_id AND t2.member_user_id = $current_userid LEFT JOIN `".table_group_shared."` t3 ON t3.share_group_id = t1.group_id WHERE t2.member_user_id = $current_userid AND t2.member_role !='banned' AND t2.member_role !='flagged' AND t2.member_status !='inactive' AND group_status = 'Enable' AND `share_user_id` = 4 AND `share_link_id` = " . $this->id);
+		    $this->group_shared_membered = $db->get_results("SELECT DISTINCT t1.group_id,t1.group_name FROM `" . table_groups . "` t1 LEFT JOIN `".table_group_member."` t2 ON t2.member_group_id=t1.group_id AND t2.member_user_id = $current_userid LEFT JOIN `".table_group_shared."` t3 ON t3.share_group_id = t1.group_id WHERE t2.member_user_id = $current_userid AND t2.member_role !='banned' AND t2.member_role !='flagged' AND t2.member_status !='inactive' AND group_status = 'Enable' AND `share_user_id` = $current_userid AND `share_link_id` = " . $this->id);
 
 		$output = '';
 		if (!empty($this->group_shared_membered))

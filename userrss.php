@@ -85,6 +85,24 @@ if($time > 0) {
 						WHERE (link_status='published' OR link_status='new') ";
 			$from_where .= " AND link_author=$user->id ";
 			break;
+		case 'draft':
+			$title = $main_smarty->get_config_vars("KLIQQI_Visual_Kliqqi_Queued_Draft");
+			$order_field = 'link_date';
+			$link_date = "date";
+			$from_where = "FROM " . table_links . " 
+						LEFT JOIN " . table_users . " ON link_author=user_id 
+						WHERE link_status='draft' ";
+			$from_where .= " AND link_author=$user->id ";
+			break;
+		case 'scheduled':
+			$title = $main_smarty->get_config_vars("KLIQQI_Visual_Kliqqi_Queued_Scheduled");
+			$order_field = 'link_date';
+			$link_date = "date";
+			$from_where = "FROM " . table_links . " 
+						LEFT JOIN " . table_users . " ON link_author=user_id 
+						WHERE link_status='scheduled' ";
+			$from_where .= " AND link_author=$user->id ";
+			break;
 		case 'voted':
 			$title = $main_smarty->get_config_vars("KLIQQI_Visual_RSS_Voted");
 			$order_field = 'link_date';
