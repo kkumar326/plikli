@@ -46,6 +46,8 @@
 		$backup_permissions = substr(sprintf('%o', fileperms('./backup')), -4);
 		if ($backup_permissions !== '0777'){
 			echo "<div class='alert'>The /admin/backup/ directory does not have the correct CHMOD permissions to write backup files.<br />Please change the CHMOD status from ".$backup_permissions." to 0777.</div>";
+			chmod('./backup', 0777);
+			echo "CHMOD changed to 0777. Refresh the page";
 		} else {
 			echo '<a class="btn btn-default" style="margin-bottom:6px;" href="?dobackup=files">';{/php}{#KLIQQI_Visual_View_Backup_Files#}{php} echo'</a>';
 			echo '&nbsp; <a class="btn btn-default" style="margin-bottom:6px;" href="?dobackup=avatars">';{/php}{#KLIQQI_Visual_View_Backup_Avatars#}{php}echo'</a>';
