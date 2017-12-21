@@ -59,7 +59,7 @@ function embed_videos($text, $type) {
 			$text = preg_replace($reg_youtube, '<br /><div class="videoWrapper"><iframe width="560" height="315" src="http://www.youtube.com/embed/'.$youtubeurl[1].'" frameborder="0" allowfullscreen></iframe></div><br />',
 				$text);
 		}
-		$findlinks = preg_match_all('$(https?://[a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$i', $text, $matches);
+		$findlinks = preg_match_all('$(https?://[\p{L}a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$ui', $text, $matches);
 		foreach($matches[1] as $match) {
 			// matching any of the audio extensions
 			$ogg = stripos($match, '.ogg');
@@ -78,9 +78,9 @@ function embed_videos($text, $type) {
 			}else{
 				// matching all other urls that are not within html tags
 				if ($the_settings['nofollow'] == "1") {
-					$text = preg_replace('$(\s|^)(https?://[a-z0-9_./?=&-]+)(?![^<>]*>)$i', " <a href=\"$match\" target=\"_blank\" rel=\"nofollow\">$match</a> ",$text);
+					$text = preg_replace('$(\s|^)(https?://[\p{L}a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$ui', " <a href=\"$match\" target=\"_blank\" rel=\"nofollow\">$match</a> ",$text);
 				}else{
-					$text = preg_replace('$(\s|^)(https?://[a-z0-9_./?=&-]+)(?![^<>]*>)$i', " <a href=\"$match\" target=\"_blank\">$match</a> ",$text);
+					$text = preg_replace('$(\s|^)(https?://[\p{L}a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$ui', " <a href=\"$match\" target=\"_blank\">$match</a> ",$text);
 				}
 			}
 		}
