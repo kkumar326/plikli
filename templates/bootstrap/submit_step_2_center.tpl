@@ -77,33 +77,11 @@
 					{/if }
 					<textarea name="typedesc" tabindex="15" rows="6" class="form-control bodytext col-md-4" id="typedesc" maxlength="{$maxStoryLength}" WRAP="SOFT">{if $submit_url_description}{$submit_url_description}{/if}{$submit_content}</textarea>
 					<br />
-					<textarea name="bodytext" tabindex="16" rows="6" class="form-control bodytext col-md-4" id="bodytext" maxlength="{$maxStoryLength}" WRAP="SOFT">{if $submit_url_description}{$submit_url_description}{/if}{$submit_content}</textarea>
+					<textarea name="bodytext" tabindex="16" rows="6" class="form-control bodytext col-md-4" id="bodytext" maxlength="{$maxStoryLength}" WRAP="SOFT" style="display:none;">{if $submit_url_description}{$submit_url_description}{/if}{$submit_content}</textarea>
 					<br />
 				</div>
 			</div>
-			{if $SubmitSummary_Allow_Edit eq 1}
-				<hr />
-				<p class="help-inline">{#KLIQQI_Visual_Submit2_DescInstruct#}</p>
-				<p class="help-inline">{#KLIQQI_Visual_Submit2_SummaryInstruct#}</p>
-				<p class="help-inline">
-					{#KLIQQI_Visual_Submit2_SummaryLimit#}
-					{$StorySummary_ContentTruncate}
-					{#KLIQQI_Visual_Submit2_SummaryLimitCharacters#}
-				</p>
-				<div class="control-group">
-					<label for="summarytext" class="control-label">{#KLIQQI_Visual_Submit2_Summary#}</label>
-					<div class="controls">
-{*Redwine: to display before the edit content textarea what are the html tags allowed if set in Admin Panel; otherwise, it displays NO HTML*}
-						{ if $Story_Content_Tags_To_Allow eq ""}
-							<p class="help-inline"><strong>{#KLIQQI_Visual_Submit2_No_HTMLTagsAllowed#} </strong>{*#KLIQQI_Visual_Submit2_HTMLTagsAllowed#*}</p>
-						{else}
-							<p class="help-inline"><strong>{#KLIQQI_Visual_Submit2_HTMLTagsAllowed#}:</strong> {$Story_Content_Tags_To_Allow}</p>
-						{/if }
-						<textarea name="summarytext" rows="6" maxlength="{$maxSummaryLength}" id="summarytext" tabindex="17" class="form-control bodytext col-md-4" maxlength="{$StorySummary_ContentTruncate}" WRAP="SOFT">{$submit_summary}</textarea>
-					</div>
-					<p><br /><hr /></p>
-				</div>
-			{/if}
+
 			<button type="button" id="btn-desc">desc</button>
 			{*
 				{if $Submit_Show_URL_Input eq 1}
