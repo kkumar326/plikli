@@ -66,6 +66,7 @@ function embed_videos($text, $type) {
 			$mp3 = stripos($match, '.mp3');
 			$wav = stripos($match, '.wav');
 			$jpg = stripos($match, '.jpg');
+			$jpg = stripos($match, '.jpeg');
 			$png = stripos($match, '.png');
 			$gif = stripos($match, '.gif');
 			if ( $ogg !== false || $mp3 !== false || $wav !== false) {
