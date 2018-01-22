@@ -115,7 +115,7 @@
 				//-->
 				</script>
 			{/if}
-			{if $user_url && $user_karma > "20" || $user_login eq $user_logged_in}
+			{if ($user_url neq '' && $user_karma > "20") || $user_login eq $user_logged_in}
 				<i class="fa fa-home"></i>
 				<a href="{$user_url}" target="_blank" rel="nofollow" id="user_website">{$user_url}</a>
 				<br />
