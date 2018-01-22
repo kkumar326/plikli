@@ -19,6 +19,7 @@
 	<script type="text/javascript" src="{$my_kliqqi_base}/templates/{$the_template}/js/modernizr.js"></script>	
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	{if $pagename eq 'editlink' || $pagename eq 'submit'}
+		<script type="text/javascript" src="{$my_kliqqi_base}/templates/{$the_template}/js/xss.js"></script>
 		<script type="text/javascript" src="{$my_kliqqi_base}/templates/{$the_template}/js/jstz.min.js"></script>
 	{/if}
 	{checkForCss}
@@ -27,48 +28,6 @@
 	<!-- START TITLE -->
 		{include file=$the_template"/title.tpl"}
 	<!-- END TITLE -->
-	
-	{if $pagename eq "submit"}
-		{literal}
-			<script type="text/javascript">
-		$(function()
-		{
-			$(".title").keyup(function() 
-			{
-				var title=$(this).val();
-				$(".story_title").html(title);
-				return false;
-			});
-			$(".title").keyup();
-			/*** Redwine: to capture the selected categories when multiple categories is set to true in Admin Panel***/
-			var category = "";
-			$( 'input[name="category[]"]' ).on( "click", function() {
-				category += $(this).attr("title") + " ";
-				$(".prev_category").html(category);
-			 });
-			/*** Redwine: to capture the selected categories when multiple categories is set to false in Admin Panel***/
-			$('select[name="category"').change(function() {
-				var option = $('select[name="category"').find(":selected").text();
-				console.log(option);
-				$(".prev_category").html(option);
-			});
-			$(".tags").keyup(function() 
-			{
-				var tags=$(this).val();
-				$(".tags").html(tags);
-				return false;
-			});
-			$(".bodytext").keyup(function() 
-			{
-				var bodytext=$(this).val();
-				$(".bodytext").html(bodytext);
-				return false;
-			});
-			
-		});
-		</script>
-		{/literal}
-	{/if}
 	
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$my_base_url}{$my_kliqqi_base}/rss.php"/>
 	<link rel="icon" href="{$my_kliqqi_base}/favicon.ico" type="image/x-icon"/>

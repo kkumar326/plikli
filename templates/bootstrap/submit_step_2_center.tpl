@@ -5,27 +5,31 @@
 <div class="submit_page">
 	<legend>{#KLIQQI_Visual_Submit2_Details#}</legend>
 	{checkActionsTpl location="tpl_kliqqi_submit_step2_start"}
-	<form class="form-horizontal" action="{$URL_submit}" method="post" name="thisform" id="thisform" enctype="multipart/form-data" onsubmit="return checkForm()">
+	<form class="form-horizontal" action="{$URL_submit}" method="post" name="thisform" id="thisform" enctype="multipart/form-data">
 		<div class="col-md-6 submit_step_2_left">
 			<div class="control-group">
-				<label for="input01" class="control-label">{#KLIQQI_Visual_Submit2_Title#}</label>
+				<label for="title" class="control-label">{#KLIQQI_Visual_Submit2_Title#}</label>
 				<div class="controls">
 					<input type="text" id="title" class="form-control title col-md-4" tabindex="1" name="title" value="{if $submit_title}{$submit_title}{else}{$submit_url_title}{/if}" size="54" maxlength="{$maxTitleLength}" />
 					<p class="help-inline">{#KLIQQI_Visual_Submit2_TitleInstruct#}</p>
 				</div>
 			</div>
 			<div class="control-group">
-				<label for="input01" class="control-label">{#KLIQQI_Visual_Submit2_Category#}</label>
+				{if $Multiple_Categories}
+					<strong>{#KLIQQI_Visual_Submit2_Category#}</strong>
+				{else}
+					<label for="category">{#KLIQQI_Visual_Submit2_Category#}</strong>
+				{/if}
 				<div class="controls select-category{if $Multiple_Categories} multi-select-category{/if}">
 					{if $Multiple_Categories}
 						{section name=thecat loop=$submit_cat_array}
 							{$submit_cat_array[thecat].spacercount|repeat_count:'&nbsp;&nbsp;&nbsp;&nbsp;'}
 								{*Redwine: I added the $submit_cat_array[thecat].name as the title attribute to the input checkbox so that we are able to use it to get the category name to be added in the preview section on the submit step 2*}
-								 <input type="checkbox" class="form-control" name="category[]" value="{$submit_cat_array[thecat].auto_id}" title="{$submit_cat_array[thecat].name}" {if $submit_cat_array[thecat].auto_id == $submit_category  || in_array($submit_cat_array[thecat].auto_id,$submit_additional_cats)}checked{/if}> {$submit_cat_array[thecat].name}<br />							
+								 <input type="checkbox" class="form-control" id= "{$submit_cat_array[thecat].auto_id}" name="category[]" value="{$submit_cat_array[thecat].auto_id}" title="{$submit_cat_array[thecat].name}" {if $submit_cat_array[thecat].auto_id == $submit_category  || in_array($submit_cat_array[thecat].auto_id,$submit_additional_cats)}checked{/if}> <label for="{$submit_cat_array[thecat].auto_id}">{$submit_cat_array[thecat].name}</label><br />							
 						{/section}
 						<br />
 					{else}
-						<select class="form-control category" tabindex="2" name="category">
+						<select class="form-control category" tabindex="2" name="category" id="category">
 							<option value="">{#KLIQQI_Visual_Submit2_CatInstructSelect#}</option>
 							{section name=thecat loop=$submit_cat_array}
 								<option value = "{$submit_cat_array[thecat].auto_id}" {if $submit_cat_array[thecat].auto_id == $submit_category  || in_array($cat_array[thecat].auto_id,$submit_additional_cats)}selected{/if}>
@@ -44,7 +48,7 @@
 			</div>
 			{if $enable_group && $output neq ''}
 				<div class="control-group">
-					<label for="input01" class="control-label">{#KLIQQI_Visual_Group_Submit_story#}</label>
+					<label for="link_group_id" class="control-label">{#KLIQQI_Visual_Group_Submit_story#}</label>
 					<div class="controls">
 						{$output}
 					</div>
@@ -54,26 +58,27 @@
 			{*{checkActionsTpl location="tpl_timestamp_stories"}*}
 			{if $enable_tags}
 				<div class="control-group">
-					<label for="input01" class="control-label">{#KLIQQI_Visual_Submit2_Tags#}</label>
+					<label for="tags" class="control-label">{#KLIQQI_Visual_Submit2_Tags#}</label>
 					<div class="controls">
-						<input tabindex="10" type="text" id="tags" class="form-control tags col-md-4" name="tags" data-mode="multiple" value="{$tags_words}" maxlength="{$maxTagsLength}" data-source="[&quot;.net&quot;,&quot;ajax&quot;,&quot;arts&quot;,&quot;apple&quot;,&quot;blog&quot;,&quot;books&quot;,&quot;business&quot;,&quot;celebrity&quot;,&quot;clothing&quot;,&quot;cms&quot;,&quot;coldfusion&quot;,&quot;computer&quot;,&quot;console&quot;,&quot;contest&quot;,&quot;css&quot;,&quot;deal&quot;,&quot;decorating&quot;,&quot;design&quot;,&quot;DIY&quot;,&quot;download&quot;,&quot;education&quot;,&quot;election&quot;,&quot;entertainment&quot;,&quot;enviroment&quot;,&quot;firefox&quot;,&quot;flash&quot;,&quot;food&quot;,&quot;forums&quot;,&quot;free software&quot;,&quot;funny&quot;,&quot;gadget&quot;,&quot;gallery&quot;,&quot;games&quot;,&quot;gifts&quot;,&quot;Google&quot;,&quot;hacking&quot;,&quot;handheld&quot;,&quot;hardware&quot;,&quot;health&quot;,&quot;howto&quot;,&quot;html&quot;,&quot;humor&quot;,&quot;images&quot;,&quot;international&quot;,&quot;internet&quot;,&quot;javascript&quot;,&quot;jobs&quot;,&quot;lifestyle&quot;,&quot;linux&quot;,&quot;mac&quot;,&quot;Microsoft&quot;,&quot;mobile&quot;,&quot;mods&quot;,&quot;money&quot;,&quot;movies&quot;,&quot;music&quot;,&quot;mysql&quot;,&quot;Nintendo&quot;,&quot;open source&quot;,&quot;pc&quot;,&quot;php&quot;,&quot;photoshop&quot;,&quot;Playstation&quot;,&quot;podcast&quot;,&quot;politics&quot;,&quot;portfolio&quot;,&quot;programming&quot;,&quot;rumor&quot;,&quot;science&quot;,&quot;security&quot;,&quot;SEO&quot;,&quot;shopping&quot;,&quot;software&quot;,&quot;space&quot;,&quot;sports&quot;,&quot;technology&quot;,&quot;television&quot;,&quot;templates&quot;,&quot;themes&quot;,&quot;tools&quot;,&quot;toys&quot;,&quot;travel&quot;,&quot;tutorial&quot;,&quot;typography&quot;,&quot;usability&quot;,&quot;video&quot;,&quot;video game&quot;,&quot;web&quot;,&quot;webdesign&quot;,&quot;Wii&quot;,&quot;work&quot;,&quot;Xbox&quot;,&quot;XHTML&quot;,&quot;Yahoo&quot;]" data-items="4" data-delimiter="," data-provide="typeahead">
+						<input tabindex="10" type="text" id="tags" class="form-control col-md-4" name="tags" data-mode="multiple" value="{$tags_words}" maxlength="{$maxTagsLength}" data-source="[&quot;.net&quot;,&quot;ajax&quot;,&quot;arts&quot;,&quot;apple&quot;,&quot;blog&quot;,&quot;books&quot;,&quot;business&quot;,&quot;celebrity&quot;,&quot;clothing&quot;,&quot;cms&quot;,&quot;coldfusion&quot;,&quot;computer&quot;,&quot;console&quot;,&quot;contest&quot;,&quot;css&quot;,&quot;deal&quot;,&quot;decorating&quot;,&quot;design&quot;,&quot;DIY&quot;,&quot;download&quot;,&quot;education&quot;,&quot;election&quot;,&quot;entertainment&quot;,&quot;enviroment&quot;,&quot;firefox&quot;,&quot;flash&quot;,&quot;food&quot;,&quot;forums&quot;,&quot;free software&quot;,&quot;funny&quot;,&quot;gadget&quot;,&quot;gallery&quot;,&quot;games&quot;,&quot;gifts&quot;,&quot;Google&quot;,&quot;hacking&quot;,&quot;handheld&quot;,&quot;hardware&quot;,&quot;health&quot;,&quot;howto&quot;,&quot;html&quot;,&quot;humor&quot;,&quot;images&quot;,&quot;international&quot;,&quot;internet&quot;,&quot;javascript&quot;,&quot;jobs&quot;,&quot;lifestyle&quot;,&quot;linux&quot;,&quot;mac&quot;,&quot;Microsoft&quot;,&quot;mobile&quot;,&quot;mods&quot;,&quot;money&quot;,&quot;movies&quot;,&quot;music&quot;,&quot;mysql&quot;,&quot;Nintendo&quot;,&quot;open source&quot;,&quot;pc&quot;,&quot;php&quot;,&quot;photoshop&quot;,&quot;Playstation&quot;,&quot;podcast&quot;,&quot;politics&quot;,&quot;portfolio&quot;,&quot;programming&quot;,&quot;rumor&quot;,&quot;science&quot;,&quot;security&quot;,&quot;SEO&quot;,&quot;shopping&quot;,&quot;software&quot;,&quot;space&quot;,&quot;sports&quot;,&quot;technology&quot;,&quot;television&quot;,&quot;templates&quot;,&quot;themes&quot;,&quot;tools&quot;,&quot;toys&quot;,&quot;travel&quot;,&quot;tutorial&quot;,&quot;typography&quot;,&quot;usability&quot;,&quot;video&quot;,&quot;video game&quot;,&quot;web&quot;,&quot;webdesign&quot;,&quot;Wii&quot;,&quot;work&quot;,&quot;Xbox&quot;,&quot;XHTML&quot;,&quot;Yahoo&quot;]" data-items="4" data-delimiter="," data-provide="typeahead">
 						<p class="help-inline">{#KLIQQI_Visual_Submit2_Tags_Example#} {#KLIQQI_Visual_Submit2_Tags_Inst2#}</p>
 					</div>
 				</div>
 			{/if}
 			{checkActionsTpl location="tpl_kliqqi_submit_step2_middle"}
 			<div class="control-group">
-				<label for="input01" class="control-label">{#KLIQQI_Visual_Submit2_Description#}</label>
+				<label for="bodytext" class="control-label">{#KLIQQI_Visual_Submit2_Description#}</label>
 				<div class="controls">
 {*Redwine: to display before the the content textarea what are the html tags allowed if set in Admin Panel; otherwise, it displays NO HTML*}
 					{ if $Story_Content_Tags_To_Allow eq ""}
 						<p class="help-inline"><strong>{#KLIQQI_Visual_Submit2_No_HTMLTagsAllowed#} </strong>{*#KLIQQI_Visual_Submit2_HTMLTagsAllowed#*}</p>
 					{else}
-							<p class="help-inline"><strong>{#KLIQQI_Visual_Submit2_HTMLTagsAllowed#}:</strong> {$Story_Content_Tags_To_Allow}</p>
+							<p class="help-inline" style="word-wrap: break-word;"><strong>{#KLIQQI_Visual_Submit2_HTMLTagsAllowed#}:</strong> {$Story_Content_Tags_To_Allow}</p>
 					{/if }
-					<textarea name="bodytext" tabindex="15" rows="6" class="form-control bodytext col-md-4" id="bodytext" maxlength="{$maxStoryLength}" WRAP="SOFT">{if $submit_url_description}{$submit_url_description}{/if}{$submit_content}</textarea>
+					<textarea name="typedesc" tabindex="15" rows="6" class="form-control bodytext col-md-4" id="typedesc" maxlength="{$maxStoryLength}" WRAP="SOFT">{if $submit_url_description}{$submit_url_description}{/if}{$submit_content}</textarea>
 					<br />
-					
+					<textarea name="bodytext" tabindex="16" rows="6" class="form-control bodytext col-md-4" id="bodytext" maxlength="{$maxStoryLength}" WRAP="SOFT">{if $submit_url_description}{$submit_url_description}{/if}{$submit_content}</textarea>
+					<br />
 				</div>
 			</div>
 			{if $SubmitSummary_Allow_Edit eq 1}
@@ -86,25 +91,26 @@
 					{#KLIQQI_Visual_Submit2_SummaryLimitCharacters#}
 				</p>
 				<div class="control-group">
-					<label for="input01" class="control-label">{#KLIQQI_Visual_Submit2_Summary#}</label>
+					<label for="summarytext" class="control-label">{#KLIQQI_Visual_Submit2_Summary#}</label>
 					<div class="controls">
-{*Redwine: to display before the the edit content textarea what are the html tags allowed if set in Admin Panel; otherwise, it displays NO HTML*}
+{*Redwine: to display before the edit content textarea what are the html tags allowed if set in Admin Panel; otherwise, it displays NO HTML*}
 						{ if $Story_Content_Tags_To_Allow eq ""}
 							<p class="help-inline"><strong>{#KLIQQI_Visual_Submit2_No_HTMLTagsAllowed#} </strong>{*#KLIQQI_Visual_Submit2_HTMLTagsAllowed#*}</p>
 						{else}
 							<p class="help-inline"><strong>{#KLIQQI_Visual_Submit2_HTMLTagsAllowed#}:</strong> {$Story_Content_Tags_To_Allow}</p>
 						{/if }
-						<textarea name="summarytext" rows="6" maxlength="{$maxSummaryLength}" id="summarytext" class="form-control bodytext col-md-4" maxlength="{$StorySummary_ContentTruncate}" WRAP="SOFT">{$submit_summary}</textarea>
+						<textarea name="summarytext" rows="6" maxlength="{$maxSummaryLength}" id="summarytext" tabindex="17" class="form-control bodytext col-md-4" maxlength="{$StorySummary_ContentTruncate}" WRAP="SOFT">{$submit_summary}</textarea>
 					</div>
-					<p>&nbsp;<hr /></p>
+					<p><br /><hr /></p>
 				</div>
 			{/if}
+			<button type="button" id="btn-desc">desc</button>
 			{*
 				{if $Submit_Show_URL_Input eq 1}
 					<div class="control-group">
-						<label for="input01" class="control-label">{#KLIQQI_Visual_Submit2_Trackback#}</label>
+						<label for="trackback" class="control-label">{#KLIQQI_Visual_Submit2_Trackback#}</label>
 						<div class="controls">
-							<input type="text" name="trackback" tabindex="17" id="trackback" class="form-control col-md-5" value="{$submit_trackback}" size="54" />
+							<input type="text" name="trackback" tabindex="18" id="trackback" class="form-control col-md-5" value="{$submit_trackback}" size="54" />
 						</div>
 					</div>
 				{/if}
@@ -113,7 +119,7 @@
 			{include file=$tpl_extra_fields.".tpl"}
 			{if isset($register_step_1_extra)}
 				{$register_step_1_extra}
-			{/if}
+			{/if}<br clear="all" />
 			<div class="form-actions">            
 				<input type="hidden" name="url" id="url" value="{$submit_url}" />
 				<input type="hidden" name="phase" value="2" />
@@ -270,27 +276,120 @@
 </div>
 {literal}
 	<script type="text/javascript">
-		var dock0=new dockit("dockcontent", 0);
+		//var dock0=new dockit("dockcontent", 0);
 	</script>
 	
 	
 	<script type="text/javascript">
+	
+$( document ).ready(function() {
+	// Rediwne: This part deals with the content textarea.
+	var allowedHTML = "{/literal}{$Story_Content_Tags_To_Allow}{literal}";
+	allowedHTML = allowedHTML.replace(/&lt;/gi, '');
+	allowedHTML = allowedHTML.replace(/&gt;/gi, ',');
+	var lastCharcomma = allowedHTML.slice(-1);
+	if (lastCharcomma == ",") { 
+		allowedHTML = allowedHTML.slice(0, -1);
+	}
+	splitallowedHTML = allowedHTML.split(',');
+	var arrayLength = splitallowedHTML.length;
+	var mywhiteList = {};
+	for (var i = 0; i < arrayLength; i++) {
+		mywhiteList[splitallowedHTML[i]] = [];
+	}  
+	var options = {
+	stripIgnoreTag: true,
+	allowCommentTag: false,
+	whiteList: 
+		mywhiteList
+	
+	};
+	$('#btn-desc').click(function() {
+		var html = $('#typedesc').val();
+		var s = Date.now();
+		var out = filterXSS(html,options);
+		$('#bodytext').val(out);
+		// The preview area
+		$(".bodytext").html(out);
+	});
+	$('#btn-desc').click();
+
+	var lastType = Date.now();
+	var lastHTML = $('#typedesc').val().trim();
+	$('#typedesc').keypress(function() {
+	  lastType = Date.now();
+	});
+	setInterval(function() {
+	  var now = Date.now();
+	  if (now - lastType > 50) {
+		var html = $('#typedesc').val().trim();
+		if (html !== lastHTML) {
+		  lastHTML = html;
+		  $('#btn-desc').click();
+		}
+	  }
+	}, 50);
+	// End process content textarea.	
+		
 	// Redwine: Added the below to prevent pressing the enter key which was taking the user back to the url submit page.
-	$( document ).ready(function() {
-		$('.title').on('keyup keypress', function(e) {
+	$('#title').on('keyup keypress', function(e) {
 		  var keyCode = e.keyCode || e.which;
 		  if (keyCode === 13) { 
 			e.preventDefault();
 			return false;
 		  }
 		});
-		$('.tags').on('keyup keypress', function(e) {
+	$('#tags').on('keyup keypress', function(e) {
 		  var keyCode = e.keyCode || e.which;
 		  if (keyCode === 13) { 
 			e.preventDefault();
 			return false;
 		  }
 		});
+	// Redwine: the following code deals with the Title, Tags input fields
+	$('#title').keyup(function() {
+		var yourInput = $(this).val();
+		re = /[^\w\s-!,]/gi;
+		var isSplChar = re.test(yourInput);
+		if(isSplChar) {
+			var no_spl_char = yourInput.replace(/[^\w\s-!,]/gi, '');
+			$(this).val(no_spl_char);
+		}
+	});
+	$('#tags').keyup(function() {
+		var yourInput = $(this).val();
+		re = /[^\w\s-,]/gi;
+		var isSplChar = re.test(yourInput);
+		if(isSplChar) {
+			var no_spl_char = yourInput.replace(/[^\w\s-,]/gi, '');
+			$(this).val(no_spl_char);
+		}
+	});
+	// Redwine: End code deals with the Title, Tags input fields
+	// Redwine: the following code deals with the Title, Tags, Category in the preview area
+	$(function() {
+		$("#title").on('change keyup', function() {
+			var title=$(this).val();
+			$(".story_title").html(title);
+			return false;
+		});
+		/*** Redwine: to capture the selected categories when multiple categories is set to true in Admin Panel***/
+		var category = "";
+		$( 'input[name="category[]"]' ).on( "click", function() {
+			category += $(this).attr("title") + " ";
+			$(".prev_category").html(category);
+		});
+		/*** Redwine: to capture the selected categories when multiple categories is set to false in Admin Panel***/
+		$('select[name="category"').change(function() {
+			var option = $('select[name="category"').find(":selected").text();
+			$(".prev_category").html(option);
+		});
+		$("#tags").keyup(function() {
+			var tags=$(this).val();
+			$(".tags").html(tags);
+			return false;
+		});
+	});
 	});
 	</script>
 	
@@ -313,7 +412,6 @@ $('#calendar').datepicker({
           }
      }
 });
-	
 	$('#calendar').change(function() {
 	  var d1 = new Date();
 	  var d2 = new Date($('#calendar').val());
@@ -326,7 +424,6 @@ $('#calendar').datepicker({
 		  $('#draft').attr('checked', false);
 	  }
 	});
-	
 });
 function getValue(){
 			$('#calendar').val('');

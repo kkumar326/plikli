@@ -47,6 +47,7 @@ if(enable_group == "true" && (group_submit_level == $current_user_level || group
 {
 	if(isset($_POST['group_title'])){
 		$group_title = $db->escape(stripslashes(strip_tags(trim($_POST['group_title']))));
+		$group_title = preg_replace('/[^\w-\s]/', ' ', $group_title);
 	}else{
 		$group_title = '';
 	}
@@ -89,7 +90,7 @@ if(enable_group == "true" && (group_submit_level == $current_user_level || group
 	    }
 
 	    $errors = '';
-	    if (!$group_name) $errors = $main_smarty->get_config_vars('KLIQQI_Visual_Group_Empty_Title');
+	    if (!$group_name || $group_name=='') $errors = $main_smarty->get_config_vars('KLIQQI_Visual_Group_Empty_Title');
 	    elseif ($group_vote_to_publish<=0) $errors = $main_smarty->get_config_vars('KLIQQI_Visual_Group_Empty_Votes');
 	    else
 	    {

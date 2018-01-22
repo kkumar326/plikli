@@ -30,4 +30,33 @@
 	<br />
 </div>
 {checkActionsTpl location="tpl_kliqqi_search_end"}
+
+{literal}
+<script type="text/javascript">
+$( document ).ready(function() {
+	$(function(){
+		$('#searchsite').keyup(function() {
+			var yourInput = $(this).val();
+			re = /[^\w\s-_]/gi;
+			var isSplChar = re.test(yourInput);
+			if(isSplChar)
+			{
+				var no_spl_char = yourInput.replace(/[^\w\s-_]/gi, '');
+				$(this).val(no_spl_char);
+			}
+		});
+		$('#searchsite').bind("paste", function() {
+			setTimeout(function() { 
+			  //get the value of the input text
+			  var data= $( '#searchsite' ).val() ;
+			  //replace the special characters to '' 
+			  var dataFull = data.replace(/[^\w\s-_]/gi, '');
+			  //set the new value of the input text without special characters
+			  $( '#searchsite' ).val(dataFull);
+			});
+		});
+	});
+});
+</script>
+{/literal}
 <!--/search_box.tpl -->

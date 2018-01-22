@@ -50,10 +50,10 @@ if($requestID > 0 && enable_friendly_urls == true){
 
 // if we're using "Friendly URL's for stories"
 if(isset($requestTitle)){
-	$requestID = $db->get_var($sql="SELECT link_id FROM " . table_links . " WHERE `link_title_url` = '".$db->escape(sanitize($requestTitle,4))."';");
+	$requestID = $db->get_var("SELECT link_id FROM " . table_links . " WHERE `link_title_url` = '".$db->escape(sanitize($requestTitle,4))."';");
 	// Search in old urls if not found
 	if (!is_numeric($requestID)) 
-		$requestID = $db->get_var($sql="SELECT old_link_id FROM " . table_old_urls . " WHERE `old_title_url` = '".$db->escape(sanitize($requestTitle,4))."';");
+		$requestID = $db->get_var("SELECT old_link_id FROM " . table_old_urls . " WHERE `old_title_url` = '".$db->escape(sanitize($requestTitle,4))."';");
 }
 
 if(is_numeric($requestID)) {
@@ -300,7 +300,8 @@ function insert_comment () {
 		$main_smarty->display($the_template . '/kliqqi.tpl');
 		exit;
 	}
-
+	settype($_POST['randkey'], "integer");
+	if ($_POST['randkey'] > 0) {
 	if(sanitize($_POST['link_id'], 3) == $link->id && $current_user->authenticated && sanitize($_POST['user_id'], 3) == $current_user->user_id &&	sanitize($_POST['randkey'], 3) > 0) 
 	{
 		if(sanitize($_POST['comment_content'], 4, $Story_Content_Tags_To_Allow) != '')
@@ -333,7 +334,11 @@ function insert_comment () {
 			}
 		}
 	}
-
+	}else{
+		$story_url = getmyurl("storyURL", $link->category_safe_names(), urlencode($link->title_url), $link->id);
+		//$story_url;
+		header('Location: '.$story_url);
+	}
     $parrent_comment_id=sanitize($_POST['parrent_comment_id'], 3);
 	if($cancontinue == true)
 	{
