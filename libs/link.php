@@ -551,7 +551,8 @@ class Link {
 		$smarty->assign('story_karma', $this->karma);
 		$smarty->assign('is_rtl', $this->is_rtl);
 		$smarty->assign('og_twitter_image', $this->og_twitter_image);
-		/* Redwine: modifications to reinstate the read more feature, done to the if $type == summary code */
+		/* Redwine: modifications to reinstate the read more feature, done to the if $type == summary code. 
+			If we remove the conditional statement on line 557 below, then we won't get the read more functionality! */
 		$smarty->assign('maxSummaryLength', StorySummary_ContentTruncate);
 		if($type == "summary"){
 			//if($this->link_summary == ""){

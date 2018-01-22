@@ -9,11 +9,8 @@
 	include(mnminclude.'tags.php');
 	include(mnminclude.'search.php');
 	include(mnminclude.'smartyvariables.php');
-echo $_REQUEST['search'] . "<br />";
+
 	/*Redwine: the str_replace was not escaped correctly!*/
-	$_REQUEST['search'] = str_replace(array(':\/\/',':\/'),array(':\\\\',':\\\\'),$_REQUEST['search']);
-	echo $_REQUEST['search'];
-	//die();
 	/*********
 	Redwine: I added  && strstr($_REQUEST['search'],'/adv/1') because the regular search $_REQUEST['search'] is always equal to the search word and a forward slash (/) at the end, therefore the first condition strstr($_REQUEST['search'],'/') is true and the second one is also true when in SEO URL Method 2. This creates a problem because the data process in this conditional statement should only apply when the advanced search is used and not the regular search. The condition I added will make sure to determine if the regular or advanced search is used.
 	*********/
