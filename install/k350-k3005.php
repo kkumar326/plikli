@@ -160,6 +160,17 @@ echo '<fieldset><legend>Updating data in Config table.</legend><ul>';
 		$marks = $ok;
 	}
 	echo '<li>Updated auto_scroll <img src="'.$marks.'" class="iconalign" /></li>';	
+	
+	// deleting the allow summary config
+	$sql = "DELETE FROM `" . table_prefix."config` WHERE `var_name` = 'SubmitSummary_Allow_Edit';";
+	$sql_del_allow_summary = $handle->query($sql);
+	if (!$sql_del_allow_summary) {
+		$marks = $notok;
+	}else{
+		$marks = $ok;
+	}
+	echo '<li>Deleted the SubmitSummary_Allow_Edit entry because it is obsolete <img src="'.$marks.'" class="iconalign" /></li>';
+	
 // Update urlmethod desc.
 	$sql = "UPDATE `" . table_prefix."config` SET `var_desc` ='<strong>1</strong> = Non-SEO Links.<br /> Example: /story.php?title=Example-Title<br /><strong>2</strong> SEO Method. <br />Example: /Category-Title/Story-title/.<br /><strong>Note:</strong> You must rename htaccess.default to .htaccess <strong>AND EDIT IT WHERE THE NOTES ARE!</strong>' where `var_name` = '\$URLMethod';";
 	$sql_urlmethod = $handle->query($sql);

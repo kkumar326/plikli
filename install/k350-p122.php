@@ -1004,6 +1004,18 @@ echo '<fieldset><legend>Updating data in Config table.</legend><ul>';
 	$warnings[] = "Added new settings to the config table:<ol><strong>Under Location Installed Section</strong><li>Allow/Disallow Registration</li><li>Disallow Registration message</li><li>Set the maintenance Mode for the site</li><strong>Under Submit Section</strong><li>Enable/Disable Submit</li><li>Disable Submit message</li><li>Enable/disable Allow Draft; users can save articles as draft for later publishing</li><li>Enable/disable Allow Scheduled; users can save articles as scheduled for later publishing</li><strong>Under Story Section</strong><li>Enable/disable link nofollow for the story URL that is linked in the title on the Story page and the original site that appears in the toolsbar under the title</li><strong>Under Comments Section</strong><li>Enable/Disable Comments</li><li>Disable Comments message</li><strong>Under Groups Section</strong><li>Allow Groups Avatar change</li><li>Set Maximum Group Avatar size to upload</li><strong>Under Avatars Section</strong><li>Set Maximum Avatar size to upload</li></ol>";
 	echo '<li>INSERTED many new settings in the config table (read the notes at the end of the upgrade process) <img src="'.$marks.'" class="iconalign" /></li>';	
 echo '</ul></fieldset><br />';
+
+echo '<fieldset><legend>Deleting SubmitSummary_Allow_Edit from config</legend><ul>';
+	$sql = "DELETE FROM `" . table_prefix."config` WHERE `var_name` = 'SubmitSummary_Allow_Edit';";
+	$sql_del_allow_summary = $handle->query($sql);
+	if (!$sql_del_allow_summary) {
+		$marks = $notok;
+	}else{
+		$marks = $ok;
+	}
+	echo '<li>Deleted the SubmitSummary_Allow_Edit entry because it is obsolete <img src="'.$marks.'" class="iconalign" /></li>';
+echo '</ul></fieldset><br />';
+
 echo '<fieldset><legend>Updating data in Links table.</legend><ul>';
 	
 // Update the content of the about page in links table

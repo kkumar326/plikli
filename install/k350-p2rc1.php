@@ -271,6 +271,16 @@ echo '<fieldset><legend>Updating data in Config table.</legend><ul>';
 	}
 	echo '<li class="warn-delete">Deleted obsolete User_Upload_Avatar_Folder <img src="'.$marks.'" class="iconalign" /></li>';
 	
+	// deleting the allow summary config
+	$sql = "DELETE FROM `" . table_prefix."config` WHERE `var_name` = 'SubmitSummary_Allow_Edit';";
+	$sql_del_allow_summary = $handle->query($sql);
+	if (!$sql_del_allow_summary) {
+		$marks = $notok;
+	}else{
+		$marks = $ok;
+	}
+	echo '<li>Deleted the SubmitSummary_Allow_Edit entry because it is obsolete <img src="'.$marks.'" class="iconalign" /></li>';
+	
 	// Update the defaultvalue, optiontext and description for table prefix
 	$sql = "UPDATE `" . table_prefix."config` set `var_defaultvalue` = 'kliqqi_', `var_desc` = 'Table prefix. Ex: kliqqi_ makes the users table become kliqqi_users. Note: changing this will not automatically rename your tables!' WHERE `var_name` =  'table_prefix';";
 	$sql_tableprefix = $handle->query($sql);

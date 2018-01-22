@@ -313,6 +313,16 @@ echo '<fieldset><legend>Updating data in Config table.</legend><ul>';
 	$warnings[] = "Added new settings to the config table:<ol><strong>Under Location Installed Section</strong><li>Allow/Disallow Registration</li><li>Disallow Registration message</li><li>Set the maintenance Mode for the site</li><strong>Under Submit Section</strong><li>Enable/Disable Submit</li><li>Disable Submit message</li><li>Enable/disable Allow Draft; users can save articles as draft for later publishing</li><li>Enable/disable Allow Scheduled; users can save articles as scheduled for later publishing</li><strong>Under Story Section</strong><li>Enable/disable link nofollow for the story URL that is linked in the title on the Story page and the original site that appears in the toolsbar under the title</li><strong>Under Comments Section</strong><li>Enable/Disable Comments</li><li>Disable Comments message</li><strong>Under Groups Section</strong><li>Allow Groups Avatar change</li><li>Set Maximum Group Avatar size to upload</li><strong>Under Avatars Section</strong><li>Set Maximum Avatar size to upload</li></ol>";
 	echo '<li>INSERTED many new settings in the config table (read the notes at the end of the upgrade process) <img src="'.$marks.'" class="iconalign" /></li>';	
 	
+	// deleting the allow summary config
+	$sql = "DELETE FROM `" . table_prefix."config` WHERE `var_name` = 'SubmitSummary_Allow_Edit';";
+	$sql_del_allow_summary = $handle->query($sql);
+	if (!$sql_del_allow_summary) {
+		$marks = $notok;
+	}else{
+		$marks = $ok;
+	}
+	echo '<li>Deleted the SubmitSummary_Allow_Edit entry because it is obsolete <img src="'.$marks.'" class="iconalign" /></li>';
+	
 	// Update Story_Content_Tags_To_Allow_Normal title.
 	$sql = "UPDATE `" . table_prefix."config` SET `var_desc` = 'leave blank to not allow tags. Examples are: &lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;u&gt;&lt;s&gt;&lt;sub&gt;&lt;sup&gt;&lt;ol&gt;&lt;ul&gt;&lt;li&gt;&lt;blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;big&gt;&lt;small&gt;&lt;tt&gt;&lt;code&gt;&lt;kbd&gt;&lt;samp&gt;&lt;var&gt;&lt;del&gt;&lt;ins&gt;&lt;hr&gt;&lt;pre&gt;' where `var_name` = 'Story_Content_Tags_To_Allow_Normal';";
 	$sql_Story_Content_Tags_To_Allow_Normal = $handle->query($sql);
