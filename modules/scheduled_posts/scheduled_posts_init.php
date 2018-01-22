@@ -5,7 +5,7 @@ if(defined('mnminclude')){
 	// tell kliqqi what pages this modules should be included in
 	// pages are <script name> minus .php
 	// index.php becomes 'index' and new.php becomes 'new'
-	$include_in_pages = array('index','new');
+	$include_in_pages = array('index');
 	$do_not_include_in_pages = array();
 		
 	if( do_we_load_module() ) {		
