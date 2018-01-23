@@ -290,7 +290,7 @@ function insert_comment () {
 	$cancontinue_anon = false;
 	if (isset($_POST['anon'])) $anon = $_POST['anon'];
 	$comment->content=sanitize($_POST['comment_content'], 4, $Story_Content_Tags_To_Allow); 
-	$comment->content=sanitize($_POST['comment_content'], 4);
+	//$comment->content=sanitize($_POST['comment_content'], 4);
 	if (strlen($comment->content) > maxCommentLength)
 	{
 		$main_smarty->assign('url', $_SERVER['REQUEST_URI']);
@@ -313,7 +313,7 @@ function insert_comment () {
 		    foreach ($_POST['reply_comment_content'] as $id => $value)
 		    	if ($id > 0 && $value)
 		    	{
-			    $comment->content = sanitize($value, 4);
+					$comment->content = sanitize($value, 4, $Story_Content_Tags_To_Allow);
 			    $comment->parent= $id;
 			    $cancontinue = true;
 			    break;
