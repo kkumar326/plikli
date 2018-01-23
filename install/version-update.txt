@@ -5,8 +5,11 @@ anonymous,0.1
 anonymous_comments,0.1
 anonymous_story,0.1
 captcha,2.5
+ckeditor,2.0
 karma,1.0
 links,2.0
+rss_import,2.1
+scheduled_posts,1.0
 send_announcement,0.2
 sidebar_comments,2.1
 sidebar_saved,2.2
@@ -16,6 +19,8 @@ sidebar_tag_cloud,2.1
 simple_messaging,3.0
 social_bookmark,2.0
 spam_trigger,3.0
+subscribe2comments,1.0
+total_story_views,1.0
 upload,2.0
 users_extra_fields,0.2
 welcome_email,0.2
