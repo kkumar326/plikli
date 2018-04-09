@@ -2,7 +2,7 @@
 //
 // Settings page
 //
-/* Redwine, made the settings array global to let all the functions have access to it instead of each function calls the get_upload_settings() and also have insdividual queries to the misc_table. */
+/* Redwine, made the settings array global to let all the functions have access to it instead of each function calls the get_upload_settings() and also save individual queries to the misc_table. */
 global	$settings, $main_smarty;
 $settings = get_upload_settings();
 /* Redwine: the below code was added as an extra security layer to prevent any malicious act, if gained access to the dashboard, from adding malicious extensions (php or any other for that matter.) so we hard-code the allowed extensions and we validate the changes in the settings against it. */
@@ -129,16 +129,16 @@ function upload_showpage(){
 			misc_data_update('upload_commentplace', sanitize($_REQUEST['upload_commentplace'], 3));
 			misc_data_update('upload_cfilelist', sanitize($_REQUEST['upload_commentfilelist'], 3));
 
-			header("Location: ".my_kliqqi_base."/module.php?module=upload");
+			header("Location: ".my_plikli_base."/module.php?module=upload");
 			die();
 		}
 		// breadcrumbs
-			$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+			$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 			$navwhere['link1'] = getmyurl('admin', '');
 			$navwhere['text2'] = "Modify Upload";
-			$navwhere['link2'] = my_kliqqi_base . "/module.php?module=upload";
+			$navwhere['link2'] = my_plikli_base . "/module.php?module=upload";
 			$main_smarty->assign('navbar_where', $navwhere);
-			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 		// breadcrumbs
 		define('modulename', 'upload'); 
 		$main_smarty->assign('modulename', modulename);
@@ -458,9 +458,9 @@ function upload_track($vars)
 	    if (strpos($file->file_name,'http')===0)
 		$image = "<div class=\"videoWrapper\"><img src='{$file->file_name}' /></div>";
 	    elseif ($file->file_size=='orig')
-		$image = "<div class=\"videoWrapper\"><img src='".my_kliqqi_base."{$upload_dir}/{$file->file_name}' /></div>";
+		$image = "<div class=\"videoWrapper\"><img src='".my_plikli_base."{$upload_dir}/{$file->file_name}' /></div>";
 	    else
-		$image = "<div class=\"videoWrapper\"><img src='".my_kliqqi_base."{$thumb_dir}/{$file->file_name}' /></div>";
+		$image = "<div class=\"videoWrapper\"><img src='".my_plikli_base."{$thumb_dir}/{$file->file_name}' /></div>";
 	}
 	else
 	    $image = '';	
@@ -476,7 +476,7 @@ function upload_track($vars)
 			$vars['smarty']->_vars['uploaded_image'] = "{$file->file_name}";
 	    }elseif ($file->file_size=='orig') {
 			$image = "<div class=\"videoWrapper\"><img src='{$upload_dir}/{$file->file_name}' /></div>";
-			$vars['smarty']->_vars['uploaded_image'] = my_base_url.my_kliqqi_base.$settings['directory']."/{$file->file_name}";
+			$vars['smarty']->_vars['uploaded_image'] = my_base_url.my_plikli_base.$settings['directory']."/{$file->file_name}";
 	    }else{
 			$image = "<div class=\"videoWrapper\"><img src='{$thumb_dir}/{$file->file_name} /></div>";
 		}
@@ -509,9 +509,9 @@ function upload_comment_track($vars)
 	    if (strpos($file->file_name,'http')===0)
 		$image = "<div class=\"videoWrapper\"><img src='{$file->file_name}'/></div>";
 	    elseif ($file->file_size=='orig')
-		$image = "<div class=\"videoWrapper\"><img src='".my_kliqqi_base."{$upload_dir}/{$file->file_name}'/></div>";
+		$image = "<div class=\"videoWrapper\"><img src='".my_plikli_base."{$upload_dir}/{$file->file_name}'/></div>";
 	    else
-		$image = "<div class=\"videoWrapper\"><img src='".my_kliqqi_base."{$thumb_dir}/{$file->file_name}'/></div>";
+		$image = "<div class=\"videoWrapper\"><img src='".my_plikli_base."{$thumb_dir}/{$file->file_name}'/></div>";
 	}
 	else
 	    $image = '';	
@@ -525,9 +525,9 @@ function upload_comment_track($vars)
 	    if (strpos($file->file_name,'http')===0)
 		$image = "<div class=\"videoWrapper\"><img src='{$file->file_name}'/></div>";
 	    elseif ($file->file_size=='orig')
-		$image = "<div class=\"videoWrapper\"><img src='".my_kliqqi_base."{$upload_dir}/{$file->file_name}'/></div>";
+		$image = "<div class=\"videoWrapper\"><img src='".my_plikli_base."{$upload_dir}/{$file->file_name}'/></div>";
 	    else
-		$image = "<div class=\"videoWrapper\"><img src='".my_kliqqi_base."{$thumb_dir}/{$file->file_name}'/></div>";
+		$image = "<div class=\"videoWrapper\"><img src='".my_plikli_base."{$thumb_dir}/{$file->file_name}'/></div>";
 
 	    if ($file->file_size=='orig')
     	    	$vars['smarty']->_vars["image{$file->file_number}"] = $file->file_ispicture ? $image : '';
@@ -603,7 +603,7 @@ function upload_rss_item($vars) {
 	$images = $db->get_results($sql,ARRAY_A);
 	if($images)
 	    	foreach ($images as $image)
-		    print "<media:content url=\"".my_base_url.my_kliqqi_base."{$upload_directory}/{$image['file_name']}\" medium=\"image\" />\n";
+		    print "<media:content url=\"".my_base_url.my_plikli_base."{$upload_directory}/{$image['file_name']}\" medium=\"image\" />\n";
 }
 
 function upload_comment_rss_item($vars) {
@@ -623,6 +623,6 @@ function upload_comment_rss_item($vars) {
 	$images = $db->get_results($sql,ARRAY_A);
 	if($images)
 	    	foreach ($images as $image)
-		    print "<media:content url=\"".my_base_url.my_kliqqi_base."{$upload_directory}/{$image['file_name']}\" medium=\"image\" />\n";
+		    print "<media:content url=\"".my_base_url.my_plikli_base."{$upload_directory}/{$image['file_name']}\" medium=\"image\" />\n";
 }
 ?>

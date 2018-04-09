@@ -1,6 +1,6 @@
 <?php
 /*
-    XML Sitemaps module for Kliqqi
+    XML Sitemaps module for Plikli
     Copyright (C) 2007-2008  Secasiu Mihai - http://patchlog.com
 
     This program is free software; you can redistribute it and/or modify
@@ -39,7 +39,7 @@ function xml_sitemaps_show_sitemap(){
 //
 function create_sitemaps_index($max_rec)
 {
-	global $db,$my_base_url,$my_kliqqi_base, $XmlSitemaps_friendly_url;
+	global $db,$my_base_url,$my_plikli_base, $XmlSitemaps_friendly_url;
 	$nr=0;
 
 	if (sitemap_header("index",true)) return true;
@@ -63,9 +63,9 @@ function create_sitemaps_index($max_rec)
 	// Main pages
 	echo "<sitemap>\n";
 	if($XmlSitemaps_friendly_url == true){
-	        echo "<loc>$my_base_url$my_kliqqi_base/sitemap-main.xml</loc>\n";
+	        echo "<loc>$my_base_url$my_plikli_base/sitemap-main.xml</loc>\n";
 	}else{
-		echo "<loc>$my_base_url$my_kliqqi_base/module.php?module=xml_sitemaps_show_sitemap&amp;i=main</loc>\n";
+		echo "<loc>$my_base_url$my_plikli_base/module.php?module=xml_sitemaps_show_sitemap&amp;i=main</loc>\n";
 	}
         echo "</sitemap>";
 
@@ -99,7 +99,7 @@ function create_sitemap_groups($index,$max_rec)
 }
 
 //
-// Kliqqi static pages
+// Plikli static pages
 //
 function create_sitemap_pages($index,$max_rec)
 {
@@ -112,7 +112,7 @@ function create_sitemap_pages($index,$max_rec)
 }
 
 //
-// Kliqqi stories
+// Plikli stories
 //
 function create_sitemap_links($index,$max_rec)
 {
@@ -146,11 +146,11 @@ function create_sitemap_links($index,$max_rec)
 }
 
 //
-// Kliqqi main pages
+// Plikli main pages
 //
 function create_sitemap_main()
 {
-	global $db,$my_base_url,$my_kliqqi_base,$URLMethod;
+	global $db,$my_base_url,$my_plikli_base,$URLMethod;
 
 	if (sitemap_header("main")) return true;
 
@@ -184,7 +184,7 @@ function create_sitemap_main()
                 }
 	}
 	// rssfeeds
-	create_entry($maxtime,"$my_base_url$my_kliqqi_base/rssfeeds.php");
+	create_entry($maxtime,"$my_base_url$my_plikli_base/rssfeeds.php");
 	
  	$vars = '';
 	check_actions('xml_sitemaps_main', $vars);
@@ -196,13 +196,13 @@ function create_sitemap_main()
 // Ping search engines
 //
 function xml_sitemaps_sites_ping(){
-	global $my_base_url,$my_kliqqi_base, $XmlSitemaps_friendly_url;
+	global $my_base_url,$my_plikli_base, $XmlSitemaps_friendly_url;
 	$res= "";
 
 	if ($XmlSitemaps_friendly_url == true) 
-		$Url = "$my_base_url$my_kliqqi_base/sitemapindex.xml";
+		$Url = "$my_base_url$my_plikli_base/sitemapindex.xml";
 	else {
-		$Url = "$my_base_url$my_kliqqi_base/modules.php?module=xml_sitemaps_show_sitemap";
+		$Url = "$my_base_url$my_plikli_base/modules.php?module=xml_sitemaps_show_sitemap";
 		$Url = urlencode($Url);
 	}
 //	if (XmlSitemaps_use_cache && ($s=stat('cache/sitemapindex.xml')) && time()-$s['mtime']<XmlSitemaps_cache_ttl){
@@ -238,7 +238,7 @@ function sitemap_call_url($pingUrl)
 //
 function sitemap_index_body($sql,$name,$max_rec)
 {
-	global $db,$my_base_url,$my_kliqqi_base, $XmlSitemaps_friendly_url;
+	global $db,$my_base_url,$my_plikli_base, $XmlSitemaps_friendly_url;
 
 	// Calculate total data size using given query
         $db->query($sql1=str_ireplace('select ','SELECT SQL_CALC_FOUND_ROWS ',$sql)." LIMIT 0,1");
@@ -255,9 +255,9 @@ function sitemap_index_body($sql,$name,$max_rec)
 		$r=$db->get_var($sql1="SELECT MAX(UNIX_TIMESTAMP(l.date)) FROM ($sql LIMIT ".$i*$max_rec.",$max_rec ) l");
 		echo "<sitemap>\n";
 		if ($XmlSitemaps_friendly_url == true) 
-			echo "<loc>$my_base_url$my_kliqqi_base/sitemap-$name$i.xml</loc>\n";
+			echo "<loc>$my_base_url$my_plikli_base/sitemap-$name$i.xml</loc>\n";
 		else 
-			echo "<loc>$my_base_url$my_kliqqi_base/module.php?module=xml_sitemaps_show_sitemap&amp;i=$name$i</loc>\n";
+			echo "<loc>$my_base_url$my_plikli_base/module.php?module=xml_sitemaps_show_sitemap&amp;i=$name$i</loc>\n";
 		echo "<lastmod>";
 		echo my_format_date($r);
 		echo "</lastmod>";
@@ -292,7 +292,7 @@ function sitemap_body($sql, $datefield, $urlname, $urlfield, $pri, $index, $max_
 }
 
 //
-// Create an entry for given kliqqi URL specified by $name, depending of data last modification
+// Create an entry for given plikli URL specified by $name, depending of data last modification
 // $sql should be 'SELECT MAX(UNIX_TIMESTAMP(<modification_datetime_field)) FROM xxx'
 //
 function sitemap_add_page($name,$sql)

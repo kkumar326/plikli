@@ -3,5 +3,5 @@
 	$module_info['desc'] = 'Allows modules to add extra fields to the users profile. Also known as "user_extra_fields".';
 	$module_info['version'] = 0.2;
 	$module_info['update_url'] = '';
-	$module_info['homepage_url'] = 'http://www.kliqqi.com/mods/users_extra_fields.zip';
+	$module_info['homepage_url'] = 'https://www.plikli.com/mods/users_extra_fields.zip';
 ?>

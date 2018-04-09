@@ -3,9 +3,9 @@
 *************************************}
 <!-- submit_step_3_center.tpl -->
 <div class="submit_page">
-	<legend>{#KLIQQI_Visual_Submit3_Header#}</legend>
-	<h2>{#KLIQQI_Visual_Submit3_Details#}</h2><br />
-	{checkActionsTpl location="tpl_kliqqi_submit_step3_start"}
+	<legend>{#PLIKLI_Visual_Submit3_Header#}</legend>
+	<h2>{#PLIKLI_Visual_Submit3_Details#}</h2><br />
+	{checkActionsTpl location="tpl_plikli_submit_step3_start"}
 	{* javascript that protects people from clicking away from the story before submitting it *}
 	{literal}
 	<SCRIPT>
@@ -68,10 +68,10 @@
 		<br style="clear: both;" />
 		<hr />
 		<center>
-			<input type="button" onclick="gPageIsOkToExit = true; document.location.href='{$my_base_url}{$my_kliqqi_base}/submit.php?id='+this.form.id.value+'&trackback='+this.form.trackback.value;" value="{#KLIQQI_Visual_Submit3_Modify#}" class="btn btn-default">&nbsp;&nbsp;
-			<input type="button" onclick="submitEdgeStory();" value="{#KLIQQI_Visual_Submit3_SubmitStory#}" class="btn btn-primary" />
+			<input type="button" onclick="gPageIsOkToExit = true; document.location.href='{$my_base_url}{$my_plikli_base}/submit.php?id='+this.form.id.value+'&trackback='+this.form.trackback.value;" value="{#PLIKLI_Visual_Submit3_Modify#}" class="btn btn-default">&nbsp;&nbsp;
+			<input type="button" onclick="submitEdgeStory();" value="{#PLIKLI_Visual_Submit3_SubmitStory#}" class="btn btn-primary" />
 		</center>
-	{checkActionsTpl location="tpl_kliqqi_submit_step3_end"} 
+	{checkActionsTpl location="tpl_plikli_submit_step3_end"} 
 	</form>
 	{checkActionsTpl location="tpl_submit_step_3_end"}
 </div>

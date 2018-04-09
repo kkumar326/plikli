@@ -33,12 +33,12 @@ if($canIhaveAccess == 0){
 $main_smarty->assign('isAdmin', $canIhaveAccess);
 
 // breadcrumbs and page title
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 $navwhere['link1'] = getmyurl('admin', '');
-$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_4');
-$navwhere['link2'] = my_kliqqi_base . "/admin/admin_backup.php";
+$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_4');
+$navwhere['link2'] = my_plikli_base . "/admin/admin_backup.php";
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 
 // sidebar
 //$main_smarty = do_sidebar($main_smarty);
@@ -47,8 +47,8 @@ $main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_
 define('pagename', 'admin_backup'); 
 $main_smarty->assign('pagename', pagename);
 
-// read the mysql database to get the kliqqi version
-/* Redwine: kliqqi version query removed and added to /libs/smartyvriables.php */
+// read the mysql database to get the plikli version
+/* Redwine: plikli version query removed and added to /libs/smartyvriables.php */
 
 // show the template
 $main_smarty->assign('tpl_center', '/admin/backup');

@@ -25,18 +25,18 @@ global $the_template, $main_smarty;
 	
 	if(pagename == "index"){
 		$ss->filterToStatus = "new";
-		$ss->header = $main_smarty->get_config_vars("KLIQQI_Visual_Kliqqi_Queued");
+		$ss->header = $main_smarty->get_config_vars("PLIKLI_Visual_Plikli_Queued");
 		$ss->link = getmyurl("new");
 	}
 	elseif(pagename == "new"){
 		$ss->filterToStatus = "published";
-		$ss->header = $main_smarty->get_config_vars("KLIQQI_Visual_Published_News");
-		$ss->link = my_base_url.my_kliqqi_base;
+		$ss->header = $main_smarty->get_config_vars("PLIKLI_Visual_Published_News");
+		$ss->link = my_base_url.my_plikli_base;
 	}
 	else{
 		$ss->filterToStatus = "published";
-		$ss->header = $main_smarty->get_config_vars("KLIQQI_Visual_Published_News");
-		$ss->link = my_base_url.my_kliqqi_base;
+		$ss->header = $main_smarty->get_config_vars("PLIKLI_Visual_Published_News");
+		$ss->link = my_base_url.my_plikli_base;
 	}
 	
 	$ss->template = $my_base_url . './modules/sidebar_stories/templates/sidebar_stories.tpl';

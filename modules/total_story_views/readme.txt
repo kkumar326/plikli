@@ -22,7 +22,7 @@
 		// ****************** End callback ****************************************
 		
 - In \templates\bootstrap\link_summary.tpl, I added the tpl callback within the <span class="subtext"> right before <i class="fa fa-folder"></i> on line 114
-	{checkActionsTpl location="tpl_kliqqi_story_views_end"}
+	{checkActionsTpl location="tpl_plikli_story_views_end"}
 	
 
 

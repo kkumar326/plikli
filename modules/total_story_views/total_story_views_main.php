@@ -40,16 +40,16 @@ function total_story_views_showpage(){
 				
 			}
 			$db->query("REPLACE INTO `".table_prefix . "misc_data` (`name`,`data`) VALUES".$key_values);
-			header("Location: ".my_kliqqi_base."/module.php?module=total_story_views");
+			header("Location: ".my_plikli_base."/module.php?module=total_story_views");
 			die();
 		}
 		// breadcrumbs
-			$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+			$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 			$navwhere['link1'] = getmyurl('admin', '');
 			$navwhere['text2'] = "Modify Total Story Views";
-			$navwhere['link2'] = my_kliqqi_base . "/module.php?module=total_story_views";
+			$navwhere['link2'] = my_plikli_base . "/module.php?module=total_story_views";
 			$main_smarty->assign('navbar_where', $navwhere);
-			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 		// breadcrumbs
 		define('modulename', 'total_story_views'); 
 		$main_smarty->assign('modulename', modulename);

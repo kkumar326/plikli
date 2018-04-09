@@ -59,7 +59,7 @@ $select_check = $_POST['chack'];
 		$url = strtolower(end(explode('/', $geturl)));
 		$vowels = array($url);
 		$Get_URL = str_replace($vowels, "", $geturl); */
-if ($_SERVER['HTTP_REFERER'] && strpos($_SERVER['HTTP_REFERER'],$my_base_url.$my_kliqqi_base)===0)
+if ($_SERVER['HTTP_REFERER'] && strpos($_SERVER['HTTP_REFERER'],$my_base_url.$my_plikli_base)===0)
     $geturl = $_SERVER['HTTP_REFERER'];
 else
     $geturl = sanitize($_SERVER['HTTP_REFERER'],3);

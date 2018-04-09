@@ -1,6 +1,6 @@
 {config_load file=total_story_views_lang_conf}
 	<div class="headline">
-		<div class="sectiontitle">{#KLIQQI_Most_Viewed_Stories#}</div>
+		<div class="sectiontitle">{#PLIKLI_Most_Viewed_Stories#}</div>
 	</div>
 	<div class="boxcontent" >
 		<ul class="sidebar-stories" id="viewed_stories">
@@ -37,4 +37,4 @@
 			{checkActionsTpl location="tpl_widget_most_viewed_end"}
 		</ul>
 	</div>
-{config_load file=total_story_views_kliqqi_lang_conf}
+{config_load file=total_story_views_plikli_lang_conf}

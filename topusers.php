@@ -13,17 +13,17 @@ include(mnminclude.'smartyvariables.php');
 // -------------------------------------------------------------------------------------
 
 // breadcrumbs and page titles
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_TopUsers');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_TopUsers');
 $navwhere['link1'] = getmyurl('topusers', '');
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_TopUsers'));
+$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_TopUsers'));
 
 // figure out what "page" of the results we're on
 $page_size = $top_users_size;
 $offset=(get_current_page()-1)* $page_size;
 
 // put the table headers in an array for the top users tpl file
-$header_items = array($main_smarty->get_config_vars('KLIQQI_Visual_TopUsers_TH_User'), $main_smarty->get_config_vars('KLIQQI_Visual_TopUsers_TH_News'), $main_smarty->get_config_vars('KLIQQI_Visual_TopUsers_TH_PublishedNews'), $main_smarty->get_config_vars('KLIQQI_Visual_TopUsers_TH_Comments'), $main_smarty->get_config_vars('KLIQQI_Visual_TopUsers_TH_TotalVotes'), $main_smarty->get_config_vars('KLIQQI_Visual_TopUsers_TH_PublishedVotes'));
+$header_items = array($main_smarty->get_config_vars('PLIKLI_Visual_TopUsers_TH_User'), $main_smarty->get_config_vars('PLIKLI_Visual_TopUsers_TH_News'), $main_smarty->get_config_vars('PLIKLI_Visual_TopUsers_TH_PublishedNews'), $main_smarty->get_config_vars('PLIKLI_Visual_TopUsers_TH_Comments'), $main_smarty->get_config_vars('PLIKLI_Visual_TopUsers_TH_TotalVotes'), $main_smarty->get_config_vars('PLIKLI_Visual_TopUsers_TH_PublishedVotes'));
 
 // determine how to sort users
 // validate and make sure value is between 0 and 5	
@@ -136,5 +136,5 @@ if(Auto_scroll==2 || Auto_scroll==3){
 
 // show the template
 $main_smarty->assign('tpl_center', $the_template . '/topusers_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 ?>

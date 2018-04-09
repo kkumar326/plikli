@@ -12,4 +12,4 @@ include_once('config.php');
 	$db->query("INSERT INTO `". table_prefix . "story_views` (`view_link_id`) Values (".$link_id.")");
 
 {/php}
-{config_load file=total_story_views_kliqqi_lang_conf}
+{config_load file=total_story_views_plikli_lang_conf}

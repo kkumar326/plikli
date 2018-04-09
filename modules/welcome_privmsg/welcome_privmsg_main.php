@@ -9,7 +9,7 @@ function welcome_privmsg_send(&$registration_details)
 	include_once('config.php');
 	include_once(mnmmodules.'simple_messaging/kmessaging/class.KMessaging.php');
 
-	$siteName = $main_smarty->get_config_vars('KLIQQI_Visual_Name'); 
+	$siteName = $main_smarty->get_config_vars('PLIKLI_Visual_Name'); 
 	
 	// User ID of Admin
 	define('welcome_privmsg_admin_id', '1');

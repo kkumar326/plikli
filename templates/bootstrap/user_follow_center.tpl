@@ -9,69 +9,69 @@
 {if $user_view eq 'removefriend'}
 	<div class="alert alert-warning">
 		<button class="close" data-dismiss="alert">&times;</button>
-		{#KLIQQI_Visual_User_Profile_Friend_Removed#}
+		{#PLIKLI_Visual_User_Profile_Friend_Removed#}
 	</div>
 {/if}
 {***********************************************************************************}
 {if $user_view eq 'addfriend'}
 	<div class="alert alert-success">
 		<button class="close" data-dismiss="alert">&times;</button>
-		{#KLIQQI_Visual_User_Profile_Friend_Added#}
+		{#PLIKLI_Visual_User_Profile_Friend_Added#}
 	</div>
 {/if}
 {***********************************************************************************}
 {if $user_view eq 'removefriend' || $user_view eq 'addfriend'}
 	<div id="profile_container" style="position: relative;">
 		<div class="row">
-			{checkActionsTpl location="tpl_kliqqi_profile_info_start"}
-			{checkActionsTpl location="tpl_kliqqi_profile_info_middle"}
+			{checkActionsTpl location="tpl_plikli_profile_info_start"}
+			{checkActionsTpl location="tpl_plikli_profile_info_middle"}
 			<div id="stats" class="col-md-6">
 				<table class="table table-bordered table-striped vertical-align">
 					<thead class="table_title">
 						<tr>
-							<th colspan="2">{#KLIQQI_Visual_User_Profile_User_Stats#}</th>
+							<th colspan="2">{#PLIKLI_Visual_User_Profile_User_Stats#}</th>
 						</tr>
 					</thead>
 					<tbody>
 						{if $user_karma > "0.00"}
 							<tr>
-								<td><strong>{#KLIQQI_Visual_Rank#}:</strong></td>
+								<td><strong>{#PLIKLI_Visual_Rank#}:</strong></td>
 								<td>{$user_rank}</td>
 							</tr>
 							<tr>
-								<td><strong>{#KLIQQI_Visual_User_Profile_KarmaPoints#}:</strong></td>
+								<td><strong>{#PLIKLI_Visual_User_Profile_KarmaPoints#}:</strong></td>
 								<td>{$user_karma|number_format:"0"}</td>
 							</tr>
 						{/if}
 						<tr>
-							<td><strong>{#KLIQQI_Visual_User_Profile_Joined#}:</strong></td>
+							<td><strong>{#PLIKLI_Visual_User_Profile_Joined#}:</strong></td>
 							<td width="120px">
 								{*	{$user_joined}	*}
 								{php}
-									$kliqqi_date = $this->_vars['user_joined'];
-									echo date("F d, Y", strtotime($kliqqi_date));
+									$plikli_date = $this->_vars['user_joined'];
+									echo date("F d, Y", strtotime($plikli_date));
 								{/php}
 							</td>	
 						</tr>
 						<tr>
-							<td><strong>{#KLIQQI_Visual_User_Profile_Total_Links#}:</strong></td>
+							<td><strong>{#PLIKLI_Visual_User_Profile_Total_Links#}:</strong></td>
 							<td>{$user_total_links}</td>
 						</tr>
 						<tr>
-							<td><strong>{#KLIQQI_Visual_User_Profile_Published_Links#}:</strong></td>
+							<td><strong>{#PLIKLI_Visual_User_Profile_Published_Links#}:</strong></td>
 							<td>{$user_published_links}</td>
 						</tr>
 						<tr>
-							<td><strong>{#KLIQQI_Visual_User_Profile_Total_Comments#}:</strong></td>
+							<td><strong>{#PLIKLI_Visual_User_Profile_Total_Comments#}:</strong></td>
 							<td>{$user_total_comments}</td>
 						</tr>
 						<tr>
-							<td><strong>{#KLIQQI_Visual_User_Profile_Total_Votes#}:</strong></td>
+							<td><strong>{#PLIKLI_Visual_User_Profile_Total_Votes#}:</strong></td>
 							<td>{$user_total_votes}</td>
 						</tr>
 						{*
 						<tr>
-							<td><strong>{#KLIQQI_Visual_User_Profile_Published_Votes#}:</strong></td>
+							<td><strong>{#PLIKLI_Visual_User_Profile_Published_Votes#}:</strong></td>
 							<td>{$user_published_votes}</td>
 						</tr>
 						*}
@@ -90,7 +90,7 @@
 							{if empty($group_display)}
 								<tr>
 									<td colspan="2">
-										{#Kliqqi_Profile_No_Membership#}
+										{#Plikli_Profile_No_Membership#}
 									</td>
 								</tr>
 							{else}
@@ -105,9 +105,9 @@
 					<table class="table table-bordered table-striped vertical-align">
 						<thead class="table_title">
 							<tr>
-								<th>{#KLIQQI_Visual_Login_Username#}</th>
-								{checkActionsTpl location="tpl_kliqqi_profile_friend_th"}
-								{if $user_authenticated eq true}<th>{#KLIQQI_Visual_User_Profile_Add_Friend#} / {#KLIQQI_Visual_User_Profile_Remove_Friend#}</th>{/if}
+								<th>{#PLIKLI_Visual_Login_Username#}</th>
+								{checkActionsTpl location="tpl_plikli_profile_friend_th"}
+								{if $user_authenticated eq true}<th>{#PLIKLI_Visual_User_Profile_Add_Friend#} / {#PLIKLI_Visual_User_Profile_Remove_Friend#}</th>{/if}
 							</tr>
 						</thead>
 						<tbody>
@@ -128,21 +128,21 @@
 										</td>
 										{if $user_login eq $user_logged_in}
 											<td>
-												<a href="{$my_kliqqi_base}/module.php?module=simple_messaging&view=compose&return={$templatelite.server.REQUEST_URI|urlencode}&to={$myfriend.user_login}">
+												<a href="{$my_plikli_base}/module.php?module=simple_messaging&view=compose&return={$templatelite.server.REQUEST_URI|urlencode}&to={$myfriend.user_login}">
 													<span class="btn btn-default"><i class="fa fa-envelope"></i></span>
 												</a>
 											</td>
 										{else}
 											<td>&nbsp;</td>
 										{/if}
-										{checkActionsTpl location="tpl_kliqqi_profile_friend_td"}
+										{checkActionsTpl location="tpl_plikli_profile_friend_td"}
 										{if $user_authenticated eq true && $myfriend.following>0}
 											<td>
-												<a href="{$user_url_remove}" class="btn btn-danger">{#KLIQQI_Visual_User_Profile_Remove_Friend#}</a>
+												<a href="{$user_url_remove}" class="btn btn-danger">{#PLIKLI_Visual_User_Profile_Remove_Friend#}</a>
 											</td>
 										{else}
 											<td>
-												<a href="{$user_url_add}" class="btn btn-success">{#KLIQQI_Visual_User_Profile_Add_Friend#}</a>
+												<a href="{$user_url_add}" class="btn btn-success">{#PLIKLI_Visual_User_Profile_Add_Friend#}</a>
 											</td>
 										{/if}
 									</tr>
@@ -150,7 +150,7 @@
 							{else}
 								<tr>
 									<td colspan="3">
-										{$user_username|capitalize} {#KLIQQI_Visual_User_Profile_No_Friends#}
+										{$user_username|capitalize} {#PLIKLI_Visual_User_Profile_No_Friends#}
 									</td>
 								</tr>
 							{/if}
@@ -158,20 +158,20 @@
 					</table>
 				</div>
 			{/if}
-			{checkActionsTpl location="tpl_kliqqi_profile_info_end"}
+			{checkActionsTpl location="tpl_plikli_profile_info_end"}
 			<div style="clear:both;"> </div>
-			{checkActionsTpl location="tpl_kliqqi_profile_tab_insert"}
+			{checkActionsTpl location="tpl_plikli_profile_tab_insert"}
 		</div>
 	</div>
 {/if}
 {***********************************************************************************}
 {if $user_view eq 'following'}
-	<legend>{#KLIQQI_Visual_User_Profile_People#} {$user_username|capitalize} {#KLIQQI_Visual_User_Profile_Is_Following#}</legend>
+	<legend>{#PLIKLI_Visual_User_Profile_People#} {$user_username|capitalize} {#PLIKLI_Visual_User_Profile_Is_Following#}</legend>
 	{if $following}
 	  	<table class="table table-bordered table-condensed table-striped vertical-align">
 			<thead>
-				<th>{#KLIQQI_Visual_User_Profile_Username#}</th>
-				{if $user_authenticated eq true}<th>{#KLIQQI_Visual_User_Profile_Add_Friend#} / {#KLIQQI_Visual_User_Profile_Remove_Friend#}</th>{/if}
+				<th>{#PLIKLI_Visual_User_Profile_Username#}</th>
+				{if $user_authenticated eq true}<th>{#PLIKLI_Visual_User_Profile_Add_Friend#} / {#PLIKLI_Visual_User_Profile_Remove_Friend#}</th>{/if}
 			</thead>
 			<tbody>
 				{foreach from=$following item=myfriend}
@@ -187,13 +187,13 @@
 						</td>
 						{if $user_authenticated eq true && $myfriend.following>0}
 							<td>
-								<a href="{$user_url_remove}" class="btn btn-danger">{#KLIQQI_Visual_User_Profile_Remove_Friend#}</a>
+								<a href="{$user_url_remove}" class="btn btn-danger">{#PLIKLI_Visual_User_Profile_Remove_Friend#}</a>
 							</td>
 						{elseif $user_authenticated neq true}
 						
 						{else}
 							<td>
-								<a href="{$user_url_add}" class="btn btn-success">{#KLIQQI_Visual_User_Profile_Add_Friend#}</a>
+								<a href="{$user_url_add}" class="btn btn-success">{#PLIKLI_Visual_User_Profile_Add_Friend#}</a>
 							</td>
 						{/if}
 					</tr>
@@ -202,22 +202,22 @@
 		</table>
 	{else}
 		<br /><br />
-		<h3 style="text-align:center;">{$user_username|capitalize} {#KLIQQI_Visual_User_Profile_No_Friends#}</h3>
+		<h3 style="text-align:center;">{$user_username|capitalize} {#PLIKLI_Visual_User_Profile_No_Friends#}</h3>
 	{/if}
 {/if}
 {***********************************************************************************}
 {if $user_view eq 'followers'}
-	<legend>{#KLIQQI_Visual_User_Profile_Viewing_Friends_2a#} {$user_username|capitalize}</legend>
+	<legend>{#PLIKLI_Visual_User_Profile_Viewing_Friends_2a#} {$user_username|capitalize}</legend>
 	{if $follower}
 	  	<table class="table table-bordered table-condensed table-striped vertical-align">
 			<thead>
 				<tr>
-					<th>{#KLIQQI_Visual_User_Profile_Username#}</th>
+					<th>{#PLIKLI_Visual_User_Profile_Username#}</th>
 					{if check_for_enabled_module('simple_messaging',2.0)}
-						<th>{#KLIQQI_Visual_User_Profile_Message#}</th>
+						<th>{#PLIKLI_Visual_User_Profile_Message#}</th>
 					{/if}
 					{if $user_authenticated eq true}
-						<th>{#KLIQQI_Visual_User_Profile_Add_Friend#} / {#KLIQQI_Visual_User_Profile_Remove_Friend#}</th>
+						<th>{#PLIKLI_Visual_User_Profile_Add_Friend#} / {#PLIKLI_Visual_User_Profile_Remove_Friend#}</th>
 					{/if}
 				</tr>
 			</thead>
@@ -232,15 +232,15 @@
 					<tr>
 						<td><img src="{$friend_avatar}" align="absmiddle" /> <a href="{$profileURL}">{$myfriend.user_login}</a></td>
 						{if check_for_enabled_module('simple_messaging',2.0) && !empty($myfriend.is_friend)}
-							<td><a href="{$my_kliqqi_base}/module.php?module=simple_messaging&view=compose&to={$myfriend.user_login}&return={$templatelite.server.REQUEST_URI|urlencode}"><span class="btn btn-sm btn-default"><i class="fa fa-envelope"></i></span></a></td>
+							<td><a href="{$my_plikli_base}/module.php?module=simple_messaging&view=compose&to={$myfriend.user_login}&return={$templatelite.server.REQUEST_URI|urlencode}"><span class="btn btn-sm btn-default"><i class="fa fa-envelope"></i></span></a></td>
 						{else}
 							<td></td>
 						{/if}
 						{if $user_authenticated eq true}
 							{if !empty($myfriend.is_friend) && $myfriend.is_friend>0}
-								<td><a class="btn btn-sm btn-danger" href="{$user_url_remove}">{#KLIQQI_Visual_User_Profile_Remove_Friend#}</a></td>
+								<td><a class="btn btn-sm btn-danger" href="{$user_url_remove}">{#PLIKLI_Visual_User_Profile_Remove_Friend#}</a></td>
 							{else}
-								<td><a class="btn btn-sm btn-success" href="{$addURL}">{#KLIQQI_Visual_User_Profile_Add_Friend#}</a></td>
+								<td><a class="btn btn-sm btn-success" href="{$addURL}">{#PLIKLI_Visual_User_Profile_Add_Friend#}</a></td>
 							{/if}
 						{/if}
 					</tr>
@@ -248,7 +248,7 @@
 			</tbody>
 		</table>
 	{else}
-		<h4>{#KLIQQI_Visual_User_Profile_No_Friends_2#} {$user_username|capitalize}</h4>
+		<h4>{#PLIKLI_Visual_User_Profile_No_Friends_2#} {$user_username|capitalize}</h4>
 	{/if}
 {/if}
 
@@ -259,10 +259,10 @@
 {/if}
 
 {if isset($user_pagination)}
-	{checkActionsTpl location="tpl_kliqqi_pagination_start"}
+	{checkActionsTpl location="tpl_plikli_pagination_start"}
 	{$user_pagination}
-	{checkActionsTpl location="tpl_kliqqi_pagination_end"}
+	{checkActionsTpl location="tpl_plikli_pagination_end"}
 {/if}
 
-{checkActionsTpl location="tpl_kliqqi_profile_end"}
+{checkActionsTpl location="tpl_plikli_profile_end"}
 <!--/user_follow_center.tpl -->

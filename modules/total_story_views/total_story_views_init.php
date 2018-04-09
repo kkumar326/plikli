@@ -1,7 +1,7 @@
 <?php
 	include_once('total_story_views_settings.php');
 
-	// tell kliqqi what pages this modules should be included in
+	// tell plikli what pages this modules should be included in
 	// pages are <script name> minus .php
 	// index.php becomes 'index' and new.php becomes 'new'
 	$do_not_include_in_pages = array();
@@ -36,7 +36,7 @@
 	if( do_we_load_module() ) {		
 		include_once(mnmmodules . 'total_story_views/total_story_views_main.php');
 		//To add 1 view every time the story page is loaded
-		module_add_action_tpl('tpl_kliqqi_story_tab_end', total_story_views_tpl_path . 'total_story_views_add_views.tpl');
+		module_add_action_tpl('tpl_plikli_story_tab_end', total_story_views_tpl_path . 'total_story_views_add_views.tpl');
 		
 		// show the total views of the story under its title 
 		module_add_action_tpl($settings['place'], total_story_views_tpl_path . 'total_story_views_in_summary.tpl');

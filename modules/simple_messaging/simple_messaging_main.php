@@ -91,7 +91,7 @@ function simple_messaging_showpage(){
 							}
 						}
 						
-						header("Location: ".my_kliqqi_base."/module.php?module=simple_messaging&view=inbox");
+						header("Location: ".my_plikli_base."/module.php?module=simple_messaging&view=inbox");
 						die();
 					}
 				}
@@ -108,7 +108,7 @@ function simple_messaging_showpage(){
 		$main_smarty->assign('modulepage', modulepage);
 	
 		$main_smarty->assign('tpl_center', simple_messaging_tpl_path . 'inbox');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 
 	}
 	
@@ -152,7 +152,7 @@ function simple_messaging_showpage(){
 							}
 						}
 						
-						header("Location: ".my_kliqqi_base."/module.php?module=simple_messaging&view=sent");
+						header("Location: ".my_plikli_base."/module.php?module=simple_messaging&view=sent");
 						die();
 					}
 				}
@@ -168,7 +168,7 @@ function simple_messaging_showpage(){
 		$main_smarty->assign('modulepage', modulepage);
 	
 		$main_smarty->assign('tpl_center', simple_messaging_tpl_path . 'sent');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 
 	}
 
@@ -176,7 +176,7 @@ function simple_messaging_showpage(){
 	if($view == 'compose'){
 		/* Redwine: ChuckRoast caught this exploit and we applied a fix to force athentication and prevent users from altering the URL to message other users who don't follow them. */
 		if(!$current_user->authenticated) {
-			header('Location:  '.my_base_url.my_kliqqi_base);
+			header('Location:  '.my_base_url.my_plikli_base);
 			die;
 		}
 		require_once(mnminclude.'user.php');
@@ -185,7 +185,7 @@ function simple_messaging_showpage(){
 		$receiver_id = $db->get_var("select user_id from ". table_users. " where user_login = '$receiver_name'");
 		$user_receiver->id = $receiver_id;
 		if(!$user_receiver->read()) {
-			 header('Location:  '.$my_base_url.$my_kliqqi_base);
+			 header('Location:  '.$my_base_url.$my_plikli_base);
 			die;
 		}
 		$user_receiver_id = $user_receiver->id;
@@ -193,7 +193,7 @@ function simple_messaging_showpage(){
 		$friend = new Friend();
 		$friendship = $friend->get_friend_status($user_receiver_id);
 		if ($friendship != "mutual") {
-			header('Location:  '.my_base_url.my_kliqqi_base);
+			header('Location:  '.my_base_url.my_plikli_base);
 			die;
 		}
 		define('modulename_sm', 'simple_messaging_compose');
@@ -217,7 +217,7 @@ function simple_messaging_showpage(){
 		$main_smarty->assign('modulepage', modulepage);
 	
 		$main_smarty->assign('tpl_center', simple_messaging_tpl_path . 'compose');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 
 	}
 	
@@ -244,7 +244,7 @@ function simple_messaging_showpage(){
 		if(!$user_to->read()) {
 			$main_smarty->assign('message', 'The person you are trying to send a message to does not exist!');
 			$main_smarty->assign('tpl_center', simple_messaging_tpl_path . 'error');
-			$main_smarty->display($the_template . '/kliqqi.tpl');
+			$main_smarty->display($the_template . '/plikli.tpl');
 			die;
 		}
 		$msg_to_ID = $user_to->id;
@@ -254,13 +254,13 @@ function simple_messaging_showpage(){
 		$msg_result = $message->SendMessage($msg_subject,$msg_body,$msg_from_ID,$msg_to_ID,0);
 		if ($msg_result != 0){
 			$main_smarty->config_load(simple_messaging_lang_conf);
-			//print 'KLIQQI_MESSAGING_Error_'.$msg_result;
-			//print $main_smarty->get_config_vars('KLIQQI_MESSAGING_Error_'.$msg_result);
+			//print 'PLIKLI_MESSAGING_Error_'.$msg_result;
+			//print $main_smarty->get_config_vars('PLIKLI_MESSAGING_Error_'.$msg_result);
 
-			$main_smarty->assign('message', $main_smarty->get_config_vars('KLIQQI_MESSAGING_Error_'.$msg_result));
-			$main_smarty->config_load(simple_messaging_kliqqi_lang_conf);
+			$main_smarty->assign('message', $main_smarty->get_config_vars('PLIKLI_MESSAGING_Error_'.$msg_result));
+			$main_smarty->config_load(simple_messaging_plikli_lang_conf);
 			$main_smarty->assign('tpl_center', simple_messaging_tpl_path . 'error');
-			$main_smarty->display($the_template . '/kliqqi.tpl');
+			$main_smarty->display($the_template . '/plikli.tpl');
 			die;
 		} else {
 			/* Redwine: changed the $email_headers = "From: " . Send_From_Email . "\r\nReply-To: " . Send_From_Email . "\r\n";
@@ -269,9 +269,9 @@ function simple_messaging_showpage(){
 			// The message has been put in the database successfully, so let's alert the recipient by email:
 			$email_to =  $db->get_var("SELECT user_email FROM `" . table_users . "` WHERE `user_id` = '$user_to->id';");
 			$email_from =  $db->get_var("SELECT user_login FROM `" . table_users . "` WHERE `user_id` = '$current_user->user_id';");
-			$email_subject = "You've got a message in your " . $main_smarty->get_config_vars("KLIQQI_Visual_Name") . " inbox";
-			$email_message = "Hi " . $user_to->username . ",\r\n\r\nYou've been sent a private message from " . $email_from . ". \r\n\r\nTo see the message, go to your " . $main_smarty->get_config_vars("KLIQQI_Visual_Name") . " inbox here: " .  my_base_url . URL_simple_messaging_inbox . "\r\n\r\nThank you, \r\n" . $main_smarty->get_config_vars("KLIQQI_Visual_Name") . " Admin";
-			$email_headers = "From: " . $main_smarty->get_config_vars("KLIQQI_PassEmail_From") . "\r\nReply-To: " . $main_smarty->get_config_vars("KLIQQI_PassEmail_From") . "\r\n";
+			$email_subject = "You've got a message in your " . $main_smarty->get_config_vars("PLIKLI_Visual_Name") . " inbox";
+			$email_message = "Hi " . $user_to->username . ",\r\n\r\nYou've been sent a private message from " . $email_from . ". \r\n\r\nTo see the message, go to your " . $main_smarty->get_config_vars("PLIKLI_Visual_Name") . " inbox here: " .  my_base_url . URL_simple_messaging_inbox . "\r\n\r\nThank you, \r\n" . $main_smarty->get_config_vars("PLIKLI_Visual_Name") . " Admin";
+			$email_headers = "From: " . $main_smarty->get_config_vars("PLIKLI_PassEmail_From") . "\r\nReply-To: " . $main_smarty->get_config_vars("PLIKLI_PassEmail_From") . "\r\n";
                         @mail($email_to, $email_subject, $email_message, $email_headers);
 			
 			// show 'message sent', click to continue or wait 5..4..3..2..1.. then redirect
@@ -303,7 +303,7 @@ function simple_messaging_showpage(){
 		$main_smarty->assign('modulepage', modulepage);
 	
 		$main_smarty->assign('tpl_center', simple_messaging_tpl_path . 'show_message');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 
 	}
 	
@@ -325,7 +325,7 @@ function simple_messaging_showpage(){
 		$main_smarty->assign('modulepage', modulepage);
 	
 		$main_smarty->assign('tpl_center', simple_messaging_tpl_path . 'show_sent_message');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 
 	}
 
@@ -367,7 +367,7 @@ function simple_messaging_showpage(){
 		$main_smarty->assign('modulepage', modulepage);
 	
 		$main_smarty->assign('tpl_center', simple_messaging_tpl_path . 'compose');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 
 	}
 

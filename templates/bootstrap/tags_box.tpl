@@ -19,7 +19,7 @@
 	{/php}
 
 	<div class="headline">
-		<div class="sectiontitle"><a href="{$URL_tagcloud}">{#KLIQQI_Visual_Top_5_Tags#}  {if $category_name neq ""} in {$category_name} {/if}</a></div>
+		<div class="sectiontitle"><a href="{$URL_tagcloud}">{#PLIKLI_Visual_Top_5_Tags#}  {if $category_name neq ""} in {$category_name} {/if}</a></div>
 	</div>
 	<div class="boxcontent tagformat">
 		{section name=customer loop=$tag_number}

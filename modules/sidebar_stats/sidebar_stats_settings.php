@@ -1,7 +1,7 @@
 <?php
 
 // the path to the module. the probably shouldn't be changed unless you rename the sidebar_stats folder(s)
-define('sidebar_stats_path', my_kliqqi_base . '/modules/sidebar_stats/');
+define('sidebar_stats_path', my_plikli_base . '/modules/sidebar_stats/');
 // the path to the modules templates. the probably shouldn't be changed unless you rename the sidebar_stats folder(s)
 define('sidebar_stats_tpl_path', '../modules/sidebar_stats/templates/');
 // the path for smarty / template lite plugins
@@ -13,7 +13,7 @@ define('sidebar_stats_plugins_path', 'modules/sidebar_stats/plugins');
 			$path = substr($_SERVER["SCRIPT_NAME"], 0, $pos);
 			if ($path == "/"){$path = "";}
 			
-			if($path != my_kliqqi_base){
+			if($path != my_plikli_base){
 				define('lang_loc', '..');
 			} else {
 				define('lang_loc', '.');
@@ -21,7 +21,7 @@ define('sidebar_stats_plugins_path', 'modules/sidebar_stats/plugins');
 	}
 
 define('sidebar_stats_lang_conf', lang_loc . '/modules/sidebar_stats/lang.conf');
-define('sidebar_stats_kliqqi_lang_conf', lang_loc . "/languages/lang_" . kliqqi_language . ".conf");
+define('sidebar_stats_plikli_lang_conf', lang_loc . "/languages/lang_" . plikli_language . ".conf");
 
 // don't touch anything past this line.
 
@@ -68,7 +68,7 @@ if(is_object($main_smarty)){
 
 	$main_smarty->assign('sidebar_stats_path', sidebar_stats_path);
 	$main_smarty->assign('sidebar_stats_tpl_path', sidebar_stats_tpl_path);
-	$main_smarty->assign('sidebar_stats_kliqqi_lang_conf', sidebar_stats_kliqqi_lang_conf);
+	$main_smarty->assign('sidebar_stats_plikli_lang_conf', sidebar_stats_plikli_lang_conf);
 	$main_smarty->assign('sidebar_stats_lang_conf', sidebar_stats_lang_conf);
 }
 

@@ -8,10 +8,10 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="input-group">
-			<form action="{$my_kliqqi_base}/user.php" method="get" {php} global $URLMethod, $my_base_url, $my_kliqqi_base; if ($URLMethod==2) print "onsubmit='document.location.href=\"{$my_base_url}{$my_kliqqi_base}/user/search/\"+encodeURIComponent(this.keyword.value); return false;'";{/php}>
+			<form action="{$my_plikli_base}/user.php" method="get" {php} global $URLMethod, $my_base_url, $my_plikli_base; if ($URLMethod==2) print "onsubmit='document.location.href=\"{$my_base_url}{$my_plikli_base}/user/search/\"+encodeURIComponent(this.keyword.value); return false;'";{/php}>
 				<span class="input-group-btn">
 					<input type="hidden" name="view" value="search">
-					<input type="text" name="keyword" class="form-control" placeholder="{#KLIQQI_Visual_User_Search_Users#}">
+					<input type="text" name="keyword" class="form-control" placeholder="{#PLIKLI_Visual_User_Search_Users#}">
 					<button class="btn btn-primary" type="button">Search Accounts</button>
 				</span>
 			</form>	
@@ -24,13 +24,13 @@
 {***********************************************************************************}
 {if $user_view eq 'search'}
 	{if $userlist}
-		<h4>{#KLIQQI_Visual_Search_SearchResults#} &quot;{$search}&quot;</h4>
+		<h4>{#PLIKLI_Visual_Search_SearchResults#} &quot;{$search}&quot;</h4>
 		<table class="table table-bordered table-striped">
 			<thead class="table_title">
 				<tr>
-					<th>{#KLIQQI_Visual_Login_Username#}</th>
-					<th>{#KLIQQI_Visual_User_Profile_Joined#}</th>
-					<th>{#KLIQQI_User_Profile_Social#}</th>
+					<th>{#PLIKLI_Visual_Login_Username#}</th>
+					<th>{#PLIKLI_Visual_User_Profile_Joined#}</th>
+					<th>{#PLIKLI_User_Profile_Social#}</th>
 					{if $Allow_Friends}<th>Add/Remove</th>{/if}
 				</tr>
 			</thead>
@@ -43,8 +43,8 @@
 						<td>
 							{* {$userlist[nr].user_date} *}
 							{php}
-								$kliqqi_date = $this->_vars['userlist'][$this->_sections['nr']['index']]['user_date'];
-								echo date("F d, Y", strtotime($kliqqi_date));
+								$plikli_date = $this->_vars['userlist'][$this->_sections['nr']['index']]['user_date'];
+								echo date("F d, Y", strtotime($plikli_date));
 							{/php}
 						</td>
 						<td>
@@ -72,9 +72,9 @@
 						{if $user_login neq $user_logged_in && $user_authenticated eq true}
 							{if $Allow_Friends}
 								<td style="text-align:center;">{if $userlist[nr].status eq '' || $userlist[nr].status eq 'follower'}	
-										<a href="{$userlist[nr].add_friend}" class="btn btn-success">{#KLIQQI_Follow#}</a>
+										<a href="{$userlist[nr].add_friend}" class="btn btn-success">{#PLIKLI_Follow#}</a>
 									{elseif $userlist[nr].status eq 'following' || $userlist[nr].status eq 'mutual'}
-										<a href="{$userlist[nr].remove_friend}" class="btn btn-danger">{#KLIQQI_Unfollow#}</a>
+										<a href="{$userlist[nr].remove_friend}" class="btn btn-danger">{#PLIKLI_Unfollow#}</a>
 									{/if}
 								</td>
 							{/if}
@@ -86,7 +86,7 @@
 			</tbody>
 		</table>
 	{else}
-		<h3>{#KLIQQI_Visual_Search_NoResults#} '{$search}'</h3>
+		<h3>{#PLIKLI_Visual_Search_NoResults#} '{$search}'</h3>
 	{/if}
 {/if}
 
@@ -97,10 +97,10 @@
 {/if}
 
 {if isset($user_pagination)}
-	{checkActionsTpl location="tpl_kliqqi_pagination_start"}
+	{checkActionsTpl location="tpl_plikli_pagination_start"}
 	{$user_pagination}
-	{checkActionsTpl location="tpl_kliqqi_pagination_end"}
+	{checkActionsTpl location="tpl_plikli_pagination_end"}
 {/if}
-{checkActionsTpl location="tpl_kliqqi_profile_end"}
+{checkActionsTpl location="tpl_plikli_profile_end"}
 
 <!--/user_search_center.tpl -->

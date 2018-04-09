@@ -2,78 +2,78 @@
 {if preg_match('/index.php$/',$templatelite.server.SCRIPT_NAME)}
 	{if !empty($get.category)}
 		{if !empty($get.page) && $get.page > 1}
-			<title>{$navbar_where.text2} | {#KLIQQI_Page_Title#} {$get.page} | {#KLIQQI_Visual_Breadcrumb_Published_Tab#} | {#KLIQQI_Visual_Name#}</title>
+			<title>{$navbar_where.text2} | {#PLIKLI_Page_Title#} {$get.page} | {#PLIKLI_Visual_Breadcrumb_Published_Tab#} | {#PLIKLI_Visual_Name#}</title>
 		{else}
-			<title>{$navbar_where.text2} | {#KLIQQI_Visual_Breadcrumb_Published_Tab#} | {#KLIQQI_Visual_Name#}</title>
+			<title>{$navbar_where.text2} | {#PLIKLI_Visual_Breadcrumb_Published_Tab#} | {#PLIKLI_Visual_Name#}</title>
 		{/if}
 	{elseif !empty($get.page) && $get.page > 1}
-		<title>{#KLIQQI_Visual_Breadcrumb_Published_Tab#} | {#KLIQQI_Page_Title#} {$get.page} | {#KLIQQI_Visual_Name#}</title>
+		<title>{#PLIKLI_Visual_Breadcrumb_Published_Tab#} | {#PLIKLI_Page_Title#} {$get.page} | {#PLIKLI_Visual_Name#}</title>
 	{else}
-		<title>{#KLIQQI_Visual_Name#} - {#KLIQQI_Visual_RSS_Description#}</title>
+		<title>{#PLIKLI_Visual_Name#} - {#PLIKLI_Visual_RSS_Description#}</title>
 	{/if}
 {elseif preg_match('/new.php$/',$templatelite.server.SCRIPT_NAME)}
 	{if !empty($get.category)}
 		{if !empty($get.page) && $get.page > 1}
-			<title>{$navbar_where.text2} | {#KLIQQI_Page_Title#} {$get.page} | {#KLIQQI_Visual_Breadcrumb_Unpublished_Tab#} | {#KLIQQI_Visual_Name#}</title>
+			<title>{$navbar_where.text2} | {#PLIKLI_Page_Title#} {$get.page} | {#PLIKLI_Visual_Breadcrumb_Unpublished_Tab#} | {#PLIKLI_Visual_Name#}</title>
 		{else}
-			<title>{$navbar_where.text2} | {#KLIQQI_Visual_Breadcrumb_Unpublished_Tab#} | {#KLIQQI_Visual_Name#}</title>
+			<title>{$navbar_where.text2} | {#PLIKLI_Visual_Breadcrumb_Unpublished_Tab#} | {#PLIKLI_Visual_Name#}</title>
 		{/if}
 	{elseif !empty($get.page) && $get.page > 1}
-		<title>{#KLIQQI_Visual_Breadcrumb_Unpublished_Tab#} | {#KLIQQI_Page_Title#} {$get.page} | {#KLIQQI_Visual_Name#}</title>
+		<title>{#PLIKLI_Visual_Breadcrumb_Unpublished_Tab#} | {#PLIKLI_Page_Title#} {$get.page} | {#PLIKLI_Visual_Name#}</title>
 	{else}
-		<title>{#KLIQQI_Visual_Breadcrumb_Unpublished_Tab#} | {#KLIQQI_Visual_Name#}</title>
+		<title>{#PLIKLI_Visual_Breadcrumb_Unpublished_Tab#} | {#PLIKLI_Visual_Name#}</title>
 	{/if}
 {elseif preg_match('/submit.php$/',$templatelite.server.SCRIPT_NAME)}
-	<title>{#KLIQQI_Visual_Submit#} | {#KLIQQI_Visual_Name#}</title>
+	<title>{#PLIKLI_Visual_Submit#} | {#PLIKLI_Visual_Name#}</title>
 {elseif preg_match('/live.php$/',$templatelite.server.SCRIPT_NAME)}
-	<title>{#KLIQQI_Visual_Live#} | {#KLIQQI_Visual_Name#}</title>
+	<title>{#PLIKLI_Visual_Live#} | {#PLIKLI_Visual_Name#}</title>
 {elseif preg_match('/live_unpublished.php$/',$templatelite.server.SCRIPT_NAME)}
-	<title>{#KLIQQI_Visual_Live#} {#KLIQQI_Visual_Breadcrumb_Unpublished#} | {#KLIQQI_Visual_Name#}</title>
+	<title>{#PLIKLI_Visual_Live#} {#PLIKLI_Visual_Breadcrumb_Unpublished#} | {#PLIKLI_Visual_Name#}</title>
 {elseif preg_match('/live_published.php$/',$templatelite.server.SCRIPT_NAME)}
-	<title>{#KLIQQI_Visual_Live#} {#KLIQQI_Visual_Breadcrumb_Published#} | {#KLIQQI_Visual_Name#}</title>
+	<title>{#PLIKLI_Visual_Live#} {#PLIKLI_Visual_Breadcrumb_Published#} | {#PLIKLI_Visual_Name#}</title>
 {elseif preg_match('/live_comments.php$/',$templatelite.server.SCRIPT_NAME)}
-	<title>{#KLIQQI_Visual_Live#} {#KLIQQI_Visual_Comments#} | {#KLIQQI_Visual_Name#}</title>
+	<title>{#PLIKLI_Visual_Live#} {#PLIKLI_Visual_Comments#} | {#PLIKLI_Visual_Name#}</title>
 {elseif preg_match('/editlink.php$/',$templatelite.server.SCRIPT_NAME)}	
-	<title>{#KLIQQI_Visual_EditStory_Header#}: {$submit_title} | {#KLIQQI_Visual_Name#}</title>
+	<title>{#PLIKLI_Visual_EditStory_Header#}: {$submit_title} | {#PLIKLI_Visual_Name#}</title>
 {elseif preg_match('/advancedsearch.php$/',$templatelite.server.SCRIPT_NAME)}
-	<title>{#KLIQQI_Visual_Search_Advanced#} | {#KLIQQI_Visual_Name#}</title>
+	<title>{#PLIKLI_Visual_Search_Advanced#} | {#PLIKLI_Visual_Name#}</title>
 {elseif preg_match('/rssfeeds.php$/',$templatelite.server.SCRIPT_NAME)}
-	<title>{#KLIQQI_Visual_RSS_Feeds#} | {#KLIQQI_Visual_Name#}</title>
+	<title>{#PLIKLI_Visual_RSS_Feeds#} | {#PLIKLI_Visual_Name#}</title>
 {elseif preg_match('/search.php$/',$templatelite.server.SCRIPT_NAME)}
-	<title>{#KLIQQI_Visual_Search_SearchResults#} &quot;{if $get.search}{$get.search}{else}{$get.date}{/if}&quot; | {#KLIQQI_Visual_Name#}</title>
+	<title>{#PLIKLI_Visual_Search_SearchResults#} &quot;{if $get.search}{$get.search}{else}{$get.date}{/if}&quot; | {#PLIKLI_Visual_Name#}</title>
 {elseif preg_match('/groups.php$/',$templatelite.server.SCRIPT_NAME)}
 	{if !empty($get.page) && $get.page > 1}
-		<title>{#KLIQQI_Visual_Groups#} | {#KLIQQI_Page_Title#} {$get.page} | {#KLIQQI_Visual_Name#}</title>
+		<title>{#PLIKLI_Visual_Groups#} | {#PLIKLI_Page_Title#} {$get.page} | {#PLIKLI_Visual_Name#}</title>
 	{else}
-		<title>{#KLIQQI_Visual_Groups#} | {#KLIQQI_Visual_Name#}</title>
+		<title>{#PLIKLI_Visual_Groups#} | {#PLIKLI_Visual_Name#}</title>
 	{/if}
 {elseif preg_match('/editgroup.php$/',$templatelite.server.SCRIPT_NAME)}
-	<title>{$group_name} | {#KLIQQI_Visual_Name#}</title>
+	<title>{$group_name} | {#PLIKLI_Visual_Name#}</title>
 {elseif preg_match('/group_story.php$/',$templatelite.server.SCRIPT_NAME)}
 	{if $groupview!='published'}
 		{if $groupview eq "new"}
-			{assign var='tview' value=#KLIQQI_Visual_Group_New#}
+			{assign var='tview' value=#PLIKLI_Visual_Group_New#}
 		{elseif $groupview eq "shared"}
-			{assign var='tview' value=#KLIQQI_Visual_Group_Shared#}
+			{assign var='tview' value=#PLIKLI_Visual_Group_Shared#}
 		{elseif $groupview eq "members"}
-			{assign var='tview' value=#KLIQQI_Visual_Group_Member#}
+			{assign var='tview' value=#PLIKLI_Visual_Group_Member#}
 		{/if}
 
 		{if !empty($get.page) && $get.page > 1}
-			<title>{$group_name} | {if !empty($get.category)}{$navbar_where.text2} | {/if}{$tview} | {#KLIQQI_Page_Title#} {$get.page} | {#KLIQQI_Visual_Name#}</title>
+			<title>{$group_name} | {if !empty($get.category)}{$navbar_where.text2} | {/if}{$tview} | {#PLIKLI_Page_Title#} {$get.page} | {#PLIKLI_Visual_Name#}</title>
 		{else}
-			<title>{$group_name} | {if !empty($get.category)}{$navbar_where.text2} | {/if}{$tview} | {#KLIQQI_Visual_Name#}</title>
+			<title>{$group_name} | {if !empty($get.category)}{$navbar_where.text2} | {/if}{$tview} | {#PLIKLI_Visual_Name#}</title>
 		{/if}
 	{elseif !empty($get.page) && $get.page > 1}
-		<title>{$group_name} | {#KLIQQI_Page_Title#} {$get.page} | {#KLIQQI_Visual_Name#}</title>
+		<title>{$group_name} | {#PLIKLI_Page_Title#} {$get.page} | {#PLIKLI_Visual_Name#}</title>
 	{else}
-		<title>{$group_name} - {$group_description} | {#KLIQQI_Visual_Name#}</title>
+		<title>{$group_name} - {$group_description} | {#PLIKLI_Visual_Name#}</title>
 	{/if}
 {elseif $pagename eq "register_complete"}
-	<title>{#KLIQQI_Validate_user_email_Title#} | {#KLIQQI_Visual_Name#}</title>
+	<title>{#PLIKLI_Validate_user_email_Title#} | {#PLIKLI_Visual_Name#}</title>
 {elseif $pagename eq "404"}
-	<title>{#KLIQQI_Visual_404_Error#} | {#KLIQQI_Visual_Name#}</title>
+	<title>{#PLIKLI_Visual_404_Error#} | {#PLIKLI_Visual_Name#}</title>
 {else}	
-	<title>{if !empty($posttitle)}{$posttitle}{/if} {if !empty($pretitle)} | {$pretitle}{/if} {#KLIQQI_Visual_Name#}</title>
+	<title>{if !empty($posttitle)}{$posttitle}{/if} {if !empty($pretitle)} | {$pretitle}{/if} {#PLIKLI_Visual_Name#}</title>
 {/if}
 <!-- /title.tpl -->

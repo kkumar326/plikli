@@ -2,7 +2,7 @@
 ****** Second Sidebar Template ******
 *************************************}
 <!-- sidebar2.tpl -->
-	{checkActionsTpl location="tpl_kliqqi_sidebar2_start"}
+	{checkActionsTpl location="tpl_plikli_sidebar2_start"}
 	{checkActionsTpl location="widget_sidebar"}
-	{checkActionsTpl location="tpl_kliqqi_sidebar2_end"}
+	{checkActionsTpl location="tpl_plikli_sidebar2_end"}
 <!--/sidebar2.tpl -->

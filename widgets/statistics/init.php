@@ -4,7 +4,7 @@ $widget['widget_has_settings'] = 0;
 $widget['widget_shrink_icon'] = 1;
 $widget['widget_uninstall_icon'] = 1;
 $widget['name'] = 'Statistics';
-$widget['desc'] = 'This widget inserts common statistics about your website. Examples include the number of members, stories, votes, comments, and your Kliqqi version.';
+$widget['desc'] = 'This widget inserts common statistics about your website. Examples include the number of members, stories, votes, comments, and your Plikli version.';
 $widget['version'] = 3.0;
 
 $sw_version='1';
