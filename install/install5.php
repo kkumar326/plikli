@@ -1,6 +1,10 @@
 <?php
 if (!$step) { header('Location: ./install.php'); die(); }
-
+if ($_POST['language'] == 'arabic') {
+	$site_direction = "rtl";
+}else{
+	$site_direction = "ltr";
+}
 if ($_POST['language'])
     $language = addslashes(strip_tags($_POST['language']));
 if($language == 'arabic'){
@@ -51,17 +55,17 @@ if (!$errors) {
 //	echo "Adding the Admin user account...<br />";
 	$userip=$db->escape($_SERVER['REMOTE_ADDR']);
 	$saltedpass=generateHash($_POST['adminpassword']);
-	$sql = "INSERT INTO `" . table_users . "` (`user_id`, `user_login`, `user_level`, `user_modification`, `user_date`, `user_pass`, `user_email`, `user_names`, `user_karma`, `user_url`, `user_lastlogin`, `user_ip`, `user_lastip`, `last_reset_request`, `user_enabled`) VALUES (1, '".$db->escape($_POST['adminlogin'])."', 'admin', now(), now(), '$saltedpass', '".$db->escape($_POST['adminemail'])."', '', '10.00', 'http://kliqqi.com', now(), '0', '0', now(), '1');";
+	$sql = "INSERT INTO `" . table_users . "` (`user_id`, `user_login`, `user_level`, `user_modification`, `user_date`, `user_pass`, `user_email`, `user_names`, `user_karma`, `user_url`, `user_lastlogin`, `user_ip`, `user_lastip`, `last_reset_request`, `user_enabled`) VALUES (1, '".$db->escape($_POST['adminlogin'])."', 'admin', now(), now(), '$saltedpass', '".$db->escape($_POST['adminemail'])."', '', '10.00', 'http://plikli.com', now(), '0', '0', now(), '1');";
 	$db->query( $sql );
 
 	// If user specified a site title, change language files.
 	if (isset($_POST['sitetitle']) && $_POST['sitetitle'] != ''){
-		// Change the value for KLIQQI_Visual_Name in the language files
-		$replacement = 'KLIQQI_Visual_Name = "'.strip_tags($_POST['sitetitle']).'"';
+		// Change the value for PLIKLI_Visual_Name in the language files
+		$replacement = 'PLIKLI_Visual_Name = "'.strip_tags($_POST['sitetitle']).'"';
 		if (glob("../languages/*.conf")) {
 			foreach (glob("../languages/*.conf") as $filename) {
 				$filedata = file_get_contents($filename);
-				$filedata = preg_replace('/KLIQQI_Visual_Name = \"(.*)\"/iu',$replacement,$filedata);
+				$filedata = preg_replace('/PLIKLI_Visual_Name = \"(.*)\"/iu',$replacement,$filedata);
 				// print $filedata;
 				
 				// Write the changes to the language files
@@ -102,19 +106,19 @@ if (!$errors) {
 	
 	
 	// Output success message
-	$output = '<div class="jumbotron" style="padding:14px 25px;">
+	$output = '<div class="jumbotron" style="padding:14px 25px;direction:'.$site_direction.'">
 		<h2>' . $lang['InstallSuccess'] . '</h2>
 		<p style="font-size:1.2em;">' . $lang['InstallSuccessMessage'] . '</p>
 	</div></fieldset>';
 	
 	$output .='<p><strong></strong></p>
-	<br /><fieldset><legend>' . $lang['WhatToDo'] . '</legend>
-	<div class="donext"><ol>
+	<br /><fieldset style="direction:'.$site_direction.'"><legend>' . $lang['WhatToDo'] . '</legend>
+	<div class="donext" style="direction:'.$site_direction.'"><ol>
 		' . $lang['WhatToDoList'] . '
 	</ol></div>';
 	
 	if ($_POST['sitetitle'] != ''){
-		// Change the site title (KLIQQI_Visual_Name) in the language file
+		// Change the site title (PLIKLI_Visual_Name) in the language file
 		
 	}
 }

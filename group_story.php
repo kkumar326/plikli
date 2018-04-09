@@ -37,7 +37,7 @@ if(isset($_REQUEST['category'])){
 
 
 // breadcrumbs and page titles
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Submit');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Submit');
 $navwhere['link1'] = getmyurl('submit', '');
 $navwhere['text2'] = $thecat;
 $main_smarty->assign('posttitle', $requestTitle);
@@ -102,10 +102,10 @@ if($requestID > 0)
 /* Redwine: Roles and permissions and Groups fixes */
     elseif (($privacy!='private' || isMemberActive($requestID)=='active'))
     {
-	$main_smarty->assign('group_shared_display', $main_smarty->get_config_vars('KLIQQI_Visual_Group_Is_Private'));
-	$main_smarty->assign('group_new_display', $main_smarty->get_config_vars('KLIQQI_Visual_Group_Is_Private'));
-	$main_smarty->assign('group_published_display', $main_smarty->get_config_vars('KLIQQI_Visual_Group_Is_Private'));
-	$main_smarty->assign('member_display', $main_smarty->get_config_vars('KLIQQI_Visual_Group_Is_Private'));
+	$main_smarty->assign('group_shared_display', $main_smarty->get_config_vars('PLIKLI_Visual_Group_Is_Private'));
+	$main_smarty->assign('group_new_display', $main_smarty->get_config_vars('PLIKLI_Visual_Group_Is_Private'));
+	$main_smarty->assign('group_published_display', $main_smarty->get_config_vars('PLIKLI_Visual_Group_Is_Private'));
+	$main_smarty->assign('member_display', $main_smarty->get_config_vars('PLIKLI_Visual_Group_Is_Private'));
     }
 } else 
 {
@@ -233,7 +233,7 @@ if(isset($_POST["avatar"]) && $_POST["avatar"] == "uploaded")
 $CSRF->create('edit_group', true, true);
 
 $main_smarty->assign('tpl_center', $the_template . '/group_story_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 
 function cleanit($value)
 {

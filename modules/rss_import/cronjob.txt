@@ -1,0 +1,12 @@
+Command for cron jobs, namely RSS importer using the import.php in the root folder
+
+We have to specify that the PHP runs it and not the /bin/bash, which gives permission denied error.
+
+/usr/bin/php /home/mymonalisasmile/public_html/leb-news/import.php
+
+To stop receiving emails after the cron job runs:
+/usr/bin/php /home/mymonalisasmile/public_html/leb-news/import.php >/dev/null 2>&1
+
+To run multiple scripts:
+
+/usr/bin/php /home/mymonalisasmile/public_html/leb-news/import.php ; /home/mymonalisasmile/public_html/leb-news/insert-news.php >/dev/null 2>&1

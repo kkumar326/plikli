@@ -2,18 +2,18 @@
 
 {config_load file=upload_lang_conf}
 
-<h2>{#KLIQQI_Upload_Attach#}</h2>
-({$upload_extensions} {#KLIQQI_Upload_Extensions_Allowed#})<br /><br />
+<h2>{#PLIKLI_Upload_Attach#}</h2>
+({$upload_extensions} {#PLIKLI_Upload_Extensions_Allowed#})<br /><br />
 
 <script>
-var uploading = '<fieldset style="border:1px solid #eee;padding:10px;margin-bottom:10px;font-weight:bold;width:450px;"><h2>{#KLIQQI_Upload_Uploading#}...</h2></fieldset>';
-var failed = '<fieldset style="border:1px solid #eee;padding:10px;margin-bottom:10px;font-weight:bold;width:450px;"><h2>{#KLIQQI_Upload_Failed#}...</h2></fieldset>';
-var my_kliqqi_base = '{$my_kliqqi_base}';
-var mandatory = '{#KLIQQI_Upload_Mandatory_Error#}';
-var choose_file = '{#KLIQQI_Upload_Choose_File#}';
-var choose_url = '{#KLIQQI_Upload_Choose_URL#}';
+var uploading = '<fieldset style="border:1px solid #eee;padding:10px;margin-bottom:10px;font-weight:bold;width:450px;"><h2>{#PLIKLI_Upload_Uploading#}...</h2></fieldset>';
+var failed = '<fieldset style="border:1px solid #eee;padding:10px;margin-bottom:10px;font-weight:bold;width:450px;"><h2>{#PLIKLI_Upload_Failed#}...</h2></fieldset>';
+var my_plikli_base = '{$my_plikli_base}';
+var mandatory = '{#PLIKLI_Upload_Mandatory_Error#}';
+var choose_file = '{#PLIKLI_Upload_Choose_File#}';
+var choose_url = '{#PLIKLI_Upload_Choose_URL#}';
 </script>
-<script src='{$my_kliqqi_base}/modules/upload/js/upload.js'></script>
+<script src='{$my_plikli_base}/modules/upload/js/upload.js'></script>
 
 {assign var="upload_fields" value='1'}
 
@@ -61,18 +61,18 @@ var choose_url = '{#KLIQQI_Upload_Choose_URL#}';
     {/php}
 >
 	<fieldset style="border:1px solid #eee;padding:10px;margin-bottom:10px;font-weight:bold;width:450px;">
-    	<form method=post enctype="multipart/form-data" action='{$my_kliqqi_base}/modules/upload/upload.php'  target='upload_iframe_{$number}'>
+    	<form method=post enctype="multipart/form-data" action='{$my_plikli_base}/modules/upload/upload.php'  target='upload_iframe_{$number}'>
 		
 		<input type='hidden' name='id' value='{$submit_id}'>
     	    <input type='hidden' name='number' value='{$number}'>
     	    {if strstr($upload_external,'file')}
-    		{#KLIQQI_Upload_Upload#}: <input style='margin-bottom:5px' size='10' type='file' name='upload_files[]' id='file_{$number}' !onchange='submitUploadForm(this.form)'>
+    		{#PLIKLI_Upload_Upload#}: <input style='margin-bottom:5px' size='10' type='file' name='upload_files[]' id='file_{$number}' !onchange='submitUploadForm(this.form)'>
     		{if strstr($upload_external,'url')}
-	    	    {#KLIQQI_Upload_OR#} 
+	    	    {#PLIKLI_Upload_OR#} 
     		{/if}
     	    {/if}
     	    {if strstr($upload_external,'url')}
-		{#KLIQQI_Upload_Link#}: <input type='text' name='upload_urls[]' id='url_{$number}' value='http://' !onchange='submitUploadForm(this.form)'>
+		{#PLIKLI_Upload_Link#}: <input type='text' name='upload_urls[]' id='url_{$number}' value='http://' !onchange='submitUploadForm(this.form)'>
     	    {/if}
 	    {foreach from=$additional_fields item=field key=i}
 	    <br />{$field}{php}if ($this->_vars['mandatory'][$this->_vars['i']+1] > 0) echo "<font color=red>*</font>";{/php}: <input type='text' size='57' name='field{php}echo $this->_vars['i']+1;{/php}' {php}if ($this->_vars['mandatory'][$this->_vars['i']+1] > 0) echo "id='mandatory'";{/php} value='{php}echo $values['field'.($this->_vars['i']+1)];{/php}'>
@@ -89,6 +89,6 @@ var choose_url = '{#KLIQQI_Upload_Choose_URL#}';
 <script>
 var upload_fields = {$upload_fields};
 </script>
-<button class="btn btn-default" onclick='if (upload_fields < {$upload_maxnumber}) add_upload_field({$upload_maxnumber}); if (++upload_fields >= {$upload_maxnumber}) this.disabled=true;' {if $upload_fields>=$upload_maxnumber}disabled{/if}>{#KLIQQI_Upload_Add_File#}</button>
+<button class="btn btn-default" onclick='if (upload_fields < {$upload_maxnumber}) add_upload_field({$upload_maxnumber}); if (++upload_fields >= {$upload_maxnumber}) this.disabled=true;' {if $upload_fields>=$upload_maxnumber}disabled{/if}>{#PLIKLI_Upload_Add_File#}</button>
 <br />
-{config_load file=upload_kliqqi_lang_conf}
+{config_load file=upload_plikli_lang_conf}

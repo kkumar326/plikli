@@ -42,7 +42,7 @@ class User {
 	}
 
 function Create(){
-		global $db, $main_smarty,$the_template,$my_base_url,$my_kliqqi_base;
+		global $db, $main_smarty,$the_template,$my_base_url,$my_plikli_base;
 		
 		if($this->username == ''){return false;}
 		if($this->pass == ''){return false;}
@@ -55,21 +55,21 @@ function Create(){
 			$userip=check_ip_behind_proxy();
 			$saltedpass=generateHash($this->pass);
 			
-			if(kliqqi_validate()){
+			if(plikli_validate()){
 				if ($db->query("INSERT IGNORE INTO " . table_users . " (user_login, user_email, user_pass, user_date, user_ip,user_categories) VALUES ('".$this->username."', '".$this->email."', '".$saltedpass."', now(), '".$userip."', '')")) {
 				
 					$result = $db->get_row("SELECT user_email, user_pass, user_karma, user_lastlogin FROM " . table_users . " WHERE user_login = '".$this->username."'");
-					$encode = md5($this->email . $result->user_karma .  $this->username. kliqqi_hash().$main_smarty->get_config_vars('KLIQQI_Visual_Name'));
+					$encode = md5($this->email . $result->user_karma .  $this->username. plikli_hash().$main_smarty->get_config_vars('PLIKLI_Visual_Name'));
 
 					$username = $this->username;
 					$password = $this->pass;
 					
 					$my_base_url=$my_base_url;
-					$my_kliqqi_base=$my_kliqqi_base;
+					$my_plikli_base=$my_plikli_base;
 					
-					$domain = $main_smarty->get_config_vars('KLIQQI_Visual_Name');			
-					$validation = my_base_url . my_kliqqi_base . "/validation.php?code=$encode&uid=".$this->username;
-					$str = $main_smarty->get_config_vars('KLIQQI_PassEmail_verification_message');
+					$domain = $main_smarty->get_config_vars('PLIKLI_Visual_Name');			
+					$validation = my_base_url . my_plikli_base . "/validation.php?code=$encode&uid=".$this->username;
+					$str = $main_smarty->get_config_vars('PLIKLI_PassEmail_verification_message');
 					eval('$str = "'.str_replace('"','\"',$str).'";');
 					$message = "$str";
 
@@ -79,12 +79,12 @@ function Create(){
 						require("class.phpmailer4.php");
 
 					$mail = new PHPMailer();
-					$mail->From = $main_smarty->get_config_vars('KLIQQI_PassEmail_From');
-					$mail->FromName = $main_smarty->get_config_vars('KLIQQI_PassEmail_Name');
+					$mail->From = $main_smarty->get_config_vars('PLIKLI_PassEmail_From');
+					$mail->FromName = $main_smarty->get_config_vars('PLIKLI_PassEmail_Name');
 					$mail->AddAddress($this->email);
-					$mail->AddReplyTo($main_smarty->get_config_vars('KLIQQI_PassEmail_From'));
+					$mail->AddReplyTo($main_smarty->get_config_vars('PLIKLI_PassEmail_From'));
 					$mail->IsHTML(false);
-					$mail->Subject = $main_smarty->get_config_vars('KLIQQI_PassEmail_Subject_verification');
+					$mail->Subject = $main_smarty->get_config_vars('PLIKLI_PassEmail_Subject_verification');
 					$mail->CharSet = 'utf-8';
 					$mail->Body = $message;
 				

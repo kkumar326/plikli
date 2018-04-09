@@ -34,9 +34,9 @@ if(is_numeric($requestID)) {
 		include(mnminclude.'redirector.php');
 		$x = new redirector($_SERVER['REQUEST_URI']);
 
-		header("Location: $my_kliqqi_base/error_404.php");
+		header("Location: $my_plikli_base/error_404.php");
 //		$main_smarty->assign('tpl_center', 'error_404_center');
-//		$main_smarty->display($the_template . '/kliqqi.tpl');		
+//		$main_smarty->display($the_template . '/plikli.tpl');		
 		die();
 	}
 
@@ -65,7 +65,7 @@ if(is_numeric($requestID)) {
 			$comment->read();
 
 			echo "<item>\n";
-			echo "	<title><![CDATA[".$main_smarty->get_config_vars('KLIQQI_MiscWords_Comment')." #".$comment->id."]]></title>\n";
+			echo "	<title><![CDATA[".$main_smarty->get_config_vars('PLIKLI_MiscWords_Comment')." #".$comment->id."]]></title>\n";
 			echo "	<link>".getmyFullurl("storyURL", $link->category_safe_names($link->category), urlencode($link->title_url), $link->id)."#c".$comment->id."</link>\n";
 			$vars = array('link' => $link);
 			check_actions('rss_add_data', $vars);
@@ -95,10 +95,10 @@ if(is_numeric($requestID)) {
 	include(mnminclude.'redirector.php');
 	$x = new redirector($_SERVER['REQUEST_URI']);
 	
-	header("Location: $my_kliqqi_base/error_404.php");
+	header("Location: $my_plikli_base/error_404.php");
 //	header("Location: error_404.php");
 //	$main_smarty->assign('tpl_center', 'error_404_center');
-//	$main_smarty->display($the_template . '/kliqqi.tpl');		
+//	$main_smarty->display($the_template . '/plikli.tpl');		
 	die();
 }
 
@@ -112,7 +112,7 @@ function do_rss_header($link) {
 	echo 'xmlns:dc="http://purl.org/dc/elements/1.1/"'."\n";
 	echo '>'. "\n";
 	echo '<channel>'."\n";
-	echo '<title>'.htmlspecialchars($main_smarty->get_config_vars("KLIQQI_Visual_Name"))." - ".$link->title.'</title>'."\n";
+	echo '<title>'.htmlspecialchars($main_smarty->get_config_vars("PLIKLI_Visual_Name"))." - ".$link->title.'</title>'."\n";
 	echo "<link>".getmyFullurl("storyURL", $link->category_safe_names($link->category), urlencode($link->title_url), $link->id)."</link>\n";
 	echo '<description>'.strip_tags($link->truncate_content()).'</description>'."\n";
 

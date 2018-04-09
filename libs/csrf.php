@@ -85,7 +85,7 @@ class CSRF {
 	}
 
 	function log($action){
-		// currently logging does nothing. a 'logging' class is being written for Kliqqi and this log function will call it.
+		// currently logging does nothing. a 'logging' class is being written for Plikli and this log function will call it.
 		if($this->do_log == true){
 			$this->datalog[] = $action;
 		}

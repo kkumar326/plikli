@@ -36,6 +36,6 @@ if(isset($_REQUEST['id'])){
 	$group_delete = $db->query(" Delete from ".table_groups." where group_id =".$group_id);
 	$member_delete = $db->query(" Delete from ".table_group_member." where member_group_id =".$group_id);
 	$db->query(" Delete from ".table_group_shared." where share_group_id =".$group_id);
-	header('Location: '.$my_base_url.$my_kliqqi_base);
+	header('Location: '.$my_base_url.$my_plikli_base);
 }
 ?>

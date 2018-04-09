@@ -130,8 +130,8 @@ class Comment {
 			$smarty->compile_dir = "cache/";
 			$smarty->template_dir = "templates/";
 			$smarty->config_dir = "";
-			$smarty->assign('kliqqi_language', kliqqi_language);
-			$smarty->config_load("/languages/lang_" . kliqqi_language . ".conf");
+			$smarty->assign('plikli_language', plikli_language);
+			$smarty->config_load("/languages/lang_" . plikli_language . ".conf");
 
 		// if we can't read the comment, return
 			if(!$this->read) return;
@@ -213,7 +213,7 @@ class Comment {
 		
 		// the url for the edit comment link
 		$smarty->assign('edit_comment_url', getmyurl('editcomment', $this->id, $this->link));
-		$smarty->assign('delete_comment_url', my_kliqqi_base.'/delete.php?comment_id='.$this->id);
+		$smarty->assign('delete_comment_url', my_plikli_base.'/delete.php?comment_id='.$this->id);
 
 		// avatars
 		$smarty->assign('UseAvatars', do_we_use_avatars());
@@ -228,23 +228,23 @@ class Comment {
 		if($canIhaveAccess == 1){$smarty->assign('isadmin', 1);}
 		
 		// the link to upvote the comment
-		$jslinky = "cvote($current_user->user_id,$this->id,$this->id," . "'" . md5($current_user->user_id.$this->randkey) . "',10,'" . my_base_url . my_kliqqi_base . "/')";
+		$jslinky = "cvote($current_user->user_id,$this->id,$this->id," . "'" . md5($current_user->user_id.$this->randkey) . "',10,'" . my_base_url . my_plikli_base . "/')";
 		$smarty->assign('link_shakebox_javascript_votey', $jslinky);
 
-		$jslinky = "cunvote($current_user->user_id,$this->id,$this->id," . "'" . md5($current_user->user_id.$this->randkey) . "',10,'" . my_base_url . my_kliqqi_base . "/')";
+		$jslinky = "cunvote($current_user->user_id,$this->id,$this->id," . "'" . md5($current_user->user_id.$this->randkey) . "',10,'" . my_base_url . my_plikli_base . "/')";
 		$smarty->assign('link_shakebox_javascript_unvotey', $jslinky);
 
 		// the link to downvote the comment
-		$jslinkn = "cvote($current_user->user_id,$this->id,$this->id," . "'" . md5($current_user->user_id.$this->randkey) . "',-10,'" . my_base_url . my_kliqqi_base . "/')";
+		$jslinkn = "cvote($current_user->user_id,$this->id,$this->id," . "'" . md5($current_user->user_id.$this->randkey) . "',-10,'" . my_base_url . my_plikli_base . "/')";
 		$smarty->assign('link_shakebox_javascript_voten', $jslinkn);
 
-		$jslinkn = "cunvote($current_user->user_id,$this->id,$this->id," . "'" . md5($current_user->user_id.$this->randkey) . "',-10,'" . my_base_url . my_kliqqi_base . "/')";
+		$jslinkn = "cunvote($current_user->user_id,$this->id,$this->id," . "'" . md5($current_user->user_id.$this->randkey) . "',-10,'" . my_base_url . my_plikli_base . "/')";
 		$smarty->assign('link_shakebox_javascript_unvoten', $jslinkn);
 
 		// misc
 		$smarty->assign('Enable_Comment_Voting', Enable_Comment_Voting);
 		$smarty->assign('my_base_url', my_base_url);
-		$smarty->assign('my_kliqqi_base', my_kliqqi_base);
+		$smarty->assign('my_plikli_base', my_plikli_base);
 		$smarty->assign('Default_Gravatar_Small', Default_Gravatar_Small);
 		
 		return $smarty;

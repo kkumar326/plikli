@@ -17,7 +17,7 @@ force_authentication();
 $numGr = $db->get_var("SELECT count(*) FROM " .table_groups . " WHERE `group_creator` = " . $current_user->user_id);
 $max_user_groups_allowed = $main_smarty->get_template_vars('max_user_groups_allowed');
 if ($numGr >= $max_user_groups_allowed) {
-	$error_max = $main_smarty->get_config_vars('KLIQQI_Visual_Submit_A_New_Group_Error');
+	$error_max = $main_smarty->get_config_vars('PLIKLI_Visual_Submit_A_New_Group_Error');
 	$main_smarty->assign('error_max', $error_max);
 }
 // restrict access to admins and moderators
@@ -46,8 +46,8 @@ $main_smarty->assign('isAdmin', $canIhaveAccess);
 define('pagename', 'admin_group'); 
 $main_smarty->assign('pagename', pagename);
 
-// read the mysql database to get the kliqqi version
-/* Redwine: kliqqi version query removed and added to /libs/smartyvriables.php */
+// read the mysql database to get the plikli version
+/* Redwine: plikli version query removed and added to /libs/smartyvriables.php */
 global $db;
 
 if(isset($_REQUEST['mode'])){
@@ -58,13 +58,13 @@ if(isset($_REQUEST['mode'])){
 		$db->query("DELETE FROM ".table_group_member." WHERE member_group_id=".$group_id);
 		$db->query("DELETE FROM ".table_group_shared." WHERE share_group_id=".$group_id);
 
-		header("Location: ".my_kliqqi_base."/admin/admin_group.php");
+		header("Location: ".my_plikli_base."/admin/admin_group.php");
 		die();
 	}
 	elseif($mode=='approve' && is_numeric($group_id)){
 	        $db->query("UPDATE ".table_groups." SET group_status='Enable' WHERE group_id=$group_id");
 
-		header("Location: ".my_kliqqi_base."/admin/admin_group.php");
+		header("Location: ".my_plikli_base."/admin/admin_group.php");
 		die();
 	}
 }

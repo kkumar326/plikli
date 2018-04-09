@@ -2,7 +2,7 @@
 
 {*config_load file=upload_lang_conf}
 {config_load file='../lang.conf'*}
-{*#KLIQQI_Upload_Success#*}
+{*#PLIKLI_Upload_Success#*}
 
 <fieldset style="border:1px solid #eee;padding:10px;margin-bottom:10px;" class="upload_ajax">
 
@@ -20,7 +20,7 @@
 					{php}
 						// Get the image URL
 						{* Redwine: fixed the path that is incorrect and generating PHP Warning:  getimagesize(): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found *}
-						$image =  $this->_vars['my_base_url'].$this->_vars['my_kliqqi_base'].'/'.$this->_vars['upload_thdirectory'].'/'.$this->_vars['image']['file_name'];
+						$image =  $this->_vars['my_base_url'].$this->_vars['my_plikli_base'].'/'.$this->_vars['upload_thdirectory'].'/'.$this->_vars['image']['file_name'];
 						// echo $image;
 						
 						// Assign $height and $width variables
@@ -51,9 +51,9 @@
 					{if strpos($image.file_name,'http')===0}
 						<a href="{$image.file_name}"><img src='{$image.file_name}' height="{$image_height}" width="{$image_width}" class="upload_ajax_image_preview"  style='max-width:520px;margin-top:5px'/></a>
 					{elseif $image.file_size=='orig'}
-						<a href="{$my_kliqqi_base}{$upload_directory}/{$image.file_name}" target="_blank"><img  src='{$my_kliqqi_base}{$upload_directory}/{$image.file_name}' height="{$image_height}" width="{$image_width}" class="upload_ajax_image_preview"  style='max-width:520px;margin-top:5px'/></a>
+						<a href="{$my_plikli_base}{$upload_directory}/{$image.file_name}" target="_blank"><img  src='{$my_plikli_base}{$upload_directory}/{$image.file_name}' height="{$image_height}" width="{$image_width}" class="upload_ajax_image_preview"  style='max-width:520px;margin-top:5px'/></a>
 					{else}
-						<img src='{$my_kliqqi_base}{$upload_thdirectory}/{$image.file_name}' height="{$image_height}" width="{$image_width}" class="upload_ajax_image_preview"  style='max-width:520px;margin-top:5px'/>
+						<img src='{$my_plikli_base}{$upload_thdirectory}/{$image.file_name}' height="{$image_height}" width="{$image_width}" class="upload_ajax_image_preview"  style='max-width:520px;margin-top:5px'/>
 					{/if}
 				</td>
 			</tr>
@@ -63,7 +63,7 @@
 					{$image.file_size}
 				</td>
 				<td class="upload_ajax_instructions">
-					<span style="font-weight:normal;">{#KLIQQI_Upload_Code_Instructions#}</span><br />
+					<span style="font-weight:normal;">{#PLIKLI_Upload_Code_Instructions#}</span><br />
 					<input type="text" style="margin:4px 0;padding:3px 5px 3px 5px;" value="{literal}{image{/literal}{$number}{if $image.file_size!='orig'}_{$image.file_size}{/if}{literal}}{/literal}" />
 					<br />
 				</td>
@@ -84,9 +84,9 @@
 		<tr class="upload_ajax_hide">
 			<td>
 				{if $ispicture}
-					<input type='checkbox' onclick='switchImage({$submit_id},{$number},"thumb");' {if $hide_thumb}checked{/if}> {#KLIQQI_Upload_Off_Thumb#}<br>
+					<input type='checkbox' onclick='switchImage({$submit_id},{$number},"thumb");' {if $hide_thumb}checked{/if}> {#PLIKLI_Upload_Off_Thumb#}<br>
 				{/if}
-				<input type='checkbox' onclick='switchImage({$submit_id},{$number},"file");'  {if $hide_file}checked{/if}> {#KLIQQI_Upload_Off_File#}
+				<input type='checkbox' onclick='switchImage({$submit_id},{$number},"file");'  {if $hide_file}checked{/if}> {#PLIKLI_Upload_Off_File#}
 			</td>
 		</tr>
 	{/if}

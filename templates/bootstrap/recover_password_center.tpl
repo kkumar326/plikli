@@ -22,21 +22,21 @@
 					{ /foreach }
 				{/if}
 				{if $wrong_secret_code neq true}
-				<label class="control-label">{#KLIQQI_Visual_New_Code#}:</label>
+				<label class="control-label">{#PLIKLI_Visual_New_Code#}:</label>
 				<div class="controls">
 					<input type="text" id="reg_code" class="form-control reg_password" name="reg_code" value="" size="25" tabindex="14"/>
-					<p class="help-inline">{#KLIQQI_Visual_Register_Validation_Code#}</p>
+					<p class="help-inline">{#PLIKLI_Visual_Register_Validation_Code#}</p>
 				</div>
-				<label class="control-label">{#KLIQQI_Visual_New_Password#}:</label>
+				<label class="control-label">{#PLIKLI_Visual_New_Password#}:</label>
 				<div class="controls">
 					<input type="password" id="reg_password" class="form-control reg_password" name="reg_password" value="" size="25" tabindex="14"/>
-					<p class="help-inline">{#KLIQQI_Visual_Register_FiveChar#}</p>
+					<p class="help-inline">{#PLIKLI_Visual_Register_FiveChar#}</p>
 				</div>
 				{/if}
 			</div>
 			{if $wrong_secret_code neq true}
 			<div class="control-group">	
-				<label class="control-label">{#KLIQQI_Visual_New_Verify_Password#}: </label>
+				<label class="control-label">{#PLIKLI_Visual_New_Verify_Password#}: </label>
 				<div class="controls">
 					<input type="password" id="reg_verify" class="form-control reg_password" name="reg_password2" value="" size="25" tabindex="15" />
 				</div>

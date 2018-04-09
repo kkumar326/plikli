@@ -1,0 +1,108 @@
+html, body {
+	height: 100%;
+}
+body {
+	color: #000;
+	padding: .5em 1em;
+	margin: 0;
+	font: normal normal normal 1em/1.35em Georgia, "Times New Roman", Times, serif;
+	
+}
+#content-wrapper {
+	margin: auto;
+	max-width: 600px;
+}
+input:focus {
+	outline: none;
+}
+h1, h2 {
+	line-height: 1em;
+}
+h1 {
+	font-size: 1.5em;
+}
+h2 {
+	margin-top: 1.5em;
+	font-size: 1.3em;
+}
+a {
+	color: #ccc;
+	text-decoration: none;
+	border-bottom: 1px solid #777;
+	display: inline-block;
+	height: 1.1em;
+	padding: 0 1px;
+}
+a:hover {
+	color: #fff;
+	border-color: #aaa;
+}
+.a-inline {
+	display:inline;
+	padding: 0;
+}
+pre {
+	display: inline;
+	background-color: rgba(255, 255, 255, .19);
+	padding: .5em;
+}
+.color {
+	padding: .5em;
+	margin-right: .4em;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+	width: 140px;
+}
+.div-toggles {
+	margin-top: 1em;
+}
+.div-toggles .trigger {
+	position: relative;
+	display: inline-block;
+	width: 40px;
+	padding: 4px;
+	height: 25px;
+	border: 1px solid #666;
+	border-radius: 2px;
+	background: #eee;
+	box-shadow: inset 0 -17px 8px rgba(0,0,0,0.3), inset 0 -4px 7px rgba(0,0,0,0.3);
+}
+.div-toggles .trigger:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	margin-top: -2px;
+	border: 5px solid;
+	border-color: #000 transparent transparent;
+}
+.div-toggles .trigger:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 50%;
+	right: 4px;
+	margin-top: -1px;
+	border: 5px solid;
+	border-color: #eee transparent transparent;
+}
+.div-toggles .active:before {
+	margin-top: -7px;
+	border-color: transparent transparent #eee;
+}
+.div-toggles .active:after {
+	margin-top: -8px;
+	border-color: transparent transparent #000;
+}
+.div-toggles .trigger div {
+	display: inline-block;
+	width: 23px;
+	height: 23px;
+	background: #fff url('data:image/gif;base64,R0lGODlhDAAMAIABAMzMzP///yH5BAEAAAEALAAAAAAMAAwAAAIWhB+ph5ps3IMyQFBvzVRq3zmfGC5QAQA7');
+}
+.div-toggles .trigger div div {
+	border: 1px solid #666;
+	border-color: #666 #ccc #ccc #666;
+	background: #aaa;
+}

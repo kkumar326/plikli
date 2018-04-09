@@ -4,6 +4,8 @@
 	$lang['Welcome'] = 'Benvinguda';
 	$lang['Install'] = 'Instal · lar';
 	$lang['Upgrade'] = 'Millorar';
+	$lang['Upgrade-Kliqqi'] = 'Upgrade-Kliqqi';
+	$lang['Upgrade-Pligg'] = 'Upgrade-Pligg';
 	$lang['Troubleshooter'] = 'Solucionador de problemes';
 	$lang['Step'] = 'Pas';
 	$lang['Readme'] = 'Llegiu-me';
@@ -14,42 +16,41 @@
 	$lang['Troubleshooter_instruct'] = 'El solucionador de problemes detecta problemes comuns, com ara permisos de carpeta incorrectes';
 
 // intro / step 1
-	$lang['WelcomeToInstaller'] = 'Benvingut a la CMS instal Kliqqi!';
+	$lang['WelcomeToInstaller'] = 'Benvingut a la CMS instal Plikli!';
 	$lang['Introduction'] = 'Introducció';
-	$lang['WelcomeToThe'] = 'Benvingut a Kliqqi Content Management System, CMS que milers de llocs web de la comunitat. Si aquesta és la primera vegada que la instal · lació de Kliqqi, llegiu totes les instruccions amb cura perquè no es perdi cap adreces importants. En nom dels desenvolupadors Kliqqi, m\'agradaria desitjar a vostè i el seu nou lloc web de la millor de les sorts.';
-	$lang['Bugs'] = 'Si us plau, familiaritzar-se amb alguns de la documentació aportada per la comunitat Kliqqi al <a href="http://kliqqi.com/support/">Kliqqi Support</a> lloc web. També suggerim que es registri un compte perquè vostè tindrà accés a suport tècnic gratuït, mòduls, widgets, plantilles i altres grans recursos.';
-	$lang['Installation'] = 'instal · lació';
-	$lang['OnceFamiliar'] = '<p>Si aquesta és la primera vegada que la instal · lació de Kliqqi ha de continuar en aquesta pàgina després de seguir acuradament les instruccions de sota. Si necessita <a href="./upgrade.php">actualitzar el seu lloc</a> d\'una versió anterior, executeu l\'script d\'actualització, feu clic a l\'enllaç d\'actualització anterior. ADVERTÈNCIA: executar el procés d\'instal · lació d\'una base de dades del lloc Kliqqi existent sobreescriurà totes les històries i configuracions, així que si us plau assegureu-vos que vol dur a terme una instal · lació si decideix continuar endavant.
+	$lang['WelcomeToThe'] = 'Benvingut a <a href="https://www.plikli.com" target="_blank"> Plikli </a>, el CMS que proporciona milers de llocs web de la comunitat. Si aquesta és la primera vegada que instal·leu el CMS de Plikli, llegeix totes les instruccions proporcionades acuradament per no perdre cap indicació important.';
+	$lang['Bugs'] = 'Si us plau, familiaritzeu-vos amb la documentació proporcionada per la comunitat de Plikli al <a href="https://www.plikli.com/forum-2/"> Fòrum de Plikli </a>. També us suggerim que us registreu un compte perquè tingueu accés a assistència gratuïta, mòduls, widgets, plantilles i altres recursos fantàstics.';
+	$lang['Installation'] = 'Instal·lació (llegiu amb atenció)';
+	$lang['OnceFamiliar'] = '<p> Si aquesta és la primera vegada que instal·leu Plikli, heu de continuar en aquesta pàgina després de seguir acuradament les indicacions a continuació. Si necessiteu <a href="./upgrade.php"> actualitzar el vostre lloc </a> des d\'una versió anterior, executeu l\'script d\'actualització fent clic a l\'enllaç Actualitza a dalt. ADVERTIMENT: executar el procés d\'instal·lació en una base de dades del lloc Plikli existent sobreescriurà totes les dades, així que assegureu-vos que voleu realitzar una instal·lació si voleu continuar a continuació. </ P> <br />
 	<ol>
-		<li>Canvieu el nom del fitxer settings.php.default a settings.php</li>
-		<li>Canvieu el nom del fitxer /languages/lang_english.conf.default a lang_english.conf</li>
-		<li>Canvieu el nom del fitxer /languages/lang_catalan.conf.default a lang_catalan.conf</li>
-		<li>Canvieu el nom del fitxer /libs/dbconnect.php.default a dbconnect.php</li>
-		<li>Canvieu el nom del directori /logs.default a /logs</li>
+<li> Canvia el nom de settings.php.default a settings.php </ li>
+<li> Canviar el nom de /languages/lang_english.conf.default a lang_english.conf </ li>
+<li> Canviar el nom de /libs/dbconnect.php.default a dbconnect.php </ li>
+<li> Canvieu el nom del directori /logs.default to / logs </ li>
 		<li>CHMOD 0777 les següents carpetes:</li>
 		<ol>
 			<li>/admin/backup/</li>
 			<li>/avatars/groups_uploaded/</li>
 			<li>/avatars/user_uploaded/</li>
 			<li>/cache/</li>
-			<li>/languages/ (CHMOD 0777 tots els arxius continguts en aquesta carpeta)</li>
+<li> / languages ​​/ (CHMOD 0777 tots els fitxers inclosos en aquesta carpeta) </ li>
 		</ol>
-		<li>CHMOD 0666 els següents arxius</li>
+<li> CHMOD 0666 els següents fitxers </ li>
 		<ol>
 			<li>/libs/dbconnect.php</li>
 			<li>settings.php</li>
 		</ol>
 	</ol>
-	Ara està més enllà de la part més difícil! Continueu amb el següent pas per instal · lar Kliqqi a la base de dades MySQL </p>';
+Ara teniu la part més difícil! Continueu fins al següent pas per instal·lar Plikli a la vostra base de dades MySQL. </ P>';
 
 	// step 2
-	$lang['EnterMySQL'] = 'Introduïu la configuració de bases de dades MySQL a continuació. Si vostè no ho sap la configuració de bases de dades MySQL ha de consultar la documentació del seu servei de hosting o poseu-vos en contacte amb ells directament.';
-	$lang['DatabaseName'] = 'Nom de la base';
-	$lang['DatabaseUsername'] = 'Base de dades Nom d\'usuari';
+	$lang['EnterMySQL'] = 'Introduïu la configuració de la base de dades MySQL a continuació. Si no coneixeu la vostra configuració de la base de dades MySQL, hauríeu de comprovar la vostra documentació web o contactar-los directament.';
+	$lang['DatabaseName'] = 'Nom de la base de dades';
+	$lang['DatabaseUsername'] = 'Nom d\'usuari de la base de dades';
 	$lang['DatabasePassword'] = 'Base de dades Contrasenya';
 	$lang['DatabaseServer'] = 'Servidor de base de dades';
 	$lang['TablePrefix'] = 'Prefix de taula de base de dades';
-	$lang['PrefixExample'] = '(ie: "kliqqi_" fa que les taules per als usuaris kliqqi_users)';
+	$lang['PrefixExample'] = '(és a dir: "plikli_" fa que les taules dels usuaris es converteixin en plikli_users)';
 	$lang['CheckSettings'] = 'Comproveu la configuració';
 	$lang['Errors'] = 'Si us plau corregiu l\'error anterior(s), a continuació, actualitzeu la pàgina';
 	$lang['LangNotFound'] = 'no s\'ha trobat. Si us plau, elimini l\'extensió. Defecte de tots els fitxers d\'idioma i torneu a intentar.';
@@ -84,19 +85,19 @@
 	$lang['Error5-2'] = 'Els camps de contrasenya no coincideixen. Si us plau, tornar enrere i tornar a entrar als camps de contrasenya.';
 	$lang['AddingAdmin'] = 'Addició del compte d\'usuari Administrador...';
 	$lang['InstallSuccess'] = 'Instal · lació completa!';
-	$lang['InstallSuccessMessage'] = 'Felicitacions, vostè ha creat un lloc web Kliqqi CMS! Mentre que el seu lloc està en ple funcionament en aquest punt, haurà de fer una mica de neteja, seguint les instruccions següents per protegir el seu lloc.';
+	$lang['InstallSuccessMessage'] = 'Felicitacions, vostè ha creat un lloc web Plikli CMS! Mentre que el seu lloc està en ple funcionament en aquest punt, haurà de fer una mica de neteja, seguint les instruccions següents per protegir el seu lloc.';
 	$lang['WhatToDo'] = 'Què fer a continuació:';
 	$lang['WhatToDoList'] = '		<li><p>chmod "/libs/dbconnect.php" de nou a 644, que no es necessita canviar el fitxer de nou.</p></li>
-		<li><p><strong>Elimineu</strong> el "/ install" directori del servidor si teniu instal · lat Kliqqi.</p></li>
-		<li><p>Entra en <a href="../admin/admin_index.php"> tauler d\'instruments </a> utilitzant la informació d\'usuari que va introduir en el pas anterior. Una vegada que entreu s\'us amb més informació sobre com utilitzar Kliqqi.</p></li>
+		<li><p><strong>Elimineu</strong> el "/ install" directori del servidor si teniu instal · lat Plikli.</p></li>
+		<li><p>Entra en <a href="../admin/admin_index.php"> tauler d\'instruments </a> utilitzant la informació d\'usuari que va introduir en el pas anterior. Una vegada que entreu s\'us amb més informació sobre com utilitzar Plikli.</p></li>
 		<li><p><a href="../admin/admin_config.php">tauler d\'instruments </a> amb l\'àrea d\'administració.</p></li>
-		<li><p>Visiteu el <a href="http://kliqqi.com/"> Kliqqi Support </a> lloc web si té alguna pregunta.</p></li>';
+		<li><p>Visiteu el <a href="https://plikli.com/forum-2/"> Plikli Support </a> lloc web si té alguna pregunta.</p></li>';
 	$lang['ContinueToSite'] = 'Continueu el seu nou lloc web';
 // Upgrade
-	$lang['UpgradeHome'] = 'En fer clic al botó de sota, Kliqqi actualitzarà la seva base de dades, a partir Pligg 1.2.2 i fins Kliqqi versió 3.0.0. També afegirà noves frases afegint les darreres incorporacions a la part inferior del seu arxiu d\'idioma. Vostè encara haurà de carregar els nous arxius i actualitzar manualment les plantilles per ser totalment compatible amb l\'última versió.</p> Li recomanem que faci una còpia del seu lloc web i la base de dades en l\'equip local abans de continuar, perquè el procés d\'actualització farà canvis permanents a la base de dades MySQL.';
+	$lang['UpgradeHome'] = 'En fer clic al botó de sota, Plikli actualitzarà la seva base de dades, a partir Pligg 1.2.2 i fins Plikli versió 3.0.0. També afegirà noves frases afegint les darreres incorporacions a la part inferior del seu arxiu d\'idioma. Vostè encara haurà de carregar els nous arxius i actualitzar manualment les plantilles per ser totalment compatible amb l\'última versió.</p> Li recomanem que faci una còpia del seu lloc web i la base de dades en l\'equip local abans de continuar, perquè el procés d\'actualització farà canvis permanents a la base de dades MySQL.';
 	$lang['UpgradeAreYouSure'] = 'Esteu segur que voleu actualitzar la seva base de dades i arxiu d\'idioma?';
 	$lang['UpgradeYes'] = 'Procedir amb l\'actualització';
-	$lang['UpgradeLanguage'] = 'Èxit, Kliqqi actualitza el seu arxiu d\'idioma. Ara inclou els últims elements del llenguatge.';
+	$lang['UpgradeLanguage'] = 'Èxit, Plikli actualitza el seu arxiu d\'idioma. Ara inclou els últims elements del llenguatge.';
 	$lang['UpgradingTables'] = '<strong>Actualització de base de dades...</strong>';
 	$lang['LanguageUpdate'] = '<strong>Actualització de l\'arxiu Idioma...</strong>';
 	$lang['IfNoError'] = 'Si no hi ha errors que es mostren, l\'actualització s\'ha completat!';

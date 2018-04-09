@@ -1,6 +1,6 @@
 {config_load file=akismet_lang_conf}
 
-<legend>{#KLIQQI_Akismet_manage_comments#}</legend>
+<legend>{#PLIKLI_Akismet_manage_comments#}</legend>
 
 {if count($link_data) gt 0}
 	{$spam_output}
@@ -32,4 +32,4 @@ function mark_all_notspam() {
 </SCRIPT>
 {/literal}
 
-{config_load file=akismet_kliqqi_lang_conf}
+{config_load file=akismet_plikli_lang_conf}

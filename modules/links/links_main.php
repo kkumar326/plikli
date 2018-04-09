@@ -21,8 +21,12 @@ function embed_videos($text, $type) {
 	}
 //match facebook video url
 	if ($correct_settings) {
-		if(preg_match($reg_facebook, $text, $facebookurl)) {
-			$text = preg_replace($reg_facebook, "<iframe style=\"border: none; overflow: hidden;\" src=\"https://www.facebook.com/plugins/video.php?href=$facebookurl[0]&show_text=0\" frameborder=\"0\" scrolling=\"no\" width=\"560\" height=\"375\"></iframe>",$text);
+		if(preg_match_all($reg_facebook, $text, $facebookurl)) {
+			$numFB = sizeof($facebookurl);
+			$numFirstFB = sizeof($facebookurl[0]);
+			for ($FB = 0; $FB < $numFirstFB; $FB++) {
+				$text = str_replace($facebookurl[0][$FB], "<br /><div class=\"videoWrapper\"><iframe style=\"border: none; overflow: hidden;\" src=\"https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/facebook/videos/".$facebookurl[1][$FB]."&show_text=0\" frameborder=\"0\" scrolling=\"no\" width=\"560\" height=\"375\"></iframe></div><br />",	$text);
+			}
 		}
 	}
 	if ($type == "articles") {
@@ -55,36 +59,40 @@ function embed_videos($text, $type) {
 				)                  # End negative lookahead assertion.
 				[?=&+%\w.-]*       # Consume any URL (query) remainder.
 				~ix';
-		if(preg_match($reg_youtube, $text, $youtubeurl)) {
-			$text = preg_replace($reg_youtube, '<br /><div class="videoWrapper"><iframe width="560" height="315" src="http://www.youtube.com/embed/'.$youtubeurl[1].'" frameborder="0" allowfullscreen></iframe></div><br />',
-				$text);
+		if(preg_match_all($reg_youtube, $text, $youtubeurl)) {
+			$numYT = sizeof($youtubeurl);
+			$numFirst = sizeof($youtubeurl[0]);
+			for ($YT = 0; $YT < $numFirst; $YT++) {
+				$text = str_replace($youtubeurl[0][$YT], '<br /><div class="videoWrapper"><iframe width="560" height="315" src="http://www.youtube.com/embed/'.$youtubeurl[1][$YT].'" frameborder="0" allowfullscreen></iframe></div><br />',	$text);
 		}
+		}
+
 		$findlinks = preg_match_all('$(https?://[\p{L}a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$ui', $text, $matches);
+		if ($matches) {
 		foreach($matches[1] as $match) {
 			// matching any of the audio extensions
 			$ogg = stripos($match, '.ogg');
 			$mp3 = stripos($match, '.mp3');
 			$wav = stripos($match, '.wav');
 			$jpg = stripos($match, '.jpg');
-			$jpg = stripos($match, '.jpeg');
+				$jpeg = stripos($match, '.jpeg');
 			$png = stripos($match, '.png');
 			$gif = stripos($match, '.gif');
 			if ( $ogg !== false || $mp3 !== false || $wav !== false) {
-				
-				$text = preg_replace("#$match#i", " <!--[if lt IE 9]><script>document.createElement(\"audio\");</script><![endif]-->
+					$text = str_replace($match, " <!--[if lt IE 9]><script>document.createElement(\"audio\");</script><![endif]-->
 		<br /><audio preload=\"none\" style=\"width: 50%;\" controls=\"controls\"><source type=\"audio/mpeg\" src=\"$match\" /></audio><br />",$text);
 			}elseif ( $jpg !== false || $png !== false || $gif !== false) {
-				
-				$text = preg_replace("#$match#i", " <div class=\"videoWrapper\"><img src=\"$match\" /></div>", $text);
+					$text = preg_replace("#(?<!=\")($match)(?![^<>]*>)#ui", " <div class=\"videoWrapper\"><img src=\"$match\" /></div>", $text);
 			}else{
 				// matching all other urls that are not within html tags
 				if ($the_settings['nofollow'] == "1") {
-					$text = preg_replace('$(\s|^)(https?://[\p{L}a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$ui', " <a href=\"$match\" target=\"_blank\" rel=\"nofollow\">$match</a> ",$text);
+						$text = preg_replace("#(?<!=\")($match)(?![^<>]*>)#ui", " <a href=\"$match\" target=\"_blank\" rel=\"nofollow\">$match</a> ",$text);
 				}else{
 					$text = preg_replace('$(\s|^)(https?://[\p{L}a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$ui', " <a href=\"$match\" target=\"_blank\">$match</a> ",$text);
 				}
 			}
 		}
+	}
 	}
 	return $text;
 }
@@ -103,7 +111,7 @@ function links_show_comment_content(&$vars) {
 		}
 		/* Redwine: checking if the links module is granted to all user levels. */
 		if ($the_settings['all']) {
-				$vars['comment_text'] = $converted;
+					$vars['comment_text'] = $converted;
 		}else{
 			$vars['comment_text'] = $to_convert;
 		}
@@ -115,17 +123,16 @@ function links_show_comment_content(&$vars) {
 					$vars['comment_text'] = $converted;
 				}
 			}
+		}
 	}
-}
 function links_summary_fill_smarty(&$vars) {
 	global $smarty, $current_user, $to_convert, $converted, $converted_nofollow,$the_settings;
 	if ($the_settings['stories']) {
 		$to_convert = $vars['smarty']->_vars['story_content'];
-
-
+		
 			$converted = embed_videos($to_convert, 'articles');
 
-
+		
 		/* Redwine: The below code is an extra layerr of security to prevent any XSS by not converting any link when a javascript: or window.open or alert() are detected in the text. */
 		if (strpos($to_convert, "javascript:") !== false || strpos($to_convert, "window.") !== false || strpos($to_convert, "alert(") !== false) {
 				$converted = $to_convert;
@@ -194,12 +201,12 @@ function links_showpage(){
 			misc_data_update('links_all', sanitize($_REQUEST['links_all'], 3));
 			misc_data_update('links_moderators', sanitize($_REQUEST['links_moderators'], 3));
 			misc_data_update('links_admins', sanitize($_REQUEST['links_admins'], 3));
-			header("Location: ".my_kliqqi_base."/module.php?module=links");
+			header("Location: ".my_plikli_base."/module.php?module=links");
 			die();
 		}
 		// breadcrumbs
 		//$main_smarty->assign('navbar_where', $navwhere);
-		$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+		$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 		// breadcrumbs
 		define('modulename', 'links'); 
 		$main_smarty->assign('modulename', modulename);

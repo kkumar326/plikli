@@ -6,10 +6,23 @@ define("mnmpath", dirname(__FILE__).'/../');
 define("mnminclude", dirname(__FILE__).'/../libs/');
 define("mnmmodules", dirname(__FILE__).'/../modules/');
 include_once '../settings.php';
+if ($language != 'english') {
+	$file_rename = str_replace(".default", "", "lang_".$language.".conf.default");
+	rename("../languages/lang_".$language.".conf.default", "../languages/$file_rename");
+	chmod("../languages/$file_rename", 0777);
+	
+	$file_rename = str_replace(".default", "", "lang_english.conf.default");
+	rename("../languages/lang_english.conf.default", "../languages/$file_rename");
+	chmod("../languages/$file_rename", 0777);
+}else{
+	$file_rename = str_replace(".default", "", "lang_".$language.".conf.default");
+	rename("../languages/lang_".$language.".conf.default", "../languages/$file_rename");
+	chmod("../languages/$file_rename", 0777);
+}
 include ('header.php');
 $tbl_prefix = '';
 $sitetitle = '';
-/* Redwine: Applies only to kliqqi 3.5.0. We want to find out if they copied 3.5.2 files and replaced the 3.5.0 ones or not. Because if they did, then we notify them that because they did so, only the kliqqi version was updated in the misc_data table and n further actions is required. However, if they are upgrading from a different directory, then we have to detect certain settings to notify them that they must copy over some files from the old directory (UPLOAD module attachements) and, for instance, rename a certain language file if they have Allow users to change language set to 1, etc. */
+/* Redwine: Applies only to kliqqi 3.5.0. We want to find out if they copied 3.5.2 files and replaced the 3.5.0 ones or not. Because if they did, then we notify them that because they did so, only the Plikli version was updated in the misc_data table and n further actions is required. However, if they are upgrading from a different directory, then we have to detect certain settings to notify them that they must copy over some files from the old directory (UPLOAD module attachements) and, for instance, rename a certain language file if they have Allow users to change language set to 1, etc. */
 
 $parse = parse_url($my_base_url.$_SERVER['REQUEST_URI']);
 $path_array = explode("/", $parse['path']);
@@ -135,6 +148,7 @@ if ((!isset($step)) || ($step == "")) { $step = 0; }
 include_once('./languages/lang_english.php');
 if ($step == 0 && $tbl_prefix == '') {
 	echo '<fieldset><legend>ATTENTION!</legend>
+	<div  class="alert-danger">We detected that your Site\'s language in your settings is set to <strong><u><i>'.$language.'</i></u></strong> and we renamed the relevant language for you, to be ready when the upgrade is done!</div>
 	<div  class="alert-danger">' . $lang['UpgradeHome'] . '</div>
 	<div  class="alert-danger">Before you start, make sure you have copied the following files from your Pligg site that you want to upgrade:
 		<ul>

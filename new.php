@@ -22,10 +22,10 @@ if(isset($_REQUEST['category'])){
 	$thecat = $thecat->category_name;
 	if (!$thecat)
 	{
-		header("Location: $my_kliqqi_base/error_404.php");
+		header("Location: $my_plikli_base/error_404.php");
 //		header("Location: error_404.php");
 //		$main_smarty->assign('tpl_center', 'error_404_center');
-//		$main_smarty->display($the_template . '/kliqqi.tpl');		
+//		$main_smarty->display($the_template . '/plikli.tpl');		
 		die();
 	}
 	$main_smarty->assign('category', $thecat);
@@ -97,21 +97,21 @@ if(isset($_REQUEST['category'])) {
 	$main_smarty->assign('meta_keywords', $category_data->category_keywords);
 
 	// breadcrumbs and page title for the category we're looking at
-	$main_smarty->assign('title', ''.$main_smarty->get_config_vars('KLIQQI_Visual_Kliqqi_Queued') .$thecat . '');
-	$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Kliqqi_Queued');
+	$main_smarty->assign('title', ''.$main_smarty->get_config_vars('PLIKLI_Visual_Plikli_Queued') .$thecat . '');
+	$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Plikli_Queued');
 	$navwhere['link1'] = getmyurl('new', '');
 	$navwhere['text2'] = $thecat;	
 	$main_smarty->assign('navbar_where', $navwhere);
 	$main_smarty->assign('pretitle', $thecat );
-	$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Kliqqi_Queued'));
-	$main_smarty->assign('page_header', $thecat . $main_smarty->get_config_vars('KLIQQI_Visual_Kliqqi_Queued'));
+	$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Plikli_Queued'));
+	$main_smarty->assign('page_header', $thecat . $main_smarty->get_config_vars('PLIKLI_Visual_Plikli_Queued'));
 } 
 else {
-	$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Queued');
+	$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Queued');
 	$navwhere['link1'] = getmyurl('new', '');
 	$main_smarty->assign('navbar_where', $navwhere);
-	$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Queued'));
-	$main_smarty->assign('page_header', $main_smarty->get_config_vars('KLIQQI_Visual_Kliqqi_Queued'));
+	$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Queued'));
+	$main_smarty->assign('page_header', $main_smarty->get_config_vars('PLIKLI_Visual_Plikli_Queued'));
 }
 if (!empty($category_data )) {
 	$main_smarty->assign('URL_rss_page', getmyurl('rsspage', $category_data->category_safe_name, 'new'));
@@ -139,5 +139,5 @@ if(Auto_scroll==2 || Auto_scroll==3){
 
 // show the template
 $main_smarty->assign('tpl_center', $the_template . '/new_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 ?>

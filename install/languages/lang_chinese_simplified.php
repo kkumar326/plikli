@@ -4,42 +4,44 @@
 	$lang['Welcome'] = '欢迎';
 	$lang['Install'] = '安装';
 	$lang['Upgrade'] = '升级';
+	$lang['Upgrade-Kliqqi'] = 'Upgrade-Kliqqi';
+	$lang['Upgrade-Pligg'] = 'Upgrade-Pligg';
 	$lang['Troubleshooter'] = '疑难解答';
-	$lang['Step'] = '步骤';
-	$lang['Readme'] = '说明';
-	$lang['Admin'] = '仪表盘';
+	$lang['Step'] = '步';
+	$lang['Readme'] = '自述';
+	$lang['Admin'] = '管理员';
 	$lang['Home'] = '首页';
-	$lang['Install_instruct'] = '请准备好你的MYSQL数据库信息. 如需升级请点击升级链接.';
-	$lang['Upgrade_instruct'] = '升级将对你的MYSQL数据库做出永久修改.你最好在开始前先做一个备份.';
-	$lang['Troubleshooter_instruct'] = '疑难解答将检查常见错误，比如错误的文件夹权限设定等';
+	$lang['Install_instruct'] = '请让你的MySQL信息方便. 请参阅升级以升级现有网站.';
+	$lang['Upgrade_instruct'] = '升级将会修改你的MySQL数据库. 继续操作之前一定要备份.';
+	$lang['Troubleshooter_instruct'] = '疑难解答程序将检测常见问题，如不正确的文件夹权限';
 
 // intro / step 1
-	$lang['WelcomeToInstaller'] = '欢迎进入Kliqqi安装程序!';
+	$lang['WelcomeToInstaller'] = '欢迎进入Plikli安装程序!';
 	$lang['Introduction'] = '简介';
-	$lang['WelcomeToThe'] = '欢迎加入 <a href="http://www.kliqqi.com" target="_blank">Kliqqi 内容管理系统</a>. 安装前请先访问<a href="http://www.kliqqi.com/download.php" target="_blank">官方下载页面</a>以确认你下载的是最新的安装包.';
-	$lang['Bugs'] = '当你访问 Kliqqi.com 时, 请先查看一下 Kliqqi 社区提供的文档. 我们同时建议你注册 <a href="http://forums.kliqqi.com/" target="_blank">Kliqqi 论坛</a>, 在这里你可以下载免费的插件, 模板和其他对你的网站有用的资源. 如果你发现Kliqqi里有Bug, 请 <a href="http://forums.kliqqi.com/projects/kliqqi-cms/index.html" target="_blank">点击这里提交报告</a> 我们会在今后的版本里修复这些BUG的.';
+	$lang['WelcomeToThe'] = '欢迎来到<a href="https://www.plikli.com" target="_blank"> Plikli </a>，这是为数千个社区网站提供支持的CMS。 如果这是您第一次安装Plikli CMS，请仔细阅读所有提供的说明，以免错过任何重要的指示。';
+	$lang['Bugs'] = '请熟悉一下Plikli社区在<a href="https://www.plikli.com/forum-2/"> Plikli论坛</a>网站上提供的一些文档。 我们还建议您注册一个帐户，以便您可以访问免费支持，模块，小工具，模板和其他优质资源。';
 	$lang['Installation'] = '安装方法 (请仔细阅读)';
-	$lang['OnceFamiliar'] = '<p>如果这是你第一次安装Kliqqi，请认真阅读下面各段文字. 如果你需要 <a href="./upgrade.php">升级</a> 老的版本, 请点击页面上方的升级标签. 警告: 在已有Kliqqi系统中运行安装程序将覆盖你所有的内容和设置, 所以在继续前请确认这是你想执行的操作.</p><br />
-	<ol>
-		<li>把文件 settings.php.default 改名为 settings.php</li>
-		<li>重命名/languages/lang_english.conf.default lang_english.conf</li>
-		<li>重命名/languages/lang_chinese_simplified.conf.default lang_chinese_simplified.conf</li>
-		<li>把文件 /libs/dbconnect.php.default 改名为 dbconnect.php</li>
-		<li>把以下目录的访问权限设为755(CHMOD 755) , 如果在安装过程中仍然出错则改为 777.</li>
-		<ol>
-			<li>/admin/backup/</li>
-			<li>/avatars/groups_uploaded/</li>
-			<li>/avatars/user_uploaded/</li>
-			<li>/cache/</li>
-			<li>/languages/ (这个目录下的所有文件访问权限设为777)</li>
-		</ol>
-		<li>4. 把以下文件访问权限设置为666 (CHMOD 666) </li>
-		<ol>
-			<li>/libs/dbconnect.php</li>
-			<li>settings.php</li>
-		</ol>
-	</ol>
-	如果你已经看过了Kliqqi论坛的贴子,并理解了Kliqqi的设计理念,你可以进行下一步安装程序了.';
+	$lang['OnceFamiliar'] = '如果这是您第一次安装Plikli，请仔细按照以下说明继续进行此操作。如果您需要从以前的版本<a href="./upgrade.php">升级您的网站</a>，请点击上面的升级链接运行升级脚本。警告：在现有Plikli站点数据库上运行安装过程将覆盖所有数据，因此请确保您希望在下面继续执行安装。</ p> <br />
+<OL>
+<li>将settings.php.default重命名为settings.php </ li>
+<li>将/languages/lang_english.conf.default重命名为lang_english.conf </ li>
+<li>将/libs/dbconnect.php.default重命名为dbconnect.php </ li>
+<li>将目录/logs.default重命名为/ logs </ li>
+<li> CHMOD 0777以下文件夹：</ li>
+<OL>
+<LI> /管理/备份/ </ LI>
+<LI> /化身/ groups_uploaded / </ LI>
+<LI> /化身/ user_uploaded / </ LI>
+<LI> /高速缓存/ </ LI>
+<li> / languages /（CHMOD 0777此文件夹中包含的所有文件）</ li>
+</醇>
+<li> CHMOD 0666以下文件</ li>
+<OL>
+<LI> /libs/dbconnect.php </ LI>
+<LI>的settings.php </ LI>
+</醇>
+</醇>
+你现在经历了最难的部分！继续下一步，将Plikli安装到您的MySQL数据库中.</ p>';
 
 // step 2
 	$lang['EnterMySQL'] = '在这里输入你的MYSQL数据库设置,如果你不知道你的MYSQL数据库是如何设置的,请阅读你的主机托管商提供的文档,或者直接与他们联系.';
@@ -48,7 +50,7 @@
 	$lang['DatabasePassword'] = '数据库访问密码';
 	$lang['DatabaseServer'] = '数据库主机';
 	$lang['TablePrefix'] = '数据库的表名前缀';
-	$lang['PrefixExample'] = '(如: "kliqqi_" 那么用户表users将保存为kliqqi_users)';
+	$lang['PrefixExample'] = '(如: "plikli_" 那么用户表users将保存为plikli_users)';
 	$lang['CheckSettings'] = '检查设置';
 	$lang['Errors'] = '请修复上述错误,然后刷新本页,暂停安装!';
 	$lang['LangNotFound'] = '没有被发现。请删除所有语言文件的默认扩展名，然后再试一次。';
@@ -89,19 +91,19 @@
 		<li><p>如果你已成功安装了Kliqqi,请从服务器上<strong>删除</strong>  "/install" 这个目录.</p></li>
 		<li><p>用你刚才设置的管理员帐号 <a href="../admin/admin_index.php">仪表盘</a>管理界面. 系统会提示你更多的操作信息.</p></li>
 		<li><p>用管理界面<a href="../admin/admin_config.php">仪表盘</a> .</p></li>
-		<li><p>如果有问题，你可以访问 <a href="http://kliqqi.com/">Kliqqi 论坛</a> , 或者就来告诉我们一下你做了一个新站.</p></li>';
+		<li><p>如果有问题，你可以访问 <a href="https://www.plikli.com/">Plikli 论坛</a> , 或者就来告诉我们一下你做了一个新站.</p></li>';
 
 // Upgrade
-	$lang['UpgradeHome'] = '<P>备份数据库中的表继续进行之前任何进一步的，并确保您的数据库与“DROP TABLE如果不存在”签EXPORTED！</ p> <p>不要继续升级如果你做任何定制你的核心文件。首先，你必须做到以下几点：</ p>
-<ul>
-<LI>使用备份文件的一个副本，合并文件与新的KLIQQI文件中使用的WinMerge或类似的软件！</ li>
-<li>如果您使用的是其他比缺省引导模板时，请您合并及其与KLIQQI自举模板文件，因为相当长的一段已经作了修改的代码。 （见注升级后已完成）</ li>
-</ ul>
-</ DIV><br/>
-升级旧的Pligg版本3.0.0 Kliqqi将修改数据库表到最新版本。<br/>';
+	$lang['UpgradeHome'] = '<p style =“text-decoration：underline”>升级将<STRONG> IRREVERSIBLE </ STRONG>更改为您的数据库。 备份您的数据库表格，然后再继续进行并确保您的数据库与“下降表格已存在”一起导出！</ p> <p>如果您已对自己的核心文件进行任何定制，请不要进行升级。 首先，你必须做以下事情：</ p>
+<UL>
+<li>使用备份文件的副本，使用WINMERGE或类似软件将您的文件与新的KLIQQI文件合并！</ li>
+<li>如果您使用的不是默认靴靴模板，请确保您使用KLIQQI靴靴模板合并其文件，因为对代码进行了一些更改。 （请参阅升级完成后的注意事项）</ li>
+</ UL>
+<br />
+将旧的Pligg或Kliqqi版本升级到Plikli'. $lang ['plikli_version']. '会将您的数据库表修改为最新版本。<br />';
 	$lang['UpgradeAreYouSure'] = '你确定你想升级你的数据库和语言文件吗?';
 	$lang['UpgradeYes'] = '是的';
-	$lang['UpgradeLanguage'] = 'Kliqqi已成功更新了你的语言文件,现在已包括了最新的内容.';
+	$lang['UpgradeLanguage'] = 'Plikli已成功更新了你的语言文件,现在已包括了最新的内容.';
 	$lang['UpgradingTables'] = '<strong>更新数据库...</strong>';
 	$lang['LanguageUpdate'] = '<strong>更新语言文件...</strong>';
 	$lang['IfNoError'] = '如果没有任何出错信息那么升级已经完成!';

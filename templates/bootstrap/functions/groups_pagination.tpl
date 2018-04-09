@@ -1,7 +1,7 @@
 <script type="text/javascript" language="javascript">
 		
 
-		var my_kliqqi_url = "{$my_base_url}{$my_kliqqi_base}";
+		var my_plikli_url = "{$my_base_url}{$my_plikli_base}";
 		var Pager_setting = "{$Pager_setting}";
 		var page_name = "{$pagename}";
 		var total_row_for_group = "{$total_row_for_group}";
@@ -21,7 +21,7 @@
 			
 			function last_msg_funtion_for_group() 
 			{ 
-				var	url = my_kliqqi_url+"/load_data_for_groups.php";
+				var	url = my_plikli_url+"/load_data_for_groups.php";
 				var dataString = "start_up="+count+"&pagesize="+pageSize;
 									
 					$.ajax({
@@ -54,14 +54,14 @@
 		   } else if(Pager_setting==3){
 			   
 				if(parseInt(total_row_for_group)>=count)  
-				$(".group_container:last").after("<div class='btn btn-default contine_read_story'>{/literal}{#KLIQQI_Continue_Reading#}{literal}</div>"); 
+				$(".group_container:last").after("<div class='btn btn-default contine_read_story'>{/literal}{#PLIKLI_Continue_Reading#}{literal}</div>"); 
 				
 				$(".contine_read_story").live("click", function(){
 					if(parseInt(total_row_for_group)>count){
 						last_msg_funtion_for_group();
 					}else{	
 						$(this).hide();
-						$(".group_container:last").after("<div class='btn btn-default no_stories_left'>{/literal}{#KLIQQI_No_More_Articles#}{literal}</div>"); 
+						$(".group_container:last").after("<div class='btn btn-default no_stories_left'>{/literal}{#PLIKLI_No_More_Articles#}{literal}</div>"); 
 					}
 				});
 		   }

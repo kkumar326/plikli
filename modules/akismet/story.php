@@ -24,7 +24,7 @@ if($requestID > 0 && enable_friendly_urls == true){
 	$link->id=$requestID;
 	if($link->read() == false){
 		$main_smarty->assign('tpl_center', 'error_404_center');
-		$main_smarty->display($the_template . '/kliqqi.tpl');		
+		$main_smarty->display($the_template . '/plikli.tpl');		
 		die();
 	}
 
@@ -53,7 +53,7 @@ if(is_numeric($requestID)) {
 		$x = new redirector($_SERVER['REQUEST_URI']);
 
 		$main_smarty->assign('tpl_center', 'error_404_center');
-		$main_smarty->display($the_template . '/kliqqi.tpl');		
+		$main_smarty->display($the_template . '/plikli.tpl');		
 		die();
 	}
 	if(isset($_POST['process']) && sanitize($_POST['process'], 3) != ''){
@@ -66,7 +66,7 @@ if(is_numeric($requestID)) {
 				$authormail = $db->get_var("SELECT user_email FROM ".table_users." WHERE `user_id` = '$link->author';");
 				$subject= 'there is a new comment in your story';
 				$message = "bodytext!";
-				$headers = "From: noreply@kliqqi.com"  . "\r\nReply-To: noreply@kliqqi.com " . "\r\nX-Priority: 1\r\n";
+				$headers = "From: noreply@plikli.com"  . "\r\nReply-To: noreply@plikli.com " . "\r\nX-Priority: 1\r\n";
 				$to=$authormail;
 				@mail($to, $subject, $message, $headers);
 			}*/
@@ -132,7 +132,7 @@ if(is_numeric($requestID)) {
 	$main_smarty->assign('the_comments', get_comments(true));
 
 	$main_smarty->assign('tpl_center', $the_template . '/story_center');
-	$main_smarty->display($the_template . '/kliqqi.tpl');
+	$main_smarty->display($the_template . '/plikli.tpl');
 } else {
 
 	// check for redirects
@@ -140,7 +140,7 @@ if(is_numeric($requestID)) {
 	$x = new redirector($_SERVER['REQUEST_URI']);
 	
 	$main_smarty->assign('tpl_center', 'error_404_center');
-	$main_smarty->display($the_template . '/kliqqi.tpl');		
+	$main_smarty->display($the_template . '/plikli.tpl');		
 	die();
 }
 

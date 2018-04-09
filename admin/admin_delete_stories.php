@@ -86,7 +86,7 @@ $db->query("INSERT INTO ".table_tag_cache." select tag_words, count(DISTINCT lin
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h4 class="modal-title"><?php echo $main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Discarded_Stories_Removed') ?></h4>
+			<h4 class="modal-title"><?php echo $main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Discarded_Stories_Removed') ?></h4>
 		</div>
 		<div class="modal-body">
 			<?php
@@ -97,7 +97,7 @@ $db->query("INSERT INTO ".table_tag_cache." select tag_words, count(DISTINCT lin
 				$sqlqry = $db->get_var($query);
 				$db->query($sqlqry);
 			
-				echo '<p><strong>'.$num_rows.'</strong> '.$main_smarty->get_config_vars("KLIQQI_Visual_AdminPanel_Discarded_Stories_Removed_Message");
+				echo '<p><strong>'.$num_rows.'</strong> '.$main_smarty->get_config_vars("PLIKLI_Visual_AdminPanel_Discarded_Stories_Removed_Message");
 			?>
 		</div>
 		<div class="modal-footer">

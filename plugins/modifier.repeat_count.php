@@ -5,7 +5,7 @@
  * Type:     modifier
  * Name:     repeat
  * Purpose:  Wrapper for the PHP 'str_repeat' function
- * Credit:   Created for the Kliqqi CMS by the Kliqqi Dev Team
+ * Credit:   Created for the Plikli CMS by the Plikli Dev Team
  * Instead of giving the number of times to repeat the string/smarty variable,
  * you give the string to repeat. The number of times to repeat is the smarty variable
  * example

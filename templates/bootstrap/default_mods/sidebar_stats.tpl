@@ -8,7 +8,7 @@
 		<tbody>
 			<tr>
 				<td><strong>{#Sidebar_Stats_Newest_Member#}</strong></td>
-				<td>{* <a href="{$my_base_url}{$my_kliqqi_base}/user.php?login={$sidebar_stats_last_user}"> *}{$last_user}{* </a> *}</td>
+				<td>{* <a href="{$my_base_url}{$my_plikli_base}/user.php?login={$sidebar_stats_last_user}"> *}{$last_user}{* </a> *}</td>
 			</tr>
 			<tr>
 				<td><strong>{#Sidebar_Stats_Members#}</strong></td>
@@ -66,4 +66,4 @@
 		</tbody>
 	</table>	
 </div>
-{config_load file=sidebar_stats_kliqqi_lang_conf}
+{config_load file=sidebar_stats_plikli_lang_conf}

@@ -1,6 +1,6 @@
 <?php
 /*
-    XML Sitemaps module for Kliqqi
+    XML Sitemaps module for Plikli
     Copyright (C) 2007-2008  Secasiu Mihai - http://patchlog.com
 
     This program is free software; you can redistribute it and/or modify

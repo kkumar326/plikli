@@ -2,7 +2,11 @@
 if (!$step) {
 	 header('Location: ./install.php'); die(); 
 }
-
+if ($_POST['language'] == 'arabic') {
+	$site_direction = "rtl";
+}else{
+	$site_direction = "ltr";
+}
 if ($_POST['language'])
     $language = addslashes(strip_tags($_POST['language']));
 if($language == 'arabic'){
@@ -39,7 +43,7 @@ if($conn = @mysql_connect($dbhost,$dbuser,$dbpass)) {
 	
 	@$_SESSION['checked_step'] = 3;
 	
-	$output.= "<fieldset><p>" . $lang['ConnectionEstab'] . "</p>\n";
+	$output.= "<div style=\"direction:$site_direction\"><fieldset><p>" . $lang['ConnectionEstab'] . "</p>\n";
 	if(mysql_select_db($dbname, $conn)) {
 	$output.= "<p><strong>" . $lang['FoundDb'] . "</strong></p>\n";
 		if($handle = fopen($file, 'w')) {
@@ -97,7 +101,7 @@ if($check_errors !== false){
     <a class="btn btn-primary" href="install.php?step=2&language='.$language.'">' . $lang['GoBack'] . '</a>
     </form></div></fieldset>';
   }
-  echo $output;
+  echo $output;echo "</div>";
 } else {
   header("Location: $url_install3"); 
 }

@@ -3,7 +3,7 @@
 	{php}
 		global $main_smarty;
 		$allowed_tags = $main_smarty->get_template_vars('Story_Content_Tags_To_Allow');
-		$removebuttons = 'NewPage,Templates,PasteFromWord,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Flash,Table,PageBreak,Iframe,Anchor,Save,Link,Unlink,Format,Font,CreateDiv,Image';
+		$removebuttons = 'NewPage,Templates,PasteFromWord,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Flash,Table,PageBreak,Iframe,Anchor,Save,Link,Unlink,Font,CreateDiv,Image,Smiley,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,TextColor,BGColor,FontSize';
 
 		$config_var = 'config.removeButtons = ';
 		$pattern = "/$config_var/i";
@@ -77,4 +77,4 @@
 	{/php}
 {literal}<script>CKEDITOR.replace( 'comment_content' );</script>{/literal}
 {/if}
-{config_load file=ckeditor_kliqqi_lang_conf}
+{config_load file=ckeditor_plikli_lang_conf}

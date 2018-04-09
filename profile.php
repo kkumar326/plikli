@@ -33,31 +33,31 @@ elseif ($current_user->user_id > 0 && $current_user->authenticated) {
 	$login = $current_user->user_login;
 	if ($_GET['avatar'] != 'edit')
 		if (urlmethod == 1) {
-			header("Location: $my_base_url$my_kliqqi_base/profile.php?login=$login");
+			header("Location: $my_base_url$my_plikli_base/profile.php?login=$login");
 		}elseif (urlmethod == 2) {
-			header("Location: $my_base_url$my_kliqqi_base/user/$login/");
+			header("Location: $my_base_url$my_plikli_base/user/$login/");
 		}
 } else {
-	//header('Location: '.$my_base_url.$my_kliqqi_base);
+	//header('Location: '.$my_base_url.$my_plikli_base);
 	//die;
-	$myname=$my_base_url.$my_kliqqi_base;
+	$myname=$my_base_url.$my_plikli_base;
 }
 
 // breadcrumbs and page title
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Profile');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Profile');
 $navwhere['link1'] = getmyurl('user2', $login, 'profile');
 $navwhere['text2'] = $login;
 $navwhere['link2'] = getmyurl('user2', $login, 'profile');
-$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_Profile_ModifyProfile');
+$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Profile_ModifyProfile');
 $navwhere['link3'] = getmyurl('profile', '');
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Profile_ModifyProfile'));
+$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Profile_ModifyProfile'));
 
 // read the users information from the database
 $user=new User();
 $user->username = $login;
 if(!$user->read()) {
-	header('Location: '.$my_base_url.$my_kliqqi_base);
+	header('Location: '.$my_base_url.$my_plikli_base);
 	die;
 }
 
@@ -164,11 +164,11 @@ if(isset($_POST['email'])){
 				
 	}else
 	{
-		$save_message_text=$main_smarty->get_config_vars("KLIQQI_Visual_Profile_DataUpdated");
+		$save_message_text=$main_smarty->get_config_vars("PLIKLI_Visual_Profile_DataUpdated");
 		if($savemsg['username']==1)
-		 $save_message_text.="<br/>".$main_smarty->get_config_vars("KLIQQI_Visual_Profile_UsernameUpdated");
+		 $save_message_text.="<br/>".$main_smarty->get_config_vars("PLIKLI_Visual_Profile_UsernameUpdated");
 		if($savemsg['pass']==1)
-		 $save_message_text.="<br/>".$main_smarty->get_config_vars("KLIQQI_Visual_Profile_PassUpdated");
+		 $save_message_text.="<br/>".$main_smarty->get_config_vars("PLIKLI_Visual_Profile_PassUpdated");
 
 	    // Reload the page if no error
 	    $_SESSION['savemsg'] = $save_message_text;
@@ -227,7 +227,7 @@ function show_profile() {
 	$main_smarty->assign('user_published_votes', $user->published_votes);
 	
 	// If the user language setting is NULL, present the site's default language file
-	$main_smarty->assign('user_language', !empty($user->language) ? $user->language : kliqqi_language);
+	$main_smarty->assign('user_language', !empty($user->language) ? $user->language : plikli_language);
 
 	$languages = array();
 	$files = glob("languages/*.conf");
@@ -277,7 +277,7 @@ function show_profile() {
 
 	// show the template
 	$main_smarty->assign('tpl_center', $the_template . '/user_settings_center');
-	$main_smarty->display($the_template . '/kliqqi.tpl');	
+	$main_smarty->display($the_template . '/plikli.tpl');	
 }
 
 function save_profile() {
@@ -292,20 +292,20 @@ function save_profile() {
 		if ($user->email!=sanitize($_POST['email'], 3))
 		{
 		    if(!check_email(sanitize($_POST['email'], 3))) {
-			$savemsg = $main_smarty->get_config_vars("KLIQQI_Visual_Profile_BadEmail");
+			$savemsg = $main_smarty->get_config_vars("PLIKLI_Visual_Profile_BadEmail");
 			return $savemsg;
 		    } 
 		    elseif(email_exists(trim(sanitize($_POST['email'], 3)))) { // if email already exists
-			$savemsg = $main_smarty->get_config_vars("KLIQQI_Visual_Register_Error_EmailExists");
+			$savemsg = $main_smarty->get_config_vars("PLIKLI_Visual_Register_Error_EmailExists");
 			return $savemsg;
 		    }
 		    else {
-			if(kliqqi_validate()){
-				$encode=md5($_POST['email'] . $user->karma .  $user->username. kliqqi_hash().$main_smarty->get_config_vars('KLIQQI_Visual_Name'));
+			if(plikli_validate()){
+				$encode=md5($_POST['email'] . $user->karma .  $user->username. plikli_hash().$main_smarty->get_config_vars('PLIKLI_Visual_Name'));
 
-				$domain = $main_smarty->get_config_vars('KLIQQI_Visual_Name');			
-				$validation = my_base_url . my_kliqqi_base . "/validation.php?code=$encode&uid=".urlencode($user->username)."&email=".urlencode($_POST['email']);
-				$str = $main_smarty->get_config_vars('KLIQQI_PassEmail_verification_message');
+				$domain = $main_smarty->get_config_vars('PLIKLI_Visual_Name');			
+				$validation = my_base_url . my_plikli_base . "/validation.php?code=$encode&uid=".urlencode($user->username)."&email=".urlencode($_POST['email']);
+				$str = $main_smarty->get_config_vars('PLIKLI_PassEmail_verification_message');
 				eval('$str = "'.str_replace('"','\"',$str).'";');
 				$message = "$str";
 
@@ -314,19 +314,19 @@ function save_profile() {
 				else
 					require("libs/class.phpmailer4.php");
 				$mail = new PHPMailer();
-				$mail->From = $main_smarty->get_config_vars('KLIQQI_PassEmail_From');
-				$mail->FromName = $main_smarty->get_config_vars('KLIQQI_PassEmail_Name');
+				$mail->From = $main_smarty->get_config_vars('PLIKLI_PassEmail_From');
+				$mail->FromName = $main_smarty->get_config_vars('PLIKLI_PassEmail_Name');
 				$mail->AddAddress($_POST['email']);
-				$mail->AddReplyTo($main_smarty->get_config_vars('KLIQQI_PassEmail_From'));
+				$mail->AddReplyTo($main_smarty->get_config_vars('PLIKLI_PassEmail_From'));
 				$mail->IsHTML(false);
-				$mail->Subject = $main_smarty->get_config_vars('KLIQQI_PassEmail_Subject_verification');
+				$mail->Subject = $main_smarty->get_config_vars('PLIKLI_PassEmail_Subject_verification');
 				$mail->Body = $message;
 				$mail->CharSet = 'utf-8';
 
 #print_r($mail);					
 				if(!$mail->Send())
 					return false;
-				$savemsg = $main_smarty->get_config_vars("KLIQQI_Visual_Register_Noemail").' '.sprintf($main_smarty->get_config_vars("KLIQQI_Visual_Register_ToDo"),$main_smarty->get_config_vars('KLIQQI_PassEmail_From'));
+				$savemsg = $main_smarty->get_config_vars("PLIKLI_Visual_Register_Noemail").' '.sprintf($main_smarty->get_config_vars("PLIKLI_Visual_Register_ToDo"),$main_smarty->get_config_vars('PLIKLI_PassEmail_From'));
 			}
 			else
 				$user->email=sanitize($_POST['email'], 2);
@@ -421,19 +421,19 @@ function save_profile() {
 				
 			if (preg_match('/\pL/u', 'a')) {	// Check if PCRE was compiled with UTF-8 support
 			if (!preg_match('/^[_\-\d\p{L}\p{M}]+$/iu',$user_login)) { // if username contains invalid characters
-			$savemsg = $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_UserInvalid');
+			$savemsg = $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_UserInvalid');
 			return $savemsg;
 			}
 			} else {
 				if (!preg_match('/^[^~`@%&=\\/;:\\.,<>!"\\\'\\^\\.\\[\\]\\$\\(\\)\\|\\*\\+\\-\\?\\{\\}\\\\]+$/', $user_login)) {
-				$savemsg = $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_UserInvalid');
+				$savemsg = $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_UserInvalid');
 				 return $savemsg;
 				}
 			}
 		
 					
 			if(user_exists(trim($user_login)) ) {
-			  $savemsg = $main_smarty->get_config_vars("KLIQQI_Visual_Register_Error_UserExists");
+			  $savemsg = $main_smarty->get_config_vars("PLIKLI_Visual_Register_Error_UserExists");
 			  $user->username= $user_login;
 			  return $savemsg;
 			
@@ -451,7 +451,7 @@ function save_profile() {
 			$saltedpass=generateHash($oldpass, substr($userX->user_pass, 0, SALT_LENGTH));
 			if($userX->user_pass == $saltedpass){
 				if(sanitize($_POST['newpassword'], 3) !== sanitize($_POST['newpassword2'], 3)) {
-					$savemsg = $main_smarty->get_config_vars("KLIQQI_Visual_Profile_BadPass");
+					$savemsg = $main_smarty->get_config_vars("PLIKLI_Visual_Profile_BadPass");
 					return $savemsg;
 				} else {
 					$saltedpass=generateHash(sanitize($_POST['newpassword'], 3));
@@ -459,7 +459,7 @@ function save_profile() {
 					$saved['pass']=1;
 				}
 			} else {
-				$savemsg = $main_smarty->get_config_vars("KLIQQI_Visual_Profile_BadOldPass");
+				$savemsg = $main_smarty->get_config_vars("PLIKLI_Visual_Profile_BadOldPass");
 				return $savemsg;
 			}
 		}

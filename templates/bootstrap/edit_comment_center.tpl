@@ -4,7 +4,7 @@
 <!-- edit_comment_center.tpl -->
 {$the_story}
 <br/>
-<h3>{#KLIQQI_Visual_Story_Comments#}</h3>
+<h3>{#PLIKLI_Visual_Story_Comments#}</h3>
 <form action="" method="POST" id="thisform">
 	<ol class="comment-list">
 		{$the_comment}

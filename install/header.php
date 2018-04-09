@@ -122,7 +122,7 @@ input[type=submit] {
 .jumbotron{background-color:#ed143d}
 	</style>
 	
-	<title>Kliqqi CMS <?php $lang['installer'] ?></title>
+	<title>Plikli CMS <?php $lang['installer'] ?></title>
 		
 </head>
 <body>

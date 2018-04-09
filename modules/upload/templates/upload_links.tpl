@@ -1,4 +1,4 @@
-{checkActionsTpl location="tpl_kliqqi_module_upload_start"}
+{checkActionsTpl location="tpl_plikli_module_upload_start"}
 {config_load file=upload_lang_conf}
 
 {php}
@@ -26,7 +26,7 @@
 {/php}                                                          
 
 {if sizeof($images)}
-	<h3>{#KLIQQI_Upload_Attached#}</h3>
+	<h3>{#PLIKLI_Upload_Attached#}</h3>
 	{$upload_pre_format}
 	{foreach from=$images item=image}
 	    {if $image.file_ext=='txt'}<!-- Text file -->
@@ -40,7 +40,7 @@
 			if (strpos($image['file_name'],'http')===0)
 			    $format = str_replace('{path}',$image['file_name'],$format);
 			else
-			    $format = str_replace('{path}',my_kliqqi_base."$upload_directory/{$image['file_name']}",$format);
+			    $format = str_replace('{path}',my_plikli_base."$upload_directory/{$image['file_name']}",$format);
 		    	if (preg_match_all('/\{field(\d+)\}/s',$format,$m))
 	    		for ($i=0; $i<sizeof($m[1]); $i++)
 	    		{
@@ -53,12 +53,12 @@
 		{if strpos($image.file_name,'http')===0}
 			<a href='{$image.file_name}'>{$image.file_name}</a>
 		{else}
-			<a href='{$my_kliqqi_base}{$upload_directory}/{$image.file_name}'>{$image.file_name}</a>
+			<a href='{$my_plikli_base}{$upload_directory}/{$image.file_name}'>{$image.file_name}</a>
 		{/if}
 	    {/if}
 	{/foreach}
 {$upload_post_format}
 {/if}
 
-{config_load file=upload_kliqqi_lang_conf}
-{checkActionsTpl location="tpl_kliqqi_module_upload_end"}
+{config_load file=upload_plikli_lang_conf}
+{checkActionsTpl location="tpl_plikli_module_upload_end"}

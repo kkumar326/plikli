@@ -1,6 +1,6 @@
 <?php
 /*
-    XML Sitemaps module for Kliqqi
+    XML Sitemaps module for Plikli
     Copyright (C) 2007-2008  Secasiu Mihai - http://patchlog.com
 
     This program is free software; you can redistribute it and/or modify
@@ -18,7 +18,7 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 // the path to the module. the probably shouldn't be changed unless you rename the xml_sitemaps folder(s)
-define('xml_sitemaps_path', my_kliqqi_base . '/modules/xml_sitemaps/');
+define('xml_sitemaps_path', my_plikli_base . '/modules/xml_sitemaps/');
 define('xml_sitemaps_tpl_path', '../modules/xml_sitemaps/templates/');
 // the path to the module. the probably shouldn't be changed unless you rename the xml_sitemaps folder(s)
 define('xml_sitemaps_lang_conf', '/modules/xml_sitemaps/lang.conf');

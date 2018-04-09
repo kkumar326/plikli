@@ -43,11 +43,20 @@ $replacement = '';
 $mysqlversion = preg_replace($pattern, $replacement, $mysqlversion); 
 $mysqlversion = strstr($mysqlversion, '-', true);
 
+$phpversion = phpversion();
+
 // Tally up how many items are fulfilled.
 $required = 23; // This should be the number of checks being performed
 $tally = 0;
+$warning_php_version = '';
 if (glob("../languages/*.conf")) { $tally = $tally+1;}
-if (phpversion() > 5) { $tally = $tally+1; }
+if ($phpversion > 5 && $phpversion < 6) {
+	$tally = $tally+1; 
+}elseif ($phpversion > 6) {
+	$warning_php_version = "You have PHP version $phpversion and Plikli is NOT yet compatible with PHP version 7+; It is in progress!<br />Check the cPanel under SOFTWARE -> MultiPHP Manager. if it is available and you can select the PHP version you want, then set it to 5+. Otherwise, ask your host to install EasyApache so you can have access to MultiPHP Manager.";
+}elseif ($phpversion < 5) {
+	$warning_php_version = "You have PHP version $phpversion and Plikli is NOT compatible with PHP version $phpversion; as Plikli CMS uses functions that are designed for PHP 5+<br />Check the cPanel under SOFTWARE -> MultiPHP Manager. if it is available and you can select the PHP version you want, then set it to 5+. Otherwise, ask your host to install EasyApache so you can have access to MultiPHP Manager.";
+}
 if (version_compare($mysqlversion, '5.0.0', '>=')) { $tally = $tally+1; }
 if (function_exists('curl_version')){ $tally = $tally+1; }
 if (function_exists('fopen')){ $tally = $tally+1; }
@@ -76,7 +85,8 @@ $percent = percent($tally,$required);
 
 if ($tally < $required ){
 	echo '<div class="alert alert-warning">
-		<p><strong>Warning:</strong> Your server has only met <strong>'.$tally.'</strong> of  the <strong>'.$required.'</strong> requirements to run Kliqqi CMS. While not all of the items on this page are required to run Kliqqi, we suggest that you try to comply with the suggestions made on this page. Please see the list below to discover what issues need to be addressed.</p><br />';
+		<p><strong>Warning:</strong> Your server has only met <strong>'.$tally.'</strong> of  the <strong>'.$required.'</strong> requirements to run Plikli CMS. While not all of the items on this page are required to run Plikli, we suggest that you try to comply with the suggestions made on this page. Please see the list below to discover what issues need to be addressed.</p><br />';
+		echo $warning_php_version;
 		
 		echo '<div class="progress" style="margin-bottom: 9px;">
 				<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="'.$percent.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$percent.'%;">
@@ -85,7 +95,7 @@ if ($tally < $required ){
 			</div>';
 } else {
 	echo '<div class="alert alert-success">
-		<p>Your server met all of the '.$required. ' requirements needed to run Kliqqi CMS. See the information below for a detailed report.</p><br />';
+		<p>Your server met all of the '.$required. ' requirements needed to run Plikli CMS. See the information below for a detailed report.</p><br />';
 	
 		echo '<div class="progress" style="margin-bottom: 9px;">
 				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="'.$percent.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$percent.'%;">
@@ -195,7 +205,7 @@ if ((!$my_base_url) || ($my_base_url == '')) { echo '<tr><td><i class="fa fa-tim
 */
 
 echo '<table class="table table-bordered table-striped">';
-echo '<thead><tr><th colspan="2">Checking <a id="chmod" data-trigger="hover" data-html="true" data-content="<span style=\'font-weight:normal;\'>CHMOD represents the read, write, and execute permissions given to files and directories. Kliqqi CMS requires that certain files and directories are given a CHMOD status of 0777, allowing Kliqqi to have access to make changes to files. Any lines that return as an error represent files that need to be updated to CHMOD 0777.<span>" rel="popover" href="http://en.wikipedia.org/wiki/Chmod" data-original-title="CHMOD">CHMOD Settings</a></th></tr></thead>';
+echo '<thead><tr><th colspan="2">Checking <a id="chmod" data-trigger="hover" data-html="true" data-content="<span style=\'font-weight:normal;\'>CHMOD represents the read, write, and execute permissions given to files and directories. Plikli CMS requires that certain files and directories are given a CHMOD status of 0777, allowing Plikli to have access to make changes to files. Any lines that return as an error represent files that need to be updated to CHMOD 0777.<span>" rel="popover" href="http://en.wikipedia.org/wiki/Chmod" data-original-title="CHMOD">CHMOD Settings</a></th></tr></thead>';
 echo '<tbody>';
 
 $file='../admin/backup/';
@@ -258,15 +268,14 @@ echo '<thead><tr><th colspan="2">Checking Server Settings</th></tr></thead>';
 echo '<tbody>';
 
 // PHP
-$phpversion = phpversion();
 echo '<tr><td>';
-if ($phpversion > 5) {
+if ($phpversion > 5 && $phpversion < 6) {
 	echo '<i class="fa fa-check"></i>';
 }else{
 	echo '<i class="fa fa-times"></i>';
 
 }
-echo '</td><td><a id="phpversion" data-trigger="hover" data-content="Kliqqi has been tested on both PHP versions 4 and 5. We have designed the content management system based on PHP 5 technologies, so certain problems may occur when using older versions of PHP. We suggest that your server runs a mininum of PHP 5." rel="popover" href="http://us3.php.net/tut.php" data-original-title="PHP Version">PHP Version ('.$phpversion.')</a></td>';
+echo '</td><td><a id="phpversion" data-trigger="hover" data-content="Plikli has been tested on PHP version 5+. We have designed the content management system based on PHP 5+ technologies, so certain problems may occur when using older versions of PHP. We recommended that your server runs a minimum of PHP 5." rel="popover" href="http://us3.php.net/tut.php" data-original-title="PHP Version">PHP Version ('.$phpversion.')</a><br /><strong>NOTE that Plikli is NOT yet compatible with PHP version 7; It is in progress!</strong></td>';
 echo '</tr>';
 
 echo '<tr><td>';
@@ -275,11 +284,11 @@ if (version_compare($mysqlversion, '5.0.0', '>=')) {
 }else{
 	echo '<i class="fa fa-times"></i>';
 }
-echo '</td><td><a id="mysqlversion" data-trigger="hover" data-content="Kliqqi has been tested on both MySQL versions 4 and 5, during that process we have discovered that bugs will occassionally pop up if you are running MySQL 4. For this reason we suggest that you use a server with MySQL 5 or later to run a Kliqqi CMS website. MySQL 5 has been available for some time now and we hope that most major web hosts now support it. It offers features that are not built into MySQL 4, which we may have used when writing code for Kliqqi CMS." rel="popover" href="http://dev.mysql.com/doc/" data-original-title="Client API version">Mysql Client API version ('.$mysqlversion.')</a></td>';
+echo '</td><td><a id="mysqlversion" data-trigger="hover" data-content="Plikli has been tested on both MySQL versions 4 and 5, during that process we have discovered that bugs will occasionally pop up if you are running MySQL 4. For this reason we recommended that you use a server with MySQL 5 or later to run a Plikli CMS website. MySQL 5 has been available for some time now and we hope that most major web hosts now support it. It offers features that are not built into MySQL 4, which we may have used when writing code for Plikli CMS." rel="popover" href="http://dev.mysql.com/doc/" data-original-title="Client API version">Mysql Client API version ('.$mysqlversion.')</a></td>';
 echo '</tr>';
 
 echo '<tr><td style="width:20px;">', function_exists('curl_version') ? '<i class="fa fa-check"></i></td>' : '<i class="fa fa-times"></i></td>';
-	echo '<td><a id="curlwarning" data-trigger="hover" data-content="cURL is a PHP library that allows Kliqqi to connect to external websites." rel="popover" href="http://php.net/manual/en/book.curl.php" data-original-title="cURL PHP Extension">cURL</a></td></tr>';
+	echo '<td><a id="curlwarning" data-trigger="hover" data-content="cURL is a PHP library that allows Plikli to connect to external websites." rel="popover" href="http://php.net/manual/en/book.curl.php" data-original-title="cURL PHP Extension">cURL</a></td></tr>';
 
 echo '<tr><td>', function_exists('fopen') ? '<i class="fa fa-check"></i></td>' : '<i class="fa fa-times"></i></td>';
 	echo '<td><a id="fopenwarning" data-trigger="hover" data-content="The fopen function for PHP allows us to create, read, and manipulate local files." rel="popover" href="http://www.w3schools.com/php/func_filesystem_fopen.asp" data-original-title="fopen PHP Function">fopen</a></td></tr>';
@@ -291,11 +300,11 @@ echo '<tr><td>', file_get_contents(__FILE__) ? '<i class="fa fa-check"></i></td>
 	echo '<td><a id="fgetwarning" data-trigger="hover" data-content="The file_get_contents() function for PHP reads a file into a string." rel="popover" href="http://www.w3schools.com/php/func_filesystem_file_get_contents.asp" data-original-title="fgetwarning PHP Function">file_get_contents</a></td></tr>';
 	
 echo '<tr><td>', function_exists('gd_info') ? '<i class="fa fa-check"></i></td>' : '<i class="fa fa-times"></i></td>';
-	echo '<td><a id="gdwarning" data-trigger="hover" data-content="The GD Graphics Library is a graphics software library for dynamically manipulating images. Any images handled by Kliqqi, like user avatar or group images, use GD to manipulate the file." rel="popover" href="http://php.net/manual/en/book.image.php" data-original-title="GD Graphics Library">GD Graphics Library</a></td></tr>';
+	echo '<td><a id="gdwarning" data-trigger="hover" data-content="The GD Graphics Library is a graphics software library for dynamically manipulating images. Any images handled by Plikli, like user avatar or group images, use GD to manipulate the file." rel="popover" href="http://php.net/manual/en/book.image.php" data-original-title="GD Graphics Library">GD Graphics Library</a></td></tr>';
 	
 echo '</tbody></table>';
 
-echo '<div class="jumbotron" style="padding:25px 10px;"><p style="text-align:center">Please continue to the <a href="./install.php">Installation Page</a>, the <a href="./upgrade.php">Upgrade Page</a>, or the <a href="../readme.html">Kliqqi Readme</a>.</p></div>';
+echo '<div class="jumbotron" style="padding:25px 10px;"><p style="text-align:center">Please continue to the <a href="./install.php">Installation Page</a>, the <a href="./upgrade.php">Upgrade Page</a>, or the <a href="../readme.html">Plikli Readme</a>.</p></div>';
 
 ?>
 

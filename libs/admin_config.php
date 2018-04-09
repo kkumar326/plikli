@@ -2,7 +2,7 @@
 
 if(!defined('mnminclude')){header('Location: ../error_404.php');}
 
-class kliqqiconfig {
+class plikliconfig {
 	var $id = 0;
 	var $var_page = 0;
 	var $var_name = 0;
@@ -14,7 +14,7 @@ class kliqqiconfig {
 	var $EditInPlaceCode = '';
 
 	function showpage(){
-		global $db, $my_kliqqi_base;
+		global $db, $my_plikli_base;
 		
 		?>
 			<div class="admin_config_content">
@@ -27,10 +27,10 @@ class kliqqiconfig {
 			echo '<table class="table table-bordered table-striped">';
 			echo '<thead><tr>';
 			echo '<th>Title</th>';
-			echo '<th>'.$main_smarty->get_config_vars(KLIQQI_Visual_Config_Description).'</th>';
-			echo '<th style="min-width:120px">'.$main_smarty->get_config_vars(KLIQQI_Visual_Config_Value).'</th>';
-			echo '<th style="width:120px;">'.$main_smarty->get_config_vars(KLIQQI_Visual_Config_Default_Value).'</th>';
-			echo '<th style="width:120px;">'.$main_smarty->get_config_vars(KLIQQI_Visual_Config_Expected_Values).'</th>';
+			echo '<th>'.$main_smarty->get_config_vars(PLIKLI_Visual_Config_Description).'</th>';
+			echo '<th style="min-width:120px">'.$main_smarty->get_config_vars(PLIKLI_Visual_Config_Value).'</th>';
+			echo '<th style="width:120px;">'.$main_smarty->get_config_vars(PLIKLI_Visual_Config_Default_Value).'</th>';
+			echo '<th style="width:120px;">'.$main_smarty->get_config_vars(PLIKLI_Visual_Config_Expected_Values).'</th>';
 			echo '</tr></thead><tbody>';
 			
 			foreach($configs as $config) {
@@ -104,7 +104,7 @@ class kliqqiconfig {
 		fclose($fp);
 		if($this->var_name == '$my_base_url'){echo translate("It looks like this should be set to") . " <strong>" . $expected_base_url ."</strong> ";}
 		
-		if($this->var_name == '$my_kliqqi_base'){
+		if($this->var_name == '$my_plikli_base'){
 			$pos = strrpos($_SERVER["SCRIPT_NAME"], "/admin/");
 			$path = substr($_SERVER["SCRIPT_NAME"], 0, $pos);
 			if ($path == "/" || $path == ""){$path = translate("Nothing - Leave it blank");}
@@ -165,7 +165,7 @@ class kliqqiconfig {
 			foreach($usersql as $row) {
 				$value = $row->var_enclosein . trim($row->var_value). $row->var_enclosein;
 				
-				$write_vars = array('table_prefix', '$my_base_url', '$my_kliqqi_base', '$dblang', '$language' );
+				$write_vars = array('table_prefix', '$my_base_url', '$my_plikli_base', '$dblang', '$language' );
 				
 				if(in_array($row->var_name, $write_vars)){
 				

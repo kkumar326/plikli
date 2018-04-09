@@ -1,6 +1,6 @@
 <?php
  /******************************************************************
-* template_lite Adsense Plugin for Kliqqi
+* template_lite Adsense Plugin for Plikli
 *
 * Name: adsense
 * Type: function

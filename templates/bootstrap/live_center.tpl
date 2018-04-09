@@ -3,16 +3,16 @@
 *************************************}
 <!-- live_center.tpl -->
 
-<legend>{#KLIQQI_Visual_Live#}</legend>
+<legend>{#PLIKLI_Visual_Live#}</legend>
 <table class="table table-bordered table-striped" id="liveTble">
 	<thead>
 		<tr class="live2-item">
-			<th><span class="live2-ts"><strong>{#KLIQQI_Visual_All_Hour#}</strong></span></th>
-			<th><span class="live2-type"><strong>{#KLIQQI_Visual_All_Action#}</strong></span></th>
-			<th><span class="live2-votes"><strong><center>{#KLIQQI_Visual_All_Votes#}</center></strong></span></th>
-			<th><span class="live2-story"><span align="center"><strong>{#KLIQQI_Visual_All_Story#}</strong></span></span></th>
-			<th><span class="live2-who"><strong>{#KLIQQI_Visual_All_User#}</strong></span></th>
-			<th><span class="live2-status"><strong>{#KLIQQI_Visual_All_State#}</strong></span></th>
+			<th><span class="live2-ts"><strong>{#PLIKLI_Visual_All_Hour#}</strong></span></th>
+			<th><span class="live2-type"><strong>{#PLIKLI_Visual_All_Action#}</strong></span></th>
+			<th><span class="live2-votes"><strong><center>{#PLIKLI_Visual_All_Votes#}</center></strong></span></th>
+			<th><span class="live2-story"><span align="center"><strong>{#PLIKLI_Visual_All_Story#}</strong></span></span></th>
+			<th><span class="live2-who"><strong>{#PLIKLI_Visual_All_User#}</strong></span></th>
+			<th><span class="live2-status"><strong>{#PLIKLI_Visual_All_State#}</strong></span></th>
 		</tr>
 	</thead>
 	<tbody>

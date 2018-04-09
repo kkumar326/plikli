@@ -54,7 +54,7 @@ if($canIhaveAccess == 1) {
 	
 	// if user is searching
 	$search_sql = '';
-	if(isset($_GET["keyword"]) && $_GET["keyword"]!= $main_smarty->get_config_vars('KLIQQI_Visual_Search_SearchDefaultText') && !empty($_GET["keyword"])){
+	if(isset($_GET["keyword"]) && $_GET["keyword"]!= $main_smarty->get_config_vars('PLIKLI_Visual_Search_SearchDefaultText') && !empty($_GET["keyword"])){
 		$search_sql = " AND (comment_content LIKE '%".sanitize($_GET["keyword"], 3)."%' OR user_login LIKE '%".sanitize($_GET["keyword"], 3)."%')";
 	}
 	$user_sql = '';
@@ -134,11 +134,11 @@ if($canIhaveAccess == 1) {
 	}
 	
 	// breadcrumbs and page title
-	$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+	$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 	$navwhere['link1'] = getmyurl('admin', '');
-	$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_Comments');
+	$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_Comments');
 	$main_smarty->assign('navbar_where', $navwhere);
-	$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+	$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 	
 	if (isset($_GET['action']) && sanitize($_GET['action'], 3) == "bulkmod" && isset($_POST['admin_acction'])) {
 		$CSRF->check_expired('comments_edit');
@@ -177,7 +177,7 @@ if($canIhaveAccess == 1) {
 						
 			
 			}
-			header("Location: ".my_kliqqi_base."/admin/admin_comments.php?page=".sanitize($_GET['page'],3));
+			header("Location: ".my_plikli_base."/admin/admin_comments.php?page=".sanitize($_GET['page'],3));
 			die();
 
 		} else {
@@ -192,8 +192,8 @@ if($canIhaveAccess == 1) {
 	define('pagename', 'admin_comments'); 
 	$main_smarty->assign('pagename', pagename);
 	
-	// read the mysql database to get the kliqqi version
-	/* Redwine: kliqqi version query removed and added to /libs/smartyvriables.php */
+	// read the mysql database to get the plikli version
+	/* Redwine: plikli version query removed and added to /libs/smartyvriables.php */
 	
 	// show the template
 	$main_smarty->assign('tpl_center', '/admin/comments');

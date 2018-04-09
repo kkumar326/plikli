@@ -5,4 +5,4 @@
 	<div class="alert alert-danger">{$message_error}</div>
 {/if}
 
-{config_load file=subscribe2comments_kliqqi_lang_conf}
+{config_load file=subscribe2comments_plikli_lang_conf}

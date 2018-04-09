@@ -50,7 +50,7 @@ if ($link) {
 			$main_smarty->assign('submit_error', 'cantedit');
 				$toredirect = $_SERVER['HTTP_REFERER'];
 				$main_smarty->assign('toredirect', $toredirect);
-				/* Redwine: we need the value of edit_time_limit to pass it to the submit_errors_center.tpl because the value of KLIQQI_Visual_EditLink_Timeout in the tpl file displays literally as "You cannot edit link after %s minutes." */
+				/* Redwine: we need the value of edit_time_limit to pass it to the submit_errors_center.tpl because the value of PLIKLI_Visual_EditLink_Timeout in the tpl file displays literally as "You cannot edit link after %s minutes." */
 				$edit_time_limit = edit_time_limit;
 				$main_smarty->assign('edit_time', $edit_time_limit);
 				
@@ -64,7 +64,7 @@ if ($link) {
 					$main_smarty->assign('pagename', pagename);
 					
 					// show the template
-					$main_smarty->display($the_template . '/kliqqi.tpl');
+					$main_smarty->display($the_template . '/plikli.tpl');
 				}
 			return $error;
 			
@@ -90,32 +90,32 @@ if ($link) {
 					$user = $db->get_row("SELECT * FROM " . table_users . " WHERE user_id=".$link_author[0].";");
 
 					$to = $user->user_email;
-					$subject = $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Email_Subject');
-					$body = $user->user_login . ", \r\n\r\n" . $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Email_AdminMadeChange') . "\r\n";
+					$subject = $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_Subject');
+					$body = $user->user_login . ", \r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_AdminMadeChange') . "\r\n";
 					$body = $body . $my_base_url . getmyurl('story', sanitize($_POST['id'], 3)) . "\r\n\r\n";
 						if ($linkres->category != sanitize($_POST["category"], 3)){
-							$body = $body . $main_smarty->get_config_vars('KLIQQI_Visual_Submit2_Category') . " change\r\n\r\n" . $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Email_PreviousText') . ": " . GetCatName($linkres->category) . "\r\n\r\n" . $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Email_NewText') . ": " . GetCatName(sanitize($_POST["category"], 3)) . "\r\n\r\n";
+							$body = $body . $main_smarty->get_config_vars('PLIKLI_Visual_Submit2_Category') . " change\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_PreviousText') . ": " . GetCatName($linkres->category) . "\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_NewText') . ": " . GetCatName(sanitize($_POST["category"], 3)) . "\r\n\r\n";
 						}
 						if ($linkres->title != sanitize($_POST["title"], 4, $Story_Content_Tags_To_Allow)){
-							$body = $body . $main_smarty->get_config_vars('KLIQQI_Visual_Submit2_Title') . " change\r\n\r\n" . $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Email_PreviousText') . ": " . $linkres->title . "\r\n\r\n" . $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Email_NewText') . ": " . sanitize($_POST["title"], 3) . "\r\n\r\n";
+							$body = $body . $main_smarty->get_config_vars('PLIKLI_Visual_Submit2_Title') . " change\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_PreviousText') . ": " . $linkres->title . "\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_NewText') . ": " . sanitize($_POST["title"], 3) . "\r\n\r\n";
 						}      
 					
 						if ($linkres->content != close_tags(sanitize($_POST["bodytext"], 4, $Story_Content_Tags_To_Allow))) {
-							$body = $body . $main_smarty->get_config_vars('KLIQQI_Visual_Submit2_Description') . " change\r\n\r\n" . $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Email_PreviousText') . ": " . $linkres->content . "\r\n\r\n" . $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Email_NewText') . ": " . close_tags(sanitize($_POST["bodytext"], 3)) . "\r\n\r\n";
+							$body = $body . $main_smarty->get_config_vars('PLIKLI_Visual_Submit2_Description') . " change\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_PreviousText') . ": " . $linkres->content . "\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_NewText') . ": " . close_tags(sanitize($_POST["bodytext"], 3)) . "\r\n\r\n";
 						}
 						if ($linkres->tags != tags_normalize_string(sanitize($_POST['tags'], 3))){
-							$body = $body . $main_smarty->get_config_vars('KLIQQI_Visual_Submit2_Tags') . " change\r\n\r\n" . $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Email_PreviousText') . ": " . $linkres->tags . "\r\n\r\n" . $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Email_NewText') . ": " . tags_normalize_string(sanitize($_POST['tags'], 3)) . "\r\n\r\n";
+							$body = $body . $main_smarty->get_config_vars('PLIKLI_Visual_Submit2_Tags') . " change\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_PreviousText') . ": " . $linkres->tags . "\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_NewText') . ": " . tags_normalize_string(sanitize($_POST['tags'], 3)) . "\r\n\r\n";
 						}
-					$body = $body . $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Email_ReasonText') . ": ";
+					$body = $body . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_ReasonText') . ": ";
 						if (sanitize($_POST["reason"], 3) == "other") {
 							$body = $body . sanitize($_POST["otherreason"], 3);
 						}else{
-							$body = $body . $main_smarty->get_config_vars('KLIQQI_Visual_EditStory_Reason_' . sanitize($_POST["reason"], 3));
+							$body = $body . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Reason_' . sanitize($_POST["reason"], 3));
 						}
-					$headers = 'From: ' . $main_smarty->get_config_vars("KLIQQI_PassEmail_From") . "\r\n";
+					$headers = 'From: ' . $main_smarty->get_config_vars("PLIKLI_PassEmail_From") . "\r\n";
 					$headers .= "Content-type: text/plain; charset=utf-8\r\n";
 						if (!mail($to, $subject, $body, $headers)) {
-						echo '<br /><div class="error">'.$main_smarty->get_config_vars('KLIQQI_PassEmail_SendFail').'</div>';
+						echo '<br /><div class="error">'.$main_smarty->get_config_vars('PLIKLI_PassEmail_SendFail').'</div>';
 						die;
 					}
 				}
@@ -271,7 +271,7 @@ if ($link) {
 			$main_smarty->assign('submit_url_title', $linkres->url_title);
 			$main_smarty->assign('submit_id', $linkres->id);
 			$main_smarty->assign('submit_stat', $linkres->status);
-			$main_smarty->assign('warning_message',sprintf($main_smarty->get_config_vars('KLIQQI_Visual_Submit2_Edit_Draft_Notice'),$linkres->status));
+			$main_smarty->assign('warning_message',sprintf($main_smarty->get_config_vars('PLIKLI_Visual_Submit2_Edit_Draft_Notice'),$linkres->status));
 			$main_smarty->assign('submit_type', $linkres->type());
 			$main_smarty->assign('submit_title', htmlspecialchars($link_title));
 			$main_smarty->assign('submit_content', $link_content);
@@ -326,7 +326,7 @@ $main_smarty->assign('link_group', $link_group);
 		if ($group_membered)
 		{
 			$output .= "<select name='link_group_id' tabindex='3' class='form-control submit_group_select'>";
-			$output .= "<option value = ''>".$main_smarty->get_config_vars('KLIQQI_Visual_Group_Select_Group')."</option>";
+			$output .= "<option value = ''>".$main_smarty->get_config_vars('PLIKLI_Visual_Group_Select_Group')."</option>";
 			foreach($group_membered as $results)
 			{
 				// To select the current group that the story is submitted to
@@ -368,17 +368,17 @@ $main_smarty->assign('link_group', $link_group);
 			//$main_smarty->assign('storylen', utf8_strlen(str_replace("<br />", "\n", $link_content)));
 			$main_smarty->assign('tpl_extra_fields', $the_template . '/submit_extra_fields');
 			$main_smarty->assign('tpl_center', $the_template . '/edit_submission_center');
-			$main_smarty->display($the_template . '/kliqqi.tpl');
+			$main_smarty->display($the_template . '/plikli.tpl');
 		}
 	}
 	else
 	{
-		echo "<br /><br />" . $main_smarty->get_config_vars('KLIQQI_Visual_EditLink_NotYours') . "<br/ ><br /><a href=".my_base_url.my_kliqqi_base.">".$main_smarty->get_config_vars('KLIQQI_Visual_Name')." home</a>";
+		echo "<br /><br />" . $main_smarty->get_config_vars('PLIKLI_Visual_EditLink_NotYours') . "<br/ ><br /><a href=".my_base_url.my_plikli_base.">".$main_smarty->get_config_vars('PLIKLI_Visual_Name')." home</a>";
 	}
 }
 else
 {
-	echo "<br /><br />" . $main_smarty->get_config_vars('KLIQQI_Visual_EditLink_NotYours') . "<br/ ><br /><a href=".my_base_url.my_kliqqi_base.">".$main_smarty->get_config_vars('KLIQQI_Visual_Name')." home</a>";
+	echo "<br /><br />" . $main_smarty->get_config_vars('PLIKLI_Visual_EditLink_NotYours') . "<br/ ><br /><a href=".my_base_url.my_plikli_base.">".$main_smarty->get_config_vars('PLIKLI_Visual_Name')." home</a>";
 }
 
 
@@ -442,7 +442,7 @@ function link_errors($linkres)
 		$main_smarty->assign('pagename', pagename);
 		
 		// show the template
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 	}
 	return $error;
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="Description" content="tiny ColorPicker is a small (10.0KB, 4.5KB gZip) but very advanced jQuery color picker and color conversion / calculation tool that supports the following color spaces: rgb, hsv, hsl, hex,  but also  alpha, WCAG 2.0 readability standards (based on opacity levels of all layers), contrast, color similarity, grayscale, 2-layer or 3-layer overlap mix, etc..." />
+    <meta name="author" content="Peter Dematté" />
+    <meta http-equiv="language" content="en" />
+	<link rel="stylesheet" type="text/css" href="../index.css">
+	<link id="colorPickerMod" rel="stylesheet" type="text/css" href="mod.css">
+	<script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="../colors.js"></script>
+	<script type="text/javascript" src="../jqColorPicker.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+
+	<title>tiny jQuery color picker demo</title>
+</head>
+<body>
+	<div id="content-wrapper">
+		<h1>Select the background-color for the heading of the comment email notification</h1>
+		
+		<div class="input-toggles wrapper">
+			<p>Click inside the input field to use the color picker. To test the selected background color on the heading, click outside the box.</p>
+			<input id="bg-selector" class="color" value="#183a52" /><br /><br />
+			<p><em>After you are satisfied with the background-color, <strong>COPY the value in the input field</strong> and <strong>PASTE it in the Subscribe to Comments Module's settings, under "Heading Background Color"</strong></p>
+			<p><em>The font color, that is displayed when you change the background color, is accurate but not 100%! In some instances you have to use your judgment and  and decide between TWO colors, Black (#000000) or White (#FFFFFF), and enter the value in the font color field in the module's settings.</em></p>
+			<p>The default CSS applied to the comment email notification heading is (background-color:#183a52) and (color:#FFFFFF)</p>
+			<div id="show_background" style="text-align:center;display: block;margin-left: auto;margin-right: auto;border:1px solid #183a52;background-color:#183a52;padding:5px;"><img src="../../../../templates/admin/img/plikli.png" style="border:none;" /><br /><br /><span style="font-size:30px;color:#ffffff;">Site Title</span></div>
+		</div>
+				<script>
+		//$(document).ready(function(){
+		$('#bg-selector').blur(function() {
+		  $('#show_background').css('background-color', $('#bg-selector').val());
+		});
+		//});
+		</script>
+
+	</div>
+</body>
+</html>

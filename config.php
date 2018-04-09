@@ -94,12 +94,12 @@ if ($my_base_url == ''){
 		$path = "";
 	}
 
-	define('my_kliqqi_base', $path);
-	$my_kliqqi_base = $path;
+	define('my_plikli_base', $path);
+	$my_plikli_base = $path;
 
 } else {
 	define('my_base_url', $my_base_url);
-	define('my_kliqqi_base', $my_kliqqi_base);
+	define('my_plikli_base', $my_plikli_base);
 }
 
 define('urlmethod', $URLMethod);
@@ -109,16 +109,16 @@ if(isset($_COOKIE['template'])){
 }
 
 // template check
-$file = dirname(__FILE__) . '/templates/' . $thetemp . "/kliqqi.tpl";
+$file = dirname(__FILE__) . '/templates/' . $thetemp . "/plikli.tpl";
 unset($errors);
 if (!file_exists($file)) {
 	$errors[]='You may have typed the template name wrong or "'. $thetemp . '" does not exist. Click <a href = "../admin/admin_config.php?page=Template">here</a> to fix it.';
 }
 
 if (isset($errors)) {
-	// Name of the default Kliqqi template
+	// Name of the default Plikli template
 	$thetemp = "bootstrap";
-	$file = dirname(__FILE__) . '/templates/' . $thetemp . "/kliqqi.tpl";
+	$file = dirname(__FILE__) . '/templates/' . $thetemp . "/plikli.tpl";
 	if (!file_exists($file)) {
 		echo 'The default template "Bootstrap" does not exist anymore. Please fix this by reuploading the Bootstrap template!';
 		die();
@@ -207,7 +207,7 @@ if (!file_exists(dirname(__FILE__) . '/languages/lang_'.$language.'.conf')) {
 	// If all else fails, default to the english language file
 	$language = 'english';
 }
-define('kliqqi_language', $language);
+define('plikli_language', $language);
 
 if (!file_exists(dirname(__FILE__) . '/languages/lang_'.$language.'.conf')) {
 	die('The language file /languages/lang_' . $language . '.conf does not exist. Either this file is missing or the server does not have permission to read it. Make sure that you renamed the file /languages/lang_' . $language . '.conf.default to /languages/lang_' . $language . '.conf.');

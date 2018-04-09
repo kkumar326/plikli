@@ -46,8 +46,8 @@ $main_smarty->assign('isAdmin', $canIhaveAccess);
 define('pagename', 'page_submit'); 
 $main_smarty->assign('pagename', pagename);
 
-// read the mysql database to get the kliqqi version
-/* Redwine: kliqqi version query removed and added to /libs/smartyvriables.php */
+// read the mysql database to get the plikli version
+/* Redwine: plikli version query removed and added to /libs/smartyvriables.php */
 
 if(isset($_REQUEST['process']) && $_REQUEST['process']=='new_page'){
 	global $current_user,$db;

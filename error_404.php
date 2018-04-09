@@ -20,7 +20,7 @@ $main_smarty = do_sidebar($main_smarty);
 // show the template
 header( "HTTP/1.1 404 Not Found" );
 $main_smarty->assign('tpl_center', $the_template . '/error_404_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 exit;
 
 ?>

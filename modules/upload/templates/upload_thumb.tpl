@@ -1,4 +1,4 @@
-{checkActionsTpl location="tpl_kliqqi_upload_thumb_start"}
+{checkActionsTpl location="tpl_plikli_upload_thumb_start"}
 {php}
 	global $db;
 //print_r($this->_vars);
@@ -54,15 +54,15 @@
 		if (strpos($image['file_name'],'http')===0)
 		    $format = str_replace('{path}',$image['file_name'],$format);
 		elseif ($image['file_size']=='orig')
-		    $format = str_replace('{path}',my_kliqqi_base."$upload_directory/{$image['file_name']}",$format);
+		    $format = str_replace('{path}',my_plikli_base."$upload_directory/{$image['file_name']}",$format);
 		else
-		    $format = str_replace('{path}',my_kliqqi_base."$upload_thdirectory/{$image['file_name']}",$format);
+		    $format = str_replace('{path}',my_plikli_base."$upload_thdirectory/{$image['file_name']}",$format);
 		if ($image['link_name'])
 		{
 		    if (strpos($image['link_name'],'http')===0)
 		    	$format = str_replace('{target}',$image['link_name'],$format);
 		    else
-		    	$format = str_replace('{target}',my_kliqqi_base.$image['link_name'],$format);
+		    	$format = str_replace('{target}',my_plikli_base.$image['link_name'],$format);
 		}
 		else
 		{
@@ -94,7 +94,7 @@
 		{if strpos($image.link_name,'http')===0}
 			<a href='{$image.link_name}' {if $open_in_new_window eq true} target="_blank"{/if} {if $story_status neq "published"}rel="nofollow"{/if}>
 		{else}
-			<a href='{$my_kliqqi_base}{$image.link_name}' {if $open_in_new_window eq true} target="_blank"{/if}>
+			<a href='{$my_plikli_base}{$image.link_name}' {if $open_in_new_window eq true} target="_blank"{/if}>
 		{/if}
 	{else}
 			{if $use_title_as_link eq true}
@@ -112,15 +112,15 @@
 			{/if}
 	{/if}
 	{if strpos($image.file_name,'http')===0}
-		<div class="videoWrapper {checkActionsTpl location="tpl_kliqqi_upload_thumb_class"}"><img src='{$image.file_name}' /></div>
+		<div class="videoWrapper {checkActionsTpl location="tpl_plikli_upload_thumb_class"}"><img src='{$image.file_name}' /></div>
 	{elseif $image.file_size=='orig'}
-		<div class="videoWrapper {checkActionsTpl location="tpl_kliqqi_upload_thumb_class"}"><img src='{$my_kliqqi_base}{$upload_directory}/{$image.file_name}' /></div>
+		<div class="videoWrapper {checkActionsTpl location="tpl_plikli_upload_thumb_class"}"><img src='{$my_plikli_base}{$upload_directory}/{$image.file_name}' /></div>
 	{else}
-		<div class="videoWrapper {checkActionsTpl location="tpl_kliqqi_upload_thumb_class"}"><img src='{$my_kliqqi_base}{$upload_thdirectory}/{$image.file_name}' /></div>
+		<div class="videoWrapper {checkActionsTpl location="tpl_plikli_upload_thumb_class"}"><img src='{$my_plikli_base}{$upload_thdirectory}/{$image.file_name}' /></div>
 	{/if}
 	</a>
     {/if}
 {/foreach}
 {$upload_thumb_post_format}
 {/if}
-{checkActionsTpl location="tpl_kliqqi_upload_thumb_end"}
+{checkActionsTpl location="tpl_plikli_upload_thumb_end"}

@@ -1,11 +1,12 @@
 ﻿<?php
 // header
-	$lang['kliqqi_version'] = '4.0.0';
+	$lang['plikli_version'] = '4.0.0';
 	$lang['installer'] = 'Installer';
 	$lang['Welcome'] = 'Welcome';
 	$lang['Install'] = 'Install';
 	$lang['Upgrade'] = 'Upgrade';
 	$lang['Upgrade-Kliqqi'] = 'Upgrade-Kliqqi';
+	$lang['Upgrade-Pligg'] = 'Upgrade-Pligg';
 	$lang['Troubleshooter'] = 'Troubleshooter';
 	$lang['Step'] = 'Step';
 	$lang['Readme'] = 'Readme';
@@ -16,12 +17,12 @@
 	$lang['Troubleshooter_instruct'] = 'The Troubleshooter will detect common problems such as incorrect folder permissions';
 
 // intro / step 1
-	$lang['WelcomeToInstaller'] = 'Welcome to the Kliqqi CMS Installer!';
+	$lang['WelcomeToInstaller'] = 'Welcome to the Plikli CMS Installer!';
 	$lang['Introduction'] = 'Introduction';
-	$lang['WelcomeToThe'] = 'Welcome to <a href="http://kliqqi.com" target="_blank">Kliqqi</a>, the CMS that powers thousands of community websites. If this is your first time installing Kliqqi CMS, please read all of the provided instructions carefully so that you don\'t miss any important directions.';
-	$lang['Bugs'] = 'Please familiarize yourself with some of the documentation provided by the Kliqqi community at the <a href="http://www.kliqqi.com/forum/">Kliqqi Forum</a> website. We also suggest that you register an account so that you will have access to free support, modules, widgets, templates and other great resources.';
+	$lang['WelcomeToThe'] = 'Welcome to <a href="https://www.plikli.com" target="_blank">Plikli</a>, the CMS that powers thousands of community websites. If this is your first time installing Plikli CMS, please read all of the provided instructions carefully so that you don\'t miss any important directions.';
+	$lang['Bugs'] = 'Please familiarize yourself with some of the documentation provided by the Plikli community at the <a href="https://www.plikli.com/forum-2/">Plikli Forum</a> website. We also suggest that you register an account so that you will have access to free support, modules, widgets, templates and other great resources.';
 	$lang['Installation'] = 'Installation (Please Read Carefully)';
-	$lang['OnceFamiliar'] = '<p>If this is your first time installing Kliqqi you should continue on this page after carefully following the directions below. If you need to <a href="./upgrade.php">upgrade your site</a> from a previous version, please run the upgrade script by clicking on the Upgrade link above. WARNING: running the installation process on an existing Kliqqi site database will overwrite all the data, so please make sure that you want to perform an installation if you choose to continue below.</p><br />
+	$lang['OnceFamiliar'] = '<p>If this is your first time installing Plikli you should continue on this page after carefully following the directions below. If you need to <a href="./upgrade.php">upgrade your site</a> from a previous version, please run the upgrade script by clicking on the Upgrade link above. WARNING: running the installation process on an existing Plikli site database will overwrite all the data, so please make sure that you want to perform an installation if you choose to continue below.</p><br />
 	<ol>
 		<li>Rename settings.php.default to settings.php</li>
 		<li>Rename /languages/lang_english.conf.default to lang_english.conf</li>
@@ -41,7 +42,7 @@
 			<li>settings.php</li>
 		</ol>
 	</ol>
-	You\'re now past the hardest part! Proceed to the next step to install Kliqqi onto your MySQL database.</p>';
+	<p>You\'re now past the hardest part! Proceed to the next step to install Plikli onto your MySQL database.</p>';
 
 // step 2
 	$lang['EnterMySQL'] = 'Enter your MySQL database settings below. If you don\'t know your MySQL database settings you should check your webhost documentation or contact them directly.';
@@ -50,7 +51,7 @@
 	$lang['DatabasePassword'] = 'Database Password';
 	$lang['DatabaseServer'] = 'Database Server';
 	$lang['TablePrefix'] = 'Table Prefix';
-	$lang['PrefixExample'] = '(ie: "kliqqi_" makes the tables for users become kliqqi_users)';
+	$lang['PrefixExample'] = '(ie: "plikli_" makes the tables for users become plikli_users)';
 	$lang['CheckSettings'] = 'Check Settings';
 	$lang['Errors'] = 'Please fix the above error(s), then <a class="btn btn-default btn-xs" onClick="document.location.reload(true)">Refresh the Page</a>';
 	$lang['LangNotFound'] = 'was not found. Please remove the \'.default\' extension from all language files and try again.';
@@ -85,13 +86,13 @@
 	$lang['Error5-2'] = 'Password fields do not match. Please go back and re-enter the password fields.';
 	$lang['AddingAdmin'] = 'Adding the Admin user account...';
 	$lang['InstallSuccess'] = 'Installation Complete!';
-	$lang['InstallSuccessMessage'] = 'Congratulations, you have set up a Kliqqi CMS website! While your site is fully functional at this point, you will want to do a little cleaning up by following the directions below to secure your site.';
+	$lang['InstallSuccessMessage'] = 'Congratulations, you have set up a Plikli CMS website! While your site is fully functional at this point, you will want to do a little cleaning up by following the directions below to secure your site.';
 	$lang['WhatToDo'] = 'What to do next:';
 	$lang['WhatToDoList'] = '		<li>chmod "/libs/dbconnect.php" back to 644, we will not need to change this file again.</li>
-		<li><strong>DELETE</strong> the "/install" directory from your server if you have successfully installed Kliqqi.</li>
-		<li>Login to the <a href="../admin/admin_index.php">dashboard</a> using the user information you entered from the previous step. Once you log in you should be presented with more information about how to use Kliqqi.</li>
+		<li><strong>DELETE</strong> the "/install" directory from your server if you have successfully installed Plikli.</li>
+		<li>Login to the <a href="../admin/admin_index.php">dashboard</a> using the user information you entered from the previous step. Once you log in you should be presented with more information about how to use Plikli.</li>
 		<li><a href="../admin/admin_config.php">Configure your site</a> using the dashboard.</li>
-		<li>Visit the <a href="http://www.kliqqi.com/forums/">Kliqqi Support</a> website if you have any questions.</li>';
+		<li>Visit the <a href="https://www.plikli.com/forum-2/">Plikli Support</a> website if you have any questions.</li>';
 	$lang['ContinueToSite'] = 'Continue to Your New Website';
 	
 // Upgrade
@@ -101,10 +102,10 @@
 	<li>IF YOU ARE USING OTHER THAN THE DEFAULT BOOTSTRAP TEMPLATE, MAKE SURE YOU MERGE ITS FILES WITH THE KLIQQI BOOTSTRAP TEMPLATE BECAUSE QUITE SOME CHANGES HAVE BEEN MADE TO THE CODE. (SEE NOTES AFTER THE UPGRADE HAS FINISHED)</li>
 	</ul>
 	<br />
-	Upgrading your old Pligg versions to Kliqqi '. $lang['kliqqi_version'] . ' will modify your database tables to the latest version.<br />';
-	$lang['UpgradeAreYouSure'] = 'Are you sure that you want to upgrade your database and language file?';
+	Upgrading your old Pligg or Kliqqi versions to Plikli '. $lang['plikli_version'] . ' will modify your database tables to the latest version.<br />';
+	$lang['UpgradeAreYouSure'] = 'Are you sure you want to upgrade your database and language file?';
 	$lang['UpgradeYes'] = 'Proceed with Upgrade';
-	$lang['UpgradeLanguage'] = 'Success, Kliqqi updated your language file. It now includes the latest language items.';
+	$lang['UpgradeLanguage'] = 'Success, Plikli updated your language file. It now includes the latest language items.';
 	$lang['UpgradingTables'] = '<strong>Upgrading Database...</strong>';
 	$lang['LanguageUpdate'] = '<strong>Upgrading Language File...</strong>';
 	$lang['IfNoError'] = 'If there were no errors displayed, upgrade is complete!';

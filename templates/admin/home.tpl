@@ -26,7 +26,7 @@
 									<div class="panel-wrapper">
 										{if $widget.lang_conf}{config_load file=`$widget.lang_conf`}{/if}
 										{include file=`$widget.main`}
-										{config_load file=$kliqqi_lang_conf}
+										{config_load file=$plikli_lang_conf}
 										<div style="clear:both;"> </div>
 									</div>
 								</div>
@@ -35,7 +35,7 @@
 									<div class="panel-wrapper">-->
 										{*if $widget.lang_conf*}{*config_load file=`$widget.lang_conf`*}{*/if*}
 										{*include file=`$widget.settings`*}
-										{*config_load file=$kliqqi_lang_conf*}
+										{*config_load file=$plikli_lang_conf*}
 										<!--<div style="clear:both;"> </div>
 									</div>
 								</div>-->
@@ -73,7 +73,7 @@
 									<div class="panel-wrapper">
 										{if $widget.lang_conf}{config_load file=`$widget.lang_conf`}{/if}
 										{include file=`$widget.main`}
-										{config_load file=$kliqqi_lang_conf}
+										{config_load file=$plikli_lang_conf}
 										<div style="clear:both;"> </div>
 									</div>
 								</div>
@@ -82,7 +82,7 @@
 									<div class="panel-wrapper">
 										{if $widget.lang_conf}{config_load file=`$widget.lang_conf`}{/if}
 										{include file=`$widget.settings`}
-										{config_load file=$kliqqi_lang_conf}
+										{config_load file=$plikli_lang_conf}
 										<div style="clear:both;"> </div>
 									</div>
 								</div>
@@ -95,6 +95,6 @@
 		{/foreach}
 	</div>
 {else}
-	{#KLIQQI_Visual_AdminPanel_NoAccess#}
+	{#PLIKLI_Visual_AdminPanel_NoAccess#}
 {/if}
 <!--/home.tpl -->

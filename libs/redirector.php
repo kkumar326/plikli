@@ -23,14 +23,14 @@ class redirector {
 		// DB 08/04/08
 		$url = sanitize($old_url,4);
 		/////
-		$url = substr($url, strlen(my_kliqqi_base), 255);
+		$url = substr($url, strlen(my_plikli_base), 255);
 		$sql = 'SELECT * FROM `' . table_redirects . '` WHERE `redirect_old` = "' . $url . '" LIMIT 1;';
 		//echo $sql;
 		$redirs = $db->get_row($sql);
 		
 		if($redirs){
 			header( "HTTP/1.1 301 Moved Permanently" );
-			header('Location: ' . my_kliqqi_base . $redirs->redirect_new);
+			header('Location: ' . my_plikli_base . $redirs->redirect_new);
 		}	
 	
 	}

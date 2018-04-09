@@ -1,7 +1,7 @@
 <?php
 	include_once('sidebar_comments_settings.php');
 
-	// tell kliqqi what pages this module should be included in
+	// tell plikli what pages this module should be included in
 	// pages are <script name> minus .php
 	$do_not_include_in_pages = array();
 	

@@ -1,7 +1,7 @@
 AddDefaultCharset UTF-8
 ############################################################################################################
 ## 404 Error Page
-## IF KLIQQI IS INSTALLED IN A SUBFOLDER, change the below line to ErrorDocument 404 /NAME-OF-SUBFOLDER/error_404.php
+## IF PLIKLI IS INSTALLED IN A SUBFOLDER, change the below line to ErrorDocument 404 /NAME-OF-SUBFOLDER/error_404.php
 ############################################################################################################
 ErrorDocument 404 /error_404.php
 
@@ -10,7 +10,7 @@ ErrorDocument 404 /error_404.php
 Options +FollowSymlinks -MultiViews
 RewriteEngine on
 ############################################################################################################
-###### IF KLIQQI IS INSTALLED IN A SUBFOLDER, change the below line to RewriteBase /NAME-OF-SUBFOLDER ######
+###### IF PLIKLI IS INSTALLED IN A SUBFOLDER, change the below line to RewriteBase /NAME-OF-SUBFOLDER ######
 ############################################################################################################
 RewriteBase /
 
@@ -34,10 +34,10 @@ RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.php\ HTTP/
 
 ############################################################################################################
 ## COMMENT OUT OR REMOVE THESE FOUR LINES (40 TO 43) IF YOU HAVE:
-## 1- a sub-domain like: http(S)://subdomain.kliqqi.com or
+## 1- a sub-domain like: http(S)://subdomain.plikli.com or
 ## 2- http://localhost
 ##
-## KEEP IF YOUR SITE IS LIKE: http(S)://www.kliqqi.com TO FORCE WWW
+## KEEP IF YOUR SITE IS LIKE: http(S)://www.plikli.com TO FORCE WWW
 ############################################################################################################
 RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteCond %{HTTP_HOST} !^localhost
@@ -192,7 +192,7 @@ RewriteRule ^inbox/?$ module.php?module=simple_messaging&view=inbox [L]
 RewriteRule ^sitemapindex.xml module.php?module=xml_sitemaps_show_sitemap [L]
 RewriteRule ^sitemap-([a-zA-Z0-9]+).xml module.php?module=xml_sitemaps_show_sitemap&i=$1 [L]
 RewriteRule ^status/([0-9]+)/?$ modules/status/status.php?id=$1 [L]
-RewriteRule ^toolbar/(\d+)/?$ modules/kliqqi_web_toolbar/toolbar.php?id=$1
+RewriteRule ^toolbar/(\d+)/?$ modules/plikli_web_toolbar/toolbar.php?id=$1
 RewriteRule ^sitemap-([0-9a-z]+).xml module.php?module=xml_sitemaps_show_sitemap&i=$1 [L]
 
 ## Pages

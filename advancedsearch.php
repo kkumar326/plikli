@@ -13,10 +13,10 @@ include(mnminclude.'smartyvariables.php');
 // -------------------------------------------------------------------------------------
 
 // breadcrumbs and page titles
-$navwhere['text1'] = ($main_smarty->get_config_vars('KLIQQI_Visual_Search_Advanced'));
+$navwhere['text1'] = ($main_smarty->get_config_vars('PLIKLI_Visual_Search_Advanced'));
 $navwhere['link1'] = 'advancedsearch.php';//getmyurl('advancesearch', '');
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Search_Advanced'));
+$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Search_Advanced'));
 
 
 $query = "SELECT *
@@ -42,5 +42,5 @@ If (!empty($header_items)) $main_smarty->assign('headers', $header_items);
 
 // show the template
 $main_smarty->assign('tpl_center', $the_template . '/search_advanced_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 ?>

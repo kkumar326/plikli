@@ -23,13 +23,13 @@ class LangFiles implements Iterator {
 	global $db;
 
 	// Main language file
-	$this->files = array(mnmpath.'/languages/lang_'.kliqqi_language.'.conf' => '');
+	$this->files = array(mnmpath.'/languages/lang_'.plikli_language.'.conf' => '');
 
    	// Fill files array from installed modules
 	$modules = $db->get_results('SELECT * from ' . table_modules . ' order by weight asc;');
 	foreach ($modules as $module) {
-	    if (file_exists(mnmmodules.$module->folder.'/lang_'.kliqqi_language.'.conf'))
-		$this->files[mnmmodules.$module->folder.'/lang_'.kliqqi_language.'.conf'] = $module->name;
+	    if (file_exists(mnmmodules.$module->folder.'/lang_'.plikli_language.'.conf'))
+		$this->files[mnmmodules.$module->folder.'/lang_'.plikli_language.'.conf'] = $module->name;
 	    elseif (file_exists(mnmmodules.$module->folder.'/lang.conf'))
 		$this->files[mnmmodules.$module->folder.'/lang.conf'] = $module->name;
 	}
@@ -48,7 +48,7 @@ class LangFiles implements Iterator {
     /**
      * Replace given line in given file
      *
-     * @param string $id Kliqqi language constant
+     * @param string $id Plikli language constant
      * @param string $value New value to save
      * @param string $file Full path to language file
      * @return string Error or empty on success
@@ -190,12 +190,12 @@ function admin_language_showpage(){
 		    $main_smarty->assign('lines', $lines);
 
 		// breadcrumbs
-			$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+			$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 			$navwhere['link1'] = getmyurl('admin', '');
 			$navwhere['text2'] = "Modify Language";
-			$navwhere['link2'] = my_kliqqi_base . "/module.php?module=admin_language";
+			$navwhere['link2'] = my_plikli_base . "/module.php?module=admin_language";
 			$main_smarty->assign('navbar_where', $navwhere);
-			$main_smarty->assign('posttitle', " | " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+			$main_smarty->assign('posttitle', " | " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 		// breadcrumbs
 
 			//Method for identifying modules rather than pagename

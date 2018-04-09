@@ -3,7 +3,8 @@
 	{php}
 		global $main_smarty;
 		$allowed_tags = $main_smarty->get_template_vars('Story_Content_Tags_To_Allow');
-		$removebuttons = 'NewPage,Templates,PasteFromWord,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Flash,Table,PageBreak,Iframe,Anchor,Save,Link,Unlink,Format,Font,CreateDiv,Image';
+		$removebuttons = 'NewPage,Templates,PasteFromWord,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Flash,Table,PageBreak,Iframe,Anchor,Save,Link,Unlink,Font,CreateDiv,Image,Smiley,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,TextColor,BGColor,FontSize';
+		//$removebuttons = 'NewPage,Templates,PasteFromWord,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Flash,Table,PageBreak,Iframe,Anchor,Save,Link,Unlink,Font,CreateDiv,Image';
 
 		$config_var = 'config.removeButtons = ';
 		$pattern = "/$config_var/i";
@@ -21,9 +22,7 @@
 		$allowed_tags = str_replace('&gt;', ',', $allowed_tags);
 		$allowed_tags = explode(',', $allowed_tags);
 		foreach($allowed_tags as $tag) {
-			if ($tag == 'img') {
-				$syn[] = 'Image';
-			}elseif ($tag == 'strong') {
+			if ($tag == 'strong') {
 				$syn[] = 'Bold';
 			}elseif ($tag == 'em') {
 				$syn[] = 'Italic';
@@ -75,9 +74,13 @@
 			}
 		}
 	{/php}
-	{literal}<script>CKEDITOR.replace( 'bodytext' );</script>{/literal}
-	{if $SubmitSummary_Allow_Edit neq ''}
-		{literal}<script>CKEDITOR.replace( 'summarytext' );</script>{/literal}
-	{/if}
+	{literal}<script>CKEDITOR.replace( 'bodytext', {
+
+			// List of text formats available for this editor instance.
+			format_tags: 'pre;address;div'
+		} );</script>{/literal}
+	{*if $SubmitSummary_Allow_Edit neq ''*}
+		{*literal*}<!--<script>CKEDITOR.replace( 'summarytext' );</script>-->{*/literal*}
+	{*/if*}
 {/if}
-{config_load file=ckeditor_kliqqi_lang_conf}
+{config_load file=ckeditor_plikli_lang_conf}

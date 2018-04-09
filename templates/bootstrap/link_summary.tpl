@@ -14,31 +14,31 @@
 			</a>
 			<ul class="dropdown-menu">
 {* Redwine: Roles and permissions and Groups fixes *}
-				<li><a href="{$story_edit_url}"><i class="fa fa-pencil"></i> {#KLIQQI_Visual_LS_Admin_Edit#}</a></li>
+				<li><a href="{$story_edit_url}"><i class="fa fa-pencil"></i> {#PLIKLI_Visual_LS_Admin_Edit#}</a></li>
 {* Redwine: Roles and permissions and Groups fixes *}
 				{if $isAdmin eq '1' || $isModerator eq '1'}
-					<li><a href="{$story_admin_url}"><i class="fa fa-arrows-v"></i> {#KLIQQI_Visual_LS_Admin_Status#}</a></li>
+					<li><a href="{$story_admin_url}"><i class="fa fa-arrows-v"></i> {#PLIKLI_Visual_LS_Admin_Status#}</a></li>
 {* Redwine: Roles and permissions and Groups fixes *}
 					{if $isAdmin eq '1'}
-					<li><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_users.php?mode=view&user={$link_submitter}"><i class="fa fa-user"></i> {#KLIQQI_Visual_Comment_Manage_User#} {$link_submitter}</a></li>
+					<li><a href="{$my_base_url}{$my_plikli_base}/admin/admin_users.php?mode=view&user={$link_submitter}"><i class="fa fa-user"></i> {#PLIKLI_Visual_Comment_Manage_User#} {$link_submitter}</a></li>
 {* Redwine: Roles and permissions and Groups fixes *}
 					{/if}
 				{/if}
 				{checkActionsTpl location="tpl_link_summary_admin_links"}
 {* Redwine: Roles and permissions and Groups fixes *}
 				{if $isAdmin eq '1' || $isModerator eq '1' || $is_gr_Creator eq '1' || $is_gr_Admin eq '1' || $is_gr_Moderator eq '1'}
-				{if $link_group_id neq 0}<li><a target="story_status" href="javascript://" onclick="show_hide_user_links(document.getElementById('stories_status-{$link_shakebox_index}'));"><i class="fa fa-group"></i> {#KLIQQI_Visual_Group_Story_Status#}</a></li>{/if}
+				{if $link_group_id neq 0}<li><a target="story_status" href="javascript://" onclick="show_hide_user_links(document.getElementById('stories_status-{$link_shakebox_index}'));"><i class="fa fa-group"></i> {#PLIKLI_Visual_Group_Story_Status#}</a></li>{/if}
 {* Redwine: Roles and permissions and Groups fixes *}
 				{/if}
 				{if $isAdmin eq '1'}
-					<li><a href="{$my_kliqqi_base}/admin/admin_users.php?mode=killspam&user={$link_submitter}"><i class="fa fa-ban"></i> {#KLIQQI_Visual_View_User_Killspam#}</a></li>
-					<li><a href="{$my_kliqqi_base}/delete.php?link_id={$link_id}" title="This function deletes the story,&#10;all its votes and comments&#10;and removes it from&#10;the groups and saved stories!"><i class="fa fa-trash-o"></i> {#KLIQQI_Visual_AdminPanel_Discard#}</a></li>
+					<li><a href="{$my_plikli_base}/admin/admin_users.php?mode=killspam&user={$link_submitter}"><i class="fa fa-ban"></i> {#PLIKLI_Visual_View_User_Killspam#}</a></li>
+					<li><a href="{$my_plikli_base}/delete.php?link_id={$link_id}" title="This function deletes the story,&#10;all its votes and comments&#10;and removes it from&#10;the groups and saved stories!"><i class="fa fa-trash-o"></i> {#PLIKLI_Visual_AdminPanel_Discard#}</a></li>
 				{/if}
 			</ul>
 			
 		</div>		
 	{/if}
-	{checkActionsTpl location="tpl_kliqqi_story_start"}
+	{checkActionsTpl location="tpl_plikli_story_start"}
 	<div class="story_data">
 		{if $Voting_Method eq 2}
 			<h4 id="ls_title-{$link_shakebox_index}">
@@ -67,7 +67,7 @@
 			<div class="votebox votebox-new">
 		  {/if}			
 				<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="vote">
-					{checkActionsTpl location="tpl_kliqqi_story_votebox_start"}
+					{checkActionsTpl location="tpl_plikli_story_votebox_start"}
 					<div itemprop="ratingCount" class="votenumber">
 						{$link_shakebox_votes}
 					</div>
@@ -94,7 +94,7 @@
 						{/if}
 						<!-- Votes: {$link_shakebox_currentuser_votes} Buries: {$link_shakebox_currentuser_reports} -->
 					</div><!-- /.votebutton -->
-				{checkActionsTpl location="tpl_kliqqi_story_votebox_end"}
+				{checkActionsTpl location="tpl_plikli_story_votebox_end"}
 				</div><!-- /.vote -->
 			</div><!-- /.votebox -->
 		{/if}
@@ -102,7 +102,7 @@
 		<span itemprop="name">
 		{* Redwine: the $is_rtl is passed by /libs/link.php and holds the value of 0 or 1; i being for the rtl languages. *}
 			<h2 {if $is_rtl eq 1}dir="rtl"{else}dir="ltr"{/if}>
-				{checkActionsTpl location="tpl_kliqqi_story_title_start"}
+				{checkActionsTpl location="tpl_plikli_story_title_start"}
 				{if $use_title_as_link eq true}
 					{if $url_short neq "http://" && $url_short neq "://"}
 						<a href="{$url}" {if $open_in_new_window eq true} target="_blank"{/if} {if $link_nofollow eq "1"}rel="nofollow"{/if}>{$title_short}</a>
@@ -119,7 +119,7 @@
 					  <a href="{$story_url}">{$title_short}</a>
 					{/if}
 				{/if}
-				{checkActionsTpl location="tpl_kliqqi_story_title_end"}
+				{checkActionsTpl location="tpl_plikli_story_title_end"}
 			</h2>
 		</span>	
 			<span class="subtext">
@@ -129,7 +129,7 @@
 				<a href="{$submitter_profile_url}">{$link_submitter}{if $submitter_rank neq ''} (#{$submitter_rank}){/if}</a> 
 				</span></span>
 				<i class="fa fa-clock-o"></i>
-				<span itemprop="datePublished">{$link_submit_timeago} {#KLIQQI_Visual_Comment_Ago#}</span>
+				<span itemprop="datePublished">{$link_submit_timeago} {#PLIKLI_Visual_Comment_Ago#}</span>
 				
 				<i class="fa fa-folder"></i> 
 				<a href="{$category_url}">{$link_category}</a>
@@ -158,40 +158,40 @@
 					<i class="fa fa-globe"></i>
 					{$No_URL_Name}
 				{/if}
-				{checkActionsTpl location="tpl_kliqqi_story_tools_start"}
+				{checkActionsTpl location="tpl_plikli_story_tools_start"}
 				&nbsp;
 				<span id="ls_comments_url-{$link_shakebox_index}">
 					{if $story_comment_count eq 0}
-						<i class="fa fa-comment"></i> <span id="linksummaryDiscuss"><a href="{$story_url}#discuss" class="comments">{#KLIQQI_MiscWords_Discuss#}</a>&nbsp;</span>
+						<i class="fa fa-comment"></i> <span id="linksummaryDiscuss"><a href="{$story_url}#discuss" class="comments">{#PLIKLI_MiscWords_Discuss#}</a>&nbsp;</span>
 					{/if}
 					{if $story_comment_count eq 1}
-						<i class="fa fa-comment"></i> <span id="linksummaryHasComment"><a href="{$story_url}#comments" class="comments2">{$story_comment_count} {#KLIQQI_MiscWords_Comment#}</a>&nbsp;</span>
+						<i class="fa fa-comment"></i> <span id="linksummaryHasComment"><a href="{$story_url}#comments" class="comments2">{$story_comment_count} {#PLIKLI_MiscWords_Comment#}</a>&nbsp;</span>
 					{/if}
 					{if $story_comment_count gt 1}
-						<i class="fa fa-comment"></i> <span id="linksummaryHasComment"><a href="{$story_url}#comments" class="comments2">{$story_comment_count} {#KLIQQI_MiscWords_Comments#}</a>&nbsp;</span>
+						<i class="fa fa-comment"></i> <span id="linksummaryHasComment"><a href="{$story_url}#comments" class="comments2">{$story_comment_count} {#PLIKLI_MiscWords_Comments#}</a>&nbsp;</span>
 					{/if}
 				</span> 
 				{if $user_logged_in}  
 					<iframe height="0px;" width="0px;" frameborder="0" name="add_stories"></iframe>
 					{if $link_mine eq 0}
 						<i class="fa fa-star"></i> <span id="linksummarySaveLink">
-						<a id="add" linkid="{$link_id}" title="{$title_short}" class="favorite" >{#KLIQQI_MiscWords_Save_Links_Save#}</a>
+						<a id="add" linkid="{$link_id}" title="{$title_short}" class="favorite" >{#PLIKLI_MiscWords_Save_Links_Save#}</a>
 					{else}
 						<i class="fa fa-star-o"></i> <span id="linksummaryRemoveLink">
-						<a id="remove" linkid="{$link_id}" title="{$title_short}" class="favorite" >{#KLIQQI_MiscWords_Save_Links_Remove#}</a>
+						<a id="remove" linkid="{$link_id}" title="{$title_short}" class="favorite" >{#PLIKLI_MiscWords_Save_Links_Remove#}</a>
 					{/if}
 					</span>&nbsp;
-					<span id="stories-{$link_shakebox_index}" class="label label-success" style="display:none;line-height:1em;">{#KLIQQI_MiscWords_Save_Links_Success#}</span>
+					<span id="stories-{$link_shakebox_index}" class="label label-success" style="display:none;line-height:1em;">{#PLIKLI_MiscWords_Save_Links_Success#}</span>
 				{/if}
 				{if $link_shakebox_currentuser_votes eq 1 && $link_shakebox_currentuser_reports eq 1}
 					<i class="fa fa-minus-sign"></i> 
-					<span id="linksummaryUnvote"><a href="javascript:{$link_shakebox_javascript_unvote}">{#KLIQQI_Visual_Unvote_For_It#}</a></span>&nbsp; 
+					<span id="linksummaryUnvote"><a href="javascript:{$link_shakebox_javascript_unvote}">{#PLIKLI_Visual_Unvote_For_It#}</a></span>&nbsp; 
 				{/if}
 				{if $enable_group eq "true" && $user_logged_in}
 					<span class="group-tool-wrapper">
 						{if $get_group_membered neq ''}
 						<i class="fa fa-group"></i> 
-						<span class="group_sharing"><a href="javascript://" onclick="{if $get_group_membered}var replydisplay=document.getElementById('group_share-{$link_shakebox_index}').style.display ? '' : 'none';document.getElementById('group_share-{$link_shakebox_index}').style.display = replydisplay;{else}alert('{#KLIQQI_Visual_No_Groups#}');{/if}">{#KLIQQI_Visual_Group_Share#}</a></span>
+						<span class="group_sharing"><a href="javascript://" onclick="{if $get_group_membered}var replydisplay=document.getElementById('group_share-{$link_shakebox_index}').style.display ? '' : 'none';document.getElementById('group_share-{$link_shakebox_index}').style.display = replydisplay;{else}alert('{#PLIKLI_Visual_No_Groups#}');{/if}">{#PLIKLI_Visual_Group_Share#}</a></span>
 						<span id = "group_share-{$link_shakebox_index}" style="display:none;">
 							<div class="group-share-popup">{$get_group_membered}</div>
 						</span>
@@ -201,7 +201,7 @@
 					{if $is_link_sharer eq 1 || $is_gr_Admin eq 1}
 					<span class="group-tool-wrapper">
 					<i class="fa fa-group"></i>
-					<span class="group_sharing"><a class="group-unshare" href="javascript://" onclick="{if $get_group_shared_membered}var replydisplay=document.getElementById('group_unshare-{$link_shakebox_index}').style.display ? '' : 'none';document.getElementById('group_unshare-{$link_shakebox_index}').style.display = replydisplay;{else}alert('{#KLIQQI_Visual_No_Groups#}');{/if}">Group Unshare</a></span>
+					<span class="group_sharing"><a class="group-unshare" href="javascript://" onclick="{if $get_group_shared_membered}var replydisplay=document.getElementById('group_unshare-{$link_shakebox_index}').style.display ? '' : 'none';document.getElementById('group_unshare-{$link_shakebox_index}').style.display = replydisplay;{else}alert('{#PLIKLI_Visual_No_Groups#}');{/if}">Group Unshare</a></span>
 					<span id = "group_unshare-{$link_shakebox_index}" style="display:none;">
 						<div class="group-unshare-popup">{$get_group_shared_membered}</div>
 					</span>
@@ -209,16 +209,16 @@
 					</span>
 					{/if}
 				{/if}
-				{checkActionsTpl location="tpl_kliqqi_story_tools_end"}
+				{checkActionsTpl location="tpl_plikli_story_tools_end"}
 				<iframe height="0" width="0" frameborder="0" name="story_status" class="invisible"></iframe>
 				<span id="stories_status-{$link_shakebox_index}" style="display:none;">
 {*Redwine: Roles and permissions and Groups fixes. I created a script in /templates/bootstrap/functions/common.tpl to change the display to the corresponding status tab when a group story status is changed. It works well, however, the page is cached and needs refreshing to load the new version. window.location.reload(true) is not working. function switch_group_links_tabs(status)*}
-					<a target="story_status" href="{$group_story_links_publish}" onclick="switch_group_links_tabs('published')">{#KLIQQI_Visual_AdminPanel_Published#}</a>
-					<a target="story_status" href="{$group_story_links_new}" onclick="switch_group_links_tabs('new')">{#KLIQQI_Visual_AdminPanel_New#}</a>
-					<a target="story_status" href="{$group_story_links_discard}" onclick="switch_group_links_tabs('discard')">{#KLIQQI_Visual_AdminPanel_Discard#}</a> {$groupview_published}
+					<a target="story_status" href="{$group_story_links_publish}" onclick="switch_group_links_tabs('published')">{#PLIKLI_Visual_AdminPanel_Published#}</a>
+					<a target="story_status" href="{$group_story_links_new}" onclick="switch_group_links_tabs('new')">{#PLIKLI_Visual_AdminPanel_New#}</a>
+					<a target="story_status" href="{$group_story_links_discard}" onclick="switch_group_links_tabs('discard')">{#PLIKLI_Visual_AdminPanel_Discard#}</a> {$groupview_published}
 				</span>
 				<span id="story_status_success-{$link_shakebox_index}" class="label label-success" style="display:none;">
-					{#KLIQQI_MiscWords_Save_Links_Success#}
+					{#PLIKLI_MiscWords_Save_Links_Success#}
 				</span>
 			</span>
 		</div><!-- /.title -->
@@ -226,7 +226,7 @@
 	<span itemprop="articleBody">
 	<div class="storycontent">
 		{checkActionsTpl location="tpl_link_summary_pre_story_content"}
-		{if $pagename eq "story"}{checkActionsTpl location="tpl_kliqqi_story_body_start_full"}{else}{checkActionsTpl location="tpl_kliqqi_story_body_start"}{/if}
+		{if $pagename eq "story"}{checkActionsTpl location="tpl_plikli_story_body_start_full"}{else}{checkActionsTpl location="tpl_plikli_story_body_start"}{/if}
 		{if $viewtype neq "short"}
 			{* Redwine: the $is_rtl is passed by /libs/link.php and holds the value of 0 or 1; i being for the rtl languages. *}
 			<div class="news-body-text" id="ls_contents-{$link_shakebox_index}" {if $is_rtl eq 1}dir="rtl"{else}dir="ltr"{/if}>
@@ -257,15 +257,15 @@
 				{if $Enable_Extra_Field_15 eq 1}{if $link_field15 neq ""}<br/><b>{$Field_15_Title}:</b> {$link_field15}{/if}{/if}
 				
 				{* 
-				  {if $pagename neq "story" && $pagename neq "submit"} <div class="floatright"><a class="btn btn-default" href="{$story_url}">{#KLIQQI_Visual_Read_More#}</a></div>{/if}
+				  {if $pagename neq "story" && $pagename neq "submit"} <div class="floatright"><a class="btn btn-default" href="{$story_url}">{#PLIKLI_Visual_Read_More#}</a></div>{/if}
 				*}
 				<div class="clearboth"></div> 
 			</div>
-			{if $pagename eq "story"}{checkActionsTpl location="tpl_kliqqi_story_body_end_full"}{else}{checkActionsTpl location="tpl_kliqqi_story_body_end"}{/if}
+			{if $pagename eq "story"}{checkActionsTpl location="tpl_plikli_story_body_end_full"}{else}{checkActionsTpl location="tpl_plikli_story_body_end"}{/if}
 		{/if}
 	</div><!-- /.storycontent -->
 	</span>
 	{checkActionsTpl location="tpl_link_summary_end"}
 </div><!-- /.stories -->
-{checkActionsTpl location="tpl_kliqqi_story_end"}
+{checkActionsTpl location="tpl_plikli_story_end"}
 <!--/link_summary.tpl -->

@@ -64,8 +64,8 @@ if(isset($_REQUEST['link_id'])){
 	}
 }
 
-// read the mysql database to get the kliqqi version
-/* Redwine: kliqqi version query removed and added to /libs/smartyvriables.php */
+// read the mysql database to get the plikli version
+/* Redwine: plikli version query removed and added to /libs/smartyvriables.php */
 
 if(isset($_REQUEST['process']) && $_REQUEST['process']=='edit_page'){
 	global $current_user,$db;

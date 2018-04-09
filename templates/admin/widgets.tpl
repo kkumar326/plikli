@@ -8,8 +8,8 @@
 		$action = 'main';
 	}
 	if($action == 'main' || $action == 'disable' || $action == 'enable'){
-		echo '<legend>'.$main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Widget_Management').' </legend>';
-		echo '<p>'.$main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Widget_Description').'</p>';
+		echo '<legend>'.$main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Widget_Management').' </legend>';
+		echo '<p>'.$main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Widget_Description').'</p>';
 		echo '	<ul id="widgettabs" class="nav nav-tabs">';
 			if ($_GET["status"] != 'uninstalled'){
 				echo '<li class="active"><a href="admin_widgets.php" id="installed">Installed</a></li>';
@@ -23,7 +23,7 @@
 		if ($_GET["status"] != 'uninstalled'){
 			echo '<form name="bulk_moderate" method="post">';
 			/*
-			echo '<div class="apply_widgets"><input type="submit" class="btn btn-primary" name="submit" value="'.$main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Apply_Changes').'" id="apply_changes" /></div>';
+			echo '<div class="apply_widgets"><input type="submit" class="btn btn-primary" name="submit" value="'.$main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Apply_Changes').'" id="apply_changes" /></div>';
 			echo '<br />';
 			*/
 			echo '<table class="table table-bordered">';
@@ -110,7 +110,7 @@
 							echo '<td></td>';
 						}
 						echo '<td style="text-align:center;vertical-align:middle;">';
-						echo '<a class="btn btn-danger btn-xs" href="?action=remove&widget=' . $widget->name . '">'.$main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Module_Remove').'</a>';
+						echo '<a class="btn btn-danger btn-xs" href="?action=remove&widget=' . $widget->name . '">'.$main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Module_Remove').'</a>';
 						echo '</td></tr>';
 					}
 				}
@@ -119,7 +119,7 @@
 			}
 			echo '</tbody></table>';
 			/*
-			echo '<div class="apply_widgets"><input type="submit" class="btn btn-primary" name="submit" value="'.$main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Apply_Changes').'" /></div>';
+			echo '<div class="apply_widgets"><input type="submit" class="btn btn-primary" name="submit" value="'.$main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Apply_Changes').'" /></div>';
 			*/
 			echo '</form>';
 		} else {
@@ -194,12 +194,12 @@
 	}
 	if($action == 'readme'){
 		$widget = sanitize($_REQUEST['widget'],3);
-		echo '<legend>'.$main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Widget_Readme').'</legend>';
-		echo '<a href="'.my_kliqqi_base.'/admin/admin_widgets.php"><i class="fa fa-caret-left"></i> '.$main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Widget_Return').'</a><br /><hr />';
+		echo '<legend>'.$main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Widget_Readme').'</legend>';
+		echo '<a href="'.my_plikli_base.'/admin/admin_widgets.php"><i class="fa fa-caret-left"></i> '.$main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Widget_Return').'</a><br /><hr />';
 		if(file_exists('../widgets/' . $widget . '/' . $widget . '_readme.htm')){
 			include_once('../widgets/' . $widget . '/' . $widget . '_readme.htm');	
 		} else {
-			echo $main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Widget_Readme_Not_Found');
+			echo $main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Widget_Readme_Not_Found');
 		}
 	}	
 	function safe_file_get_contents($url,$redirect=0){

@@ -16,7 +16,7 @@ class Friend {
 
 		$friend_status = $this->get_friend_status($friend);
 		if ($friend_status == 'following'){die("there was an error");}
-		header('Location: ' .my_base_url.my_kliqqi_base. '/user.php?login='.$current_user->user_login);
+		header('Location: ' .my_base_url.my_plikli_base. '/user.php?login='.$current_user->user_login);
 	}
 	
 	function add($friend)
@@ -25,7 +25,7 @@ class Friend {
 		if (!is_numeric($friend)) die();
 		
 		if ($current_user->user_id == 0) {
-        echo "<span class='success' style='border:solid1px#269900;padding:2px2px2px2px'>Please <a href=" .my_base_url.my_kliqqi_base. "/login.php?return=/user.php?view=addfriend>login</a></span><br/>";
+        echo "<span class='success' style='border:solid1px#269900;padding:2px2px2px2px'>Please <a href=" .my_base_url.my_plikli_base. "/login.php?return=/user.php?view=addfriend>login</a></span><br/>";
         return;
         }
 		
@@ -36,7 +36,7 @@ class Friend {
 
 			$friend_status = $this->get_friend_status($friend);
 			if ($friend_status == ''){die("there was an error");}
-			header('Location: ' .my_base_url.my_kliqqi_base. '/user.php?login='.$current_user->user_login);
+			header('Location: ' .my_base_url.my_plikli_base. '/user.php?login='.$current_user->user_login);
 		}
 	}
 	

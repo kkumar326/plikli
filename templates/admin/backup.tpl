@@ -41,7 +41,7 @@
 			die();
 		}
 		// Output the data
-		echo "<legend>";{/php}{#KLIQQI_Visual_AdminPanel_Backup#}{php}echo "</legend>";
+		echo "<legend>";{/php}{#PLIKLI_Visual_AdminPanel_Backup#}{php}echo "</legend>";
 		// Check to see if you have permission to write backup files to the /admin/backup directory.
 		$backup_permissions = substr(sprintf('%o', fileperms('./backup')), -4);
 		if ($backup_permissions !== '0777'){
@@ -49,9 +49,9 @@
 			chmod('./backup', 0777);
 			echo "CHMOD changed to 0777. Refresh the page";
 		} else {
-			echo '<a class="btn btn-default" style="margin-bottom:6px;" href="?dobackup=files">';{/php}{#KLIQQI_Visual_View_Backup_Files#}{php} echo'</a>';
-			echo '&nbsp; <a class="btn btn-default" style="margin-bottom:6px;" href="?dobackup=avatars">';{/php}{#KLIQQI_Visual_View_Backup_Avatars#}{php}echo'</a>';
-			echo '&nbsp; <a class="btn btn-default" style="margin-bottom:6px;" href="?dobackup=database">';{/php}{#KLIQQI_Visual_View_Backup_Database#}{php}echo'</a>';
+			echo '<a class="btn btn-default" style="margin-bottom:6px;" href="?dobackup=files">';{/php}{#PLIKLI_Visual_View_Backup_Files#}{php} echo'</a>';
+			echo '&nbsp; <a class="btn btn-default" style="margin-bottom:6px;" href="?dobackup=avatars">';{/php}{#PLIKLI_Visual_View_Backup_Avatars#}{php}echo'</a>';
+			echo '&nbsp; <a class="btn btn-default" style="margin-bottom:6px;" href="?dobackup=database">';{/php}{#PLIKLI_Visual_View_Backup_Database#}{php}echo'</a>';
 
 			// http://www.phpbbstyles.com/viewtopic.php?t=2278
 			$files = array();
@@ -64,8 +64,8 @@
 			closedir($dir);  
 			sort($files);  
 			if (count($files) != '0'){
-				echo '&nbsp; <a class="btn btn-danger" style="margin-bottom:6px;" href="?dobackup=clearall">';{/php}{#KLIQQI_Visual_View_Backup_Remove#}{php}echo'</a>';
-				echo "<p>";{/php}{#KLIQQI_Visual_View_Backup_Previous#}{php}echo"</p>";
+				echo '&nbsp; <a class="btn btn-danger" style="margin-bottom:6px;" href="?dobackup=clearall">';{/php}{#PLIKLI_Visual_View_Backup_Remove#}{php}echo'</a>';
+				echo "<p>";{/php}{#PLIKLI_Visual_View_Backup_Previous#}{php}echo"</p>";
 				echo '<table class="table table-striped table-condensed"><tbody>';
 				for($i=0; $i<count($files); $i++) {
 					echo '<tr><td colspan="4"><a href="./backup/' . $files[$i] . '"><i class="fa fa-download"></i> ' . $files[$i] . '</a></td></tr>';  
@@ -74,7 +74,7 @@
 			}else{
 				echo '<p>';
 				{/php}
-				{#KLIQQI_Visual_AdminPanel_Backup_None#}
+				{#PLIKLI_Visual_AdminPanel_Backup_None#}
 				{php}
 				echo '</p>';
 			}
@@ -84,6 +84,6 @@
 	}
 	{/php}
 {else}
-	{#KLIQQI_Visual_Header_AdminPanel_NoAccess#}
+	{#PLIKLI_Visual_Header_AdminPanel_NoAccess#}
 {/if}
 <!--/backup.tpl -->

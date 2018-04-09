@@ -1,7 +1,14 @@
-<div class="instructions">
+<?php
+if ($language == 'arabic') {
+	$site_direction = "rtl";
+}else{
+	$site_direction = "ltr";
+}
+?>
+<div class="instructions" style="direction:<?php echo $site_direction;?>">
 	<div class="jumbotron" style="padding:6px 25px 16px 25px;">
 		<h2><?php echo $lang['WelcomeToInstaller']; ?></h2>
-		<p style="font-size:0.8em;">
+		<p>
 			<?php echo $lang['WelcomeToThe']; ?>
 		</p>
 	</div>

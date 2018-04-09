@@ -54,7 +54,7 @@
 		$smarty->assign('js_data', $smarty->get_template_vars('js_data') . $js_data);
 		
 		// Added in 1.2
-		// If a TPL is INCLUDED (like in kliqqi.tpl) the ASSIGNed varibles do not make it back to PHP
+		// If a TPL is INCLUDED (like in plikli.tpl) the ASSIGNed varibles do not make it back to PHP
 		// so we cannot call the ShowOnloadJS() function at the end of the page and have all the
 		// JS in one spot. The quickest solution was to show the JS along with the HTML (ugly, I know, but it works)
 		if(isset($params['ShowJS'])){

@@ -24,12 +24,12 @@ function admin_snippet_showpage(){
 	if($canIhaveAccess == 1)
 	{	
 		// breadcrumbs
-			$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+			$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 			$navwhere['link1'] = getmyurl('admin', '');
 			$navwhere['text2'] = "Modify Snippet";
-			$navwhere['link2'] = my_kliqqi_base . "/module.php?module=admin_snippet";
+			$navwhere['link2'] = my_plikli_base . "/module.php?module=admin_snippet";
 			$main_smarty->assign('navbar_where', $navwhere);
-			$main_smarty->assign('posttitle', " | " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+			$main_smarty->assign('posttitle', " | " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 		// breadcrumbs
 		//Method for identifying modules rather than pagename
 		define('modulename', 'admin_snippet'); 
@@ -52,7 +52,7 @@ function admin_snippet_showpage(){
 					$snippet_content  = $db->escape($_POST['snippet_content']);
 					$db->query("INSERT INTO ".table_prefix."snippets (snippet_name,snippet_location,snippet_updated,snippet_order,snippet_content) 
 						   VALUES ('$snippet_name','$snippet_location',NOW(),'1','$snippet_content')");
-					header("Location: ".my_kliqqi_base."/module.php?module=admin_snippet");
+					header("Location: ".my_plikli_base."/module.php?module=admin_snippet");
 					die();
 			    }
 			}
@@ -75,19 +75,19 @@ function admin_snippet_showpage(){
 					$snippet_content  = $db->escape($_POST['snippet_content']);
 					$snippet_status  = $db->escape($_POST['snippet_status']);
 					$db->query("UPDATE ".table_prefix."snippets SET snippet_name='$snippet_name', snippet_location='$snippet_location', snippet_content='$snippet_content', snippet_updated=NOW(), snippet_status=$snippet_status WHERE snippet_id='$snippet_id'");
-					header("Location: ".my_kliqqi_base."/module.php?module=admin_snippet");
+					header("Location: ".my_plikli_base."/module.php?module=admin_snippet");
 					die();
 			    }
 			}
 	
 			// Check ID
 			if(!is_numeric($_GET['id'])) {
-				header("Location: ".my_kliqqi_base."/module.php?module=admin_snippet");
+				header("Location: ".my_plikli_base."/module.php?module=admin_snippet");
 				die();
 			} else {
 				$snippet = $db->get_row("SELECT * FROM ".table_prefix."snippets WHERE snippet_id={$_GET['id']}");
 				if (!$snippet->snippet_id) {
-					header("Location: ".my_kliqqi_base."/module.php?module=admin_snippet");
+					header("Location: ".my_plikli_base."/module.php?module=admin_snippet");
 					die();
 				}
 				$main_smarty->assign("snippet",(array)$snippet);
@@ -120,14 +120,14 @@ function admin_snippet_showpage(){
 				die();
 			}
 
-			header("Location: ".my_kliqqi_base."/module.php?module=admin_snippet");
+			header("Location: ".my_plikli_base."/module.php?module=admin_snippet");
 			die();
 		// Delete selected
 		} elseif(isset($_POST['delete'])) { 
 			if (sizeof($_POST["snippet_delete"]))
 				$db->query("DELETE FROM ".table_prefix."snippets WHERE snippet_id IN(".join(",",array_keys($_POST["snippet_delete"])).")");
 
-			header("Location: ".my_kliqqi_base."/module.php?module=admin_snippet");
+			header("Location: ".my_plikli_base."/module.php?module=admin_snippet");
 			die();
 		// Update orders
 		} elseif(isset($_POST['update'])) {
@@ -136,7 +136,7 @@ function admin_snippet_showpage(){
 				if (is_numeric($k) && is_numeric($v))
 					$db->query("UPDATE ".table_prefix."snippets SET snippet_order='$v' WHERE snippet_id='$k'");
 
-			header("Location: ".my_kliqqi_base."/module.php?module=admin_snippet");
+			header("Location: ".my_plikli_base."/module.php?module=admin_snippet");
 			die();
 		// Display the list
 		} else {
@@ -161,7 +161,7 @@ function admin_snippet_showpage(){
 					    $db->query("INSERT INTO ".table_prefix."snippets (snippet_name,snippet_location,snippet_updated,snippet_order,snippet_content) 
 							   VALUES ('$snippet_name','$snippet_location',NOW(),'1','$snippet_content')");
 					}
-					header("Location: ".my_kliqqi_base."/module.php?module=admin_snippet");
+					header("Location: ".my_plikli_base."/module.php?module=admin_snippet");
 					die();
 				    }
 				    else

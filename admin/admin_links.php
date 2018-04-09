@@ -54,9 +54,9 @@ if($canIhaveAccess == 1) {
 	$search_sql = '';
 	// if user is searching
 	$temp = '';
-	if(isset($_GET['keyword']) && $_GET['keyword']!= $main_smarty->get_config_vars('KLIQQI_Visual_Search_SearchDefaultText')){
-		$kliqqi_keyword = sanitize($_GET["keyword"], 3);
-		$search_sql = " AND (link_author LIKE '%".$kliqqi_keyword."%' OR link_title LIKE '%".$kliqqi_keyword."%' OR link_content LIKE '%".$kliqqi_keyword."%' OR link_tags LIKE '%".$kliqqi_keyword."%') ";
+	if(isset($_GET['keyword']) && $_GET['keyword']!= $main_smarty->get_config_vars('PLIKLI_Visual_Search_SearchDefaultText')){
+		$plikli_keyword = sanitize($_GET["keyword"], 3);
+		$search_sql = " AND (link_author LIKE '%".$plikli_keyword."%' OR link_title LIKE '%".$plikli_keyword."%' OR link_content LIKE '%".$plikli_keyword."%' OR link_tags LIKE '%".$plikli_keyword."%') ";
 	}
 
 	if (!empty($_GET['user']))
@@ -153,11 +153,11 @@ if($canIhaveAccess == 1) {
 	}
 
 	// breadcrumbs and page title
-	$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+	$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 	$navwhere['link1'] = getmyurl('admin', '');
-	$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_Links');
+	$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_Links');
 	$main_smarty->assign('navbar_where', $navwhere);
-	$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+	$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 	
 	// if admin changes the link status
 	if (isset($_GET['action']) && sanitize($_GET['action'], 3) == "bulkmod" && isset($_POST['admin_acction'])) {
@@ -218,7 +218,7 @@ if($canIhaveAccess == 1) {
 			}
 			
 			totals_regenerate();
-			//header("Location: ".my_kliqqi_base."/admin/admin_links.php?page=".sanitize($_GET['page'],3));
+			//header("Location: ".my_plikli_base."/admin/admin_links.php?page=".sanitize($_GET['page'],3));
 			$redirect_url=$_SERVER['HTTP_REFERER'];
 			header("Location:". $redirect_url);
 			exit();
@@ -234,8 +234,8 @@ if($canIhaveAccess == 1) {
 	define('pagename', 'admin_links'); 
 	$main_smarty->assign('pagename', pagename);
 	
-// read the mysql database to get the kliqqi version
-/* Redwine: kliqqi version query removed and added to /libs/smartyvriables.php */
+// read the mysql database to get the plikli version
+/* Redwine: plikli version query removed and added to /libs/smartyvriables.php */
 	
 	// show the template
 	$main_smarty->assign('tpl_center', '/admin/submissions');

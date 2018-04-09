@@ -4,11 +4,11 @@ date_default_timezone_set('UTC');
 if(!defined('mnminclude')){header('Location: ../error_404.php');die();}
 
 function mailer_start(){
-	// Usually a module will define Kliqqi_Mailer
+	// Usually a module will define Plikli_Mailer
 	// If defined, then include call the function thats starts (includes) it
 
-	if(defined('Kliqqi_Mailer') && function_exists(Kliqqi_Mailer . '_mailer_start')){
-		call_user_func(Kliqqi_Mailer . '_mailer_start');
+	if(defined('Plikli_Mailer') && function_exists(Plikli_Mailer . '_mailer_start')){
+		call_user_func(Plikli_Mailer . '_mailer_start');
 	} else {
 		include_once(mnminclude.'mailer.php');
 	}
@@ -24,23 +24,23 @@ function check_if_table_exists($table) {
 	return true;
 }
 
-function kliqqi_version(){
-	// returns the version of Kliqqi that's installed 
-	$ver = get_misc_data('kliqqi_version');
+function plikli_version(){
+	// returns the version of Plikli that's installed 
+	$ver = get_misc_data('plikli_version');
 	return $ver;
 }
 
-function kliqqi_hash(){
+function plikli_hash(){
 	// returns the hash from the misc_table 
 	$hash = get_misc_data('hash');
 	return $hash;
 }
 
 
-function kliqqi_validate(){
+function plikli_validate(){
 	// returns the value for register validation 
 	$vars = array('validate' => misc_validate);
-	check_actions('kliqqi_validate', $vars);
+	check_actions('plikli_validate', $vars);
 
 	return $vars['validate'];
 }
@@ -168,20 +168,20 @@ function txt_time_diff($from, $now=0){
 	$diff=$diff%3600;
 	$minutes=intval($diff/60);
 
-	if($days>1) $txt  .= " $days ".$main_smarty->get_config_vars('KLIQQI_Visual_Story_Times_Days');
-	else if ($days==1) $txt  .= " $days ".$main_smarty->get_config_vars('KLIQQI_Visual_Story_Times_Day');
+	if($days>1) $txt  .= " $days ".$main_smarty->get_config_vars('PLIKLI_Visual_Story_Times_Days');
+	else if ($days==1) $txt  .= " $days ".$main_smarty->get_config_vars('PLIKLI_Visual_Story_Times_Day');
 
 	if($days < 2){
-		if($hours>1) $txt .= " $hours ".$main_smarty->get_config_vars('KLIQQI_Visual_Story_Times_Hours');
-		else if ($hours==1) $txt  .= " $hours ".$main_smarty->get_config_vars('KLIQQI_Visual_Story_Times_Hour');
+		if($hours>1) $txt .= " $hours ".$main_smarty->get_config_vars('PLIKLI_Visual_Story_Times_Hours');
+		else if ($hours==1) $txt  .= " $hours ".$main_smarty->get_config_vars('PLIKLI_Visual_Story_Times_Hour');
 	
 		if($hours < 3){
-			if($minutes>1) $txt .= " $minutes ".$main_smarty->get_config_vars('KLIQQI_Visual_Story_Times_Minutes');
-			else if ($minutes==1) $txt  .= " $minutes ".$main_smarty->get_config_vars('KLIQQI_Visual_Story_Times_Minute');
+			if($minutes>1) $txt .= " $minutes ".$main_smarty->get_config_vars('PLIKLI_Visual_Story_Times_Minutes');
+			else if ($minutes==1) $txt  .= " $minutes ".$main_smarty->get_config_vars('PLIKLI_Visual_Story_Times_Minute');
 		}
 	}
 	
-	if($txt=='') $txt = ' '. $main_smarty->get_config_vars('KLIQQI_Visual_Story_Times_FewSeconds') . ' ';
+	if($txt=='') $txt = ' '. $main_smarty->get_config_vars('PLIKLI_Visual_Story_Times_FewSeconds') . ' ';
 	return $txt;
 }
 
@@ -241,7 +241,7 @@ function get_date($epoch) {
 }
 
 function get_base_url($url){
-	// get base of URL. For example, get_base_url will return www.kliqqi.com if the URL was www.kliqqi.com/support/
+	// get base of URL. For example, get_base_url will return www.plikli.com if the URL was www.plikli.com/support/
    $req = $url;
   
    $pos = strpos($req, '://');

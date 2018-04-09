@@ -1,7 +1,7 @@
 ﻿{config_load file=admin_snippet_lang_conf}
 
-<legend>{#KLIQQI_Admin_Snippet#}</legend>
-<p>{#KLIQQI_Admin_Snippet_Instructions_1#}</p>
+<legend>{#PLIKLI_Admin_Snippet#}</legend>
+<p>{#PLIKLI_Admin_Snippet_Instructions_1#}</p>
 <br />
 
 {if $snippet_error}
@@ -15,12 +15,12 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th>{#KLIQQI_Admin_Snippet_Name#}</th>
-				<th>{#KLIQQI_Admin_Snippet_Location#}</th>
-				<th>{#KLIQQI_Admin_Snippet_Updated#}</th>
-				<th style="width:75px;">{#KLIQQI_Admin_Snippet_Order#}</th>
-				<th style="width:75px;">{#KLIQQI_Admin_Snippet_Status#}</th>
-				<th style="width:50px;">{#KLIQQI_Admin_Snippet_Delete#}</th>	
+				<th>{#PLIKLI_Admin_Snippet_Name#}</th>
+				<th>{#PLIKLI_Admin_Snippet_Location#}</th>
+				<th>{#PLIKLI_Admin_Snippet_Updated#}</th>
+				<th style="width:75px;">{#PLIKLI_Admin_Snippet_Order#}</th>
+				<th style="width:75px;">{#PLIKLI_Admin_Snippet_Status#}</th>
+				<th style="width:50px;">{#PLIKLI_Admin_Snippet_Delete#}</th>	
 			</tr>
 		<tbody>
 		{section name=id loop=$template_snippets}
@@ -36,13 +36,13 @@
 		</tbody>
 	</table>
 
-	<p style="text-align:right"><a href="javascript:check_all()">{#KLIQQI_Admin_Snippet_Check_All#}</a>&nbsp;&nbsp;&nbsp;<a href="javascript:uncheck_all()">{#KLIQQI_Admin_Snippet_Uncheck_All#}</a></p><br />
+	<p style="text-align:right"><a href="javascript:check_all()">{#PLIKLI_Admin_Snippet_Check_All#}</a>&nbsp;&nbsp;&nbsp;<a href="javascript:uncheck_all()">{#PLIKLI_Admin_Snippet_Uncheck_All#}</a></p><br />
 
 	<div style="text-align:right">
-		<input type="submit" value="{#KLIQQI_Admin_Snippet_Add_New#}" onclick="document.location='?module=admin_snippet&mode=new'; return false;" class="btn btn-success" /> 
-		<input type="submit" name="update" value="{#KLIQQI_Admin_Snippet_Update#}" class="btn btn-default" />
-		<input type="submit" name="export" value="{#KLIQQI_Admin_Snippet_Export_Selected#}" class="btn btn-default" />
-		<input type="submit" name="delete" value="{#KLIQQI_Admin_Snippet_Delete_Selected#}" class="btn btn-danger" />
+		<input type="submit" value="{#PLIKLI_Admin_Snippet_Add_New#}" onclick="document.location='?module=admin_snippet&mode=new'; return false;" class="btn btn-success" /> 
+		<input type="submit" name="update" value="{#PLIKLI_Admin_Snippet_Update#}" class="btn btn-default" />
+		<input type="submit" name="export" value="{#PLIKLI_Admin_Snippet_Export_Selected#}" class="btn btn-default" />
+		<input type="submit" name="delete" value="{#PLIKLI_Admin_Snippet_Delete_Selected#}" class="btn btn-danger" />
 	</div>
 	
 	{literal}
@@ -55,7 +55,7 @@
 	{/literal}
 
 	<input type="file" name="file" id="file" >
-	<input type="submit" name="import" value="{#KLIQQI_Admin_Snippet_Import#}" class="btn btn-primary" />
+	<input type="submit" name="import" value="{#PLIKLI_Admin_Snippet_Import#}" class="btn btn-primary" />
 
 </form>
 
@@ -78,4 +78,4 @@ function uncheck_all() {
 </SCRIPT>
 {/literal}
 
-{config_load file=admin_snippet_kliqqi_lang_conf}
+{config_load file=admin_snippet_plikli_lang_conf}

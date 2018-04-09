@@ -1,7 +1,7 @@
 <?php
 
 // the path to the module. the probably shouldn't be changed unless you rename the akismet folder(s)
-define('akismet_path', my_kliqqi_base . '/modules/akismet/');
+define('akismet_path', my_plikli_base . '/modules/akismet/');
 
 // the path to the module. the probably shouldn't be changed unless you rename the module_store folder(s)
 	if(!defined('lang_loc')){
@@ -10,7 +10,7 @@ define('akismet_path', my_kliqqi_base . '/modules/akismet/');
 			$path = substr($_SERVER["SCRIPT_NAME"], 0, $pos);
 			if ($path == "/"){$path = "";}
 			
-			if($path != my_kliqqi_base){
+			if($path != my_plikli_base){
 				define('lang_loc', '..');
 			} else {
 				define('lang_loc', '.');
@@ -18,7 +18,7 @@ define('akismet_path', my_kliqqi_base . '/modules/akismet/');
 	}
 	
 define('akismet_lang_conf', lang_loc . '/modules/akismet/lang.conf');
-define('akismet_kliqqi_lang_conf', lang_loc . "/languages/lang_" . kliqqi_language . ".conf");
+define('akismet_plikli_lang_conf', lang_loc . "/languages/lang_" . plikli_language . ".conf");
 
 // the path to the modules templates. the probably shouldn't be changed unless you rename the akismet folder(s)
 define('akismet_tpl_path', '../modules/akismet/templates/');
@@ -27,10 +27,10 @@ define('akismet_tpl_path', '../modules/akismet/templates/');
 define('akismet_lib_path', './modules/akismet/libs/');
 
 // the path to the images. the probably shouldn't be changed unless you rename the akismet folder(s)
-define('akismet_img_path', my_kliqqi_base . '/modules/akismet/images/');
+define('akismet_img_path', my_plikli_base . '/modules/akismet/images/');
 
-define('URL_akismet', my_kliqqi_base.'/module.php?module=akismet');
-define('URL_akismet_isSpam', my_kliqqi_base.'/module.php?module=akismet&view=isSpam&link_id=');
+define('URL_akismet', my_plikli_base.'/module.php?module=akismet');
+define('URL_akismet_isSpam', my_plikli_base.'/module.php?module=akismet&view=isSpam&link_id=');
 define('URL_akismet_isSpamcomment', 'module.php?module=akismet&view=isSpamcomment');
 
 // don't touch anything past this line.
@@ -38,7 +38,7 @@ define('URL_akismet_isSpamcomment', 'module.php?module=akismet&view=isSpamcommen
 if(isset($main_smarty) && is_object($main_smarty)){
 	$main_smarty->assign('akismet_path', akismet_path);
 	$main_smarty->assign('akismet_lang_conf', akismet_lang_conf);
-	$main_smarty->assign('akismet_kliqqi_lang_conf', akismet_kliqqi_lang_conf);
+	$main_smarty->assign('akismet_plikli_lang_conf', akismet_plikli_lang_conf);
 	$main_smarty->assign('akismet_tpl_path', akismet_tpl_path);
 	$main_smarty->assign('akismet_lib_path', akismet_lib_path);
 	$main_smarty->assign('akismet_img_path', akismet_img_path);

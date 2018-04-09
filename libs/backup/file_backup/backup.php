@@ -51,8 +51,8 @@ class FileBackup {
 		 $pos = strrpos($_SERVER["SCRIPT_NAME"], "/");
 		//echo $_SERVER['DOCUMENT_ROOT'];
 	   //echo $path = substr($_SERVER["SCRIPT_NAME"], 0, $pos);
-	//echo my_kliqqi_base."/avatars/";
-		$files = $this->filelist($_SERVER['DOCUMENT_ROOT'].my_kliqqi_base."/avatars/",1,0); // call the function
+	//echo my_plikli_base."/avatars/";
+		$files = $this->filelist($_SERVER['DOCUMENT_ROOT'].my_plikli_base."/avatars/",1,0); // call the function
 		//echo "<pre>";
 		//print_r($files);
 		
@@ -69,7 +69,7 @@ class FileBackup {
 		// code from http://www.phpit.net/article/creating-zip-tar-archives-dynamically-php/
 		$zipname = 'Avatars'."_".date("Y-m-d_H-i-s").'_'.$rand.'.zip';
 		$zipfile = New Archive_Zip('./backup/' . $zipname);
-		$p_params= array('remove_path' =>$_SERVER['DOCUMENT_ROOT'].my_kliqqi_base);
+		$p_params= array('remove_path' =>$_SERVER['DOCUMENT_ROOT'].my_plikli_base);
 		$zipfile->create($xlist,$p_params);
 		echo 'Zip file created -- <a href = "' . './backup/' . $zipname . '">'.$zipname.'</a>';
 		$this->success = 1;

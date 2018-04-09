@@ -1,0 +1,61 @@
+<h2>RSS Importer Module</h2>
+
+<h3>Revision History</h3>
+<ul>
+    <li>Redwine - 03/08/2017 - Fixed the inlcudes path that was generating errors and breaking the execution when using a cron job.</li>
+	<li>Added instructions on how accurately and correctly use it in a cron job.</li>
+</ul>
+
+<h2>Description</h2>
+<p>Import RSS feeds from your favorite websites into your plikli site.</p>
+
+<h2>Instructions</h2>
+
+<h3>Settings</h3>
+	<ol>
+		<li>Click on "Add a new feed."</li>
+		<li>Enter feed URL in "Feed URL." input</li>
+		<li>Click on the "Edit" link to configure the feed settings</li>
+		<li>Click "Add a new field link" to map the fields of the RSS feed to your plikli site fields. For example:
+			<ul>The basic fields are the below three. <strong><u>However, make sure to select a relevant field from the feed to assign to the link_tags, otherwise, rss importer will split the title of the feed article and assign it to the link_tags! (See pictures below)</u></strong> 
+				<li>link_title</li>
+				<li>link_url</li>
+				<li>link_content</li>
+			</ul>
+		</li>
+		
+		<br /><strong><u><i>Keep in mind that every Feed is built differently. So, you have to examine every feed to get to decide what elements to use and match with Plikli field! See the difference of two feeds in the pictures.</i></u></strong><br /><br />
+		<img src="../modules/rss_import/images/first-feed.png" />
+		<br /> <hr /><br />
+		<img src="../modules/rss_import/images/second-feed.png" />
+	</ol>
+<p><strong><u><i>You must select a field for the tags, as illustarted in the picture:</i></u></strong><br /><br /></p>
+
+<h3>Create a Cron Job</h3>
+<ol>
+<li>COPY /modules/rss_import/<span style="color:red">import.php</span> file to the ROOT of the Plikli CMS</li>
+<li>Cron Jobs are run from <strong>/bin/bash</strong>. In most cases, depending on your host's permissions you will get this error:<br />
+<strong><u><i>/bin/bash: /home/YOUR-ACCOUNT-USERNAME/public_html/THE-FOLDER/import.php: Permission denied</i></u></strong></li>
+<li>To GUARANTEE the cron job will work, you have to specifically tell the server to run the cron as PHP, in the command box:<br /><strong><u><i><span style="color:red">/usr/bin/php</span> /home/YOUR-ACCOUNT-USERNAME/public_html/THE-FOLDER/import.php</i></u></strong></li>
+<li>Cron jobs fire an email to the owner every time they run. To stop receiving these emails, add the following to the end of the command: <span style="color:red">&gt;/dev/null 2&gt;&amp;1</span> OR JUST <span style="color:red">&gt; /dev/null</span><br />
+<strong><u><i><span style="color:red">/usr/bin/php</span> /home/YOUR-ACCOUNT-USERNAME/public_html/THE-FOLDER/import.php <span style="color:red">&gt; /dev/null 2&gt;&amp;1</span></i></u></strong></li>
+<li>If you still received emails, CHECK WITH THE HOST <span style="color:red">NOT WITH plikli Support!</span></li>
+</ol>
+<hr />
+<h3>Revision History</h3>
+<ul>
+    <li>ChuckRoast - 1/21/2016 - Converted the module to be used with Plikli CMS.</li>
+	<li>Yankidank - 08/09/2013 - <span style="text-decoration:line-through;color:red">import.php can be left in the module's directory. Fixed Smarty include path.</span></li>
+	<li>Yankidank - 08/08/2013 - v2.0 Updated for pligg 2.</li>
+	<li>Yankidank - 3/13/2009 - v0.9 Added scriptaculous to module.</li>
+	<li>Yankidank - 2/11/2009 - v0.8 Fixes for images and template locations.</li>
+	<li>Yankidank - 09/17/2008 - v0.7 Updated to work with new admin panel location</li>
+	<li>Mark E - 02/08/2008 - v0.6 Rearranged administration interface to be more streamlined; modified feed update link to only update the 
+	selected feed unless Import All Feeds is selected; added confirmation before deleting a feed; added Edit and Import links to main 
+	admin page; added functionality so that if a feed doesn't have tags then keywords in the title are used as tags; added "stopword" 
+	list to prevent certain words from becoming tags.</li>
+	<li>AshDigg - 08/20/2007 - v0.5 Misc bug fixes</li>
+	<li>AshDigg - 05/03/2007 - v0.4 Bug fixes, added 'order' option</li>
+	<li>AshDigg - 04/29/2007 - v0.3 First version as module</li>
+</ul>
+

@@ -49,7 +49,7 @@ if (file_exists($logsdir)) {
 	}
 }
 
-echo 'Continue to the <a href="./install.php">Installation Page</a>, the <a href="./upgrade.php">Upgrade Page</a>, or the <a href="../readme.html">Kliqqi Readme</a>.'
+echo 'Continue to the <a href="./install.php">Installation Page</a>, the <a href="./upgrade.php">Upgrade Page</a>, or the <a href="../readme.html">Plikli Readme</a>.'
 
 // Comment out or temporarily delete the line below if you wish to see that status of renaming the files above.
 

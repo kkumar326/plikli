@@ -5,14 +5,14 @@ very basic mailer class
 howto:
 
 mailer_start();
-$mailer = new KliqqiMailer('Welcome to Kliqqi', 'Welcome to Kliqqi.Com. Thanks for joining!', 'admin@kliqqi.com', 'user@user.com');
+$mailer = new PlikliMailer('Welcome to Plikli', 'Welcome to Plikli.Com. Thanks for joining!', 'admin@plikli.com', 'user@user.com');
 $mailer->send();
 
 mailer_start -- in utils.php, checks to see if another mailer is being used (like Swift Mailer)
   -- if it is, then include the code for that and use it
   -- if not, include this class, and use it
 
-KliqqiMailer(subject, body, to, from);
+PlikliMailer(subject, body, to, from);
 
 Currently only supports 1 to address
 
@@ -22,14 +22,14 @@ Returns true if success, false if failure.
 
 if(!defined('mnminclude')){header('Location: ../error_404.php');die();}
 
-class KliqqiMailer{
+class PlikliMailer{
 
 	var $subject = '';
 	var $body = '';
 	var $from = '';
 	var $to = '';
 
-	function KliqqiMailer($subj = '', $body = '', $from = '', $to = '', $cc = '', $bcc = ''){
+	function PlikliMailer($subj = '', $body = '', $from = '', $to = '', $cc = '', $bcc = ''){
 
 		if($subj != ''){$this->subject = $subj;}
 		if($body != ''){$this->body = $body;}

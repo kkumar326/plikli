@@ -1,7 +1,7 @@
 ﻿<?php
 function joinGroup($group_id,$privacy)
 {
-	global $db, $current_user,$main_smarty,$the_template,$my_base_url,$my_kliqqi_base;
+	global $db, $current_user,$main_smarty,$the_template,$my_base_url,$my_plikli_base;
 	if (!is_numeric($group_id)) die();
 	if (!$current_user->user_id) die();
 
@@ -32,13 +32,13 @@ function joinGroup($group_id,$privacy)
 		$creator_id = get_group_creator($group_id);
 		$to = get_group_user_email($creator_id);
 
-		$subject = $main_smarty->get_config_vars('KLIQQI_Visual_Group_Email_Subject');
-		$body = sprintf(  $main_smarty->get_config_vars('KLIQQI_Visual_Group_Email_Body'),
+		$subject = $main_smarty->get_config_vars('PLIKLI_Visual_Group_Email_Subject');
+		$body = sprintf(  $main_smarty->get_config_vars('PLIKLI_Visual_Group_Email_Body'),
 					my_base_url.getmyurl("user", $current_user->user_login),
 					$current_user->user_login,
-					my_base_url.my_kliqqi_base."/join_group.php?activate=true&group_id=".$group_id."&user_id=".$current_user->user_id,
-					my_base_url.my_kliqqi_base."/join_group.php?activate=false&group_id=".$group_id."&user_id=".$current_user->user_id);
-		$headers = 'From: ' . $main_smarty->get_config_vars("KLIQQI_PassEmail_From") . "\r\n";
+					my_base_url.my_plikli_base."/join_group.php?activate=true&group_id=".$group_id."&user_id=".$current_user->user_id,
+					my_base_url.my_plikli_base."/join_group.php?activate=false&group_id=".$group_id."&user_id=".$current_user->user_id);
+		$headers = 'From: ' . $main_smarty->get_config_vars("PLIKLI_PassEmail_From") . "\r\n";
 		$headers .= "Content-type: text/html; charset=utf-8\r\n";
 
 		mail($to, $subject, $body, $headers);
@@ -239,9 +239,9 @@ function group_display($requestID)
 		
 		//get group avatar path
 		if($group_avatar == "uploaded" && allow_groups_avatar == 'true' && file_exists(mnmpath."avatars/groups_uploaded/".$group_id."_".group_avatar_size_width.".jpg"))
-			$imgsrc = my_base_url . my_kliqqi_base."/avatars/groups_uploaded/".$group_id."_".group_avatar_size_width.".jpg";
+			$imgsrc = my_base_url . my_plikli_base."/avatars/groups_uploaded/".$group_id."_".group_avatar_size_width.".jpg";
 		else
-			$imgsrc = my_base_url . my_kliqqi_base."/templates/".$the_template."/img/group_large.gif";
+			$imgsrc = my_base_url . my_plikli_base."/templates/".$the_template."/img/group_large.gif";
 		$main_smarty->assign('imgsrc', $imgsrc);
 		
 		//get group creator and his urls
@@ -325,12 +325,12 @@ if ($gr_roles == "admin") {
 	$is_gr_Moderator = 1;
 }
 
-	$change_role = $main_smarty->get_config_vars("KLIQQI_Visual_Group_Change_Role");
-	$role_normal = $main_smarty->get_config_vars("KLIQQI_Visual_Group_Role_Normal");
-	$role_admin = $main_smarty->get_config_vars("KLIQQI_Visual_Group_Role_Admin");
-	$role_moderator = $main_smarty->get_config_vars("KLIQQI_Visual_Group_Role_Moderator");
-	$role_flagged = $main_smarty->get_config_vars("KLIQQI_Visual_Group_Role_Flagged");
-	$role_banned = $main_smarty->get_config_vars("KLIQQI_Visual_Group_Role_Banned");
+	$change_role = $main_smarty->get_config_vars("PLIKLI_Visual_Group_Change_Role");
+	$role_normal = $main_smarty->get_config_vars("PLIKLI_Visual_Group_Role_Normal");
+	$role_admin = $main_smarty->get_config_vars("PLIKLI_Visual_Group_Role_Admin");
+	$role_moderator = $main_smarty->get_config_vars("PLIKLI_Visual_Group_Role_Moderator");
+	$role_flagged = $main_smarty->get_config_vars("PLIKLI_Visual_Group_Role_Flagged");
+	$role_banned = $main_smarty->get_config_vars("PLIKLI_Visual_Group_Role_Banned");
 /* Redwine: Roles and permissions and Groups fixes */
 	$gcreator = get_group_creator($requestID);
 	if($gcreator == $current_user->user_id || $isAdmin == '1' || $is_gr_Admin == '1' || $is_gr_Moderator == '1')
@@ -367,7 +367,7 @@ if ($gr_roles == "admin") {
 							$main_smarty->assign('is_group_admin', 'true');
 							$member_display .= '<td>'.$member_role.'</td><td></td><td></td>';
 						} else {
-							$member_display .= '<td>'.$member_role.'</td><td><a class="btn btn-default" href="#groupadminlinks-'.$index.'" data-toggle="modal"><i class="fa fa-edit" title="'.$change_role.'"></i> Edit</a></td><td><a class="btn btn-danger" href="'.my_base_url . my_kliqqi_base . '/join_group.php?activate=false&group_id='.$requestID.'&user_id='.$member_user_id.'">Deactivate</a></td>';
+							$member_display .= '<td>'.$member_role.'</td><td><a class="btn btn-default" href="#groupadminlinks-'.$index.'" data-toggle="modal"><i class="fa fa-edit" title="'.$change_role.'"></i> Edit</a></td><td><a class="btn btn-danger" href="'.my_base_url . my_plikli_base . '/join_group.php?activate=false&group_id='.$requestID.'&user_id='.$member_user_id.'">Deactivate</a></td>';
 						}
 						$member_display .= '
 						<div class="modal fade" id="groupadminlinks-'.$index.'">
@@ -398,7 +398,7 @@ if ($gr_roles == "admin") {
 				} else {
 /* Redwine: Roles and permissions and Groups fixes */
 					if($gcreator == $current_user->user_id || $is_gr_Admin == '1' || $is_gr_Moderator == '1') {
-					$member_display .= '<td>&nbsp;</td><td>&nbsp;</td><td><a class="btn btn-success" href="'.my_base_url . my_kliqqi_base . '/join_group.php?activate=true&group_id='.$requestID.'&user_id='.$member_user_id.'">Activate</a></td>';
+					$member_display .= '<td>&nbsp;</td><td>&nbsp;</td><td><a class="btn btn-success" href="'.my_base_url . my_plikli_base . '/join_group.php?activate=true&group_id='.$requestID.'&user_id='.$member_user_id.'">Activate</a></td>';
 /* Redwine: Roles and permissions and Groups fixes */
 					}else{
 						$member_display .= '<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>';
@@ -623,9 +623,9 @@ function group_print_summary($requestID)
 		
 		//get group avatar path
 		if($group_avatar == "uploaded" && file_exists(mnmpath."avatars/groups_uploaded/".$group_id."_".group_avatar_size_width.".jpg"))
-			$imgsrc = my_base_url . my_kliqqi_base."/avatars/groups_uploaded/".$group_id."_".group_avatar_size_width.".jpg";
+			$imgsrc = my_base_url . my_plikli_base."/avatars/groups_uploaded/".$group_id."_".group_avatar_size_width.".jpg";
 		else
-			$imgsrc = my_base_url . my_kliqqi_base."/templates/".$the_template."/img/group_large.gif";
+			$imgsrc = my_base_url . my_plikli_base."/templates/".$the_template."/img/group_large.gif";
 		$main_smarty->assign('imgsrc', $imgsrc);
 		
 		//get group creator and his url
@@ -641,9 +641,9 @@ function group_print_summary($requestID)
 		if($current_user->user_id == $group_creator){$main_smarty->assign('is_group_admin', 1);}
 		
 		//language
-		$lang_Created_By = $main_smarty->get_config_vars("KLIQQI_Visual_Group_Created_By");
-		$lang_Created_On = $main_smarty->get_config_vars("KLIQQI_Visual_Group_Created_On");
-		$lang_Member = $main_smarty->get_config_vars("KLIQQI_Visual_Group_Member");
+		$lang_Created_By = $main_smarty->get_config_vars("PLIKLI_Visual_Group_Created_By");
+		$lang_Created_On = $main_smarty->get_config_vars("PLIKLI_Visual_Group_Created_On");
+		$lang_Member = $main_smarty->get_config_vars("PLIKLI_Visual_Group_Member");
 		
 		//check member
 		//include_once(mnminclude.'group.php');

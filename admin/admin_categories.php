@@ -11,9 +11,9 @@ include_once(mnminclude.'dbtree.php');
 include(mnminclude.'csrf.php');
 include(mnminclude.'document_class.php');
 
-$KliqqiDoc->add_js(my_base_url.my_kliqqi_base."/templates/admin/js/move.js");
+$PlikliDoc->add_js(my_base_url.my_plikli_base."/templates/admin/js/move.js");
 
-$KliqqiDoc->get_js();
+$PlikliDoc->get_js();
 
 check_referrer();
 
@@ -37,12 +37,12 @@ if(caching == 1){
 }
 
 // breadcrumbs and page title
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 $navwhere['link1'] = getmyurl('admin', '');
-$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_2');
-$navwhere['link2'] = my_kliqqi_base . "/admin_categories.php";
+$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_2');
+$navwhere['link2'] = my_plikli_base . "/admin_categories.php";
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 
 if($canIhaveAccess == 1)
 {
@@ -63,8 +63,8 @@ if($canIhaveAccess == 1)
 	define('pagename', 'admin_categories'); 
 	$main_smarty->assign('pagename', pagename);
 	
-	// read the mysql database to get the kliqqi version
-	/* Redwine: kliqqi version query removed and added to /libs/smartyvriables.php */
+	// read the mysql database to get the plikli version
+	/* Redwine: plikli version query removed and added to /libs/smartyvriables.php */
 
 	rebuild_the_tree();
 	ordernew();

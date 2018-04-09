@@ -5,4 +5,4 @@
 		</a>
 	</li>
 {* this is a temporary fix. When you load a new config file the existing config gets dropped. *}
-{config_load file=akismet_kliqqi_lang_conf}
+{config_load file=akismet_plikli_lang_conf}

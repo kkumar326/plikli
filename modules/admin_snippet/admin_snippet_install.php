@@ -3,7 +3,7 @@
 	$module_info['desc'] = 'Easily insert code into your template file through module hooks. A great way to add analytics or advertisements.';
 	$module_info['version'] = 1.5;
 	$module_info['update_url'] = '';
-	$module_info['homepage_url'] = 'http://www.kliqqi.com/mods/admin_snippet.zip';
+	$module_info['homepage_url'] = 'https://www.plikli.com/mods/admin_snippet.zip';
 	$module_info['settings_url'] = '../module.php?module=admin_snippet';
 
 	

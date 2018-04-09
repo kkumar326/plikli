@@ -10,7 +10,7 @@ function sendannouncement_showpage(){
 	$canIhaveAccess = $canIhaveAccess + checklevel('admin');
 	
 	if($canIhaveAccess == 0){	
-		header("Location: " .my_base_url.my_kliqqi_base );
+		header("Location: " .my_base_url.my_plikli_base );
 		die();
 	}
 
@@ -26,7 +26,7 @@ function sendannouncement_showpage(){
 	
 	
 	// breadcrumbs
-	$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+	$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 	$navwhere['link1'] = getmyurl('admin', '');
 	$navwhere['text2'] = "Send Announcement";
 	$main_smarty->assign('navbar_where', $navwhere);
@@ -34,7 +34,7 @@ function sendannouncement_showpage(){
 	// breadcrumbs
 	
 	$main_smarty->assign('tpl_center', send_announcement_tpl_path . 'sendannouncement');
-	$main_smarty->display($the_template . '/kliqqi.tpl');
+	$main_smarty->display($the_template . '/plikli.tpl');
 }
 
 ?>

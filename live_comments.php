@@ -12,17 +12,17 @@ include(mnminclude.'comment.php');
 include(mnminclude.'smartyvariables.php');
 
 if(!Enable_Live) {
-	header("Location: $my_kliqqi_base/error_404.php");
+	header("Location: $my_plikli_base/error_404.php");
 	die();
 }
 
 // breadcrumbs and page title
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Live');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Live');
 $navwhere['link1'] = getmyurl('live', '');
-$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Comments');
+$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Comments');
 $navwhere['link2'] = getmyurl('live_comments', '');
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Comments'));
+$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Comments'));
 
 // figure out what "page" of the results we're on
 $offset = (get_current_page() - 1) * $top_users_size;
@@ -70,5 +70,5 @@ $main_smarty = do_sidebar($main_smarty);
 
 // show the template
 $main_smarty->assign('tpl_center', $the_template . '/live_comments_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 ?>

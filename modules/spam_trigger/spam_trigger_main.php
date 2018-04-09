@@ -26,23 +26,23 @@ function spam_trigger_showpage(){
 			misc_data_update('spam_trigger_medium', sanitize($_REQUEST['spam_medium'], 3));
 			misc_data_update('spam_trigger_hard', sanitize($_REQUEST['spam_hard'], 3));
 
-			header("Location: ".my_kliqqi_base."/module.php?module=spam_trigger");
+			header("Location: ".my_plikli_base."/module.php?module=spam_trigger");
 			die();
 		}
 		// breadcrumbs
-		$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+		$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 		$navwhere['link1'] = getmyurl('admin', '');
 		$navwhere['text2'] = "Modify spam_trigger";
-		$navwhere['link2'] = my_kliqqi_base . "/module.php?module=spam_trigger";
+		$navwhere['link2'] = my_plikli_base . "/module.php?module=spam_trigger";
 		$main_smarty->assign('navbar_where', $navwhere);
-		$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+		$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 
 		define('modulename', 'spam_trigger'); 
 		$main_smarty->assign('modulename', modulename);
 		
 		if (!defined('pagename')) define('pagename', 'admin_modifyspam_trigger'); 
 		$main_smarty->assign('pagename', pagename);
-		$main_smarty->assign('settings', str_replace('"','&#034;',get_spam_trigger_settings()));
+		$main_smarty->assign('spam_settings', str_replace('"','&#034;',get_spam_trigger_settings()));
 		//$main_smarty->assign('places',$spam_trigger_places);
 		$main_smarty->assign('tpl_center', spam_trigger_tpl_path . 'spam_trigger_main');
 		$main_smarty->display('/admin/admin.tpl');
@@ -60,24 +60,24 @@ function spam_trigger_editlink()
 	//if (checklevel('moderator') || checklevel('admin')) return;
 	if (!is_numeric($_POST['id'])) return;
 
-	$settings = get_spam_trigger_settings();
+	$spam_settings = get_spam_trigger_settings();
 	isset($_POST['summarytext']) ?: $_POST['summarytext'] = '';
 	$str = $_POST['title']."\n".$_POST['bodytext']."\n".$_POST['summarytext']."\n".$_POST['tags'];
 	// Killspam user
-	if ($settings['spam_hard'] && !spam_trigger_check($str, $settings['spam_hard']))
+	if ($spam_settings['spam_hard'] && !spam_trigger_check($str, $spam_settings['spam_hard']))
 	{
 		$_SESSION['spam_trigger_story_error'] = 'deleted';
 		spam_trigger_killspam($current_user->user_id);
 		$linkres->status = 'spam';
 	}
 	// discard story
-	elseif ($settings['spam_medium'] && !spam_trigger_check($str, $settings['spam_medium']))
+	elseif ($spam_settings['spam_medium'] && !spam_trigger_check($str, $spam_settings['spam_medium']))
 	{
 		$_SESSION['spam_trigger_story_error'] = 'discarded';
 		$linkres->status = 'discard';
 	}
 	// set status to moderated
-	elseif ($settings['spam_light'] && !spam_trigger_check($str, $settings['spam_light']))
+	elseif ($spam_settings['spam_light'] && !spam_trigger_check($str, $spam_settings['spam_light']))
 	{
 		$_SESSION['spam_trigger_story_error'] = 'moderated';
 		$linkres->status = 'moderated';
@@ -92,24 +92,24 @@ function spam_trigger_do_submit3($vars)
 	$linkres = $vars['linkres'];
 	if (!$linkres->id) return;
 
-	$settings = get_spam_trigger_settings();
+	$spam_settings = get_spam_trigger_settings();
 
 	$str = $linkres->title."\n".$linkres->content."\n".$linkres->link_summary."\n".$linkres->tags;
 	// Killspam user
-	if ($settings['spam_hard'] && !spam_trigger_check($str, $settings['spam_hard']))
+	if ($spam_settings['spam_hard'] && !spam_trigger_check($str, $spam_settings['spam_hard']))
 	{
 		$_SESSION['spam_trigger_story_error'] = 'deleted';
 		spam_trigger_killspam($current_user->user_id);
 		$vars['linkres']->status = 'spam';
 	}
 	// discard story
-	elseif ($settings['spam_medium'] && !spam_trigger_check($str, $settings['spam_medium']))
+	elseif ($spam_settings['spam_medium'] && !spam_trigger_check($str, $spam_settings['spam_medium']))
 	{
 		$_SESSION['spam_trigger_story_error'] = 'discarded';
 		$vars['linkres']->status = 'discard';
 	}
 	// set status to moderated
-	elseif ($settings['spam_light'] && !spam_trigger_check($str, $settings['spam_light']))
+	elseif ($spam_settings['spam_light'] && !spam_trigger_check($str, $spam_settings['spam_light']))
 	{
 		$_SESSION['spam_trigger_story_error'] = 'moderated';
 		$vars['linkres']->status = 'moderated';
@@ -120,11 +120,11 @@ function spam_trigger_comment($vars)
 {
 	global $db, $current_user;
 
-	$settings = get_spam_trigger_settings();
+	$spam_settings = get_spam_trigger_settings();
 
 	$str = $_POST['comment_content'];
 	// Killspam user
-	if ($settings['spam_hard'] && !spam_trigger_check($str, $settings['spam_hard']))
+	if ($spam_settings['spam_hard'] && !spam_trigger_check($str, $spam_settings['spam_hard']))
 	{
 		$_SESSION['spam_trigger_comment_error'] = 'deleted';
 		spam_trigger_killspam($current_user->user_id);
@@ -133,14 +133,14 @@ function spam_trigger_comment($vars)
 		$vars['comment']->status = 'spam';
 	}
 	// delete comment
-	elseif ($settings['spam_medium'] && !spam_trigger_check($str, $settings['spam_medium']))
+	elseif ($spam_settings['spam_medium'] && !spam_trigger_check($str, $spam_settings['spam_medium']))
 	{
 		$_SESSION['spam_trigger_comment_error'] = 'deleted';
 		$vars['error'] = 1;
 		$vars['comment']->status = 'moderated';
 	}
 	// set status to moderated
-	elseif ($settings['spam_light'] && !spam_trigger_check($str, $settings['spam_light']))
+	elseif ($spam_settings['spam_light'] && !spam_trigger_check($str, $spam_settings['spam_light']))
 	{
 		$_SESSION['spam_trigger_comment_error'] = 'moderated';
 		$vars['comment']->status = 'discard';

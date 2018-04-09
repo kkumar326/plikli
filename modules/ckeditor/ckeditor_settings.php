@@ -1,7 +1,7 @@
 <?php
 
 // the path to the module. the probably shouldn't be changed unless you rename the ckeditor folder(s)
-define('ckeditor_path', my_kliqqi_base . '/modules/ckeditor/');
+define('ckeditor_path', my_plikli_base . '/modules/ckeditor/');
 
 // the path to the module. the probably shouldn't be changed unless you rename the module_store folder(s)
 if(!defined('lang_loc')){
@@ -10,14 +10,14 @@ if(!defined('lang_loc')){
 		$path = substr($_SERVER["SCRIPT_NAME"], 0, $pos);
 		if ($path == "/"){$path = "";}
 		
-		if($path != my_kliqqi_base){
+		if($path != my_plikli_base){
 			define('lang_loc', '..');
 		} else {
 			define('lang_loc', '.');
 		}
 }
 define('ckeditor_lang_conf', lang_loc . '/modules/ckeditor/lang.conf');
-define('ckeditor_kliqqi_lang_conf', lang_loc . "/languages/lang_" . kliqqi_language . ".conf");
+define('ckeditor_plikli_lang_conf', lang_loc . "/languages/lang_" . plikli_language . ".conf");
 
 // the path to the modules templates. the probably shouldn't be changed unless you rename the ckeditor folder(s)
 define('ckeditor_tpl_path', '../modules/ckeditor/templates/');

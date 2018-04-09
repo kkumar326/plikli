@@ -1,7 +1,7 @@
 <?php
 
 // the path to the module. the probably shouldn't be changed unless you rename the messaging folder(s)
-define('simple_messaging_path', my_kliqqi_base . '/modules/simple_messaging/');
+define('simple_messaging_path', my_plikli_base . '/modules/simple_messaging/');
 
 // the path to the module. the probably shouldn't be changed unless you rename the module_store folder(s)
 	if(!defined('lang_loc')){
@@ -10,7 +10,7 @@ define('simple_messaging_path', my_kliqqi_base . '/modules/simple_messaging/');
 			$path = substr($_SERVER["SCRIPT_NAME"], 0, $pos);
 			if ($path == "/"){$path = "";}
 			
-			if($path != my_kliqqi_base){
+			if($path != my_plikli_base){
 				define('lang_loc', '..');
 			} else {
 				define('lang_loc', '.');
@@ -18,26 +18,26 @@ define('simple_messaging_path', my_kliqqi_base . '/modules/simple_messaging/');
 	}
 
 define('simple_messaging_lang_conf', lang_loc . '/modules/simple_messaging/lang.conf');
-define('simple_messaging_kliqqi_lang_conf', lang_loc . "/languages/lang_" . kliqqi_language . ".conf");
+define('simple_messaging_plikli_lang_conf', lang_loc . "/languages/lang_" . plikli_language . ".conf");
 
 // the path to the modules templates. this probably shouldn't be changed unless you rename the messaging folder(s)
 define('simple_messaging_tpl_path', '../modules/simple_messaging/templates/');
 // the path to the images folder. this probably shouldn't be changed unless you rename the messaging folder(s)
-define('simple_messaging_img_path', my_kliqqi_base . '/modules/simple_messaging/images/');
+define('simple_messaging_img_path', my_plikli_base . '/modules/simple_messaging/images/');
 
-define('URL_simple_messaging_inbox', my_kliqqi_base.'/module.php?module=simple_messaging&view=inbox');
-define('URL_simple_messaging_compose', my_kliqqi_base.'/module.php?module=simple_messaging&view=compose&to=');
-define('URL_simple_messaging_viewmsg', my_kliqqi_base.'/module.php?module=simple_messaging&view=viewmsg&msg_id=');
-define('URL_simple_messaging_viewsentmsg', my_kliqqi_base.'/module.php?module=simple_messaging&view=viewsentmsg&msg_id=');
-define('URL_simple_messaging_delmsg', my_kliqqi_base.'/module.php?module=simple_messaging&view=delmsg&msg_id=');
-define('URL_simple_messaging_reply', my_kliqqi_base.'/module.php?module=simple_messaging&view=reply&msg_id=');
+define('URL_simple_messaging_inbox', my_plikli_base.'/module.php?module=simple_messaging&view=inbox');
+define('URL_simple_messaging_compose', my_plikli_base.'/module.php?module=simple_messaging&view=compose&to=');
+define('URL_simple_messaging_viewmsg', my_plikli_base.'/module.php?module=simple_messaging&view=viewmsg&msg_id=');
+define('URL_simple_messaging_viewsentmsg', my_plikli_base.'/module.php?module=simple_messaging&view=viewsentmsg&msg_id=');
+define('URL_simple_messaging_delmsg', my_plikli_base.'/module.php?module=simple_messaging&view=delmsg&msg_id=');
+define('URL_simple_messaging_reply', my_plikli_base.'/module.php?module=simple_messaging&view=reply&msg_id=');
 
 // don't touch anything past this line.
 
 if(isset($main_smarty) && is_object($main_smarty)){
 	$main_smarty->assign('simple_messaging_path', simple_messaging_path);
 	$main_smarty->assign('simple_messaging_lang_conf', simple_messaging_lang_conf);
-	$main_smarty->assign('simple_messaging_kliqqi_lang_conf', simple_messaging_kliqqi_lang_conf);
+	$main_smarty->assign('simple_messaging_plikli_lang_conf', simple_messaging_plikli_lang_conf);
 	$main_smarty->assign('simple_messaging_tpl_path', simple_messaging_tpl_path);
 	$main_smarty->assign('simple_messaging_img_path', simple_messaging_img_path);
 	$main_smarty->assign('URL_simple_messaging_inbox', URL_simple_messaging_inbox);

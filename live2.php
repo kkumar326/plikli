@@ -7,7 +7,7 @@ include('config.php');
 include(mnminclude.'link.php');
 
 if(!Enable_Live) {
-	header("Location: $my_kliqqi_base/error_404.php");
+	header("Location: $my_plikli_base/error_404.php");
 	die();
 }
 

@@ -21,18 +21,18 @@ if($canIhaveAccess == 0)
 define('pagename', 'admin_modules'); 
 $main_smarty->assign('pagename', pagename);
 
-// read the mysql database to get the kliqqi version
-/* Redwine: kliqqi version query removed and added to /libs/smartyvriables.php */
+// read the mysql database to get the plikli version
+/* Redwine: plikli version query removed and added to /libs/smartyvriables.php */
 
 // breadcrumbs and page title
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 $navwhere['link1'] = getmyurl('admin', '');
-$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_6');
+$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_6');
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_6'));
+$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_6'));
  
-$main_smarty->assign('module_management_name', $main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Module_Management'));
-$main_smarty->assign('module_management_desc', $main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Module_Description'));
+$main_smarty->assign('module_management_name', $main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Module_Management'));
+$main_smarty->assign('module_management_desc', $main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Module_Description'));
 
 if (!isset($_GET["status"])) {
 	$status = "installed";
@@ -187,8 +187,8 @@ if($status=="uninstalled") {
 } elseif($status=='installed') {
 	// Installed Modules
 	
-	$main_smarty->assign('btn_apply_change', $main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Apply_Changes'));
-	$main_smarty->assign('btn_module_remove', $main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Module_Remove'));
+	$main_smarty->assign('btn_apply_change', $main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Apply_Changes'));
+	$main_smarty->assign('btn_module_remove', $main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Module_Remove'));
 
 	$token=isset($_GET['token']) ? $_GET['token']: '';
     if($token==1)
@@ -363,8 +363,8 @@ $action=$_GET['action'];
 if($action == 'readme'){
 	$main_smarty->assign('action', 'readme');
 	$module = sanitize($_REQUEST['module'],3);
-	$main_smarty->assign('module_management_name', $main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Module_Readme'));
-	$main_smarty->assign('module_readme_return', $main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Module_Return'));
+	$main_smarty->assign('module_management_name', $main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Module_Readme'));
+	$main_smarty->assign('module_readme_return', $main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Module_Return'));
 	
 	
 	if(file_exists('../modules/' . $module . '/' . $module . '_readme.htm')){
@@ -376,7 +376,7 @@ if($action == 'readme'){
 		$main_smarty->assign('readme_content', $theData);
 	} else {
 		$main_smarty->assign('found','no');
-		$main_smarty->assign('not_found', $main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Module_Readme_Not_Found'));
+		$main_smarty->assign('not_found', $main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Module_Readme_Not_Found'));
 		
 	}
 }else
@@ -424,7 +424,7 @@ if($canIhaveAccess == 1){
 
 	if (!function_exists('clear_module_cache'))
 	{
-		echo "Your template is not compatible with this version of Kliqqi. Missing the 'clear_modules_cache' function in modules.tpl.";
+		echo "Your template is not compatible with this version of Plikli. Missing the 'clear_modules_cache' function in modules.tpl.";
 	} else {
 		echo $output;
 	}

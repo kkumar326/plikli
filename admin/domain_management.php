@@ -18,8 +18,8 @@ $canIhaveAccess = $canIhaveAccess + checklevel('moderator');
 
 $is_moderator = checklevel('moderator'); // Moderators have a value of '1' for the variable $is_moderator
 
-// read the mysql database to get the kliqqi version
-/* Redwine: kliqqi version query removed and added to /libs/smartyvriables.php */
+// read the mysql database to get the plikli version
+/* Redwine: plikli version query removed and added to /libs/smartyvriables.php */
 
 // File locations
 global $USER_SPAM_RULESET, $FRIENDLY_DOMAINS;
@@ -31,9 +31,9 @@ $blacklist = '../'.$USER_SPAM_RULESET;
 $whitelist = '../'.$FRIENDLY_DOMAINS;
 
 // breadcrumbs and page title
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Ban_This_URL');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Ban_This_URL');
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Ban_This_URL'));
+$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Ban_This_URL'));
 
 // pagename
 define('pagename', 'domain_management'); 
@@ -49,7 +49,7 @@ if($canIhaveAccess == 1){
 	
 	// if spam checking is not enabled in the admin panel
 	if(CHECK_SPAM == false){
-		$main_smarty->assign('errorText', "<b>Error:</b> You have <b>Enable spam checking</b> set to false. Please set it to true in the <a href='$my_base_url$my_kliqqi_base/admin/admin_config.php?page=AntiSpam' target='_blank'>admin panel</a>.");
+		$main_smarty->assign('errorText', "<b>Error:</b> You have <b>Enable spam checking</b> set to false. Please set it to true in the <a href='$my_base_url$my_plikli_base/admin/admin_config.php?page=AntiSpam' target='_blank'>admin panel</a>.");
 		$main_smarty->assign('tpl_center', '/admin/domain_blacklist_add');
 		if ($is_moderator == '1'){
 			$main_smarty->display('/admin/moderator.tpl');

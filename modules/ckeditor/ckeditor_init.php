@@ -7,11 +7,11 @@ $include_in_pages = array('all');
 if( do_we_load_module() ) {		
 	if(is_object($main_smarty)){
 		$main_smarty->plugins_dir[] = ckeditor_plugins_path;
-		module_add_action_tpl('tpl_kliqqi_submit_step2_start', ckeditor_tpl_path . 'ckeditor1.tpl');
-		//module_add_action_tpl('tpl_kliqqi_submit_step2_end', ckeditor_tpl_path . 'ckeditor2.tpl');
+		module_add_action_tpl('tpl_plikli_submit_step2_start', ckeditor_tpl_path . 'ckeditor1.tpl');
+		//module_add_action_tpl('tpl_plikli_submit_step2_end', ckeditor_tpl_path . 'ckeditor2.tpl');
 		module_add_action_tpl('submit_step_2_pre_extrafields', ckeditor_tpl_path . 'ckeditor2.tpl');
-		module_add_action_tpl('tpl_kliqqi_story_comments_submit_start', ckeditor_tpl_path . 'ckeditor1.tpl');
-		module_add_action_tpl('tpl_kliqqi_story_comments_submit_end', ckeditor_tpl_path . 'ckeditor-comment.tpl');
+		module_add_action_tpl('tpl_plikli_story_comments_submit_start', ckeditor_tpl_path . 'ckeditor1.tpl');
+		module_add_action_tpl('tpl_plikli_story_comments_submit_end', ckeditor_tpl_path . 'ckeditor-comment.tpl');
 	}
 }
 

@@ -1,7 +1,7 @@
 {if $user_authenticated eq 1}
 	<script type="text/javascript">
-	var save_lang_text="{#KLIQQI_MiscWords_Save_Links_Save#}";
-	var remove_lang_text="{#KLIQQI_MiscWords_Save_Links_Remove#}";
+	var save_lang_text="{#PLIKLI_MiscWords_Save_Links_Save#}";
+	var remove_lang_text="{#PLIKLI_MiscWords_Save_Links_Remove#}";
 	var UserURLSave="{$user_url_saved}";
 	{literal}
 	$(function() {
@@ -16,7 +16,7 @@
 			
 			$.ajax({
 				type: "POST",
-				url:my_base_url+my_kliqqi_base+"/user_add_remove_links.php",
+				url:my_base_url+my_plikli_base+"/user_add_remove_links.php",
 				data: dataString,
 				beforeSend: function() {
 					parent.addClass("loader");
@@ -55,7 +55,7 @@
 					$.ajax({
 						type: "POST",
 						cache:false,
-						url: my_base_url+my_kliqqi_base+'/modules/sidebar_saved/update_rightpanel.php',
+						url: my_base_url+my_plikli_base+'/modules/sidebar_saved/update_rightpanel.php',
 						success: function(html)	{
 							$("#saved_stories").html('');
 							$("#saved_stories").html(html);

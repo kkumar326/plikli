@@ -18,11 +18,11 @@ global $db;
 $result = $db->get_row ($user);
 if($result)
     if(isset($_GET['email']))
-	$decode=md5($_GET['email'] . $result->user_karma .  $username. kliqqi_hash().$main_smarty->get_config_vars('KLIQQI_Visual_Name'));
+	$decode=md5($_GET['email'] . $result->user_karma .  $username. plikli_hash().$main_smarty->get_config_vars('PLIKLI_Visual_Name'));
     else
-	$decode=md5($result->user_email . $result->user_karma .  $username. kliqqi_hash().$main_smarty->get_config_vars('KLIQQI_Visual_Name'));
+	$decode=md5($result->user_email . $result->user_karma .  $username. plikli_hash().$main_smarty->get_config_vars('PLIKLI_Visual_Name'));
 else
-	$main_smarty->assign('error', $main_smarty->get_config_vars('KLIQQI_Validation_No_Results'));
+	$main_smarty->assign('error', $main_smarty->get_config_vars('PLIKLI_Validation_No_Results'));
 
 // Compare values
 if($rcode==$decode)
@@ -32,28 +32,28 @@ if($rcode==$decode)
 	$lastlogin = $db->get_var("SELECT user_lastlogin FROM " . table_users . " WHERE user_login = '$username'");
 	if($lastlogin == "0000-00-00 00:00:00"){
 		$login_url=getmyurl("loginNoVar");
-		$message = sprintf($main_smarty->get_config_vars('KLIQQI_Validation_Message'),$login_url);
+		$message = sprintf($main_smarty->get_config_vars('PLIKLI_Validation_Message'),$login_url);
 		$main_smarty->assign('message', $message);
 
 		$sql="UPDATE " . table_users . " SET user_lastlogin = now() WHERE user_login='$username'";
 		if(!$db->query($sql))
-			$main_smarty->assign('error', $main_smarty->get_config_vars('KLIQQI_Validation_Mysql_Error'));
+			$main_smarty->assign('error', $main_smarty->get_config_vars('PLIKLI_Validation_Mysql_Error'));
 	}
 	elseif($_GET['email'] && $_GET['email']!=$result->user_email)
 	{
 		$login_url=getmyurl("loginNoVar");
-		$message = sprintf($main_smarty->get_config_vars('KLIQQI_Validation_Message'),$login_url);
+		$message = sprintf($main_smarty->get_config_vars('PLIKLI_Validation_Message'),$login_url);
 		$main_smarty->assign('message', $message);
 
-		$sql="UPDATE " . table_users . " SET user_email = '".mysql_real_escape_string($_GET['email'])."' WHERE user_login='$username'";
+		$sql="UPDATE " . table_users . " SET user_email = '".$db->escape($_GET['email'])."' WHERE user_login='$username'";
 		if(!$db->query($sql))
-			$main_smarty->assign('error', $main_smarty->get_config_vars('KLIQQI_Validation_Mysql_Error'));
+			$main_smarty->assign('error', $main_smarty->get_config_vars('PLIKLI_Validation_Mysql_Error'));
 	}
 	else
-		$main_smarty->assign('error', $main_smarty->get_config_vars('KLIQQI_Validation_Already_Activated'));
+		$main_smarty->assign('error', $main_smarty->get_config_vars('PLIKLI_Validation_Already_Activated'));
 }
 else
-	$main_smarty->assign('error', $main_smarty->get_config_vars('KLIQQI_Validation_Invalid_Code'));
+	$main_smarty->assign('error', $main_smarty->get_config_vars('PLIKLI_Validation_Invalid_Code'));
 
 define('pagename', 'validation'); 
 $main_smarty->assign('pagename', pagename);
@@ -61,5 +61,5 @@ $main_smarty->assign('pagename', pagename);
 do_sidebar($main_smarty);
 
 $main_smarty->assign('tpl_center', $the_template . '/user_validation_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 ?>

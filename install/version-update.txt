@@ -19,11 +19,11 @@ sidebar_tag_cloud,2.1
 simple_messaging,3.0
 social_bookmark,2.0
 spam_trigger,3.0
-subscribe2comments,1.0
+subscribe2comments,2.0
 total_story_views,1.0
 upload,2.0
 users_extra_fields,0.2
 welcome_email,0.2
 welcome_privmsg,2.0
 xml_sitemaps,3.0
-kliqqi_new_version,4.0.0
+plikli_new_version,4.0.0

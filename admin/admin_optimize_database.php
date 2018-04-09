@@ -43,13 +43,13 @@ if ($_SERVER['SERVER_ADDR'])
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h4 class="modal-title"><?php echo $main_smarty->get_config_vars('KLIQQI_Visual_AdminPanel_Optimized') ?></h4>
+			<h4 class="modal-title"><?php echo $main_smarty->get_config_vars('PLIKLI_Visual_AdminPanel_Optimized') ?></h4>
 		</div>
 		<div class="modal-body">
 			<?php
 				if (!empty($result)) {
 					$db->query($result);
-					echo '<p>'.$main_smarty->get_config_vars("KLIQQI_Visual_AdminPanel_Optimized_Message").'</p>';
+					echo '<p>'.$main_smarty->get_config_vars("PLIKLI_Visual_AdminPanel_Optimized_Message").'</p>';
 				}
 			?>
 		</div>

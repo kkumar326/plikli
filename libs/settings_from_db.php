@@ -20,7 +20,7 @@ if(!defined('mnminclude')){header('Location: ../error_404.php');die();}
 	foreach($usersql as $row) {
 		$value = $row->var_value;
 		if ($row->var_method == "normal"){
-			$kliqqi_vars[$row->var_name] = $value;
+			$plikli_vars[$row->var_name] = $value;
 			if ($main_smarty) $main_smarty->assign(str_replace("$","",$row->var_name), $value);
 		}elseif ($row->var_method == "define"){
 			if($row->var_name != 'table_prefix'){
@@ -49,19 +49,19 @@ if(!defined('mnminclude')){header('Location: ../error_404.php');die();}
 // other than converting these to a "define" which we will eventually do
 
 define('StorySummary_ContentTruncate', maxSummaryLength);
-$URLMethod = $kliqqi_vars['$URLMethod'] ;
-$trackbackURL = $kliqqi_vars['$trackbackURL'];
-$tags_min_pts = $kliqqi_vars['$tags_min_pts'];
-$tags_max_pts = $kliqqi_vars['$tags_max_pts'];
-$tags_words_limit = $kliqqi_vars['$tags_words_limit'];
-$MAIN_SPAM_RULESET = $kliqqi_vars['$MAIN_SPAM_RULESET'];
-$USER_SPAM_RULESET = $kliqqi_vars['$USER_SPAM_RULESET'];
-$FRIENDLY_DOMAINS = $kliqqi_vars['$FRIENDLY_DOMAINS'];
-$SPAM_LOG_BOOK = $kliqqi_vars['$SPAM_LOG_BOOK'];
-$CommentOrder = $kliqqi_vars['$CommentOrder'];
-$anon_karma = $kliqqi_vars['$anon_karma'];
-$page_size = $kliqqi_vars['$page_size'];
-$top_users_size = $kliqqi_vars['$top_users_size'];
-$thetemp = $kliqqi_vars['$thetemp'];
+$URLMethod = $plikli_vars['$URLMethod'] ;
+$trackbackURL = $plikli_vars['$trackbackURL'];
+$tags_min_pts = $plikli_vars['$tags_min_pts'];
+$tags_max_pts = $plikli_vars['$tags_max_pts'];
+$tags_words_limit = $plikli_vars['$tags_words_limit'];
+$MAIN_SPAM_RULESET = $plikli_vars['$MAIN_SPAM_RULESET'];
+$USER_SPAM_RULESET = $plikli_vars['$USER_SPAM_RULESET'];
+$FRIENDLY_DOMAINS = $plikli_vars['$FRIENDLY_DOMAINS'];
+$SPAM_LOG_BOOK = $plikli_vars['$SPAM_LOG_BOOK'];
+$CommentOrder = $plikli_vars['$CommentOrder'];
+$anon_karma = $plikli_vars['$anon_karma'];
+$page_size = $plikli_vars['$page_size'];
+$top_users_size = $plikli_vars['$top_users_size'];
+$thetemp = $plikli_vars['$thetemp'];
 
 ?>

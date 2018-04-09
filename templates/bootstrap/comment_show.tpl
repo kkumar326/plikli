@@ -4,7 +4,7 @@
 <!-- comment_show.tpl -->
 <li class="media comment">
 	<a id="c{$comment_id}"></a>
-	{checkActionsTpl location="tpl_kliqqi_story_comments_single_start"}
+	{checkActionsTpl location="tpl_plikli_story_comments_single_start"}
 	<div class="comment-wrapper {if $user_username == $link_submitter}alert alert-success comment-author{/if}{if $comment_votes lt 0}alert alert-danger comment-negative{/if}{if $comment_status neq "published"}alert alert-warning comment-moderated{/if} clearfix">
 		<div class="pull-left comment_left">
 {* Redwine: Fix the Negative votes to remove comment in Admin Panel -> Settings -> Comments -> Negative votes to remove comment. See  https://github.com/Pligg/pligg-cms/commit/68a52f2e77cec7f95d5775444d213d1a6419e121 *}
@@ -45,38 +45,38 @@
 					</a>
 					<ul class="dropdown-menu">
 						{if $isadmin eq 1}
-							<li><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_users.php?mode=view&user={$user_userlogin}"><i class="fa fa-user"></i> {#KLIQQI_Visual_Comment_Manage_User#} {$user_userlogin}</a></li>
-							<li><a href="{$edit_comment_url}"><i class="fa fa-edit"></i> {#KLIQQI_Visual_Comment_Edit#}</a></li>
-							<li><a href="{$delete_comment_url}"><i class="fa fa-trash-o"></i> {#KLIQQI_Visual_Comment_Delete#}</a></li>
+							<li><a href="{$my_base_url}{$my_plikli_base}/admin/admin_users.php?mode=view&user={$user_userlogin}"><i class="fa fa-user"></i> {#PLIKLI_Visual_Comment_Manage_User#} {$user_userlogin}</a></li>
+							<li><a href="{$edit_comment_url}"><i class="fa fa-edit"></i> {#PLIKLI_Visual_Comment_Edit#}</a></li>
+							<li><a href="{$delete_comment_url}"><i class="fa fa-trash-o"></i> {#PLIKLI_Visual_Comment_Delete#}</a></li>
 						{elseif $user_logged_in == $user_userlogin}
-							<li><a href="{$edit_comment_url}"><i class="fa fa-edit"></i> {#KLIQQI_Visual_Comment_Edit#}</a></li>
+							<li><a href="{$edit_comment_url}"><i class="fa fa-edit"></i> {#PLIKLI_Visual_Comment_Edit#}</a></li>
 						{/if}
-						{checkActionsTpl location="tpl_kliqqi_story_comments_admin"}
+						{checkActionsTpl location="tpl_plikli_story_comments_admin"}
 					</ul>
 				</div>
 			{/if}
 			<p class="comment-data">
 				<span class="comment-author">
 					{if $is_anonymous}
-						{#KLIQQI_Visual_Comment_Manage_Unregistered#}
+						{#PLIKLI_Visual_Comment_Manage_Unregistered#}
 					{/if}
 					<a href="{$user_view_url}">{$user_username}</a>
 					<!-- {if $user_rank neq ''} (#{$user_rank}){/if} -->
 				</span>
 				<span class="comment-date">
-					{$comment_age} {#KLIQQI_Visual_Comment_Ago#} 
+					{$comment_age} {#PLIKLI_Visual_Comment_Ago#} 
 				</span>
                 <span class="comment-reply">
                 <a href="#" onclick="show_comments('{$comment_id}')" id="comment-{$comment_id}">Permalink</a>
                 </span>
 				<span class="comment-reply">
 					{if $current_userid neq 0} 
-						<a href="#" onclick="show_replay_comment_form('{$comment_id}')" id="comment-reply-{$comment_id}" >{#KLIQQI_Visual_Comment_Reply#}</a>
+						<a href="#" onclick="show_replay_comment_form('{$comment_id}')" id="comment-reply-{$comment_id}" >{#PLIKLI_Visual_Comment_Reply#}</a>
 					{/if}
 				</span>
 				{if $comment_votes lt 0}
 					<span class="label label-danger comment-hide">
-						<span id="show_hide_comment_content-{$comment_id}"> <a href = "javascript://"  onclick="var replydisplay=document.getElementById('comment_content-{$comment_id}').style.display ? '' : 'none'; document.getElementById('comment_content-{$comment_id}').style.display = replydisplay;">{#KLIQQI_Visual_Comment_Show_Hide#}</a></span>
+						<span id="show_hide_comment_content-{$comment_id}"> <a href = "javascript://"  onclick="var replydisplay=document.getElementById('comment_content-{$comment_id}').style.display ? '' : 'none'; document.getElementById('comment_content-{$comment_id}').style.display = replydisplay;">{#PLIKLI_Visual_Comment_Show_Hide#}</a></span>
 					</span>
 				{/if}
 			</p>
@@ -87,6 +87,6 @@
 			{/if}
 		</div>
 	</div>
-	{checkActionsTpl location="tpl_kliqqi_story_comments_single_end"}
+	{checkActionsTpl location="tpl_plikli_story_comments_single_end"}
 </li>
 <!--/comment_show.tpl -->

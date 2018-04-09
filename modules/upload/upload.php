@@ -66,7 +66,7 @@ elseif (isset($_GET['id']) && $_GET['number'] && is_numeric($_GET['id']) && is_n
 	}
 
 	$main_smarty->assign('my_base_url', my_base_url);
-	$main_smarty->assign('my_kliqqi_base', my_kliqqi_base);
+	$main_smarty->assign('my_plikli_base', my_plikli_base);
 	$main_smarty->assign('upload_directory',get_misc_data('upload_directory')); 
 	$main_smarty->assign('upload_thdirectory',get_misc_data('upload_thdirectory'));
 	$main_smarty->assign('upload_allow_hide',get_misc_data('upload_allow_hide'));

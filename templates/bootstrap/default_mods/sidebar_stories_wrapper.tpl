@@ -1,6 +1,6 @@
 {if $ss_body ne ''}
 <div class="headline">
-	<div class="sectiontitle"><a href="{$my_base_url}{$my_kliqqi_base}{if $pagename eq "index"}/new.php{/if}">{$ss_header}</a></div>
+	<div class="sectiontitle"><a href="{$my_base_url}{$my_plikli_base}{if $pagename eq "index"}/new.php{/if}">{$ss_header}</a></div>
 </div>
 <div class="boxcontent">
 	<ul class="sidebar-stories">

@@ -1,11 +1,11 @@
 <?php
-class KliqqiDoc{
+class PlikliDoc{
 	
 	var $js;
 	var $all_script;
 	var $top;
 	
-	function KliqqiDoc(){
+	function PlikliDoc(){
 		$this->js=array();
 		$this->all_script="";
 		$this->top=0;
@@ -46,6 +46,6 @@ class KliqqiDoc{
 	}
 }
 
-$KliqqiDoc= new KliqqiDoc();
+$PlikliDoc= new PlikliDoc();
 
 ?>

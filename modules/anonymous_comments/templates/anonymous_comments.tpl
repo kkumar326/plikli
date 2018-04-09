@@ -13,20 +13,20 @@
 </script>
 {/literal}
 
-<fieldset><legend>{#KLIQQI_Anonymous_Comment_Submit_Comment#}</legend>	
+<fieldset><legend>{#PLIKLI_Anonymous_Comment_Submit_Comment#}</legend>	
 	<form action="" method="POST" id="thisform" onsubmit="javascript:return validate('thisform','a_email');">
-		<span><b>&nbsp;{#KLIQQI_Anonymous_Comment_Name#} :&nbsp;</b></span><br/><input  type ="text" name = "a_username" />{$a_username}<br clear="all" />
-{*		<span><b>&nbsp;{#KLIQQI_Anonymous_Comment_Website#} :&nbsp;</b></span><br/><input  type ="text" name = "a_website" />{$a_website}<br clear="all" />
-		<span><b>&nbsp;{#KLIQQI_Anonymous_Comment_Email#} :&nbsp;</b></span><br/><input  type ="text" name = "a_email" />{$a_email}<br clear="all" />
+		<span><b>&nbsp;{#PLIKLI_Anonymous_Comment_Name#} :&nbsp;</b></span><br/><input  type ="text" name = "a_username" />{$a_username}<br clear="all" />
+{*		<span><b>&nbsp;{#PLIKLI_Anonymous_Comment_Website#} :&nbsp;</b></span><br/><input  type ="text" name = "a_website" />{$a_website}<br clear="all" />
+		<span><b>&nbsp;{#PLIKLI_Anonymous_Comment_Email#} :&nbsp;</b></span><br/><input  type ="text" name = "a_email" />{$a_email}<br clear="all" />
 *}
-		<label>{#KLIQQI_Anonymous_Comment_NoHTML#}</label><br clear="all" />
+		<label>{#PLIKLI_Anonymous_Comment_NoHTML#}</label><br clear="all" />
 		<textarea name="comment_content" id="comment" rows="6" cols="60"/>{if isset($TheComment)}{$TheComment}{/if}</textarea><br />
 		<br/>
 		{if isset($register_step_1_extra)}
 			<br />
 			{$register_step_1_extra}
 		{/if}
-		<input type="submit" name="submit" value="{#KLIQQI_Anonymous_Comment_Submit#}" class="btn btn-default" />
+		<input type="submit" name="submit" value="{#PLIKLI_Anonymous_Comment_Submit#}" class="btn btn-default" />
 		<input type="hidden" name="process" value="newcomment" />
 		<input type="hidden" name="randkey" value="{$randkey}" />
 		<input type="hidden" name="link_id" value="{$link_id}" />
@@ -35,4 +35,4 @@
 	</form>
 </fieldset>
 
-{config_load file=anonymous_comments_kliqqi_lang_conf}
+{config_load file=anonymous_comments_plikli_lang_conf}

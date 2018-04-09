@@ -1,5 +1,5 @@
 ﻿<!-- categories.tpl -->
-<legend>{#KLIQQI_Visual_AdminPanel_Category_Manage#}</legend>
+<legend>{#PLIKLI_Visual_AdminPanel_Category_Manage#}</legend>
 <br />
 {literal}
 <script>
@@ -19,7 +19,7 @@ function showdel(id)
 				<li class="{if $templatelite.section.thecat.index==1}active{/if}"><a data-toggle="tab" href="#cat-{$cat_array[thecat].auto_id}">{$cat_array[thecat].name}</a></li>
 			{/if}
 		{/section}
-		<li class="add_new_category_tab"><a data-toggle="tab" href="#AddNew">{#KLIQQI_Visual_AdminPanel_Category_Add#}</a></li>
+		<li class="add_new_category_tab"><a data-toggle="tab" href="#AddNew">{#PLIKLI_Visual_AdminPanel_Category_Add#}</a></li>
 	</ul>
 	<br />
 	<div class="tab-content">
@@ -33,27 +33,27 @@ function showdel(id)
 						<table class="table table-bordered table-striped">
 							<tbody>
 								<tr>
-									<td>{#KLIQQI_Visual_AdminPanel_Category_Name#}</td>
+									<td>{#PLIKLI_Visual_AdminPanel_Category_Name#}</td>
 									<td><input name="name" class="form-control" value="{$cat_array[thecat].name}" type="text"></td>
 								</tr>
 								<tr>
-									<td>{#KLIQQI_Visual_AdminPanel_Category_URL#}</td>
+									<td>{#PLIKLI_Visual_AdminPanel_Category_URL#}</td>
 									<td><input name="safename" class="form-control" value="{$cat_array[thecat].safename}" type="text"></td>
 								</tr>
 								<tr>
-									<td>{#KLIQQI_Visual_AdminPanel_Category_ID#}</td>
+									<td>{#PLIKLI_Visual_AdminPanel_Category_ID#}</td>
 									<td>{$cat_array[thecat].id}</td>
 								</tr>
 								<tr>
-									<td>{#KLIQQI_Visual_AdminPanel_Category_Meta_Desc#}</td>
+									<td>{#PLIKLI_Visual_AdminPanel_Category_Meta_Desc#}</td>
 									<td><input name="description" class="form-control" value="{$cat_array[thecat].description}" type="text"></td>
 								</tr>
 								<tr>
-									<td>{#KLIQQI_Visual_AdminPanel_Category_Meta_Keywords#}</td>
+									<td>{#PLIKLI_Visual_AdminPanel_Category_Meta_Keywords#}</td>
 									<td><input name="keywords" class="form-control" value="{$cat_array[thecat].keywords}" type="text"></td>
 								</tr>
 								<tr>
-									<td>{#KLIQQI_Visual_AdminPanel_Category_Author_Level#}</td>
+									<td>{#PLIKLI_Visual_AdminPanel_Category_Author_Level#}</td>
 									<td>
 										<select name="level" class="form-control">
 											<option value="normal" {if $cat_array[thecat].authorlevel=='normal'}selected{/if}>Normal</option>
@@ -63,19 +63,19 @@ function showdel(id)
 									</td>
 								</tr>
 								<tr>
-									<td>{#KLIQQI_Visual_AdminPanel_Category_Author_Group#}</td>
+									<td>{#PLIKLI_Visual_AdminPanel_Category_Author_Group#}</td>
 									<td><input name="group" class="form-control" value="{$cat_array[thecat].authorgroup}" type="text"></td>
 								</tr>
 								<tr>
-									<td>{#KLIQQI_Visual_AdminPanel_Category_Votes#}</td>
+									<td>{#PLIKLI_Visual_AdminPanel_Category_Votes#}</td>
 									<td><input name="votes" class="form-control" value="{$cat_array[thecat].votes}" type="text"></td>
 								</tr>
 								<tr>
-									<td>{#KLIQQI_Visual_AdminPanel_Category_Karma#}</td>
+									<td>{#PLIKLI_Visual_AdminPanel_Category_Karma#}</td>
 									<td><input name="karma" class="form-control" value="{$cat_array[thecat].karma}" type="text"></td>
 								</tr>
 								<tr>
-									<td>{#KLIQQI_Visual_AdminPanel_Category_Parent#}</td>
+									<td>{#PLIKLI_Visual_AdminPanel_Category_Parent#}</td>
 									<td>
 									<select name="parent" class="form-control">
 									  <option value="0"> --- </option>
@@ -88,14 +88,14 @@ function showdel(id)
 									</td>
 								</tr>
 								<tr>
-									<td><input onclick="showdel({$cat_array[thecat].auto_id})" value="{#KLIQQI_Visual_AdminPanel_Category_Delete#}" {if sizeof($cat_array)<=2}disabled{/if} type="button" class="btn btn-danger"></td> 
-									<td valign='top'><input value="{#KLIQQI_Visual_AdminPanel_Category_Update#}" type="submit" class="btn btn-primary"></td>
+									<td><input onclick="showdel({$cat_array[thecat].auto_id})" value="{#PLIKLI_Visual_AdminPanel_Category_Delete#}" {if sizeof($cat_array)<=2}disabled{/if} type="button" class="btn btn-danger"></td> 
+									<td valign='top'><input value="{#PLIKLI_Visual_AdminPanel_Category_Update#}" type="submit" class="btn btn-primary"></td>
 								</tr>
 							</tbody>
 						</table>
 						<div id="del{$cat_array[thecat].auto_id}" class="alert alert-error" style="display:none;">
-							<p><strong>{#KLIQQI_Visual_AdminPanel_Category_Select#}</strong></p>
-							<input type="radio" name="sub" value="move" onclick="this.form.delete1.disabled=false;"> {#KLIQQI_Visual_AdminPanel_Category_Move#}:
+							<p><strong>{#PLIKLI_Visual_AdminPanel_Category_Select#}</strong></p>
+							<input type="radio" name="sub" value="move" onclick="this.form.delete1.disabled=false;"> {#PLIKLI_Visual_AdminPanel_Category_Move#}:
 								<select name="move">
 								{foreach from=$cat_array item=cat}
 								  {if $cat.auto_id!=0 && $cat.auto_id!=$cat_array[thecat].auto_id}
@@ -103,11 +103,11 @@ function showdel(id)
 								  {/if}
 								{/foreach}
 								</select><br />
-							<input type="radio" name="sub" value="delete" onclick="this.form.delete1.disabled=false;"> {#KLIQQI_Visual_AdminPanel_Category_Delete_Stories#}<br /><br />
-							<input type="radio" name="sub1" value="move" checked> {#KLIQQI_Visual_AdminPanel_Subcategory_Move#}<br />
-							<input type="radio" name="sub1" value="delete"> {#KLIQQI_Visual_AdminPanel_Subcategory_Delete#}<br /><br />
-							<input onclick="if (confirm('{#KLIQQI_Visual_View_User_Reset_Pass_Confirm#}')) document.location.href='admin_categories.php?action=remove&id={$cat_array[thecat].auto_id}&sub='+(this.form.sub[0].checked ? 'move' : 'delete')+'&move='+this.form.move.options[this.form.move.selectedIndex].value+'&sub1='+(this.form.sub1[0].checked ? 'move' : 'delete')+'&token='+this.form.token.value;" value="{#KLIQQI_Visual_AdminPanel_Category_Delete#}" disabled name='delete1' type="button" class="btn btn-danger">
-							<input onclick="document.getElementById('del{$cat_array[thecat].auto_id}').style.display='none';" value="{#KLIQQI_Visual_AdminPanel_Category_Cancel#}" type="button" class="btn btn-default">
+							<input type="radio" name="sub" value="delete" onclick="this.form.delete1.disabled=false;"> {#PLIKLI_Visual_AdminPanel_Category_Delete_Stories#}<br /><br />
+							<input type="radio" name="sub1" value="move" checked> {#PLIKLI_Visual_AdminPanel_Subcategory_Move#}<br />
+							<input type="radio" name="sub1" value="delete"> {#PLIKLI_Visual_AdminPanel_Subcategory_Delete#}<br /><br />
+							<input onclick="if (confirm('{#PLIKLI_Visual_View_User_Reset_Pass_Confirm#}')) document.location.href='admin_categories.php?action=remove&id={$cat_array[thecat].auto_id}&sub='+(this.form.sub[0].checked ? 'move' : 'delete')+'&move='+this.form.move.options[this.form.move.selectedIndex].value+'&sub1='+(this.form.sub1[0].checked ? 'move' : 'delete')+'&token='+this.form.token.value;" value="{#PLIKLI_Visual_AdminPanel_Category_Delete#}" disabled name='delete1' type="button" class="btn btn-danger">
+							<input onclick="document.getElementById('del{$cat_array[thecat].auto_id}').style.display='none';" value="{#PLIKLI_Visual_AdminPanel_Category_Cancel#}" type="button" class="btn btn-default">
 						</div>
 					</form>
 				</div>
@@ -120,23 +120,23 @@ function showdel(id)
 				<table class="table table-bordered table-striped">
 					<tbody>
 						<tr>
-							<td>{#KLIQQI_Visual_AdminPanel_Category_Name#}</td>
+							<td>{#PLIKLI_Visual_AdminPanel_Category_Name#}</td>
 							<td><input name="name" class="form-control" placeholder="New Category" type="text"></td>
 						</tr>
 						<tr>
-							<td>{#KLIQQI_Visual_AdminPanel_Category_URL#}</td>
+							<td>{#PLIKLI_Visual_AdminPanel_Category_URL#}</td>
 							<td><input name="safename" class="form-control" value="" type="text"></td>
 						</tr>
 						<tr>
-							<td>{#KLIQQI_Visual_AdminPanel_Category_Meta_Desc#}</td>
+							<td>{#PLIKLI_Visual_AdminPanel_Category_Meta_Desc#}</td>
 							<td><input name="description" class="form-control" value="" type="text"></td>
 						</tr>
 						<tr>
-							<td>{#KLIQQI_Visual_AdminPanel_Category_Meta_Keywords#}</td>
+							<td>{#PLIKLI_Visual_AdminPanel_Category_Meta_Keywords#}</td>
 							<td><input name="keywords" class="form-control" value="" type="text"></td>
 						</tr>
 						<tr>
-							<td>{#KLIQQI_Visual_AdminPanel_Category_Author_Level#}</td>
+							<td>{#PLIKLI_Visual_AdminPanel_Category_Author_Level#}</td>
 							<td>
 							<select name="level" class="form-control">
 								<option value="normal">Normal</option>
@@ -146,19 +146,19 @@ function showdel(id)
 							</td>
 						</tr>
 						<tr>
-							<td>{#KLIQQI_Visual_AdminPanel_Category_Author_Group#}</td>
+							<td>{#PLIKLI_Visual_AdminPanel_Category_Author_Group#}</td>
 							<td><input name="group" class="form-control" value="" type="text"></td>
 						</tr>
 						<tr>
-							<td>{#KLIQQI_Visual_AdminPanel_Category_Votes#}</td>
+							<td>{#PLIKLI_Visual_AdminPanel_Category_Votes#}</td>
 							<td><input name="votes" class="form-control" value="" type="text"></td>
 						</tr>
 						<tr>
-							<td>{#KLIQQI_Visual_AdminPanel_Category_Karma#}</td>
+							<td>{#PLIKLI_Visual_AdminPanel_Category_Karma#}</td>
 							<td><input name="karma" class="form-control" value="" type="text"></td>
 						</tr>
 						<tr>
-							<td>{#KLIQQI_Visual_AdminPanel_Category_Parent#}</td>
+							<td>{#PLIKLI_Visual_AdminPanel_Category_Parent#}</td>
 							<td>
 								<select name="parent" class="form-control">
 									<option value="0"> --- </option>
@@ -172,7 +172,7 @@ function showdel(id)
 						</tr>
 						<tr>
 							<td></td>
-							<td><input value="{#KLIQQI_Visual_AdminPanel_Category_Add#}" type="submit" class="btn btn-primary"></td>
+							<td><input value="{#PLIKLI_Visual_AdminPanel_Category_Add#}" type="submit" class="btn btn-primary"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -182,8 +182,8 @@ function showdel(id)
 </div><!--/.tabbable-->
 <div style="clear:both;margin-top:50px;">
 	<hr />
-	<legend>{#KLIQQI_Visual_AdminPanel_Category_Order#}</legend>
-	<p>{#KLIQQI_Visual_AdminPanel_Category_Order_Description#}</p>
+	<legend>{#PLIKLI_Visual_AdminPanel_Category_Order#}</legend>
+	<p>{#PLIKLI_Visual_AdminPanel_Category_Order_Description#}</p>
 	{section name=thecat loop=$cat_array}
 		{if $cat_array[thecat].auto_id neq 0}
 			{if $cat_array[thecat].spacercount < $submit_lastspacer}
@@ -198,7 +198,7 @@ function showdel(id)
 	{/section}
 </div>
 <hr />
-<p>Kliqqi allows users to select what categories they see from their profile settings page. If you add a new category after users have de-selected a category, they won't be able to see that new category. To make it so that all users category settings are reset to see all cateogires, click on the button below.</p> 
-<a href="admin_categories.php?action=reset" class="btn btn-warning">{#KLIQQI_Visual_Categories_Reset#}</a>
+<p>Plikli allows users to select what categories they see from their profile settings page. If you add a new category after users have de-selected a category, they won't be able to see that new category. To make it so that all users category settings are reset to see all cateogires, click on the button below.</p> 
+<a href="admin_categories.php?action=reset" class="btn btn-warning">{#PLIKLI_Visual_Categories_Reset#}</a>
 <div style="clear:both;"> </div>
 <!--/categories.tpl -->

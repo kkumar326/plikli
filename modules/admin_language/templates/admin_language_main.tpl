@@ -1,20 +1,20 @@
 {config_load file=admin_language_lang_conf}
 
-<legend>{#KLIQQI_Admin_Language#}</legend>
-<p>{#KLIQQI_Admin_Language_Instructions_1#}</p>
-<p>{#KLIQQI_Admin_Language_Instructions_2#}</p>
-<p>{#KLIQQI_Admin_Language_Instructions_3#}</p>
+<legend>{#PLIKLI_Admin_Language#}</legend>
+<p>{#PLIKLI_Admin_Language_Instructions_1#}</p>
+<p>{#PLIKLI_Admin_Language_Instructions_2#}</p>
+<p>{#PLIKLI_Admin_Language_Instructions_3#}</p>
 
 <div style="">
-	<strong>{#KLIQQI_Admin_Language_Filter_Text#}</strong>:
+	<strong>{#PLIKLI_Admin_Language_Filter_Text#}</strong>:
 </div>
 <div style="">
 	<div style="float:left;display:inline;margin:0 4px 0 0;">
 		<input type="text" id="filterfor" class="form-control">
 	</div>
 	<div style="float:left;display:inline;">
-		<input type="button" name="filter" value="{#KLIQQI_Admin_Language_Filter_Button#}" onclick="filtertotext();" class="btn btn-primary">
-		<input type="button" name="clearfilter" value="{#KLIQQI_Admin_Language_Filter_Clear#}" onclick="showall();" class="btn btn-default">
+		<input type="button" name="filter" value="{#PLIKLI_Admin_Language_Filter_Button#}" onclick="filtertotext();" class="btn btn-primary">
+		<input type="button" name="clearfilter" value="{#PLIKLI_Admin_Language_Filter_Clear#}" onclick="showall();" class="btn btn-default">
 	</div>
 	<div style="clear:both;"></div>
 </div>
@@ -91,4 +91,4 @@
 {/literal}
 
 
-{config_load file=admin_language_kliqqi_lang_conf}
+{config_load file=admin_language_plikli_lang_conf}

@@ -60,9 +60,9 @@ function validate_all_user_action(){
 {/literal}
 <legend>
 	{if $templatelite.get.user}
-		{$templatelite.get.user|sanitize:2}'s {#KLIQQI_Visual_TopUsers_TH_News#}
+		{$templatelite.get.user|sanitize:2}'s {#PLIKLI_Visual_TopUsers_TH_News#}
 	{else}
-		{#KLIQQI_Visual_AdminPanel_Links#}
+		{#PLIKLI_Visual_AdminPanel_Links#}
 	{/if}
 </legend>
 {if $moderated_submissions_count neq 0}
@@ -82,45 +82,45 @@ function validate_all_user_action(){
 	<div class="col-md-3">
 		<div class="btn-group pull">
 			<a class="btn btn-default dropdown-toggle" href="#" data-toggle="dropdown">
-				<i id="selected_action"></i> {#KLIQQI_Visual_AdminPanel_Apply_Changes#} <span class="caret"></span>
+				<i id="selected_action"></i> {#PLIKLI_Visual_AdminPanel_Apply_Changes#} <span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu">
-				<li><a onclick="set_admin_action('published')" href="#"><i class="fa fa-level-up"></i>{#KLIQQI_Visual_AdminPanel_Publish#}</a></li>
-				<li><a onclick="set_admin_action('new')" href="#"><i class="fa fa-level-down"></i>{#KLIQQI_Visual_AdminPanel_New#}</a></li>
-				<li><a onclick="set_admin_action('discard')" href="#"><i class="fa fa-trash-o"></i>{#KLIQQI_Visual_AdminPanel_Discard#}</a></li>
-				<li><a onclick="set_admin_action('moderated')" href="#"><i class="fa fa-ban"></i>{#KLIQQI_Visual_AdminPanel_Moderated#}</a></li>
-				<li><a onclick="set_admin_action('spam')" href="#"><i class="fa fa-ban"></i>{#KLIQQI_Visual_AdminPanel_Spam#}</a></li>
+				<li><a onclick="set_admin_action('published')" href="#"><i class="fa fa-level-up"></i>{#PLIKLI_Visual_AdminPanel_Publish#}</a></li>
+				<li><a onclick="set_admin_action('new')" href="#"><i class="fa fa-level-down"></i>{#PLIKLI_Visual_AdminPanel_New#}</a></li>
+				<li><a onclick="set_admin_action('discard')" href="#"><i class="fa fa-trash-o"></i>{#PLIKLI_Visual_AdminPanel_Discard#}</a></li>
+				<li><a onclick="set_admin_action('moderated')" href="#"><i class="fa fa-ban"></i>{#PLIKLI_Visual_AdminPanel_Moderated#}</a></li>
+				<li><a onclick="set_admin_action('spam')" href="#"><i class="fa fa-ban"></i>{#PLIKLI_Visual_AdminPanel_Spam#}</a></li>
 			</ul>
 		</div>
 	</div>
-	<form action="{$my_base_url}{$my_kliqqi_base}/admin/admin_links.php" method="get" class="form-search search-bar">
+	<form action="{$my_base_url}{$my_plikli_base}/admin/admin_links.php" method="get" class="form-search search-bar">
 		<div class="col-md-3">
 			<div class="input-append">
 				<input type="hidden" name="mode" value="search">
 				{if isset($templatelite.get.keyword) && $templatelite.get.keyword neq ""}
 					{assign var=searchboxtext value=$templatelite.get.keyword|sanitize:2}
 				{else}
-					{assign var=searchboxtext value=#KLIQQI_Visual_Search_SearchDefaultText#}			
+					{assign var=searchboxtext value=#PLIKLI_Visual_Search_SearchDefaultText#}			
 				{/if}
 				<input type="hidden" name="user" value="{$templatelite.get.user|sanitize:2}">
 				<input type="text" class="form-control search-query" name="keyword" placeholder="{$searchboxtext}">
-				<button type="submit" class="btn btn-primary search-button">{#KLIQQI_Visual_Search_Go#}</button>
+				<button type="submit" class="btn btn-primary search-button">{#PLIKLI_Visual_Search_Go#}</button>
 			</div>
 		</div>
 		<div class="col-md-3">
 			<select name="filter" class="form-control" id="submission_filter" onchange="this.form.submit()">
-				<option value="all" {if $templatelite.get.filter == "all"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_All#}</option>
-				<option value="published" {if $templatelite.get.filter == "published"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Published#}</option>
-				<option value="new" {if $templatelite.get.filter == "new"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_New#}</option>
-				<option value="draft" {if $templatelite.get.filter == "draft"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Draft#}</option>
-				<option value="scheduled" {if $templatelite.get.filter == "scheduled"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Scheduled#}</option>
-				<option value="discard" {if $templatelite.get.filter == "discard"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Discarded#}</option>
-				<option value="moderated" {if $templatelite.get.filter == "moderated"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Moderated#}</option>
-				<option value="spam" {if $templatelite.get.filter == "spam"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Spam#}</option>
+				<option value="all" {if $templatelite.get.filter == "all"} selected="selected" {/if}>{#PLIKLI_Visual_AdminPanel_All#}</option>
+				<option value="published" {if $templatelite.get.filter == "published"} selected="selected" {/if}>{#PLIKLI_Visual_AdminPanel_Published#}</option>
+				<option value="new" {if $templatelite.get.filter == "new"} selected="selected" {/if}>{#PLIKLI_Visual_AdminPanel_New#}</option>
+				<option value="draft" {if $templatelite.get.filter == "draft"} selected="selected" {/if}>{#PLIKLI_Visual_AdminPanel_Draft#}</option>
+				<option value="scheduled" {if $templatelite.get.filter == "scheduled"} selected="selected" {/if}>{#PLIKLI_Visual_AdminPanel_Scheduled#}</option>
+				<option value="discard" {if $templatelite.get.filter == "discard"} selected="selected" {/if}>{#PLIKLI_Visual_AdminPanel_Discarded#}</option>
+				<option value="moderated" {if $templatelite.get.filter == "moderated"} selected="selected" {/if}>{#PLIKLI_Visual_AdminPanel_Moderated#}</option>
+				<option value="spam" {if $templatelite.get.filter == "spam"} selected="selected" {/if}>{#PLIKLI_Visual_AdminPanel_Spam#}</option>
 				<option value="all">   ---   </option>
-				<option value="today" {if $templatelite.get.filter == "today"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Today#}</option>
-				<option value="yesterday" {if $templatelite.get.filter == "yesterday"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Yesterday#}</option>
-				<option value="week" {if $templatelite.get.filter == "week"} selected="selected" {/if}>{#KLIQQI_Visual_AdminPanel_Week#}</option>
+				<option value="today" {if $templatelite.get.filter == "today"} selected="selected" {/if}>{#PLIKLI_Visual_AdminPanel_Today#}</option>
+				<option value="yesterday" {if $templatelite.get.filter == "yesterday"} selected="selected" {/if}>{#PLIKLI_Visual_AdminPanel_Yesterday#}</option>
+				<option value="week" {if $templatelite.get.filter == "week"} selected="selected" {/if}>{#PLIKLI_Visual_AdminPanel_Week#}</option>
 			</select>
 		</div>
 		<div class="col-md-3">
@@ -135,18 +135,18 @@ function validate_all_user_action(){
 	</form>
 </div>
 
-<form name="bulk_moderate" id="user_list_form" action="{$my_base_url}{$my_kliqqi_base}/admin/admin_links.php?action=bulkmod&page={$templatelite.get.page|sanitize:2}" method="post" onsubmit="return validate_all_user_action()">
+<form name="bulk_moderate" id="user_list_form" action="{$my_base_url}{$my_plikli_base}/admin/admin_links.php?action=bulkmod&page={$templatelite.get.page|sanitize:2}" method="post" onsubmit="return validate_all_user_action()">
 	<input type="hidden" name="admin_acction"  value="" id="admin_action"/>
 	{$hidden_token_admin_links_edit}
 	<table class="table table-bordered table-condensed">
 		<tr>
 			<th style="text-align:center;vertical-align:middle;"><input type='checkbox' id="selectall_user_ed" name="all1"></th>
-			{checkActionsTpl location="tpl_kliqqi_admin_submissions_th_start"}
-			<th>{#KLIQQI_Visual_View_Links_Author#}</th>
-			<th>{#KLIQQI_Visual_View_Links_New_Window#}</th>
-			<th nowrap style="text-align:center;">{#KLIQQI_Visual_AdminPanel_Group_Date#}</th>
-			<th nowrap style="text-align:center;">{#KLIQQI_Visual_View_Links_Status#}</th>
-			{checkActionsTpl location="tpl_kliqqi_admin_submissions_th_end"}
+			{checkActionsTpl location="tpl_plikli_admin_submissions_th_start"}
+			<th>{#PLIKLI_Visual_View_Links_Author#}</th>
+			<th>{#PLIKLI_Visual_View_Links_New_Window#}</th>
+			<th nowrap style="text-align:center;">{#PLIKLI_Visual_AdminPanel_Group_Date#}</th>
+			<th nowrap style="text-align:center;">{#PLIKLI_Visual_View_Links_Status#}</th>
+			{checkActionsTpl location="tpl_plikli_admin_submissions_th_end"}
 		</tr>
 		{section name=id loop=$template_stories}
 		<tr {if $template_stories[id].link_status=='moderated'}class="tr_moderated"{/if}>
@@ -155,42 +155,42 @@ function validate_all_user_action(){
 					<input type="checkbox" name="link[{$template_stories[id].link_id}]" class="enabled_disable"  value="1" usernameval="{$template_stories[id].link_author}"/>
 				{/if} 
 			</td>
-			{checkActionsTpl location="tpl_kliqqi_admin_submissions_td_start"}
-			<td><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_users.php?mode=view&user={$template_stories[id].link_author}" title="{$template_stories[id].link_author}'s Articles" id="link-{$template_stories[id].link_id}-author">{$template_stories[id].link_author}</a></td>
+			{checkActionsTpl location="tpl_plikli_admin_submissions_td_start"}
+			<td><a href="{$my_base_url}{$my_plikli_base}/admin/admin_users.php?mode=view&user={$template_stories[id].link_author}" title="{$template_stories[id].link_author}'s Articles" id="link-{$template_stories[id].link_id}-author">{$template_stories[id].link_author}</a></td>
 			<td>
-				<a href='{$my_kliqqi_base}/editlink.php?id={$template_stories[id].link_id}'><i class="fa fa-edit" title="{#KLIQQI_Visual_AdminPanel_Page_Edit#}" alt="{#KLIQQI_Visual_AdminPanel_Page_Edit#}"></i></a>
-				<a href="{$my_base_url}{$my_kliqqi_base}/story.php?title={$template_stories[id].link_title_url}" title="{$template_stories[id].link_title|truncate:50:"...":true}" >{$template_stories[id].link_title}</a>
+				<a href='{$my_plikli_base}/editlink.php?id={$template_stories[id].link_id}'><i class="fa fa-edit" title="{#PLIKLI_Visual_AdminPanel_Page_Edit#}" alt="{#PLIKLI_Visual_AdminPanel_Page_Edit#}"></i></a>
+				<a href="{$my_base_url}{$my_plikli_base}/story.php?title={$template_stories[id].link_title_url}" title="{$template_stories[id].link_title|truncate:50:"...":true}" >{$template_stories[id].link_title}</a>
 			</td>
 			<td style="text-align:center;vertical-align:middle;">{$template_stories[id].link_date}</td>
 			<td style="text-align:center;vertical-align:middle;">
 				{if $template_stories[id].link_status=='new'} 
-					{#KLIQQI_Visual_AdminPanel_New#}
+					{#PLIKLI_Visual_AdminPanel_New#}
 				{elseif $template_stories[id].link_status=='published'}
-					{#KLIQQI_Visual_AdminPanel_Published#}
+					{#PLIKLI_Visual_AdminPanel_Published#}
 				{elseif $template_stories[id].link_status=='discard'}
-					{#KLIQQI_Visual_AdminPanel_Discarded#}
+					{#PLIKLI_Visual_AdminPanel_Discarded#}
 				{elseif $template_stories[id].link_status=='spam'} 
-					{#KLIQQI_Visual_AdminPanel_Spam#}
+					{#PLIKLI_Visual_AdminPanel_Spam#}
 				{elseif $template_stories[id].link_status=='draft'} 
-					{#KLIQQI_Visual_AdminPanel_Draft#}
+					{#PLIKLI_Visual_AdminPanel_Draft#}
 				{elseif $template_stories[id].link_status=='scheduled'} 
-					{#KLIQQI_Visual_AdminPanel_Scheduled#}	
+					{#PLIKLI_Visual_AdminPanel_Scheduled#}	
 				{elseif $template_stories[id].link_status=='moderated'} 
-					{#KLIQQI_Visual_AdminPanel_Moderated#}
+					{#PLIKLI_Visual_AdminPanel_Moderated#}
 				{/if}
 			</td>
-			{checkActionsTpl location="tpl_kliqqi_admin_submissions_td_end"}
+			{checkActionsTpl location="tpl_plikli_admin_submissions_td_end"}
 		</tr>	
 		{/section}
 	</table>
 	<div style="clear:both;"> </div>
 </form>
 <div style="float:right;margin-top:6px;">
-	<a data-toggle="modal" href="{$my_base_url}{$my_kliqqi_base}/admin/admin_delete_stories.php" class="btn btn-danger"><i class="fa fa-trash-o fa-white"></i> {#KLIQQI_Visual_AdminPanel_Delete_Stories#}</a>
+	<a data-toggle="modal" href="{$my_base_url}{$my_plikli_base}/admin/admin_delete_stories.php" class="btn btn-danger"><i class="fa fa-trash-o fa-white"></i> {#PLIKLI_Visual_AdminPanel_Delete_Stories#}</a>
 </div>
 <div style="clear:both;"> </div>
 <SCRIPT>
-var confirmation = "{#KLIQQI_Visual_AdminPanel_Confirm_Killspam#}\n";
+var confirmation = "{#PLIKLI_Visual_AdminPanel_Confirm_Killspam#}\n";
 {literal}
 function mark_all_publish() {
 	document.bulk_moderate.all1.checked=1;

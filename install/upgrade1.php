@@ -10,31 +10,6 @@ include_once(mnmpath.'settings.php');
 
 if ($_GET['language'])
     $language = addslashes(strip_tags($_GET['language']));
-/*if ($language == 'arabic') {
-	$direction = 'rtl';
-}else{
-	$direction = 'ltr';
-}*/
-
-/*if($language == 'arabic'){
-	include_once('./languages/lang_arabic.php');
-} elseif($language == 'catalan'){
-	include_once('./languages/lang_catalan.php');
-} elseif($language == 'chinese_simplified'){
-	include_once('./languages/lang_chinese_simplified.php');
-} elseif($language == 'french'){
-	include_once('./languages/lang_french.php');
-} elseif($language == 'german'){
-	include_once('./languages/lang_german.php');
-} elseif($language == 'italian'){
-	include_once('./languages/lang_italian.php');
-} elseif($language == 'russian'){
-	include_once('./languages/lang_russian.php');
-} elseif($language == 'thai'){
-	include_once('./languages/lang_thai.php');
-} elseif($language == 'english'){
-	include_once('./languages/lang_english.php');
-}*/
 
 echo '<style type="text/css">
 h2 {
@@ -92,7 +67,7 @@ li{marging-left:30px;}
 a:link, a:hover, a:visited, a:active{color:#000000}
 .btn-primary, btn {margin-left:10px}
 </style>';
-echo '<fieldset dir="'.$direction.'"><legend>'.$lang['Upgrade'].'</legend><div class="well">';
+echo '<fieldset><legend>'.$lang['Upgrade'].'</legend><div class="well">';
 
 //$include='header.php'; if (file_exists($include)) { include_once($include); }
 $include='functions.php'; if (file_exists($include)) { include_once($include); }
@@ -136,21 +111,21 @@ if (!$errors) {
 
 
 			if ($cms_name == 'pligg_version' && $old_version == '122') {
-				echo "<li>upgrading from Pligg $old_version to Kliqqi " . $lang['kliqqi_version'] . "</li></ul></fieldset>";
-				include_once('k350-p122.php');
+				echo "<li>upgrading from Pligg $old_version to Plikli " . $lang['plikli_version'] . "</li></ul></fieldset>";
+				include_once('plikli4-p122.php');
 			}elseif (($cms_name == 'pligg_version' && $old_version == '200rc1') || ($cms_name == 'pligg_version' && $old_version == '200rc2')) {
-				echo "<li>upgrading from Pligg $old_version to Kliqqi " . $lang['kliqqi_version'] . "</li></ul></fieldset>";
-				include_once('k350-p2rc1.php');
+				echo "<li>upgrading from Pligg $old_version to Plikli " . $lang['plikli_version'] . "</li></ul></fieldset>";
+				include_once('plikli4-p2rc1.php');
 			
 			}elseif (($cms_name == 'pligg_version' && $old_version == '200') || ($cms_name == 'pligg_version' && $old_version == '201') || ($cms_name == 'pligg_version' && $old_version == '202') || ($cms_name == 'pligg_version' && $old_version == '203')) {
-				echo "<li>upgrading from Pligg $old_version to Kliqqi " . $lang['kliqqi_version'] . "</li></ul></fieldset>";
-				include_once('k350-p200.php');
+				echo "<li>upgrading from Pligg $old_version to Plikli " . $lang['plikli_version'] . "</li></ul></fieldset>";
+				include_once('plikli4-p200.php');
 			}elseif ($cms_name == 'kliqqi_version' && $old_version == '300') {
-				echo "<li>upgrading from Kliqqi $old_version to Kliqqi " . $lang['kliqqi_version'] . "</li></ul></fieldset>";
-				include_once('k350-k3005.php');
+				echo "<li>upgrading from Kliqqi $old_version to Plikli " . $lang['plikli_version'] . "</li></ul></fieldset>";
+				include_once('plikli4-k3005.php');
 			}elseif ($cms_name == 'kliqqi_version' && $old_version == '350' || $cms_name == 'kliqqi_version' && $old_version == '352') {
-				echo "<li>upgrading from Kliqqi $old_version to Kliqqi " . $lang['kliqqi_version'] . "</li></ul></fieldset>";
-				include_once('k352-k350.php');
+				echo "<li>upgrading from Kliqqi $old_version to Plikli " . $lang['plikli_version'] . "</li></ul></fieldset>";
+				include_once('plikli4-k350.php');
 			}
 
 		echo '<fieldset><legend>Recalculating Totals, clearing the cache and creating the settings.php file</legend><ul><li>Regenerating the totals table</li>';
@@ -166,11 +141,7 @@ if (!$errors) {
 	$smarty->clear_compiled_tpl();
 
 	include(mnminclude.'admin_config.php');
-		//if (version_compare($pligg_version, '3.0.0') <= 0) {
-	$config = new kliqqiconfig;
-		//}else{
-		//	$config = new pliggconfig;
-		//}
+	$config = new plikliconfig;
 	$config->create_file("../settings.php");
 
 		echo '</ul><div class="alert alert-info">' . $lang['IfNoError'] . '</div></fieldset>';

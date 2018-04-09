@@ -2,7 +2,7 @@
 if(defined('mnminclude')){
 	include_once('scheduled_posts_settings.php');
 
-	// tell kliqqi what pages this modules should be included in
+	// tell plikli what pages this modules should be included in
 	// pages are <script name> minus .php
 	// index.php becomes 'index' and new.php becomes 'new'
 	$include_in_pages = array('index');

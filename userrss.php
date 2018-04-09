@@ -18,14 +18,14 @@ include_once(mnminclude.'smartyvariables.php');
 if(isset($_GET['user']) && sanitize($_GET['user'], 3) != ''){
 	$login = sanitize($_GET['user'], 3);
 } else {
-	header("Location: $my_kliqqi_base/error_404.php");
+	header("Location: $my_plikli_base/error_404.php");
 	die;
 }
 $user=new User();
 $user->username = $login;
 if(!$user->read()) {
 	//echo "error: user does not exist";
-	header("Location: $my_kliqqi_base/error_404.php");
+	header("Location: $my_plikli_base/error_404.php");
 //	header('Location: error_404.php');
 	die;
 }
@@ -46,7 +46,7 @@ if($time > 0) {
 	$sql .= "vote_link_id=link_id  AND (link_status='published' OR link_status='new') GROUP BY vote_link_id  ORDER BY votes DESC LIMIT $rows";
 
 	$last_modified = time();
-	$title = $main_smarty->get_config_vars("KLIQQI_Visual_RSS_Recent") . ' ' . txt_time_diff($from);
+	$title = $main_smarty->get_config_vars("PLIKLI_Visual_RSS_Recent") . ' ' . txt_time_diff($from);
 	$link_date = "";
 
 } else {
@@ -59,7 +59,7 @@ if($time > 0) {
 	switch ($status) {
 		
 		case 'published':
-			$title = $main_smarty->get_config_vars("KLIQQI_Visual_Published_News");
+			$title = $main_smarty->get_config_vars("PLIKLI_Visual_Published_News");
 			$order_field = 'link_published_date';
 			$link_date = 'published_date';
 			$from_where = "FROM " . table_links . " 
@@ -68,7 +68,7 @@ if($time > 0) {
 			$from_where .= " AND link_author=$user->id ";
 			break;
 		case 'new':
-			$title = $main_smarty->get_config_vars("KLIQQI_Visual_Kliqqi_Queued");
+			$title = $main_smarty->get_config_vars("PLIKLI_Visual_Plikli_Queued");
 			$order_field = 'link_date';
 			$link_date = "date";
 			$from_where = "FROM " . table_links . " 
@@ -77,7 +77,7 @@ if($time > 0) {
 			$from_where .= " AND link_author=$user->id ";
 			break;
 		case 'submitted':
-			$title = $main_smarty->get_config_vars("KLIQQI_Visual_RSS_All");
+			$title = $main_smarty->get_config_vars("PLIKLI_Visual_RSS_All");
 			$order_field = 'link_date';
 			$link_date = "date";
 			$from_where = "FROM " . table_links . " 
@@ -86,7 +86,7 @@ if($time > 0) {
 			$from_where .= " AND link_author=$user->id ";
 			break;
 		case 'draft':
-			$title = $main_smarty->get_config_vars("KLIQQI_Visual_Kliqqi_Queued_Draft");
+			$title = $main_smarty->get_config_vars("PLIKLI_Visual_Plikli_Queued_Draft");
 			$order_field = 'link_date';
 			$link_date = "date";
 			$from_where = "FROM " . table_links . " 
@@ -95,7 +95,7 @@ if($time > 0) {
 			$from_where .= " AND link_author=$user->id ";
 			break;
 		case 'scheduled':
-			$title = $main_smarty->get_config_vars("KLIQQI_Visual_Kliqqi_Queued_Scheduled");
+			$title = $main_smarty->get_config_vars("PLIKLI_Visual_Plikli_Queued_Scheduled");
 			$order_field = 'link_date';
 			$link_date = "date";
 			$from_where = "FROM " . table_links . " 
@@ -104,7 +104,7 @@ if($time > 0) {
 			$from_where .= " AND link_author=$user->id ";
 			break;
 		case 'voted':
-			$title = $main_smarty->get_config_vars("KLIQQI_Visual_RSS_Voted");
+			$title = $main_smarty->get_config_vars("PLIKLI_Visual_RSS_Voted");
 			$order_field = 'link_date';
 			$link_date = "date";
 			$from_where = "FROM " . table_links . "
@@ -113,7 +113,7 @@ if($time > 0) {
 						WHERE vote_user_id=$user->id AND (link_status='published' OR link_status='new') ";
 			break;
 		case 'upvoted':
-			$title = $main_smarty->get_config_vars("KLIQQI_Visual_UpVoted");
+			$title = $main_smarty->get_config_vars("PLIKLI_Visual_UpVoted");
 			$order_field = 'link_date';
 			$link_date = "date";
 			$from_where = "FROM " . table_links . "
@@ -122,7 +122,7 @@ if($time > 0) {
 						WHERE vote_user_id=$user->id AND (link_status='published' OR link_status='new')  AND vote_value>0";
 			break;
 		case 'downvoted':
-			$title = $main_smarty->get_config_vars("KLIQQI_Visual_DownVoted");
+			$title = $main_smarty->get_config_vars("PLIKLI_Visual_DownVoted");
 			$order_field = 'link_date';
 			$link_date = "date";
 			$from_where = "FROM " . table_links . "
@@ -132,7 +132,7 @@ if($time > 0) {
 			break;
 
 		case 'commented':
-			$title = $main_smarty->get_config_vars("KLIQQI_Visual_RSS_Commented");
+			$title = $main_smarty->get_config_vars("PLIKLI_Visual_RSS_Commented");
 			$user->username = $login;
 			$order_field = 'link_date';
 			$link_date = "date";
@@ -142,7 +142,7 @@ if($time > 0) {
 						WHERE comment_status='published' AND comment_user_id=$user->id AND (link_status='published' OR link_status='new') ";
 			break;
 		case 'saved':
-			$title = $main_smarty->get_config_vars("KLIQQI_Visual_RSS_Saved");
+			$title = $main_smarty->get_config_vars("PLIKLI_Visual_RSS_Saved");
 			$user->username = $login;
 			$order_field = 'saved_id';
 			$link_date = "date";
@@ -152,7 +152,7 @@ if($time > 0) {
 						WHERE saved_user_id=$user->id AND (link_status='published' OR link_status='new') ";
 			break;		
 		default:
-			header("Location: $my_kliqqi_base/error_404.php");
+			header("Location: $my_plikli_base/error_404.php");
 			die();
 			break;
 	}
@@ -248,9 +248,9 @@ function do_rss_header($title) {
 	echo 'xmlns:dc="http://purl.org/dc/elements/1.1/"'."\n";
 	echo '>'. "\n";
 	echo '<channel>'."\n";
-	echo '<title>'.htmlspecialchars($main_smarty->get_config_vars("KLIQQI_Visual_Name")).' / '.$login.' / '.$title.'</title>'."\n";
-	echo '<link>'.my_base_url.my_kliqqi_base.'</link>'."\n";
-	echo '<description>'.$main_smarty->get_config_vars("KLIQQI_Visual_RSS_Description").'</description>'."\n";
+	echo '<title>'.htmlspecialchars($main_smarty->get_config_vars("PLIKLI_Visual_Name")).' / '.$login.' / '.$title.'</title>'."\n";
+	echo '<link>'.my_base_url.my_plikli_base.'</link>'."\n";
+	echo '<description>'.$main_smarty->get_config_vars("PLIKLI_Visual_RSS_Description").'</description>'."\n";
 	echo '<pubDate>'.date("r", $last_modified-misc_timezone*3600).'</pubDate>'."\n";
 	echo '<language>'.$dblang.'</language>'."\n";
 }

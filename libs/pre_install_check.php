@@ -4,7 +4,7 @@ if(!defined('mnminclude')){
 	die();
 }
 
-// after your Kliqqi is installed, change this to false
+// after your Plikli is installed, change this to false
 $do_check = true;
 
 if($do_check == true){
@@ -54,9 +54,9 @@ if($do_check == true){
 							<div class="row">
 								<div class="col-md-12">
 									<legend>Error Loading Site!</legend>
-									<p>Have you installed your website yet? Please fix the errors below by proceeding to the  <a href="./install/troubleshooter.php">Kliqqi Troubleshooter</a> which will set all the required files and persmissions for you!<br />Also, check <a href="./readme.html">Kliqqi Readme</a> to learn more about the required files and their permissions (CHMOD) </p>
+									<p>Have you installed your website yet? Please fix the errors below by proceeding to the  <a href="./install/troubleshooter.php">Plikli Troubleshooter</a> which will set all the required files and persmissions for you!<br />Also, check <a href="./readme.html">Plikli Readme</a> to learn more about the required files and their permissions (CHMOD) </p>
 									';
-									echo '<strong>The below are just warnings that some files need to be renamed. You don\'t have to do anything, JUST CLICK ON THE <a href="./install/troubleshooter.php">Kliqqi Troubleshooter</a> TO FIX ALL THE WARNINGS!</strong>';
+									echo '<strong>The below are just warnings that some files need to be renamed. You don\'t have to do anything, JUST CLICK ON THE <a href="./install/troubleshooter.php">Plikli Troubleshooter</a> TO FIX ALL THE WARNINGS!</strong>';
 									foreach ($errors as $error) {
 										echo "<div class='alert alert-info'>";
 										echo "$error \n";

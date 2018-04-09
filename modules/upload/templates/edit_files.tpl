@@ -1,6 +1,6 @@
 {config_load file=upload_lang_conf}
 
-<h3>{#KLIQQI_Upload_Attached#}</h3>
+<h3>{#PLIKLI_Upload_Attached#}</h3>
 
 {php}
 	global $db;
@@ -11,27 +11,27 @@
 	$images = $db->get_results($sql = "SELECT * from " . table_prefix . "files where file_link_id='{$this->_vars['submit_id']}' AND file_size='orig'");
 	if($images)
 	{
-	    print "<b>".$this->get_config_vars('KLIQQI_Upload_Delete')."</b><br>";
+	    print "<b>".$this->get_config_vars('PLIKLI_Upload_Delete')."</b><br>";
 	    foreach($images as $image) 
 	    {
 	    	print "<input type='checkbox' name='upload_delete[]' value='{$image->file_id}'>";
 		if (strpos($image->file_name,'http')===0)
 		    print "<a href='{$image->file_name}'/>{$image->file_name}</a><br>";
 		else
-		    print "<a href='".my_kliqqi_base."$upload_directory/{$image->file_name}'>{$image->file_name}</a><br>";
+		    print "<a href='".my_plikli_base."$upload_directory/{$image->file_name}'>{$image->file_name}</a><br>";
 	    }
 	}
 	$this->_vars['upload_maxnumber']-=sizeof($images);
 {/php}                                                          
 
-({$upload_extensions} {#KLIQQI_Upload_Extensions_Allowed#})<br>
+({$upload_extensions} {#PLIKLI_Upload_Extensions_Allowed#})<br>
 
 {section name=files start=0 loop=$upload_maxnumber step=1}
-    {#KLIQQI_Upload_Upload#}: <input type='file' name='upload_files[]'>
+    {#PLIKLI_Upload_Upload#}: <input type='file' name='upload_files[]'>
     {if $upload_external}
 	OR Link: <input type='text' name='upload_urls[]' value='http://'>
     {/if}
     <br>
 {/section}
 
-{config_load file=upload_kliqqi_lang_conf}
+{config_load file=upload_plikli_lang_conf}

@@ -4,7 +4,11 @@ if (!$step) {
 } else if(@$_SESSION['checked_step'] != 3){
 	header('Location: ./install.php'); die(); 
 }
-
+if ($_POST['language'] == 'arabic') {
+	$site_direction = "rtl";
+}else{
+	$site_direction = "ltr";
+}
 if ($_POST['language'])
     $language = addslashes(strip_tags($_POST['language']));
 if($language == 'arabic'){
@@ -136,7 +140,7 @@ if (!$errors) {
 		echo '<fieldset><legend>' . $lang['CreatingTables'] . '</legend>';
 		include_once ('../libs/db.php');
 		include_once("installtables.php");
-		if (kliqqi_createtables($conn) == 1) { echo "<li>" . $lang['TablesGood'] . "</li><hr />"; }
+		if (plikli_createtables($conn) == 1) { echo "<li>" . $lang['TablesGood'] . "</li><hr />"; }
 		else { $errors[] = $lang['Error3-1']; }
 	}
 	else { $errors[] = $lang['Error3-2']; }
@@ -144,10 +148,10 @@ if (!$errors) {
 
 if (!$errors) {
 	// refresh / recreate settings
-	// this is needed to update it with table_prefix if it has been changed from "kliqqi_"
+	// this is needed to update it with table_prefix if it has been changed from "plikli_"
 	include_once( '../libs/admin_config.php' );
 	
-	$config = new kliqqiconfig;
+	$config = new plikliconfig;
 	$config->create_file('../settings.php');
 
 	$gethttphost = $_SERVER["HTTP_HOST"];
@@ -168,14 +172,14 @@ if (!$errors) {
 		$preportnotice = "Non standard web server port " . str_replace(":","",substr($gethttphost, $port));
 	} 
 	fclose($fp);
-	echo "<br><strong>" . $preportnotice . " has been detected on your server.</strong> Your Kliqqi base URL has been set to <strong>" . $my_base_url . "</strong>. This can be changed after install in admin, settings 'Location Installed' or manually by updating both the config table in the database and the settings.php file.";
+	echo "<br><strong>" . $preportnotice . " has been detected on your server.</strong> Your Plikli base URL has been set to <strong>" . $my_base_url . "</strong>. This can be changed after install in admin, settings 'Location Installed' or manually by updating both the config table in the database and the settings.php file.";
 	
-	$my_kliqqi_base=dirname($_SERVER["PHP_SELF"]); $my_kliqqi_base=str_replace("/".substr(strrchr($my_kliqqi_base, '/'), 1),'',$my_kliqqi_base);
+	$my_plikli_base=dirname($_SERVER["PHP_SELF"]); $my_plikli_base=str_replace("/".substr(strrchr($my_plikli_base, '/'), 1),'',$my_plikli_base);
 
 	$sql = "Update " . table_config . " set `var_value` = '" . $my_base_url . "' where `var_name` = '" . '$my_base_url' . "';";
 	mysql_query( $sql, $conn );
 
-	$sql = "Update " . table_config . " set `var_value` = '" . $my_kliqqi_base . "' where `var_name` = '" . '$my_kliqqi_base' . "';";
+	$sql = "Update " . table_config . " set `var_value` = '" . $my_plikli_base . "' where `var_name` = '" . '$my_plikli_base' . "';";
 	mysql_query( $sql, $conn );
 	
 	// Set the site language to what the user has been using during the installation
@@ -183,15 +187,15 @@ if (!$errors) {
 	$sql = "Update " . table_config . " set `var_value` = '" . $language . "' where `var_name` = '" . '$language' . "';";
 	mysql_query( $sql, $conn );
 
-	$config = new kliqqiconfig;
+	$config = new plikliconfig;
 	$config->create_file('../settings.php');
 
 	include_once( '../config.php' );
 	
 	// Remove the cookie setting a template value
-	setcookie("template", "", time()-60000,$my_kliqqi_base,$domain);
+	setcookie("template", "", time()-60000,$my_plikli_base,$domain);
 
-	$output='<div class="instructions"><p>' . $lang['EnterAdmin'] . '</p>
+	$output='<div class="instructions" style="direction:'.$site_direction.'"><p>' . $lang['EnterAdmin'] . '</p>
 	<table>
 		<form id="form1" name="form1" action="install.php" method="post">
 			<tr>
@@ -240,7 +244,7 @@ if (isset($errors)) {
 
 if(function_exists("gd_info")) {}
 else {
-	$config = new kliqqiconfig;
+	$config = new plikliconfig;
 	$config->var_id = 60;
 	$config->var_value = "false";
 	$config->store();

@@ -30,15 +30,15 @@ $canIhaveAccess = $canIhaveAccess + checklevel('moderator');
 $is_moderator = checklevel('moderator'); // Moderators have a value of '1' for the variable $is_moderator
 /* Redwine: Roles and permissions and Groups fixes */
 $main_smarty->assign('is_moderator', $is_moderator);
-$KliqqiDoc->add_js(my_base_url.my_kliqqi_base."/templates/admin/js/jquery/jquery.tablesorter.js");
+$PlikliDoc->add_js(my_base_url.my_plikli_base."/templates/admin/js/jquery/jquery.tablesorter.js");
 
-$KliqqiDoc->add_js("$(function() {
+$PlikliDoc->add_js("$(function() {
 				
             $('#tablesorter-userTable').tablesorter({sortList: [[1,1]], headers: { 5:{sorter: false}, 6:{sorter: false}, 0:{sorter: false}}});
             
         });	", true);
 
-$KliqqiDoc->get_js();
+$PlikliDoc->get_js();
 
 
 if($canIhaveAccess == 0){	
@@ -48,8 +48,8 @@ if($canIhaveAccess == 0){
 	die();
 }
 
-// read the mysql database to get the kliqqi version
-/* Redwine: kliqqi version query removed and added to /libs/smartyvriables.php */
+// read the mysql database to get the plikli version
+/* Redwine: plikli version query removed and added to /libs/smartyvriables.php */
 
 // sidebar
 //$main_smarty = do_sidebar($main_smarty);
@@ -113,7 +113,7 @@ if($canIhaveAccess == 1)
 			}
 	    }
 		
-	    //header("Location:  ".my_kliqqi_base."/admin/admin_users.php");
+	    //header("Location:  ".my_plikli_base."/admin/admin_users.php");
 		header("Location:".$_SERVER['HTTP_REFERER']);
 	    exit;
 	}
@@ -137,26 +137,26 @@ if($canIhaveAccess == 1)
 			}
 			
 			if (!isset($username) || strlen($username) < 3) {
-				$main_smarty->assign(username_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_UserTooShort'));			
+				$main_smarty->assign(username_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_UserTooShort'));			
 			}
 			elseif (!preg_match('/^[a-zA-Z0-9\-]+$/', $username)) {
-				$main_smarty->assign(username_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_UserInvalid'));
+				$main_smarty->assign(username_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_UserInvalid'));
 			}
 			elseif (user_exists(trim($username)) ) {
-				$main_smarty->assign(username_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_UserExists'));
+				$main_smarty->assign(username_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_UserExists'));
 			}
 			elseif (!check_email(trim($email))) {
-				$main_smarty->assign(email_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_BadEmail'));
+				$main_smarty->assign(email_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_BadEmail'));
 			}
 			elseif (email_exists(trim($email))) {
-				$main_smarty->assign(email_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_EmailExists'));			
+				$main_smarty->assign(email_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_EmailExists'));			
 			}
 			elseif (strlen($password) < 5 ) {
-				$main_smarty->assign(password_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_FiveCharPass'));			
+				$main_smarty->assign(password_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_FiveCharPass'));			
 			}
 			else {
 				$db->query("INSERT IGNORE INTO " . table_users . " (user_login, user_level, user_email, user_pass, user_date, user_modification, user_lastlogin) VALUES ('$username', '$level', '$email', '$saltedpass', NOW(), NOW(), NOW())");
-				header("Location:  ".my_kliqqi_base."/admin/admin_users.php");
+				header("Location:  ".my_plikli_base."/admin/admin_users.php");
 				die();
 			}
 	    } else {
@@ -171,13 +171,13 @@ if($canIhaveAccess == 1)
 				
 			$CSRF->create('admin_users_create', true, true);
 			// breadcrumbs and page titles
-			$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+			$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 			$navwhere['link1'] = getmyurl('admin', '');
-			$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_1');
-			$navwhere['link2'] = my_kliqqi_base . "/admin/admin_users.php";
-			$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_User_Killspam');
+			$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+			$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
+			$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_User_Killspam');
 			$main_smarty->assign('navbar_where', $navwhere);
-			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 			
 			// misc smarty
 			$main_smarty->assign('pagename', pagename);
@@ -225,13 +225,13 @@ if($canIhaveAccess == 1)
 			$main_smarty->assign('commentcount', $commentcount);
 			
 			// breadcrumbs and page title
-			$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+			$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 			$navwhere['link1'] = getmyurl('admin', '');
-			$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_1');
-			$navwhere['link2'] = my_kliqqi_base . "/admin/admin_users.php";
-			$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_View_User');
+			$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+			$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
+			$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_View_User');
 			$main_smarty->assign('navbar_where', $navwhere);
-			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 			
 			// pagename
 			define('pagename', 'admin_users'); 
@@ -301,26 +301,26 @@ if($canIhaveAccess == 1)
 					
 					if($user_old->user_login!=$username){	
 						if (!isset($username) || strlen($username) < 3) {
-							$main_smarty->assign(username_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_UserTooShort'));
+							$main_smarty->assign(username_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_UserTooShort'));
 							$error=1;			
 						}
 						elseif (!preg_match('/^[a-zA-Z0-9\-]+$/', $username)) {
-							$main_smarty->assign(username_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_UserInvalid'));
+							$main_smarty->assign(username_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_UserInvalid'));
 							$error=1;
 						}
 						elseif (user_exists(trim($username)) ) {
-							$main_smarty->assign(username_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_UserExists'));
+							$main_smarty->assign(username_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_UserExists'));
 							$error=1;
 						}
 					}
 					
 					if($user_old->user_email!=$email){
 						if (!check_email(trim($email))) {
-							$main_smarty->assign(email_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_BadEmail'));
+							$main_smarty->assign(email_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_BadEmail'));
 							$error=1;
 						}
 						elseif (email_exists(trim($email))) {
-							$main_smarty->assign(email_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_EmailExists'));
+							$main_smarty->assign(email_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_EmailExists'));
 							$error=1;			
 						}
 					}
@@ -336,7 +336,7 @@ if($canIhaveAccess == 1)
 					
 					if ($_POST["password"] && $_POST["password"]==$_POST["password2"]){
 						if (strlen($password) < 5 ) {
-							$main_smarty->assign(password_error, $main_smarty->get_config_vars('KLIQQI_Visual_Register_Error_FiveCharPass'));
+							$main_smarty->assign(password_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_FiveCharPass'));
 							$error=1;			
 						} else {
 							$user->pass = $_POST["password"];
@@ -347,7 +347,7 @@ if($canIhaveAccess == 1)
 						$user->id=$_GET["user_id"];	
 						echo "save";
 						$user->store();
-						header("Location: ".my_kliqqi_base."/admin/admin_users.php?mode=view&user=".$_GET["user_id"]."");
+						header("Location: ".my_plikli_base."/admin/admin_users.php?mode=view&user=".$_GET["user_id"]."");
 					}
 					
 					if($error==1){
@@ -370,13 +370,13 @@ if($canIhaveAccess == 1)
 			$main_smarty->assign('levels', array('normal','admin','moderator','Spammer'));
 
 			// breadcrumbs and page title
-			$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+			$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 			$navwhere['link1'] = getmyurl('admin', '');
-			$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_1');
-			$navwhere['link2'] = my_kliqqi_base . "/admin/admin_users.php";
-			$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Edit_User');
+			$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+			$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
+			$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Edit_User');
 			$main_smarty->assign('navbar_where', $navwhere);
-			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 			
 			// pagename
 			define('pagename', 'admin_users'); 
@@ -413,30 +413,30 @@ if($canIhaveAccess == 1)
 				if ($user) {
 //					$db->query('UPDATE `' . table_users . '` SET `user_pass` = "033700e5a7759d0663e33b18d6ca0dc2b572c20031b575750" WHERE `user_login` = "'.sanitize($_GET["user"], 3).'"');
 					$to = $user->user_email;
-					$subject = $main_smarty->get_config_vars("KLIQQI_Visual_Name").' '.$main_smarty->get_config_vars("KLIQQI_PassEmail_Subject");
+					$subject = $main_smarty->get_config_vars("PLIKLI_Visual_Name").' '.$main_smarty->get_config_vars("PLIKLI_PassEmail_Subject");
 
 					$password = substr(md5(uniqid(rand(), true)),0,8);
 					$saltedPass = generateHash($password);
 					$db->query('UPDATE `' . table_users . "` SET `user_pass` = '$saltedPass' WHERE `user_login` = '".sanitize($_GET["user"], 3)."'");
-					$body = sprintf($main_smarty->get_config_vars("KLIQQI_PassEmail_PassBody"),
-						$main_smarty->get_config_vars("KLIQQI_Visual_Name"),
-						$my_base_url . $my_kliqqi_base . '/login.php',
+					$body = sprintf($main_smarty->get_config_vars("PLIKLI_PassEmail_PassBody"),
+						$main_smarty->get_config_vars("PLIKLI_Visual_Name"),
+						$my_base_url . $my_plikli_base . '/login.php',
 						$_GET["user"],
 						$password);
 
-					$headers = 'From: ' . $main_smarty->get_config_vars("KLIQQI_PassEmail_From") . "\r\n";
+					$headers = 'From: ' . $main_smarty->get_config_vars("PLIKLI_PassEmail_From") . "\r\n";
 					$headers .= "Content-type: text/html; charset=utf-8\r\n";
 
 					mail($to, $subject, $body, $headers);
 	
 					// breadcrumbs and page title
-					$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+					$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 					$navwhere['link1'] = getmyurl('admin', '');
-					$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_1');
-					$navwhere['link2'] = my_kliqqi_base . "/admin/admin_users.php";
-					$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_User_Reset_Pass');
+					$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+					$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
+					$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_User_Reset_Pass');
 					$main_smarty->assign('navbar_where', $navwhere);
-					$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+					$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 					
 					// pagename
 					define('pagename', 'admin_users'); 
@@ -472,13 +472,13 @@ if($canIhaveAccess == 1)
 				if ($user) {
 					
 					// breadcrumbs and page title
-					$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+					$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 					$navwhere['link1'] = getmyurl('admin', '');
-					$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_1');
-					$navwhere['link2'] = my_kliqqi_base . "/admin/admin_users.php";
-					$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_User_Disable');
+					$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+					$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
+					$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_User_Disable');
 					$main_smarty->assign('navbar_where', $navwhere);
-					$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+					$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 					
 					$main_smarty->assign('user', sanitize($_GET["user"], 3));	
 								
@@ -522,19 +522,19 @@ if($canIhaveAccess == 1)
 					$db->query('UPDATE `' . table_users . '` SET `user_enabled` = 0 WHERE `user_login` = "'.sanitize($_GET["user"], 3).'"');
 					
 					// breadcrumbs and page titles
-					$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+					$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 					$navwhere['link1'] = getmyurl('admin', '');
-					$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_1');
-					$navwhere['link2'] = my_kliqqi_base . "/admin/admin_users.php";
-					$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_User_Disable_2');
+					$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+					$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
+					$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_User_Disable_2');
 					$main_smarty->assign('navbar_where', $navwhere);
-					$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+					$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 					
 					// pagename
 					define('pagename', 'admin_users'); 
 					$main_smarty->assign('pagename', pagename);
 	
-					header("Location: ".my_kliqqi_base."/admin/admin_users.php");
+					header("Location: ".my_plikli_base."/admin/admin_users.php");
 					die();
 				} else {
 					showmyerror('userdoesntexist');
@@ -555,19 +555,19 @@ if($canIhaveAccess == 1)
 					$db->query('UPDATE `' . table_users . '` SET `user_enabled` = 1 WHERE `user_login` = "'.sanitize($_GET["user"], 3).'"');
 					
 					// breadcrumbs and page titles
-					$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+					$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 					$navwhere['link1'] = getmyurl('admin', '');
-					$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_1');
-					$navwhere['link2'] = my_kliqqi_base . "/admin/admin_users.php";
-					$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_User_Disable_2');
+					$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+					$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
+					$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_User_Disable_2');
 					$main_smarty->assign('navbar_where', $navwhere);
-					$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+					$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 					
 					// pagename
 					define('pagename', 'admin_users'); 
 					$main_smarty->assign('pagename', pagename);
 	
-					header("Location: ".my_kliqqi_base."/admin/admin_users.php");
+					header("Location: ".my_plikli_base."/admin/admin_users.php");
 					die();
 				} else {
 					showmyerror('userdoesntexist');
@@ -591,13 +591,13 @@ if($canIhaveAccess == 1)
 				if ($user) {
 	
 					// breadcrumbs and page titles
-					$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+					$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 					$navwhere['link1'] = getmyurl('admin', '');
-					$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_1');
-					$navwhere['link2'] = my_kliqqi_base . "/admin/admin_users.php";
-					$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_User_Killspam');
+					$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+					$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
+					$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_User_Killspam');
 					$main_smarty->assign('navbar_where', $navwhere);
-					$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+					$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 					
 					// misc smarty
 					$main_smarty->assign('pagename', pagename);
@@ -630,7 +630,7 @@ if($canIhaveAccess == 1)
 			{
 				$user= $db->get_row('SELECT * FROM ' . table_users .' where user_login="'.sanitize($_GET["user"], 3).'"');
 				killspam($user->user_id);
-				header("Location: ".my_kliqqi_base."/admin/admin_users.php");
+				header("Location: ".my_plikli_base."/admin/admin_users.php");
 				die();
 
 			} else {
@@ -655,7 +655,7 @@ if($canIhaveAccess == 1)
 			   $filter_sql = " user_level!='Spammer' ";
 			}
 			$search_sql = '';
-			if($_GET["keyword"] && $_GET["keyword"]!= $main_smarty->get_config_vars('KLIQQI_Visual_Search_SearchDefaultText')){
+			if($_GET["keyword"] && $_GET["keyword"]!= $main_smarty->get_config_vars('PLIKLI_Visual_Search_SearchDefaultText')){
 			    $search_sql = "AND (user_login LIKE '%".sanitize($_GET["keyword"], 3)."%' OR user_email LIKE '%".sanitize($_GET["keyword"], 3)."%')";
 			}
 
@@ -672,13 +672,13 @@ if($canIhaveAccess == 1)
 				$main_smarty->assign('userlist', $userlist);					
 			}
 			// breadcrumbs and page title
-			$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+			$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 			$navwhere['link1'] = getmyurl('admin', '');
-			$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_1');
-			$navwhere['link2'] = my_kliqqi_base . "/admin/admin_users.php";
-			$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Search'). sanitize($_GET["keyword"], 3);
+			$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+			$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
+			$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Search'). sanitize($_GET["keyword"], 3);
 			$main_smarty->assign('navbar_where', $navwhere);
-			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+			$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 			
 			// pagename	
 			define('pagename', 'admin_users'); 
@@ -747,12 +747,12 @@ if($canIhaveAccess == 1)
 		$main_smarty->assign('userlist', $userlist);
 		
 		// breadcrumbs anf page title
-		$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+		$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 		$navwhere['link1'] = getmyurl('admin', '');
-		$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_1');
-		$navwhere['link2'] = my_kliqqi_base . "/admin/admin_users.php";
+		$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+		$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
 		$main_smarty->assign('navbar_where', $navwhere);
-		$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+		$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 		
 		// pagename
 		define('pagename', 'admin_users'); 
@@ -776,13 +776,13 @@ function showmyerror()
 	$main_smarty->assign('user', sanitize($_GET["user"], 3));
 
 	// breadcrumbs and page title
-	$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel');
+	$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
 	$navwhere['link1'] = getmyurl('admin', '');
-	$navwhere['text2'] = $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel_1');
-	$navwhere['link2'] = my_kliqqi_base . "/admin/admin_users.php";
-	$navwhere['text3'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_User_Does_Not_Exist');
+	$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+	$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
+	$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_User_Does_Not_Exist');
 	$main_smarty->assign('navbar_where', $navwhere);
-	$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+	$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 	
 	// pagename	define('pagename', 'admin_users'); 
 

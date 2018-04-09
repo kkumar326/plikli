@@ -15,7 +15,7 @@ if(!defined('lang_loc')){
 	$path = substr($_SERVER["SCRIPT_NAME"], 0, $pos);
 	if ($path == "/"){$path = "";}
 	
-	if($path != my_kliqqi_base){
+	if($path != my_plikli_base){
 		define('lang_loc', '..');
 	} else {
 		define('lang_loc', '.');
@@ -30,7 +30,7 @@ $main_smarty->assign('maintenance_mode', $maintenance);
 
 $main_smarty->config_dir = "";
 $main_smarty->force_compile = false; // has to be off to use cache
-$main_smarty->config_load(lang_loc . "/languages/lang_" . kliqqi_language . ".conf");
+$main_smarty->config_load(lang_loc . "/languages/lang_" . plikli_language . ".conf");
 
 if(isset($_GET['id']) && is_numeric($_GET['id'])){$main_smarty->assign('request_id', $_GET['id']);}
 if(isset($_GET['category']) && sanitize($_GET['category'], 3) != ''){$main_smarty->assign('request_category', sanitize($_GET['category'], 3));}
@@ -39,7 +39,7 @@ if(isset($_POST['username']) && sanitize($_POST['username'], 3) != ''){$main_sma
 
 $main_smarty->assign('votes_per_ip', votes_per_ip);
 $main_smarty->assign('dblang', $dblang);
-$main_smarty->assign('kliqqi_language', kliqqi_language);
+$main_smarty->assign('plikli_language', plikli_language);
 $main_smarty->assign('user_logged_in', $current_user->user_login);
 $main_smarty->assign('user_id', $current_user->user_id);
 if ($current_user->authenticated == true) {
@@ -63,7 +63,7 @@ $main_smarty->assign('Enable_Tags', Enable_Tags);
 $main_smarty->assign('Enable_Live', Enable_Live);
 $main_smarty->assign('Voting_Method', Voting_Method);
 $main_smarty->assign('my_base_url', my_base_url);
-$main_smarty->assign('my_kliqqi_base', my_kliqqi_base);
+$main_smarty->assign('my_plikli_base', my_plikli_base);
 $main_smarty->assign('Allow_User_Change_Templates', Allow_User_Change_Templates);
 $main_smarty->assign('urlmethod', urlmethod);
 $main_smarty->assign('UseAvatars', do_we_use_avatars());
@@ -206,9 +206,9 @@ $main_smarty->assign('sidebar_stats_members', $sidebar_stats_members);
 $last_user = $db->get_var("SELECT user_login FROM " . table_users . " where user_level != 'Spammer' ORDER BY user_id DESC LIMIT 1");
 $main_smarty->assign('last_user', $last_user); 
 /* Redwine: added the query to get the version and removed 16 duplicate queries from all admin and some other files */
-// read the mysql database to get the kliqqi version
-$kliqqi_version = kliqqi_version();
-$main_smarty->assign('version_number', $kliqqi_version); 
+// read the mysql database to get the plikli version
+$plikli_version = plikli_version();
+$main_smarty->assign('version_number', $plikli_version); 
 /* Redwine: redundant query */
 /*// Count variable for moderated comments
 $moderated_comments_count = $db->get_var('SELECT count(*) from ' . table_comments . ' where comment_status = "moderated";');
@@ -323,10 +323,10 @@ $backup_count = $sqlcount+$zipcount;
 $moderated_total_count = $disabled_groups_count+$moderated_users_count+$moderated_comments_count+$moderated_submissions_count+$error_count+$backup_count;
 $main_smarty->assign('moderated_total_count', $moderated_total_count);
 
-/********************** NEW FOR KLIQQI VERSION, INSTALLED / UNINSTALLED MODULES UPDATES **********************/
+/********************** NEW FOR PLIKLI VERSION, INSTALLED / UNINSTALLED MODULES UPDATES **********************/
 
 /**********
-Redwine: this block of code is the new check for module and kliqqi version updates. It checks if today's date is the date to check for updates, then it computes all the needed processes and generate all the variabes to pass to admin_modules.php for the installed and uninstalled modules pages.
+Redwine: this block of code is the new check for module and plikli version updates. It checks if today's date is the date to check for updates, then it computes all the needed processes and generate all the variabes to pass to admin_modules.php for the installed and uninstalled modules pages.
 
 1- Redwine: verify if it is time to run the check for update. 
 If yes it should run, then it runs and updates the $update_uninstalled data.
@@ -362,7 +362,7 @@ if($modules) {
 	}
 }
 
-$sql_get_mods_update = $db->get_results('SELECT * from `' . table_misc_data . '` where `name` like "modules_%" OR `name` like "kliqqi_update%";');
+$sql_get_mods_update = $db->get_results('SELECT * from `' . table_misc_data . '` where `name` like "modules_%" OR `name` like "plikli_update%";');
 
 if($sql_get_mods_update) {
 	foreach($sql_get_mods_update as $item) {
@@ -372,12 +372,12 @@ if($sql_get_mods_update) {
 			$update_link = $item->data; //holds the location of the file from where it gets the latest versions.
 		}elseif ($item->name == 'modules_update_unins') {
 			$update_uninstalled = $item->data; //holds serialized array of the uninstalled modules that need update.
-		}elseif ($item->name == 'kliqqi_update') {
-			$update_available = $item->data; //holds the latest kliqqi version if there is an update or empty if not.
+		}elseif ($item->name == 'plikli_update') {
+			$update_available = $item->data; //holds the latest plikli version if there is an update or empty if not.
 		}elseif ($item->name == 'modules_upd_versions') {
-			$update_latest_versions = $item->data; //holds the latest kliqqi versions from the file.
-		}elseif ($item->name == 'kliqqi_update_url') {
-			$update_kliqqi_url = $item->data; //holds the latest kliqqi versions from the file.
+			$update_latest_versions = $item->data; //holds the latest plikli versions from the file.
+		}elseif ($item->name == 'plikli_update_url') {
+			$update_plikli_url = $item->data; //holds the latest plikli versions from the file.
 		}
 	}
 }
@@ -388,34 +388,34 @@ if(time() >= strtotime($check_for_update)) {
 	$proceed_check_update = 'true'; // meaning go ahead and check the latest versions.
 	/* Redwine: checking if modules updates exist. It runs only if today is equal or greater than the date in the misc_data table. $versionupdate is an array that holds the name and latest version of each module that is due for update. */
 	$versionupdate = array();
-	$versionkliqqiupdate = array();
+	$versionplikliupdate = array();
 	$lines = file($update_link, FILE_IGNORE_NEW_LINES);
 
 	foreach ($lines as $key => $value) {
-		if (strpos($value, 'kliqqi_new_version') !== false) {
-			$versionkliqqiupdate[$key] = str_getcsv($value);
+		if (strpos($value, 'plikli_new_version') !== false) {
+			$versionplikliupdate[$key] = str_getcsv($value);
 		}else{
 			$versionupdate[$key] = str_getcsv($value);
 		}
 	}
 	/* Redwine: the only way to mantain the $versionupdate if it not the time to check is to insert it in the misc_data table. */
 	misc_data_update('modules_upd_versions',serialize($versionupdate));
-	/* Redwine: first let's check if there is a new kliqqi version. */
-	if ($update_available == '0' || $update_available == ''|| $update_available == $kliqqi_version) {
-		$update_kliqqi = '';
+	/* Redwine: first let's check if there is a new plikli version. */
+	if ($update_available == '0' || $update_available == ''|| $update_available == $plikli_version) {
+		$update_plikli = '';
 		if ($proceed_check_update == 'true') {
-			$kliqqi_new_version = 'kliqqi_new_version';
-			foreach($versionkliqqiupdate as $entry) {
-				if (in_array($kliqqi_new_version, $entry)) {
-					if($entry[1]>$kliqqi_version) {
-						$update_kliqqi = $entry[1];
-						misc_data_update('kliqqi_update',$update_kliqqi);
+			$plikli_new_version = 'plikli_new_version';
+			foreach($versionplikliupdate as $entry) {
+				if (in_array($plikli_new_version, $entry)) {
+					if($entry[1]>$plikli_version) {
+						$update_plikli = $entry[1];
+						misc_data_update('plikli_update',$update_plikli);
 					}
 				}
 			}	
 		}
 	}
-	/* END CHECKING KLIQQI NEW VERSION. */
+	/* END CHECKING PLIKLI NEW VERSION. */
 	
 	/* Redwine: we need to maintain a copy to pass on to the installed modules instead of running the process again. */
 	$versionupdate_to_pass_to_installed = $versionupdate;
@@ -533,10 +533,10 @@ if(time() >= strtotime($check_for_update)) {
 		$versionupdate = unserialize($update_latest_versions);
 	}	
 	$versionupdate_to_pass_to_installed = unserialize($update_latest_versions);
-	if ($update_available == $kliqqi_version) {
-		$update_kliqqi = '';
+	if ($update_available == $plikli_version) {
+		$update_plikli = '';
 	}else{
-		$update_kliqqi = $update_available;
+		$update_plikli = $update_available;
 	}
 	
 
@@ -548,8 +548,8 @@ foreach($res_update_mod as $modules_folders){
 			$num_update_mod++;
  }
 }
-$main_smarty->assign('update_kliqqi', $update_kliqqi);
-$main_smarty->assign('update_kliqqi_url', $update_kliqqi_url);
+$main_smarty->assign('update_plikli', $update_plikli);
+$main_smarty->assign('update_plikli_url', $update_plikli_url);
 $main_smarty->assign('in_no_module_update_require', $num_update_mod);
 
 $res_for_update=$db->get_var("select var_value from " . table_config . "  where var_name = 'uninstall_module_updates'");
@@ -568,7 +568,7 @@ function update_module_update_date($update_new_date){
 
 /* END CHECKING FOR UNINSTALLED MODULES.*/
 
-/********************** END NEW FOR KLIQQI VERSION, INSTALLED / UNINSTALLED MODULES UPDATES **********************/
+/********************** END NEW FOR PLIKLI VERSION, INSTALLED / UNINSTALLED MODULES UPDATES **********************/
 //count installed module with updates available
 
 
@@ -580,21 +580,21 @@ $vars = '';
 check_actions('all_pages_top', $vars);
 
 // setup the sorting links on the index page in smarty
-$kliqqi_category = isset($_GET['category']) ? sanitize($_GET['category'], 3) : '';
-if($kliqqi_category != ''){
-	$main_smarty->assign('index_url_recent', getmyurl('maincategory', $kliqqi_category));
-	$main_smarty->assign('index_url_today', getmyurl('index_sort', 'today', $kliqqi_category));
-	$main_smarty->assign('index_url_yesterday', getmyurl('index_sort', 'yesterday', $kliqqi_category));
-	$main_smarty->assign('index_url_week', getmyurl('index_sort', 'week', $kliqqi_category));
-	$main_smarty->assign('index_url_month', getmyurl('index_sort', 'month', $kliqqi_category));
+$plikli_category = isset($_GET['category']) ? sanitize($_GET['category'], 3) : '';
+if($plikli_category != ''){
+	$main_smarty->assign('index_url_recent', getmyurl('maincategory', $plikli_category));
+	$main_smarty->assign('index_url_today', getmyurl('index_sort', 'today', $plikli_category));
+	$main_smarty->assign('index_url_yesterday', getmyurl('index_sort', 'yesterday', $plikli_category));
+	$main_smarty->assign('index_url_week', getmyurl('index_sort', 'week', $plikli_category));
+	$main_smarty->assign('index_url_month', getmyurl('index_sort', 'month', $plikli_category));
 /* Redwine: add an additional Sort by from the sort button to sort the stories of the current month */
-	$main_smarty->assign('index_url_curmonth', getmyurl('index_sort', 'curmonth', $kliqqi_category));
-	$main_smarty->assign('index_url_year', getmyurl('index_sort', 'year', $kliqqi_category));
-	$main_smarty->assign('index_url_alltime', getmyurl('index_sort', 'alltime', $kliqqi_category));
+	$main_smarty->assign('index_url_curmonth', getmyurl('index_sort', 'curmonth', $plikli_category));
+	$main_smarty->assign('index_url_year', getmyurl('index_sort', 'year', $plikli_category));
+	$main_smarty->assign('index_url_alltime', getmyurl('index_sort', 'alltime', $plikli_category));
 	
-	$main_smarty->assign('index_url_upvoted', getmyurl('index_sort', 'upvoted', $kliqqi_category));
-	$main_smarty->assign('index_url_downvoted', getmyurl('index_sort', 'downvoted', $kliqqi_category));
-	$main_smarty->assign('index_url_commented', getmyurl('index_sort', 'commented', $kliqqi_category));
+	$main_smarty->assign('index_url_upvoted', getmyurl('index_sort', 'upvoted', $plikli_category));
+	$main_smarty->assign('index_url_downvoted', getmyurl('index_sort', 'downvoted', $plikli_category));
+	$main_smarty->assign('index_url_commented', getmyurl('index_sort', 'commented', $plikli_category));
 	
 	$main_smarty->assign('cat_url', getmyurl("maincategory"));
 }	

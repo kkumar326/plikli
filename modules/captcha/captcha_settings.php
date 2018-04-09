@@ -1,7 +1,7 @@
 <?php
 
 // the path to the module. the probably shouldn't be changed unless you rename the captcha folder(s)
-define('captcha_path', my_kliqqi_base . '/modules/captcha/');
+define('captcha_path', my_plikli_base . '/modules/captcha/');
 
 // the language path for the module
 	if(!defined('lang_loc')){
@@ -10,7 +10,7 @@ define('captcha_path', my_kliqqi_base . '/modules/captcha/');
 			$path = substr($_SERVER["SCRIPT_NAME"], 0, $pos);
 			if ($path == "/"){$path = "";}
 			
-			if($path != my_kliqqi_base){
+			if($path != my_plikli_base){
 				define('lang_loc', '..');
 			} else {
 				define('lang_loc', '.');
@@ -18,7 +18,7 @@ define('captcha_path', my_kliqqi_base . '/modules/captcha/');
 	}
 
 define('captcha_lang_conf', lang_loc . '/modules/captcha/lang.conf');
-define('captcha_kliqqi_lang_conf', lang_loc . "/languages/lang_" . kliqqi_language . ".conf");
+define('captcha_plikli_lang_conf', lang_loc . "/languages/lang_" . plikli_language . ".conf");
 
 // the path to the modules templates. the probably shouldn't be changed unless you rename the captcha folder(s)
 define('captcha_tpl_path', '../modules/captcha/templates/');
@@ -30,7 +30,7 @@ define('captcha_lib_path', './modules/captcha/libs/');
 define('captcha_captchas_path', './modules/captcha/captchas/');
 
 // the path to the images. the probably shouldn't be changed unless you rename the captcha folder(s)
-define('captcha_img_path',  my_kliqqi_base . '/modules/captcha/images/');
+define('captcha_img_path',  my_plikli_base . '/modules/captcha/images/');
 
 $captcha_single_step = (get_misc_data('reg_single_step') == '') ? false : get_misc_data('reg_single_step');
 $captcha_single_step = ($captcha_single_step == 'true') ? true : false;
@@ -55,7 +55,7 @@ $captcha_checked = false;
 
 if(isset($main_smarty) && is_object($main_smarty)){
 	$main_smarty->assign('captcha_path', captcha_path);
-	$main_smarty->assign('captcha_kliqqi_lang_conf', captcha_kliqqi_lang_conf);
+	$main_smarty->assign('captcha_plikli_lang_conf', captcha_plikli_lang_conf);
 	$main_smarty->assign('captcha_lang_conf', captcha_lang_conf);
 	$main_smarty->assign('captcha_tpl_path', captcha_tpl_path);
 	$main_smarty->assign('captcha_lib_path', captcha_lib_path);

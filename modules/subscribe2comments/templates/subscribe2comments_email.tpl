@@ -24,7 +24,7 @@
 		{if $site_logo}
 			<img src="{$site_logo}" style="border:none;" />
 		{/if}
-			<h1 style="font-size:30px;"><a href="{$my_base_url}{$my_kliqqi_base}" style="text-decoration:none;color:#ffffff">
+			<h1 style="font-size:30px;color:{$headingfc}"><a href="{$my_base_url}{$my_plikli_base}" style="text-decoration:none;color:#ffffff">
 				{$site_title}														
 			</a></h1>
 		</div>

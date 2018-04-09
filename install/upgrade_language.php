@@ -94,7 +94,7 @@ $tbl_prefix = $_SESSION['table_prefix'];
 		$sql = "SELECT * FROM " . $tbl_prefix . "misc_data WHERE name like '%_version'";
 		$pligg_version = $db->get_results($sql);
 		foreach($pligg_version as $plv) {
-			if ($plv->name == 'pligg_version' || $plv->name == 'kliqqi_version') {
+			if ($plv->name == 'pligg_version' || $plv->name == 'kliqqi_version' || $plv->name == 'plikli_version') {
 			$old_version = str_replace('.', '' , $plv->data);
 			$_SESSION['cms_name'] = $plv->name;
 			if ($old_version == '200') {
@@ -133,25 +133,25 @@ $tbl_prefix = $_SESSION['table_prefix'];
 			}elseif ($_SESSION['cms_name'] == 'kliqqi_version' && $old_version < '300') {
 				echo '<br /><fieldset><legend>ATTENTION!</legend><div class="alert-danger">Sorry, your CMS is ' . $plv->name . ' ' . $plv->data. ' There is no Kliqqi version '. $old_version . '</div><br /></fieldset>';
 				die();
-			}elseif ($_SESSION['cms_name'] == 'kliqqi_version' && $old_version == '400') {
-				echo '<br /><fieldset><legend>ATTENTION!</legend><div class="alert-danger">Your CMS is ' . $plv->name . ' ' . $plv->data. ' You already have the latest Kliqqi version '. $old_version . '</div><br /></fieldset>';
+			}elseif ($_SESSION['cms_name'] == 'plikli_version' && $old_version == '400') {
+				echo '<br /><fieldset><legend>ATTENTION!</legend><div class="alert-danger">Your CMS is ' . $plv->name . ' ' . $plv->data. ' You already have the latest Plikli version '. $old_version . '</div><br /></fieldset>';
 				die();
 				}
 			}
 		}
 	}else{
-		echo "We could not find the tables that belong to the table prefix you entered!";
+		echo "We could not find the tables that belong to the table prefix $tbl_prefix you entered!";
 }
 
 if($_GET['language'] == '' && $_GET['step'] == ''){
 	$data = file_get_contents('./languages/language_list_upgrade.html');
-	if(strpos($data, '<!--Kliqqi Language Select-->') > 0){
+	if(strpos($data, '<!--Plikli Language Select-->') > 0){
 		echo $data;
 	} else {
 			echo '<fieldset><legend>ATTENTION!</legend><div class="alert-danger">';
 		echo 'We are having issues with displaying the local language file list. You can continue by using the default English installer.';
 			echo '</div><br />';
-		echo '<a class="btn btn-primary" href = "upgrade.php?step=1&language=english">Click to Continue in English</a>';
+		echo '<a class="btn btn-primary" style="border:2px solid #fff;color:#fff;" href = "upgrade.php?step=1&language=english">Click to Continue in English</a>';
 			echo '</fieldset>';
 	}
 	//include ('footer.php');

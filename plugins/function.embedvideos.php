@@ -1,6 +1,6 @@
 <?php
 /**************************************************************
-* Smarty Youtube Plugin for Kliqqi
+* Smarty Youtube Plugin for Plikli
 *
 * Name: youtube
 * Type: function

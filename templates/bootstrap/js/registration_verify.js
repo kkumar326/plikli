@@ -8,7 +8,7 @@ $(function() {
 	  var parent = $(".reg_usernamecheckitvalue");
 	  $.ajax({
 	  type: "POST",
-	  url:my_base_url+my_kliqqi_base+"/checkfield.php",
+	  url:my_base_url+my_plikli_base+"/checkfield.php",
 	  data: dataString,
 	  beforeSend: function() {
       	parent.addClass("loader");
@@ -35,7 +35,7 @@ $(function() {
 	  var parent = $(".reg_emailcheckitvalue");
 	  $.ajax({
 	  type: "POST",
-	  url:my_base_url+my_kliqqi_base+"/checkfield.php",
+	  url:my_base_url+my_plikli_base+"/checkfield.php",
 	  data: dataString,
 	  beforeSend: function() {
       	parent.addClass("loader");

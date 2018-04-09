@@ -6,4 +6,4 @@
 		{literal}<script>CKEDITOR.replace( 'summarytext' );</script>{/literal}
 	{/if}
 {/if}
-{config_load file=ckeditor_kliqqi_lang_conf}
+{config_load file=ckeditor_plikli_lang_conf}

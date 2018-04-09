@@ -30,18 +30,18 @@ if( (isset($_POST["processlogin"]) && is_numeric($_POST["processlogin"])) || (is
 		if ($login->login_id)
 		{
 			$login_id = $login->login_id;
-			if ($login->time < 3) $errorMsg=sprintf($main_smarty->get_config_vars('KLIQQI_Visual_Login_Error'),3);
+			if ($login->time < 3) $errorMsg=sprintf($main_smarty->get_config_vars('PLIKLI_Visual_Login_Error'),3);
 			elseif ($login->login_count>=3)
 			{
 			if ($login->time < min(60*pow(2,$login->login_count-3),3600))
-				$errorMsg=sprintf($main_smarty->get_config_vars('KLIQQI_Login_Incorrect_Attempts'),$login->login_count,min(60*pow(2,$login->login_count-3),3600)-$login->time);
+				$errorMsg=sprintf($main_smarty->get_config_vars('PLIKLI_Login_Incorrect_Attempts'),$login->login_count,min(60*pow(2,$login->login_count-3),3600)-$login->time);
 			}
 		}
 		elseif (!is_ip_approved($lastip))
 		{
 			$db->query("INSERT INTO ".table_login_attempts." SET login_username = '$dbusername', login_time=NOW(), login_ip='$lastip'");
 			$login_id = $db->insert_id;
-			if (!$login_id) $errorMsg=sprintf($main_smarty->get_config_vars('KLIQQI_Visual_Login_Error'),3);
+			if (!$login_id) $errorMsg=sprintf($main_smarty->get_config_vars('PLIKLI_Visual_Login_Error'),3);
 		}
 
 		if (!$errorMsg)
@@ -49,8 +49,8 @@ if( (isset($_POST["processlogin"]) && is_numeric($_POST["processlogin"])) || (is
 			if($current_user->Authenticate($username, $password, $persistent) == false) {
 				$db->query("UPDATE ".table_login_attempts." SET login_username='$dbusername', login_count=login_count+1, login_time=NOW() WHERE login_id=".$login_id);
 				$user=$db->get_row("SELECT * FROM " . table_users . " WHERE user_login = '$username' or user_email= '$username'");
-				if (kliqqi_validate() && $user->user_lastlogin == "0000-00-00 00:00:00"){
-					$errorMsg=$main_smarty->get_config_vars('KLIQQI_Visual_Resend_Email') .
+				if (plikli_validate() && $user->user_lastlogin == "0000-00-00 00:00:00"){
+					$errorMsg=$main_smarty->get_config_vars('PLIKLI_Visual_Resend_Email') .
 						"<form method='post'>
 							<div class='input-append notvalidated'>
 								<input type='text' class='form-control col-md-12' name='email'> 
@@ -59,7 +59,7 @@ if( (isset($_POST["processlogin"]) && is_numeric($_POST["processlogin"])) || (is
 							</div>
 						</form>";
 				} else {
-					$errorMsg=$main_smarty->get_config_vars('KLIQQI_Visual_Login_Error');
+					$errorMsg=$main_smarty->get_config_vars('PLIKLI_Visual_Login_Error');
 				}
 			} else {
 				$sql = "DELETE FROM " . table_login_attempts . " WHERE login_ip='$lastip' ";
@@ -68,7 +68,7 @@ if( (isset($_POST["processlogin"]) && is_numeric($_POST["processlogin"])) || (is
 				if(strlen(sanitize($_POST['return'], 3)) > 1) {
 					$return = sanitize($_POST['return'], 3);
 				} else {
-					$return =  my_kliqqi_base.'/admin/admin_index.php';
+					$return =  my_plikli_base.'/admin/admin_index.php';
 				}
 				
 				define('logindetails', $username . ";" . $password . ";" . $return);
@@ -78,7 +78,7 @@ if( (isset($_POST["processlogin"]) && is_numeric($_POST["processlogin"])) || (is
 
 				if(strpos($_SERVER['SERVER_SOFTWARE'], "IIS") && strpos(php_sapi_name(), "cgi") >= 0){
 					echo '<SCRIPT LANGUAGE="JavaScript">window.location="' . $return . '";</script>';
-					echo $main_smarty->get_config_vars('KLIQQI_Visual_IIS_Logged_In') . '<a href = "'.$return.'">' . $main_smarty->get_config_vars('KLIQQI_Visual_IIS_Continue') . '</a>';
+					echo $main_smarty->get_config_vars('PLIKLI_Visual_IIS_Logged_In') . '<a href = "'.$return.'">' . $main_smarty->get_config_vars('PLIKLI_Visual_IIS_Continue') . '</a>';
 				} else {
 					header('Location: '.$return);
 				}
@@ -103,7 +103,7 @@ if($canIhaveAccess == 0){
 	
 } else {
 	// Send you to the admin panel
-	$return =  my_kliqqi_base.'/admin/admin_index.php';
+	$return =  my_plikli_base.'/admin/admin_index.php';
 	header('Location: '.$return);
 }
 

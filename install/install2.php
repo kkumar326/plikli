@@ -1,6 +1,10 @@
 <?php
 if (!$step) { header('Location: ./install.php'); die(); }
-
+if ($_POST['language'] == 'arabic') {
+	$site_direction = "rtl";
+}else{
+	$site_direction = "ltr";
+}
 if ($_POST['language'])
     $language = addslashes(strip_tags($_POST['language']));
 if($language == 'arabic'){
@@ -46,6 +50,7 @@ $file="../languages/lang_$language.conf";
 if (!file_exists($file)) { $errors[]="$file " . $lang['LangNotFound'] ; }
 elseif (!is_writable($file)) { $errors[]="$file " . $lang['NotEditable'] ; }
 echo '<style type="text/css">
+body{direction:'.$site_direction.';}
 h2 {
 margin:0 0 5px 0;
 line-height:30px;
@@ -162,7 +167,7 @@ $output='
 		<div class="control-group">
 			<label for="input01" class="control-label">' . $lang['TablePrefix'] . '</label>
 			<div class="controls">
-				<input class="form-control" name="tableprefix" type="text" value="kliqqi_" />
+				<input class="form-control" name="tableprefix" type="text" value="plikli_" />
 				<p class="help-block">' . $lang['PrefixExample'] . '</p>
 			</div>
 		</div>

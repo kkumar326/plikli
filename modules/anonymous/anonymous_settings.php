@@ -1,7 +1,7 @@
 <?php
 
 // the path to the module. the probably shouldn't be changed unless you rename the embed_videos folder(s)
-define('anonymous_path', my_kliqqi_base . '/modules/anonymous/');
+define('anonymous_path', my_plikli_base . '/modules/anonymous/');
 
 // the language path for the module
 	if(!defined('lang_loc')){
@@ -10,7 +10,7 @@ define('anonymous_path', my_kliqqi_base . '/modules/anonymous/');
 			$path = substr($_SERVER["SCRIPT_NAME"], 0, $pos);
 			if ($path == "/"){$path = "";}
 			
-			if($path != my_kliqqi_base){
+			if($path != my_plikli_base){
 				define('lang_loc', '..');
 			} else {
 				define('lang_loc', '.');
@@ -18,20 +18,20 @@ define('anonymous_path', my_kliqqi_base . '/modules/anonymous/');
 	}
 
 define('anonymous_lang_conf', lang_loc . '/modules/anonymous/lang.conf');
-define('anonymous_kliqqi_lang_conf', lang_loc . "/languages/lang_" . kliqqi_language . ".conf");
+define('anonymous_plikli_lang_conf', lang_loc . "/languages/lang_" . plikli_language . ".conf");
 
 // the path to the modules templates. the probably shouldn't be changed unless you rename the embed_videos folder(s)
 define('anonymous_tpl_path', '../modules/anonymous/templates/');
 
 
-define('URL_anonymous', my_kliqqi_base.'/module.php?module=anonymous');
+define('URL_anonymous', my_plikli_base.'/module.php?module=anonymous');
 
 // don't touch anything past this line.
 
 if(is_object($main_smarty)){
 	$main_smarty->assign('anonymous_path', anonymous_path);
 	$main_smarty->assign('anonymous_conf', anonymous_lang_conf);
-	$main_smarty->assign('anonymous_kliqqi_lang_conf', anonymous_kliqqi_lang_conf);
+	$main_smarty->assign('anonymous_plikli_lang_conf', anonymous_plikli_lang_conf);
 	$main_smarty->assign('anonymous_tpl_path', anonymous_tpl_path);
 	$main_smarty->assign('URL_anonymous', URL_anonymous);
 }

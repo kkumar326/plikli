@@ -3,7 +3,7 @@
 	$module_info['desc'] = 'One of the most powerful anti-spam modules available. Requires an Akismet API key. Currently only configured to run on default server port 80.';
 	$module_info['version'] = 2.0;
 	$module_info['update_url'] = '';
-	$module_info['homepage_url'] = 'http://www.kliqqi.com/mods/akismet.zip';
+	$module_info['homepage_url'] = 'https://www.plikli.com/mods/akismet.zip';
 	$module_info['settings_url'] = '../module.php?module=akismet';
 
 

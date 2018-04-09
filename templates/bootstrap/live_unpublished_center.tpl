@@ -2,15 +2,15 @@
 ******* Live Unpublished Page *******
 *************************************}
 <!-- live_unpublished_center.tpl -->
-<legend>{#KLIQQI_Visual_Live#} {#KLIQQI_Visual_Breadcrumb_Unpublished#}</legend>
+<legend>{#PLIKLI_Visual_Live#} {#PLIKLI_Visual_Breadcrumb_Unpublished#}</legend>
 <table class="table table-bordered table-striped">
 	<thead>
 		<tr class="live2-item">
-			<th><strong>{#KLIQQI_Visual_Comments_Date#}</strong></th>
-			<th><strong>{#KLIQQI_Visual_Breadcrumb_Vote#}</strong></th>
-			<th><strong>{#KLIQQI_Visual_Comments_Link#}</strong></th>
-			<th><strong>{#KLIQQI_MiscWords_Category#}</strong></th>
-			<th><strong>{#KLIQQI_Visual_Comments_Author#}</strong></th>
+			<th><strong>{#PLIKLI_Visual_Comments_Date#}</strong></th>
+			<th><strong>{#PLIKLI_Visual_Breadcrumb_Vote#}</strong></th>
+			<th><strong>{#PLIKLI_Visual_Comments_Link#}</strong></th>
+			<th><strong>{#PLIKLI_MiscWords_Category#}</strong></th>
+			<th><strong>{#PLIKLI_Visual_Comments_Author#}</strong></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,7 +25,7 @@
 	{/section}
 	</tbody>
 </table>
-{checkActionsTpl location="tpl_kliqqi_pagination_start"}
+{checkActionsTpl location="tpl_plikli_pagination_start"}
 {$live_pagination}
-{checkActionsTpl location="tpl_kliqqi_pagination_end"}
+{checkActionsTpl location="tpl_plikli_pagination_end"}
 <!--/live_unpublished_center.tpl -->

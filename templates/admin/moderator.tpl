@@ -1,13 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="{#KLIQQI_Visual_Language_Direction#}" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html dir="{#PLIKLI_Visual_Language_Direction#}" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	{checkActionsTpl location="tpl_kliqqi_admin_head_start"}
+	{checkActionsTpl location="tpl_plikli_admin_head_start"}
 
-	<link rel="stylesheet" type="text/css" href="{$my_base_url}{$my_kliqqi_base}/templates/admin/css/bootstrap.no-icons.min.css">
-	<link rel="stylesheet" type="text/css" href="{$my_base_url}{$my_kliqqi_base}/templates/admin/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="{$my_base_url}{$my_kliqqi_base}/templates/admin/css/jquery.pnotify.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="{$my_base_url}{$my_kliqqi_base}/templates/admin/css/bootstrap-fileupload.min.css" media="screen">
-	<link rel="stylesheet" type="text/css" href="{$my_base_url}{$my_kliqqi_base}/templates/admin/css/style.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="{$my_base_url}{$my_plikli_base}/templates/admin/css/bootstrap.no-icons.min.css">
+	<link rel="stylesheet" type="text/css" href="{$my_base_url}{$my_plikli_base}/templates/admin/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{$my_base_url}{$my_plikli_base}/templates/admin/css/jquery.pnotify.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{$my_base_url}{$my_plikli_base}/templates/admin/css/bootstrap-fileupload.min.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="{$my_base_url}{$my_plikli_base}/templates/admin/css/style.css" media="screen">
 	{checkForCss}
 
 	<meta name="Language" content="en-us">
@@ -15,32 +15,32 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<title>{#KLIQQI_Visual_Name#} Admin Panel</title>
+	<title>{#PLIKLI_Visual_Name#} Admin Panel</title>
 	
-	<link rel="icon" href="{$my_base_url}{$my_kliqqi_base}/favicon.ico" type="image/x-icon"/>	
+	<link rel="icon" href="{$my_base_url}{$my_plikli_base}/favicon.ico" type="image/x-icon"/>	
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/jquery/jquery.easing.1.3.js"></script>
-	<script type="text/javascript" src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/jquery/jquery.coda-slider-2.0.js"></script> 
-	<script type="text/javascript" src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/jquery/jquery.pnotify.js"></script>
-	<script type="text/javascript" src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/jquery/jquery.masonry.min.js"></script>
-	<script type="text/javascript" src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/bootstrap-fileupload.min.js"></script>
-    <script type="text/javascript" src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/jquery/jquery_cookie.js"></script>
-    <script type="text/javascript" src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/leftmenu.js"></script>
+	<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.coda-slider-2.0.js"></script> 
+	<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.pnotify.js"></script>
+	<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.masonry.min.js"></script>
+	<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/bootstrap-fileupload.min.js"></script>
+    <script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery_cookie.js"></script>
+    <script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/leftmenu.js"></script>
 	 
 	{if $pagename eq "admin_index"}
-		<script type="text/javascript" src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/jquery/jquery.ui.widget.js"></script> 
-		<script type="text/javascript" src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/jquery/jquery.ui.mouse.js"></script> 
-		<script type="text/javascript" src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/jquery/jquery.ui.sortable.js"></script>
-		<link type="text/css" href="{$my_base_url}{$my_kliqqi_base}/templates/admin/css/jquery.ui.theme.css" rel="stylesheet" /> 
-		<link type="text/css" href="{$my_base_url}{$my_kliqqi_base}/templates/admin/css/admin_home.css" rel="stylesheet" />		
-		<link type="text/css" href="{$my_base_url}{$my_kliqqi_base}/templates/admin/css/coda-slider-2.0.css" rel="stylesheet" media="screen" />
+		<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.ui.widget.js"></script> 
+		<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.ui.mouse.js"></script> 
+		<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.ui.sortable.js"></script>
+		<link type="text/css" href="{$my_base_url}{$my_plikli_base}/templates/admin/css/jquery.ui.theme.css" rel="stylesheet" /> 
+		<link type="text/css" href="{$my_base_url}{$my_plikli_base}/templates/admin/css/admin_home.css" rel="stylesheet" />		
+		<link type="text/css" href="{$my_base_url}{$my_plikli_base}/templates/admin/css/coda-slider-2.0.css" rel="stylesheet" media="screen" />
 	{/if}
 	
     {$Jscript}
 	
-	<script src="{$my_base_url}{$my_kliqqi_base}/templates/admin/js/simpleedit.js" type="text/javascript"></script>
+	<script src="{$my_base_url}{$my_plikli_base}/templates/admin/js/simpleedit.js" type="text/javascript"></script>
 	{if $pagename eq "admin_index"}
 		{literal}
 		<script type="text/javascript">
@@ -95,12 +95,12 @@
 		</script>
 		{/literal}
 	{/if}
-	{checkActionsTpl location="tpl_kliqqi_admin_head_end"}
+	{checkActionsTpl location="tpl_plikli_admin_head_end"}
 </head>
-<body dir="{#KLIQQI_Visual_Language_Direction#}">
+<body dir="{#PLIKLI_Visual_Language_Direction#}">
 {if $pagename neq "admin_login"}
 	
-	{checkActionsTpl location="tpl_kliqqi_admin_body_start"}
+	{checkActionsTpl location="tpl_plikli_admin_body_start"}
 	
 	<header role="banner" class="navbar navbar-inverse">
 		<div class="container">
@@ -111,14 +111,14 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="http://kliqqi.com/"><img src="{$my_base_url}{$my_kliqqi_base}/templates/admin/img/kliqqi.png" /></a>
+				<a class="navbar-brand" href="http://plikli.com/"><img src="{$my_base_url}{$my_plikli_base}/templates/admin/img/plikli.png" /></a>
 			</div>
 			<nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li{if $pagename eq "admin_index"} class="active"{/if}><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_index.php">{#KLIQQI_Visual_AdminPanel#} Panel</a></li>
-					<li><a href="{$my_base_url}{$my_kliqqi_base}/">{#KLIQQI_Visual_Home#}</a></li>
+					<li{if $pagename eq "admin_index"} class="active"{/if}><a href="{$my_base_url}{$my_plikli_base}/admin/admin_index.php">{#PLIKLI_Visual_AdminPanel#} Panel</a></li>
+					<li><a href="{$my_base_url}{$my_plikli_base}/">{#PLIKLI_Visual_Home#}</a></li>
 					{checkActionsTpl location="tpl_header_admin_links"}
-					<li><a href="{$URL_logout}">{#KLIQQI_Visual_Logout#}</a></li>
+					<li><a href="{$URL_logout}">{#PLIKLI_Visual_Logout#}</a></li>
 				</ul><!--/.nav -->
 			</nav>
 		</div>
@@ -133,7 +133,7 @@
 							<div class="accordion-group">
 								<div class="btn btn-default col-md-12 accordion-heading">
 									<span class="accordion-heading-title">
-										<li class="nav-header"><i class="fa fa-user" /></i>&nbsp; {#KLIQQI_Visual_AdminPanel_Manage_Nav#}</li>
+										<li class="nav-header"><i class="fa fa-user" /></i>&nbsp; {#PLIKLI_Visual_AdminPanel_Manage_Nav#}</li>
 									</span>
 									{if $moderated_total_count neq ''}
 										<span class="badge accordion-heading-alert">
@@ -143,12 +143,12 @@
 								</div>
 								<div class="accordion-body " id="CollapseManage">
 									<ul class="accordion-inner">
-										<li{if $pagename eq "admin_links"} class="active"{/if} id="manage_submissions"><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_links.php">Submissions {if $moderated_submissions_count != '0'}<span class="pull-right badge badge-gray">{$moderated_submissions_count}</span>{/if}</a></li>
-										<li{if $pagename eq "admin_comments"} class="active"{/if} id="manage_comments"><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_comments.php">Comments {if $moderated_comments_count != '0'}<span class="pull-right badge badge-gray">{$moderated_comments_count}</span>{/if}</a></li>
-										<li{if $pagename eq "admin_users" || $pagename eq "admin_user_validate"} class="active"{/if} id="manage_users"><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_users.php">Users {if $moderated_users_count != '0'}<span class="pull-right badge badge-gray">{$moderated_users_count}</span>{/if}</a></li>
-										<li{if $pagename eq "admin_group"} class="active"{/if} id="manage_groups"><a href="{$my_base_url}{$my_kliqqi_base}/admin/admin_group.php">Groups {if $moderated_groups_count != '0'}<span class="pull-right badge badge-gray">{$moderated_groups_count}</span>{/if}</a></li>
-										{if $CHECK_SPAM}<li{if $pagename eq "domain_management"} class="active"{/if} id="domain_management"><a href="{$my_base_url}{$my_kliqqi_base}/admin/domain_management.php">Manage Domains</a></li>{/if}
-										{checkActionsTpl location="tpl_kliqqi_admin_manage_sidebarnav_end"}
+										<li{if $pagename eq "admin_links"} class="active"{/if} id="manage_submissions"><a href="{$my_base_url}{$my_plikli_base}/admin/admin_links.php">Submissions {if $moderated_submissions_count != '0'}<span class="pull-right badge badge-gray">{$moderated_submissions_count}</span>{/if}</a></li>
+										<li{if $pagename eq "admin_comments"} class="active"{/if} id="manage_comments"><a href="{$my_base_url}{$my_plikli_base}/admin/admin_comments.php">Comments {if $moderated_comments_count != '0'}<span class="pull-right badge badge-gray">{$moderated_comments_count}</span>{/if}</a></li>
+										<li{if $pagename eq "admin_users" || $pagename eq "admin_user_validate"} class="active"{/if} id="manage_users"><a href="{$my_base_url}{$my_plikli_base}/admin/admin_users.php">Users {if $moderated_users_count != '0'}<span class="pull-right badge badge-gray">{$moderated_users_count}</span>{/if}</a></li>
+										<li{if $pagename eq "admin_group"} class="active"{/if} id="manage_groups"><a href="{$my_base_url}{$my_plikli_base}/admin/admin_group.php">Groups {if $moderated_groups_count != '0'}<span class="pull-right badge badge-gray">{$moderated_groups_count}</span>{/if}</a></li>
+										{if $CHECK_SPAM}<li{if $pagename eq "domain_management"} class="active"{/if} id="domain_management"><a href="{$my_base_url}{$my_plikli_base}/admin/domain_management.php">Manage Domains</a></li>{/if}
+										{checkActionsTpl location="tpl_plikli_admin_manage_sidebarnav_end"}
                                     </ul>
 								</div>
 							</div>
@@ -159,7 +159,7 @@
 			<div class="col-md-9">
 				<div class="row">
 					<div id="main_content">
-						{checkActionsTpl location="tpl_kliqqi_admin_legend_before"}
+						{checkActionsTpl location="tpl_plikli_admin_legend_before"}
 						{include file=$tpl_center.".tpl"}
 						{* Start Pagination *}
 						{if ($pagename eq "admin_users" && $templatelite.get.mode=='') || $pagename eq "admin_comments" || $pagename eq "admin_links" || $pagename eq "admin_user_validate"}	
@@ -173,16 +173,16 @@
 							{/php}
 						{/if} 
 						{* End Pagination *}
-						{checkActionsTpl location="tpl_kliqqi_admin_legend_after"}
+						{checkActionsTpl location="tpl_plikli_admin_legend_after"}
 					</div>
-					{checkActionsTpl location="tpl_kliqqi_admin_body_end"}
+					{checkActionsTpl location="tpl_plikli_admin_body_end"}
 				</div><!-- /row -->
 			</div><!-- /col-md-9 -->
 		</div><!-- /row -->
 		<hr />
 		<footer>
-			<p>Powered by <a href="http://kliqqi.com/">Kliqqi CMS</a></p>
-			{checkActionsTpl location="tpl_kliqqi_admin_footer_end"}
+			<p>Powered by <a href="http://plikli.com/">Plikli CMS</a></p>
+			{checkActionsTpl location="tpl_plikli_admin_footer_end"}
 		</footer>
 	</div><!-- /container -->
 	{* JavaScript to prevent the carousel function from automatically changing content *}

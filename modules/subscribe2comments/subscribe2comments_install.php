@@ -1,9 +1,9 @@
 <?php
 	$module_info['name'] = 'Subscribe To Comments';
 	$module_info['desc'] = 'The module provides an option to subscribe/unsubscribe to comments notifications!';
-	$module_info['version'] = 1.0;
+	$module_info['version'] = 2.0;
 	$module_info['settings_url'] = '../module.php?module=subscribe2comments';
-	$module_info['homepage_url'] = 'http://www.kliqqi.com/mods/subscribe2comments.zip';
+	$module_info['homepage_url'] = 'https://www.plikli.com/mods/subscribe2comments.zip';
 	$module_info['update_url'] = '';
 	$module_info['creator'] = 'redwine';
 	/****************** Add new columns ******************

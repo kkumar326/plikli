@@ -116,7 +116,7 @@ class UserAuth {
 			$user=new User();
 			$user->username = $m[1];
 			if(!$user->all_stats() || $user->total_links+$user->total_comments==0) 
-				$url = my_kliqqi_base.'/';
+				$url = my_plikli_base.'/';
 		}
 			
 
@@ -125,7 +125,7 @@ class UserAuth {
 			if(strlen(sanitize($url, 3)) > 1) {
 				$url = sanitize($url, 3);
 			} else {
-				$url =  my_kliqqi_base.'/';
+				$url =  my_plikli_base.'/';
 			}
 			header("Location: $url");
 		}
@@ -133,7 +133,7 @@ class UserAuth {
 		header("ETag: \"logingout" . time(). "\"");
 		if(strpos($_SERVER['SERVER_SOFTWARE'], "IIS") && strpos(php_sapi_name(), "cgi") >= 0){
 			echo '<SCRIPT LANGUAGE="JavaScript">window.location="' . $url . '";</script>';
-			echo $main_smarty->get_config_vars('KLIQQI_Visual_IIS_Logged_Out') . '<a href = "'.$url.'">' . $main_smarty->get_config_vars('KLIQQI_Visual_IIS_Continue') . '</a>';
+			echo $main_smarty->get_config_vars('PLIKLI_Visual_IIS_Logged_Out') . '<a href = "'.$url.'">' . $main_smarty->get_config_vars('PLIKLI_Visual_IIS_Continue') . '</a>';
 		}
 		die;
 	}

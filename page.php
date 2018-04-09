@@ -41,13 +41,13 @@ if($_REQUEST['page']){
 	}
 	
 	if (!$page_results->link_id) {
-		header("Location: $my_kliqqi_base/error_404.php");
+		header("Location: $my_plikli_base/error_404.php");
 		die();
 	}
 }
 
 // show the template
 $main_smarty->assign('tpl_center', $the_template . '/page_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 
 ?>

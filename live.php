@@ -8,16 +8,16 @@ include(mnminclude.'html1.php');
 include(mnminclude.'smartyvariables.php');
 
 if(!Enable_Live) {
-	header("Location: $my_kliqqi_base/error_404.php");
+	header("Location: $my_plikli_base/error_404.php");
 	die();
 }
 
 // breadcrumbs and page title
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Live');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Live');
 $navwhere['link1'] = getmyurl('live', '');
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Live'));
-$main_smarty->assign('page_header', $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Live'));
+$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Live'));
+$main_smarty->assign('page_header', $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Live'));
 
 $globals['body-args'] = 'onload="start()"';
 
@@ -48,6 +48,6 @@ $main_smarty->assign('isAdmin', $canIhaveAccess);
 
 // show the template
 $main_smarty->assign('tpl_center', $the_template . '/live_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 $main_smarty->display($the_template . '/functions/live_js.tpl');
 ?>

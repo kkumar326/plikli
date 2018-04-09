@@ -36,14 +36,14 @@ function dowork(){
 			$action = "view";
 		}
 		if($action == "view"){
-			$config = new kliqqiconfig;
+			$config = new plikliconfig;
 			if(isset($_REQUEST['page'])){
 				$config->var_page = $_REQUEST['page'];
 				$config->showpage();
 			}
 		}
 		if($action == "save"){
-			$config = new kliqqiconfig;
+			$config = new plikliconfig;
 			$config->var_id = substr($_REQUEST['var_id'], 6, 10);
 			$config->var_value = $_REQUEST['var_value'];
 			$config->store();
@@ -83,9 +83,9 @@ if ($URLMethod == 1) {
 		$redirectUrl = $delete_referrer;
 	}elseif (strstr($delete_referrer, 'story.php')) {
 		if ($linkres->status == 'new') {
-			$redirectUrl = $my_base_url.$my_kliqqi_base . "/".$linkres->status.".php?category=$linkslug";
+			$redirectUrl = $my_base_url.$my_plikli_base . "/".$linkres->status.".php?category=$linkslug";
 		}else{
-			$redirectUrl = $my_base_url.$my_kliqqi_base . "/?category=$linkslug";
+			$redirectUrl = $my_base_url.$my_plikli_base . "/?category=$linkslug";
 	}
 			} else{
 		$redirectUrl = $delete_referrer;
@@ -94,9 +94,9 @@ if ($URLMethod == 1) {
 	/*Redwine: the first part of the below conditional stattement: strstr($delete_referrer, "story.php?title=".$linkres->title_url) is to account for when an Admin is discarding a story; the links are in url method 1 and having the link safe title instead of the link id!*/
 	if (strstr($delete_referrer, "story.php?title=".$linkres->title_url) || strstr($delete_referrer, "/$linkslug/".$linkres->title_url)) {
 		if ($linkres->status == 'new') {
-			$redirectUrl = $my_base_url.$my_kliqqi_base . "/".$linkres->status."/$linkslug/";
+			$redirectUrl = $my_base_url.$my_plikli_base . "/".$linkres->status."/$linkslug/";
 		}else{
-			$redirectUrl = $my_base_url.$my_kliqqi_base . "/$linkslug/";
+			$redirectUrl = $my_base_url.$my_plikli_base . "/$linkslug/";
 			}
 	}else{
 		$redirectUrl = $delete_referrer;
@@ -117,10 +117,10 @@ if ($URLMethod == 1) {
 	# Redwine - Sidebar tag cache fix
 	$db->query($sql="INSERT INTO ".table_tag_cache." select tag_words, count(DISTINCT link_id) as count FROM ".table_tags.", ".table_links." WHERE tag_lang='en' and link_id = tag_link_id and (link_status='published' OR link_status='new') GROUP BY tag_words order by count desc");
 
-	if ($_SERVER['HTTP_REFERER'] && strpos($_SERVER['HTTP_REFERER'], $my_base_url.$my_kliqqi_base)  !== false){
+	if ($_SERVER['HTTP_REFERER'] && strpos($_SERVER['HTTP_REFERER'], $my_base_url.$my_plikli_base)  !== false){
 		header('Location: '.$redirectUrl);
 	}else{
-		header('Location: '.$my_base_url.$my_kliqqi_base);
+		header('Location: '.$my_base_url.$my_plikli_base);
 	}
 }
 
@@ -152,7 +152,7 @@ if(isset($_REQUEST['comment_id'])){
 	$link->store();
 	$link='';
 	
-	if ($_SERVER['HTTP_REFERER'] && strpos($_SERVER['HTTP_REFERER'], $my_base_url.$my_kliqqi_base)===0)
+	if ($_SERVER['HTTP_REFERER'] && strpos($_SERVER['HTTP_REFERER'], $my_base_url.$my_plikli_base)===0)
 	    header('Location: '.$_SERVER['HTTP_REFERER']);
 	else
 	    header('Location: '.$redirectUrl);

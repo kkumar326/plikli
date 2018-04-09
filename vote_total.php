@@ -77,17 +77,17 @@ if(is_numeric($post_id) && $post_id > 0){
 	$link->read_basic();
 	
 	if ($current_user->user_id == 0 && !anonymous_vote) {
-		error($main_smarty->get_config_vars('KLIQQI_Visual_Vote_NoAnon'));
+		error($main_smarty->get_config_vars('PLIKLI_Visual_Vote_NoAnon'));
 	}
 
 	$post_user = sanitize($_POST['user'], 3);
 	if($current_user->user_id != $post_user) {
-		error($main_smarty->get_config_vars('KLIQQI_Visual_Vote_BadUser'). $current_user->user_id . '-'. $post_user);
+		error($main_smarty->get_config_vars('PLIKLI_Visual_Vote_BadUser'). $current_user->user_id . '-'. $post_user);
 	}
 
 	$md5=md5($post_user.$link->randkey);
 	if($md5 !== sanitize($_POST['md5'], 3)){
-		error($main_smarty->get_config_vars('KLIQQI_Visual_Vote_BadKey'));
+		error($main_smarty->get_config_vars('PLIKLI_Visual_Vote_BadKey'));
 	}
 
 	$value = intval($_POST['value']);
@@ -98,18 +98,18 @@ if(is_numeric($post_id) && $post_id > 0){
 		//Checking for ip vote
 	   if($current_user->user_id!=0){	  
 		if($link->votes($current_user->user_id) > 0)
-		  error($main_smarty->get_config_vars('KLIQQI_Visual_Vote_AlreadyVoted').$link->votes($current_user->user_id).'/'.$value);
+		  error($main_smarty->get_config_vars('PLIKLI_Visual_Vote_AlreadyVoted').$link->votes($current_user->user_id).'/'.$value);
 	   }else{
 		
 		if($value==10 && votes_per_ip > 0 && $link->votes_from_ip() >= votes_per_ip+1)
-		 error($main_smarty->get_config_vars('KLIQQI_Visual_Vote_AlreadyVoted').'/'.$value);
+		 error($main_smarty->get_config_vars('PLIKLI_Visual_Vote_AlreadyVoted').'/'.$value);
 		 
 		if($value==-10 && votes_per_ip > 0 && $link->reports_from_ip() >= votes_per_ip+1)
-		 error($main_smarty->get_config_vars('KLIQQI_Visual_Vote_AlreadyVoted').'/'.$value);
+		 error($main_smarty->get_config_vars('PLIKLI_Visual_Vote_AlreadyVoted').'/'.$value);
 	   }
 	   /* if($link->votes($current_user->user_id, 10) > 0 || $link->votes($current_user->user_id, -10) > 0 ||
 	        (votes_per_ip > 0 && $link->votes_from_ip() + $link->reports_from_ip() >= votes_per_ip)) {
-			//error($main_smarty->get_config_vars('KLIQQI_Visual_Vote_AlreadyVoted').$link->votes($current_user->user_id, $value).'/'.$value);
+			//error($main_smarty->get_config_vars('PLIKLI_Visual_Vote_AlreadyVoted').$link->votes($current_user->user_id, $value).'/'.$value);
 	    }*/
 			/* Redwine: fix to some bugs in the Karma system. https://github.com/Pligg/pligg-cms/commit/737770202d22ec938465fe66e52f2ae7cdcf5240. The remove_vote was to offset the double update of insert_vote that was wrongly done. We don't need it */
 	    //$link->remove_vote($current_user->user_id, -$value);

@@ -1,17 +1,17 @@
 {config_load file=akismet_lang_conf}
 
-<legend>{#KLIQQI_Akismet_manage_stories#}</legend>
+<legend>{#PLIKLI_Akismet_manage_stories#}</legend>
 
 <form name="bulk_moderate" action="{$URL_akismet_isSpam}&action=bulkmod" method="post">
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th style="width:250px;">{#KLIQQI_Akismet_title#}</th>
-				<th style="width:110px;">{#KLIQQI_Akismet_author#}</th>
-				<th>{#KLIQQI_Akismet_url#}</th>
-				<th style="width:50px;">{#KLIQQI_Akismet_status#}</th>
-				<th style="width:60px;"><input type='checkbox' name='all1'  onclick='mark_all_spam();'><a onclick='mark_all_spam();' style="cursor:pointer;text-decoration:none;">{#KLIQQI_Akismet_spam#}</a></th>
-				<th style="width:90px;"><input type='checkbox' name='all2'  onclick='mark_all_notspam();'><a onclick='mark_all_notspam();' style="cursor:pointer;text-decoration:none;">{#KLIQQI_Akismet_not_spam#}</a></th>
+				<th style="width:250px;">{#PLIKLI_Akismet_title#}</th>
+				<th style="width:110px;">{#PLIKLI_Akismet_author#}</th>
+				<th>{#PLIKLI_Akismet_url#}</th>
+				<th style="width:50px;">{#PLIKLI_Akismet_status#}</th>
+				<th style="width:60px;"><input type='checkbox' name='all1'  onclick='mark_all_spam();'><a onclick='mark_all_spam();' style="cursor:pointer;text-decoration:none;">{#PLIKLI_Akismet_spam#}</a></th>
+				<th style="width:90px;"><input type='checkbox' name='all2'  onclick='mark_all_notspam();'><a onclick='mark_all_notspam();' style="cursor:pointer;text-decoration:none;">{#PLIKLI_Akismet_not_spam#}</a></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,13 +19,13 @@
 				{foreach value=link from=$link_data}
 					<tr>
 						<td><strong>{$link.link_title|truncate:50}</strong></td>
-						<td><a href="{$my_kliqqi_base}/admin/admin_users.php?mode=view&user={$link.user_login}">{$link.user_login|truncate:20}</a></td>
+						<td><a href="{$my_plikli_base}/admin/admin_users.php?mode=view&user={$link.user_login}">{$link.user_login|truncate:20}</a></td>
 						<td><a href="{$link.link_url}" target="_blank">{$link.link_url|truncate:70}</a></td>
 						<td style="text-align:center;">
 							{if $link.link_status eq "moderated"}
-								<img src="{$my_kliqqi_base}/modules/akismet/images/page_white_error.png" alt="{#KLIQQI_Akismet_status_moderated#}" title="{#KLIQQI_Akismet_status_moderated#}" />
+								<img src="{$my_plikli_base}/modules/akismet/images/page_white_error.png" alt="{#PLIKLI_Akismet_status_moderated#}" title="{#PLIKLI_Akismet_status_moderated#}" />
 							{elseif $link.link_status eq "spam"}
-								<img src="{$my_kliqqi_base}/modules/akismet/images/page_white_delete.png" alt="{#KLIQQI_Akismet_status_spam#}" title="{#KLIQQI_Akismet_status_spam#}" />
+								<img src="{$my_plikli_base}/modules/akismet/images/page_white_delete.png" alt="{#PLIKLI_Akismet_status_spam#}" title="{#PLIKLI_Akismet_status_spam#}" />
 							{/if}
 						</td>
 						<td><center><input type="radio" name="spam[{$link.link_id}]" id="spam-{$link.link_id}" value="spam"></center></td>
@@ -38,7 +38,7 @@
 			{/if}
 		</tbody>
 	</table>
-	<p align="right" style="margin-top:10px;"><input type="submit" name="submit" value="{#KLIQQI_Akismet_apply_changes#}" class="btn btn-primary" /></p>
+	<p align="right" style="margin-top:10px;"><input type="submit" name="submit" value="{#PLIKLI_Akismet_apply_changes#}" class="btn btn-primary" /></p>
 </form>
 
 <hr />
@@ -67,4 +67,4 @@ function mark_all_notspam() {
 </SCRIPT>
 {/literal}
 
-{config_load file=akismet_kliqqi_lang_conf}
+{config_load file=akismet_plikli_lang_conf}

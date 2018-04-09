@@ -15,7 +15,7 @@ pre {
 </head>
 
 <body>
-<h2>CKEditor v2.0 CKEditor v4.62</h2>
+<h2>CKEditor v2.5 based on CKEditor v4.8.0 • 13-12-2017 the last version in Build 4</h2>
 
 <h3>Description</h3>
 <p>Integrates CKEditor with your description Textarea on the <u>submit</u> and <u>edit story</u> pages as well as the <u>comment form</u> on the story page.<br /></p>
@@ -28,12 +28,14 @@ pre {
 </ul>
 <hr />
 <h3>Revision History</h3>
-<h4>Redwine - May 08, 2017 added/modified the following:</h4>
-<ul>
+
+<h4>Redwine: v2.5 February 02, 2018 based on CKEditor v4.8.0 • 13-12-2017 the last version in Build 4</h4>
+<h4>Redwine  v2.0 May 08, 2017 based on CKEditor v4.6.2</h4>
+<ul> <em><strong>Added/modified the following:</strong></em>
 	<li>Updated the folder /modules/ckeditor/<strong>ckeditor</strong> to the latest CKEditor Version 4.6.2 Standard package</li>
 	<li>Customized the CKEditor settings to exclude some unneccessary features and HTML tags <em>that must never be allowed, due to security risks and/or compliance with the CMS settings and style.</em></li>
 	<li>The HTML tags that are safe to use and most needed for rich text that you can enter in the 3 fields mentioned above, are:<br /><br />
-	<pre>&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;u&gt;&lt;s&gt;&lt;sub&gt;&lt;sup&gt;&lt;ol&gt;&lt;ul&gt;&lt;li&gt;&lt;blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;big&gt;&lt;small&gt;&lt;tt&gt;&lt;code&gt;&lt;kbd&gt;&lt;samp&gt;&lt;var&gt;&lt;del&gt;&lt;ins&gt;&lt;hr&gt;&lt;pre&gt;&lt;q&gt;</pre><br />
+	<pre>&lt;br&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;u&gt;&lt;s&gt;&lt;sub&gt;&lt;sup&gt;&lt;ol&gt;&lt;ul&gt;&lt;li&gt;&lt;blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;big&gt;&lt;small&gt;&lt;tt&gt;&lt;code&gt;&lt;kbd&gt;&lt;samp&gt;&lt;var&gt;&lt;del&gt;&lt;ins&gt;&lt;address&gt;&lt;cite&gt;&lt;q&gt;&lt;hr&gt;&lt;pre&gt;</pre><br />
 	
 	<em><u>If you want to use the full potential of the customized CKEditor module, enter all the above HTML in the 3 fields of the settings in the Dashboard</u></em><br /><br />
 	Otherwise, you can enter the ones of your choice from this list, <u>and the module's settings will be updated dynamically!</u>
@@ -55,8 +57,9 @@ pre {
 	<li>Created ckeditor-comment.tpl in the templates folder</li>
 	<li>Modified ckeditor1.tpl and ckeditor2.tpl to only run if HTML is allowed as mentioned above.</li>
 	<li>Modified ckeditor2.tpl and ckeditor-comment.tpl to update the CKEditor settings when HTML tags are added/removed from the dashboard settings.</li>
-
 </ul>
+<h3>The placement of the allowed HTML Tags in the Module's toolbars</h3>
+<img src="../modules/ckeditor/html-tags-placement.png" alt="" title="" />
 <hr />
 </body>
 </html>

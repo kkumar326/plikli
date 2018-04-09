@@ -22,7 +22,7 @@ function deleteImage(id,number)
 {
     if(XMLHttpRequestObject)
     {
-    	XMLHttpRequestObject.open("GET", my_kliqqi_base+"/modules/upload/upload.php?delid="+id+"&number="+number, false);
+    	XMLHttpRequestObject.open("GET", my_plikli_base+"/modules/upload/upload.php?delid="+id+"&number="+number, false);
     	XMLHttpRequestObject.send(null);
     	if (XMLHttpRequestObject.responseText == "OK")
     	{
@@ -39,7 +39,7 @@ function switchImage(id,number,mode)
 {
     if(XMLHttpRequestObject)
     {
-    	XMLHttpRequestObject.open("GET", my_kliqqi_base+"/modules/upload/upload.php?switchid="+id+"&number="+number+"&mode="+mode, false);
+    	XMLHttpRequestObject.open("GET", my_plikli_base+"/modules/upload/upload.php?switchid="+id+"&number="+number+"&mode="+mode, false);
     	XMLHttpRequestObject.send(null);
     	if (XMLHttpRequestObject.responseText != "OK")
 	    return false;
@@ -49,7 +49,7 @@ function getThumbs(id,number)
 {
     if(XMLHttpRequestObject)
     {
-	XMLHttpRequestObject.open("GET", my_kliqqi_base+"/modules/upload/upload.php?id="+id+"&number="+number, false);
+	XMLHttpRequestObject.open("GET", my_plikli_base+"/modules/upload/upload.php?id="+id+"&number="+number, false);
 	XMLHttpRequestObject.send(null);
 
         if (XMLHttpRequestObject.responseText != "")

@@ -80,7 +80,7 @@ if($language == 'arabic'){
 
 if($_GET['language'] == '' && $_GET['step'] == ''){
 	$data = file_get_contents('./languages/language_list_install.html');
-	if(strpos($data, '<!--Kliqqi Language Select-->') > 0){
+	if(strpos($data, '<!--Plikli Language Select-->') > 0){
 		echo $data;
 	} else {
 	    echo '<fieldset><legend>ATTENTION!</legend><div class="alert-danger">';

@@ -17,10 +17,10 @@ $CSRF = new csrf();
 //$main_smarty->assign('Story_Content_Tags_To_Allow', htmlspecialchars(Story_Content_Tags_To_Allow));
 
 // breadcrumbs and page titles
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Submit_A_New_Group');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Submit_A_New_Group');
 $navwhere['link1'] = getmyurl('submit', '');
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Submit_A_New_Group'));
+$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Submit_A_New_Group'));
 $main_smarty = do_sidebar($main_smarty);
 $main_smarty->assign('auto_approve_group', auto_approve_group);
 
@@ -31,7 +31,7 @@ $current_user_level = $current_user->user_level;
 $numGr = $db->get_var("SELECT count(*) FROM " .table_groups . " WHERE `group_creator` = " . $current_user->user_id);
 $max_user_groups_allowed = $main_smarty->get_template_vars('max_user_groups_allowed');
 if ($numGr >= $max_user_groups_allowed) {
-	$errors = $main_smarty->get_config_vars('KLIQQI_Visual_Submit_A_New_Group_Error');
+	$errors = $main_smarty->get_config_vars('PLIKLI_Visual_Submit_A_New_Group_Error');
 	$main_smarty->assign('error', $errors);
 // pagename
 define('pagename', 'submit_groups');
@@ -39,7 +39,7 @@ $main_smarty->assign('pagename', pagename);
 
 // show the template
 $main_smarty->assign('tpl_center', $the_template . '/submit_groups_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 exit;
 }
 if(enable_group == "true" && (group_submit_level == $current_user_level || group_submit_level == 'normal' || $current_user_level == 'admin'))
@@ -90,12 +90,12 @@ if(enable_group == "true" && (group_submit_level == $current_user_level || group
 	    }
 
 	    $errors = '';
-	    if (!$group_name || $group_name=='') $errors = $main_smarty->get_config_vars('KLIQQI_Visual_Group_Empty_Title');
-	    elseif ($group_vote_to_publish<=0) $errors = $main_smarty->get_config_vars('KLIQQI_Visual_Group_Empty_Votes');
+	    if (!$group_name || $group_name=='') $errors = $main_smarty->get_config_vars('PLIKLI_Visual_Group_Empty_Title');
+	    elseif ($group_vote_to_publish<=0) $errors = $main_smarty->get_config_vars('PLIKLI_Visual_Group_Empty_Votes');
 	    else
 	    {
 		$exists = $db->get_var("select COUNT(*) from ".table_groups." WHERE group_name='$group_name'");
-	 	if ($exists) $errors = $main_smarty->get_config_vars('KLIQQI_Visual_Group_Title_Exists');
+	 	if ($exists) $errors = $main_smarty->get_config_vars('PLIKLI_Visual_Group_Title_Exists');
 	    }
 
 	    if (!$errors)
@@ -140,18 +140,18 @@ if(enable_group == "true" && (group_submit_level == $current_user_level || group
 					/* Redwine: the two lines below are useless. */
 					//$str='';
 					//$from = "email@example.com";
-					$subject = $main_smarty->get_config_vars('KLIQQI_InvitationEmail_Subject');
+					$subject = $main_smarty->get_config_vars('PLIKLI_InvitationEmail_Subject');
 					$to = $t;
 					
-					$message = sprintf($main_smarty->get_config_vars('KLIQQI_InvitationEmail_Message'),"<a href='".my_base_url.my_kliqqi_base."/group_story.php?id=".$in_id."'>".$group_name."</a>","<a href='".my_base_url.my_kliqqi_base."/user.php?login=".$username."'>".$username."</a>");
+					$message = sprintf($main_smarty->get_config_vars('PLIKLI_InvitationEmail_Message'),"<a href='".my_base_url.my_plikli_base."/group_story.php?id=".$in_id."'>".$group_name."</a>","<a href='".my_base_url.my_plikli_base."/user.php?login=".$username."'>".$username."</a>");
 					
 					//echo $to.":".$site_mail.":".$subject."$message<br/>";
 					/* Redwine: the $mail->From = $site_mail is wrong, because $site_mail is defined nowhere! We must set it to the value defined in the language file. The same applies to $mail->AddReplyTo */
 					$mail = new PHPMailer();
-					$mail->From = $main_smarty->get_config_vars('KLIQQI_PassEmail_From');
-					$mail->FromName = $main_smarty->get_config_vars('KLIQQI_PassEmail_Name');
+					$mail->From = $main_smarty->get_config_vars('PLIKLI_PassEmail_From');
+					$mail->FromName = $main_smarty->get_config_vars('PLIKLI_PassEmail_Name');
 					$mail->AddAddress($to);
-					$mail->AddReplyTo($main_smarty->get_config_vars('KLIQQI_PassEmail_From'));
+					$mail->AddReplyTo($main_smarty->get_config_vars('PLIKLI_PassEmail_From'));
 					$mail->IsHTML(true);
 					$mail->Subject = $subject;
 					$mail->Body = $message;
@@ -184,5 +184,5 @@ $main_smarty->assign('pagename', pagename);
 
 // show the template
 $main_smarty->assign('tpl_center', $the_template . '/submit_groups_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 ?>

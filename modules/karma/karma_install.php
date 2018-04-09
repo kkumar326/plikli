@@ -4,7 +4,7 @@
 	$module_info['desc'] = 'Configure the karma algorithms used to generate karma scores';
 	$module_info['version'] = 1.0;
 	$module_info['update_url'] = '';
-	$module_info['homepage_url'] = 'http://www.kliqqi.com/mods/karma.zip';
+	$module_info['homepage_url'] = 'https://www.plikli.com/mods/karma.zip';
 	$module_info['settings_url'] = '../module.php?module=karma';
 	// this is where you set the modules "name" and "version" that is required
 	// if more that one module is required then just make a copy of that line

@@ -37,10 +37,10 @@ if (checklevel('admin')) {
 $main_smarty->assign('Story_Content_Tags_To_Allow', htmlspecialchars($Story_Content_Tags_To_Allow));
 
 // breadcrumbs and page titles
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Submit');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Submit');
 $navwhere['link1'] = getmyurl('submit', '');
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Submit'));
+$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Submit'));
 $main_smarty = do_sidebar($main_smarty);
 
 //to check anonymous mode activated
@@ -82,7 +82,7 @@ if(empty($_POST['phase']) && (!empty($_GET['url']) || (!empty($_GET['id']) && is
 		$main_smarty->assign('pagename', pagename);
 		$main_smarty->assign('submit_error', 'badkey');
 		$main_smarty->assign('tpl_center', $the_template . '/submit_errors_center');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 		die();
 	    }
 	    $_POST['url'] = $row['link_url'];
@@ -129,7 +129,7 @@ function do_submit0() {
 	$main_smarty->assign('tpl_center', $the_template . '/submit_step_1_center');
 	$vars = '';
 	check_actions('do_submit0', $vars);
-	$main_smarty->display($the_template . '/kliqqi.tpl');
+	$main_smarty->display($the_template . '/plikli.tpl');
 }
 
 // submit step 1
@@ -219,7 +219,7 @@ function do_submit1() {
 	if(!$linkres->valid) {
 		$main_smarty->assign('submit_error', 'invalidurl');
 		$main_smarty->assign('tpl_center', $the_template . '/submit_errors_center');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 		return;
 	}
 	
@@ -232,7 +232,7 @@ function do_submit1() {
 			define('pagename', 'submit'); 
 		     	$main_smarty->assign('pagename', pagename);
 			
-			$main_smarty->display($the_template . '/kliqqi.tpl');
+			$main_smarty->display($the_template . '/plikli.tpl');
 			return;
 		}
 	}
@@ -301,7 +301,7 @@ function do_submit1() {
 	//to display group drop down
 	if(enable_group == "true")
 	{
-/* Redwine: Roles and permissions and Groups fixes (already implemented https://github.com/redwinefireplace/kliqqi-cms/commit/65ed15efb51c1c0fc714e11863c6c332a66bb2ca. Fix: Banned and inactive group members could still see the group when submitting a story. */
+/* Redwine: Roles and permissions and Groups fixes (already implemented https://github.com/redwinefireplace/plikli-cms/commit/65ed15efb51c1c0fc714e11863c6c332a66bb2ca. Fix: Banned and inactive group members could still see the group when submitting a story. */
 		$output = '';
 		$group_membered = $db->get_results("SELECT group_id,group_name FROM " . table_groups . " 
 			LEFT JOIN ".table_group_member." ON member_group_id=group_id
@@ -313,7 +313,7 @@ function do_submit1() {
 		if ($group_membered)
 		{
 			$output .= "<select id='link_group_id' name='link_group_id' tabindex='3' class='form-control submit_group_select'>";
-			$output .= "<option value = ''>".$main_smarty->get_config_vars('KLIQQI_Visual_Group_Select_Group')."</option>";
+			$output .= "<option value = ''>".$main_smarty->get_config_vars('PLIKLI_Visual_Group_Select_Group')."</option>";
 			foreach($group_membered as $results)
 			{
 				$output .= "<option value = ".$results->group_id. ($linkres->link_group_id ? ' selected' : '') . ">".$results->group_name."</option>";
@@ -336,7 +336,7 @@ function do_submit1() {
 	$vars = '';
 	check_actions('do_submit1', $vars);
 	$_SESSION['step'] = 1;
-	$main_smarty->display($the_template . '/kliqqi.tpl');
+	$main_smarty->display($the_template . '/plikli.tpl');
 }
 
 // submit step 2
@@ -366,7 +366,7 @@ function do_submit2() {
 	
 	if($_SESSION['step']!=1)die('Wrong step');
 	if(!is_numeric($linkres->id))die();
-	if(!$linkres->verify_ownership($current_user->user_id))	die($main_smarty->get_config_vars('KLIQQI_Visual_Submit2Errors_NoAccess'));
+	if(!$linkres->verify_ownership($current_user->user_id))	die($main_smarty->get_config_vars('PLIKLI_Visual_Submit2Errors_NoAccess'));
 		
 	$linkres->read(FALSE);
 
@@ -514,7 +514,7 @@ function do_submit2() {
 	if (Submit_Complete_Step2){
 	    do_submit3();
 	} else {
-	    $main_smarty->display($the_template . '/kliqqi.tpl');
+	    $main_smarty->display($the_template . '/plikli.tpl');
 	}
 }
 
@@ -759,7 +759,7 @@ function link_errors($linkres)
 	if($error == true){
 		$main_smarty->assign('link_id', $linkres->id);
 		$main_smarty->assign('tpl_center', $the_template . '/submit_errors_center');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 		die();
 	}
 	
@@ -774,7 +774,7 @@ function link_catcha_errors($linkerror)
 	if($linkerror == 'captcha_error') { // if no category is selected
 		$main_smarty->assign('submit_error', 'register_captcha_error');
 		$main_smarty->assign('tpl_center', $the_template . '/submit_errors_center');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 #		$main_smarty->display($the_template . '/submit_errors.tpl');
 		$error = true;
 	}

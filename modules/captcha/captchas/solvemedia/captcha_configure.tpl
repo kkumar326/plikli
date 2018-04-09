@@ -14,12 +14,12 @@
 	<input type="hidden" name="captcha" value="solvemedia">
 	<input type="hidden" name="action" value="configure">
 	
-	<p>Kliqqi CMS uses special API keys for Solve Media's CAPTCHA which allows us to enable their product across all Kliqqi domains. These API keys are set by default, so that you don't need to configure anything to make use of Solve Media. Please be aware that we collect a small amount of data about your website related to CAPTCHA impressions and completions. This allows us to keep an eye on how Kliqqi CAPTCHAs perform. The API key also generates a small profit from embedded CAPTCHAs, which we use to help fund Kliqqi development.</p>
+	<p>Plikli CMS uses special API keys for Solve Media's CAPTCHA which allows us to enable their product across all Plikli domains. These API keys are set by default, so that you don't need to configure anything to make use of Solve Media. Please be aware that we collect a small amount of data about your website related to CAPTCHA impressions and completions. This allows us to keep an eye on how Plikli CAPTCHAs perform. The API key also generates a small profit from embedded CAPTCHAs, which we use to help fund Plikli development.</p>
 	<p>If you would like to use your own Solve Media API keys, enter them in the fields below. You can sign up and find your own API keys from the <a href="http://portal.solvemedia.com/portal/public/signup">Solve Media portal</a> website.</p>
 	<br />
 	<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
 		<thead>
-			<tr><th colspan="2">{#Kliqqi_Captcha_Solve_Media#} Settings</th><tr>
+			<tr><th colspan="2">{#Plikli_Captcha_Solve_Media#} Settings</th><tr>
 		</thead>
 		<tbody>
 			<tr>
@@ -75,11 +75,11 @@
 				</td>
 			<tr>
 				<td></td>
-				<td><input type="submit" class="btn btn-primary" value="{#Kliqqi_Captcha_Save_Settings#}"></td>
+				<td><input type="submit" class="btn btn-primary" value="{#Plikli_Captcha_Save_Settings#}"></td>
 			</tr>
 		</tbody>
 	</table>
 </form>
 <br />
 <a class="btn btn-default" href="{$URL_captcha}"><i class="fa fa-arrow-left"></i> Return to the Captcha Settings Page</a>
-{config_load file=captcha_kliqqi_lang_conf}
+{config_load file=captcha_plikli_lang_conf}

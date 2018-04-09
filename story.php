@@ -36,7 +36,7 @@ if($requestID > 0 && enable_friendly_urls == true){
 				      (array_diff($thecat, $link->additional_cats, array($link->category)) || 
 				       sizeof($thecat)!=sizeof($link->additional_cats)+1)))
 	{
-		header("Location: $my_kliqqi_base/error_404.php");
+		header("Location: $my_plikli_base/error_404.php");
 		die();
 	}
 
@@ -69,7 +69,7 @@ if(is_numeric($requestID)) {
 		include(mnminclude.'redirector.php');
 		$x = new redirector($_SERVER['REQUEST_URI']);
 
-		header("Location: $my_kliqqi_base/error_404.php");
+		header("Location: $my_plikli_base/error_404.php");
 		die();
 	}
 
@@ -192,16 +192,16 @@ if(is_numeric($requestID)) {
 	$main_smarty->assign('URL_rss_page', getmyurl('storyrss', isset($requestTitle) ? $requestTitle : urlencode($link->title_url), $link->category_safe_name($link->category)));
 
 	$main_smarty->assign('tpl_center', $the_template . '/story_center');
-	$main_smarty->display($the_template . '/kliqqi.tpl');
+	$main_smarty->display($the_template . '/plikli.tpl');
 } else {
 
 	// check for redirects
 	include(mnminclude.'redirector.php');
 	$x = new redirector($_SERVER['REQUEST_URI']);
 	
-	header("Location: $my_kliqqi_base/error_404.php");
+	header("Location: $my_plikli_base/error_404.php");
 //	$main_smarty->assign('tpl_center', 'error_404_center');
-//	$main_smarty->display($the_template . '/kliqqi.tpl');		
+//	$main_smarty->display($the_template . '/plikli.tpl');		
 	die();
 }
 
@@ -297,7 +297,7 @@ function insert_comment () {
 /*Redwine: added smarty assign for the length of the comment to be able to provide the relevant warning in the comments_error.tpl*/
 		$main_smarty->assign('max_Comment_Length', 'comment_too_long');
 		$main_smarty->assign('tpl_center', $the_template . '/comment_errors');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 		exit;
 	}
 	settype($_POST['randkey'], "integer");
@@ -375,7 +375,7 @@ function comment_catcha_errors($linkerror)
 	if($linkerror == 'captcha_error') {
 		$main_smarty->assign('submit_error', 'register_captcha_error');
 		$main_smarty->assign('tpl_center', $the_template . '/comment_errors');
-		$main_smarty->display($the_template . '/kliqqi.tpl');
+		$main_smarty->display($the_template . '/plikli.tpl');
 #		$main_smarty->display($the_template . '/submit_errors.tpl');
 		$error = true;
 	}

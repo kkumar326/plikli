@@ -10,19 +10,19 @@ include(mnminclude.'tags.php');
 include(mnminclude.'smartyvariables.php');
 
 if(!Enable_Tags) {
-	header("Location: $my_kliqqi_base/error_404.php");
+	header("Location: $my_plikli_base/error_404.php");
 	die();
 }
 
 // breadcrumbs and page title
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Cloud');
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Cloud');
 $navwhere['link1'] = getmyurl('tagcloud', '');
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Cloud'));
+$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Cloud'));
 $main_smarty = do_sidebar($main_smarty);
 
 // put the names of the tabs in an array for the tag cloud tpl file
-$range_names  = array($main_smarty->get_config_vars('KLIQQI_Visual_Tags_All'), $main_smarty->get_config_vars('KLIQQI_Visual_Tags_48_Hours'), $main_smarty->get_config_vars('KLIQQI_Visual_Tags_This_Week'), $main_smarty->get_config_vars('KLIQQI_Visual_Tags_This_Month'), $main_smarty->get_config_vars('KLIQQI_Visual_Tags_This_Year'));
+$range_names  = array($main_smarty->get_config_vars('PLIKLI_Visual_Tags_All'), $main_smarty->get_config_vars('PLIKLI_Visual_Tags_48_Hours'), $main_smarty->get_config_vars('PLIKLI_Visual_Tags_This_Week'), $main_smarty->get_config_vars('PLIKLI_Visual_Tags_This_Month'), $main_smarty->get_config_vars('PLIKLI_Visual_Tags_This_Year'));
 // give each name a value
 $range_values = array(0, 172800, 604800, 2592000, 31536000);
 
@@ -49,6 +49,6 @@ $main_smarty->assign('pagename', pagename);
 
 // show the template
 $main_smarty->assign('tpl_center', $the_template . '/tag_cloud_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 
 ?>

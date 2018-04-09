@@ -5,12 +5,12 @@ function subscribe2comments_comment_submit(&$vars)
 	include_once(mnmmodules.'subscribe2comments/subscribe2comments_settings.php');
 	global $db, $main_smarty, $current_user;
 
-	$main_smarty->config_load(subscribe2comments_kliqqi_lang_conf);
-	$fromEmail = $main_smarty->get_config_vars("KLIQQI_PassEmail_From");
-	$fromSite = $main_smarty->get_config_vars("KLIQQI_Visual_Name");
+	$main_smarty->config_load(subscribe2comments_plikli_lang_conf);
+	$fromEmail = $main_smarty->get_config_vars("PLIKLI_PassEmail_From");
+	$fromSite = $main_smarty->get_config_vars("PLIKLI_Visual_Name");
 	$main_smarty->assign('site_title', $fromSite);
 	$main_smarty->config_load(subscribe2comments_lang_conf);
-	$fromSubject = $main_smarty->get_config_vars("KLIQQI_Subscribe_2_Comments_Email_Subject");
+	$fromSubject = $main_smarty->get_config_vars("PLIKLI_Subscribe_2_Comments_Email_Subject");
 
 	$comment = new Comment;
 	$comment->id = $vars['comment'];
@@ -40,16 +40,16 @@ function subscribe2comments_comment_submit(&$vars)
 			//echo "user anonymous is " .$user->username;die();
 		}
 		if (Default_Site_Logo != '') {
-			$site_logo = my_base_url.my_kliqqi_base.Default_Site_Logo;
+			$site_logo = my_base_url.my_plikli_base.Default_Site_Logo;
 			$main_smarty->assign('site_logo', $site_logo); 
 		}
 		
 		$main_smarty->assign('comment_author', $user->username);
 		//$main_smarty->assign('comment', get_object_vars($comment));
-		/*$main_smarty->assign('image_facebook', my_base_url.my_kliqqi_base . '/modules/subscribe2comments/templates/images/facebook.png');
-		$main_smarty->assign('image_twitter', my_base_url.my_kliqqi_base . '/modules/subscribe2comments/templates/images/twitter.png');
-		$main_smarty->assign('image_header', my_base_url.my_kliqqi_base . '/modules/subscribe2comments/templates/images/email_header.jpg');
-		$main_smarty->assign('image_sidebar', my_base_url.my_kliqqi_base . '/modules/subscribe2comments/templates/images/email_sidebar.jpg');*/
+		/*$main_smarty->assign('image_facebook', my_base_url.my_plikli_base . '/modules/subscribe2comments/templates/images/facebook.png');
+		$main_smarty->assign('image_twitter', my_base_url.my_plikli_base . '/modules/subscribe2comments/templates/images/twitter.png');
+		$main_smarty->assign('image_header', my_base_url.my_plikli_base . '/modules/subscribe2comments/templates/images/email_header.jpg');
+		$main_smarty->assign('image_sidebar', my_base_url.my_plikli_base . '/modules/subscribe2comments/templates/images/email_sidebar.jpg');*/
 
 		$settings = subscribe2comments_settings();
 
@@ -75,13 +75,13 @@ function subscribe2comments_comment_submit(&$vars)
 				$user->id = $sub['notify_user_id'];
 				if ($user->read())
 				{
-				$main_smarty->assign('unsubscribe_link', my_base_url.my_kliqqi_base . '/unsubscribe.php?linkid='.$linkres->id.'&unsub=1&uid='.$user->username.'&code='.md5($user->email . $user->date . $user->username . kliqqi_hash()));
+				$main_smarty->assign('unsubscribe_link', my_base_url.my_plikli_base . '/unsubscribe.php?linkid='.$linkres->id.'&unsub=1&uid='.$user->username.'&code='.md5($user->email . $user->date . $user->username . plikli_hash()));
 				$text = $main_smarty->fetch('../modules/subscribe2comments/templates/subscribe2comments_email.tpl');
 
 						$mail->From = $fromEmail;
 						$mail->FromName = $fromSite;
 						$mail->AddAddress($user->email);
-						$mail->AddReplyTo($main_smarty->get_config_vars('KLIQQI_PassEmail_From'));
+						$mail->AddReplyTo($main_smarty->get_config_vars('PLIKLI_PassEmail_From'));
 						$mail->IsHTML(true);
 						$mail->Subject = $fromSubject;
 						$mail->Body = $text;
@@ -146,7 +146,7 @@ function subscribe2comments_showpage(){
 		}
 		// breadcrumbs
 		$main_smarty->assign('navbar_where', $navwhere);
-		$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('KLIQQI_Visual_Header_AdminPanel'));
+		$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 		// breadcrumbs
 		define('modulename', 'subscribe2comments'); 
 		$main_smarty->assign('modulename', modulename);

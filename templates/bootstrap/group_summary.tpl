@@ -17,49 +17,49 @@
 		</span>
 		<br />
 		{if $pagename eq 'group_story'}
-			{checkActionsTpl location="tpl_kliqqi_group_list_start"}
+			{checkActionsTpl location="tpl_plikli_group_list_start"}
 		{/if}
 		<span class="group_created_by">
-			{#KLIQQI_Visual_Group_Created_By#} <a href="{$submitter_profile_url}">{$group_submitter}</a>
+			{#PLIKLI_Visual_Group_Created_By#} <a href="{$submitter_profile_url}">{$group_submitter}</a>
 		</span>
 		<span class="group_created_on">
-			{#KLIQQI_Visual_Group_Created_On#}
+			{#PLIKLI_Visual_Group_Created_On#}
 			{$group_date}
 		</span>
-		<span class="group_members"> with {$group_members} {#KLIQQI_Visual_Group_Member#}</span>
+		<span class="group_members"> with {$group_members} {#PLIKLI_Visual_Group_Member#}</span>
 		<br />
 		<p class="group_description">{$group_description}</p>
 		{if $pagename eq 'group_story'}
-			{checkActionsTpl location="tpl_kliqqi_group_list_end"}
+			{checkActionsTpl location="tpl_plikli_group_list_end"}
 			{if $user_logged_in neq $group_submitter}
 				{if $user_logged_in neq ""}
 					{if $is_group_member eq 0}
 						{if $join_group_url neq '' || $join_group_privacy_url neq ''}
 							{if $group_privacy eq 'public'}
-								<a class="btn btn-default" href="{$join_group_url}" ><i class="fa fa-check"></i> {#KLIQQI_Visual_Group_Join#}</a>
+								<a class="btn btn-default" href="{$join_group_url}" ><i class="fa fa-check"></i> {#PLIKLI_Visual_Group_Join#}</a>
 							{else}
-								<a class="btn btn-default" href="{$join_group_privacy_url}" ><i class="fa fa-check"></i> {#KLIQQI_Visual_Group_Join#}</a>
+								<a class="btn btn-default" href="{$join_group_privacy_url}" ><i class="fa fa-check"></i> {#PLIKLI_Visual_Group_Join#}</a>
 							{/if}
 						{/if}
 					{else}
 						{if $is_member_active eq 'active'}
-							<a class="btn btn-default" href="{$unjoin_group_url}" ><i class="fa fa-times"></i> {#KLIQQI_Visual_Group_Unjoin#}</a>
+							<a class="btn btn-default" href="{$unjoin_group_url}" ><i class="fa fa-times"></i> {#PLIKLI_Visual_Group_Unjoin#}</a>
 						{/if}
 						{if $is_member_active eq 'inactive'}
-							<a class="btn btn-default" href="{$join_group_withdraw}" ><i class="fa fa-times"></i> {#KLIQQI_Visual_Group_Withdraw_Request#}</a>
+							<a class="btn btn-default" href="{$join_group_withdraw}" ><i class="fa fa-times"></i> {#PLIKLI_Visual_Group_Withdraw_Request#}</a>
 						{/if}	
 					{/if}
 				{/if}
 			{/if}
 			{*Redwine: Roles and permissions and Groups fixes. Provide permissions according to Group Roles and Site level Roles - Group Moderator cannot edit the group info or image*}
 			{if !empty($is_group_admin) && $is_group_admin eq '1' || $isAdmin eq '1' || $isModerator eq '1' || $is_gr_Admin eq '1'}
-				<a class="btn btn-default" href="{$group_edit_url}"><i class="fa fa-edit"></i> {#KLIQQI_Visual_Group_Text_edit#}</a>
+				<a class="btn btn-default" href="{$group_edit_url}"><i class="fa fa-edit"></i> {#PLIKLI_Visual_Group_Text_edit#}</a>
 				{if $allow_groups_avatar eq 'true'}
-				<a class="btn btn-default" href="#groupavatar" data-toggle="modal"><i class="fa fa-picture-o"></i> {#KLIQQI_Visual_Group_Avatar_Upload#}</a>
+				<a class="btn btn-default" href="#groupavatar" data-toggle="modal"><i class="fa fa-picture-o"></i> {#PLIKLI_Visual_Group_Avatar_Upload#}</a>
 				{/if}
 				{*Redwine: Roles and permissions and Groups fixes. Only Group Creator and Site Admin can delete a group*}
 				{if !empty($is_group_admin) && $is_group_admin eq '1' || $isAdmin eq '1'}
-				<a class="btn btn-danger" onclick="return confirm('{#KLIQQI_Visual_Group_Delete_Confirm#}')" href={$group_delete_url}><i class="fa fa-white fa-trash-o"></i> {#KLIQQI_Visual_Group_Text_Delete#}</a>
+				<a class="btn btn-danger" onclick="return confirm('{#PLIKLI_Visual_Group_Delete_Confirm#}')" href={$group_delete_url}><i class="fa fa-white fa-trash-o"></i> {#PLIKLI_Visual_Group_Text_Delete#}</a>
 {* Redwine: Roles and permissions and Groups fixes *}
 				{/if}
 				{if $allow_groups_avatar eq 'true'}
@@ -77,7 +77,7 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title">{#KLIQQI_Visual_Group_Avatar_Upload#}</h4>
+									<h4 class="modal-title">{#PLIKLI_Visual_Group_Avatar_Upload#}</h4>
 								</div>
 								<div class="modal-body">
 									<p>Please choose a image file to represent your group. Our site will resize your image to fit our standards, but we encourage you to crop your image to square dimensions prior to uploading.</p>
@@ -86,7 +86,7 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<button type="submit" name="action" class="btn btn-primary"><span class="fa fa-white fa fa-picture"></span> {#KLIQQI_Visual_Group_Avatar_Upload#}</button>
+									<button type="submit" name="action" class="btn btn-primary"><span class="fa fa-white fa fa-picture"></span> {#PLIKLI_Visual_Group_Avatar_Upload#}</button>
 									<input type="hidden" name="idname" value="{$group_id}"/>
 									<input type="hidden" name="avatar" value="uploaded"/>
 									<input type="hidden" name="avatarsource" value="useruploaded">

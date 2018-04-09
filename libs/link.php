@@ -71,7 +71,7 @@ class Link {
 		}
 		if(Validate_URL != false){
 			if($url != 'http://' && $url != ''){
-				$r = new KliqqiHTTPRequest($url);
+				$r = new PlikliHTTPRequest($url);
 				$xxx = $r->DownloadToString();
 				/* Redwine: to fix the bug that wasn't getting the url of some site that do not allow fopen or fsockopen. This way, the submitted url will be the url of the link */
 				if ($xxx == '') {
@@ -116,7 +116,7 @@ class Link {
 		/* Redwine: enhanced the preg_match patern to match any quotes, single or double. Also some sites have the meta content attribute preceding the name attribute. 
 		We are also grabbing the Facebook and Twitter opengraph to make sure we find the needed meta. */
 		
-		/* finding the image of the article to be used when submitting a story on Kliqqi. */
+		/* finding the image of the article to be used when submitting a story on Plikli. */
 		if(preg_match("'<meta\s+(name|property)=[\"\'](og:image|twitter:image|twitter:image:src)[\"\']\s+content=[\"\']([^<]*?)[\"\'](?:\s+itemprop=[\"\'][^<]*?[\"\'])?\s{0,}\/?\s{0,}>'si", $this->html, $matches)) {
 			$this->og_twitter_image=$matches[3];
 		}elseif(preg_match("'<meta\s+(name|property)=[\"\'](og:image|twitter:image|twitter:image:src)[\"\'](?:\s+itemprop=[\"\'][^<]*?[\"\'])?\s+content=[\"\']([^<]*?)[\"\']\s{0,}\/?\s{0,}>'si", $this->html, $matches)) {
@@ -131,7 +131,7 @@ class Link {
 			$this->og_twitter_image=$matches[1];
 		}
 		
-		/* finding the description of the article to be used when submitting a story on Kliqqi. */
+		/* finding the description of the article to be used when submitting a story on Plikli. */
 		if(preg_match("'<meta\s+name=[\"\']description[\"\']\s+content=[\"\']([^<]*?)[\"\']\s{0,}\/?\s{0,}>'si", $this->html, $matches)) {
 			$this->url_description=$matches[1];
 		}elseif(preg_match("'<meta\s+content=[\"\']([^<]*?)[\"\']\s+name=[\"\']description[\"\']\s{0,}\/?\s{0,}>'si", $this->html, $matches)) {
@@ -455,8 +455,8 @@ class Link {
 		$main_smarty->cache_dir = mnmpath."cache/";
 
 		$main_smarty->config_dir = "";
-		$main_smarty->assign('kliqqi_language', kliqqi_language);
-		$main_smarty->config_load(lang_loc . "/languages/lang_" . kliqqi_language . ".conf");
+		$main_smarty->assign('plikli_language', plikli_language);
+		$main_smarty->config_load(lang_loc . "/languages/lang_" . plikli_language . ".conf");
 		
         $anonymous_can_vote = $db->get_var('SELECT var_value from ' . table_config . ' where var_name = "anonymous_vote";');
         $main_smarty->assign('anonymous_vote', $anonymous_can_vote);
@@ -653,7 +653,7 @@ class Link {
 			$smarty->assign('link_field15', $this->link_field15);
 		}
 		$smarty->assign('link_group_id', $this->link_group_id);
-		$smarty->assign('instpath', my_base_url . my_kliqqi_base . "/");		
+		$smarty->assign('instpath', my_base_url . my_plikli_base . "/");		
 		$smarty->assign('UseAvatars', do_we_use_avatars());
 		$smarty->assign('Avatar', $avatars = get_avatar('all', "", "", "", $this->userid));
 		$smarty->assign('Avatar_ImgSrc', $avatars['large']);
@@ -812,7 +812,7 @@ class Link {
 			// for pages like index, this ->display was being called for each story
 			// which was sometimes 15+ times per page. this way it's just called once
 			$smarty->display('blank.tpl'); //this is just to load the lang file so we can pull from it in php
-			define('alltagtext', $smarty->get_config_vars('KLIQQI_Visual_Tags_All_Tags')); 			
+			define('alltagtext', $smarty->get_config_vars('PLIKLI_Visual_Tags_All_Tags')); 			
 		}
 		$alltagtext = alltagtext;
 	
@@ -831,9 +831,9 @@ class Link {
  				{
  					if(isset($tag_array[$i])){
 						if ( $URLMethod == 1 ) { 
-						    $tags_url_array[$i] = my_kliqqi_base . "/search.php?search=".urlencode(trim($tag_array[$i]))."&amp;tag=true";
+						    $tags_url_array[$i] = my_plikli_base . "/search.php?search=".urlencode(trim($tag_array[$i]))."&amp;tag=true";
 						} elseif ( $URLMethod == 2) {
-						    $tags_url_array[$i] = my_kliqqi_base . "/tag/" . urlencode(trim($tag_array[$i]));
+						    $tags_url_array[$i] = my_plikli_base . "/tag/" . urlencode(trim($tag_array[$i]));
 				    }
 				  }
  				}
@@ -851,7 +851,7 @@ class Link {
 		$smarty->assign('enable_group', enable_group);
 		$smarty->assign('pagename', pagename);
 		$smarty->assign('my_base_url', my_base_url);
-		$smarty->assign('my_kliqqi_base', my_kliqqi_base);
+		$smarty->assign('my_plikli_base', my_plikli_base);
 		$smarty->assign('Default_Gravatar_Large', Default_Gravatar_Large);
 			
 		//$link_index++;
@@ -884,7 +884,7 @@ class Link {
 		if (!empty($this->group_membered)) {
 			if ($this->group_membered != NULL) {
 			foreach($this->group_membered as $results)
-				$output .= "<a class='group_member_share' href='".my_base_url.my_kliqqi_base."/group_share.php?link_id=".$this->id."&group_id=".$results->group_id."&user_id=".$current_user->user_id."' >".$results->group_name."</a><br />";
+				$output .= "<a class='group_member_share' href='".my_base_url.my_plikli_base."/group_share.php?link_id=".$this->id."&group_id=".$results->group_id."&user_id=".$current_user->user_id."' >".$results->group_name."</a><br />";
 			}
 		}
 
@@ -902,7 +902,7 @@ class Link {
 		$output = '';
 		if (!empty($this->group_shared_membered))
 			foreach($this->group_shared_membered as $results)
-				$output .= "<a class='group_member_share' href='".my_base_url.my_kliqqi_base."/group_share.php?link_id=".$this->id."&group_id=".$results->group_id."&user_id=".$current_user->user_id."&action=unshare'>".$results->group_name."</a><br />";
+				$output .= "<a class='group_member_share' href='".my_base_url.my_plikli_base."/group_share.php?link_id=".$this->id."&group_id=".$results->group_id."&user_id=".$current_user->user_id."&action=unshare'>".$results->group_name."</a><br />";
 
 		return $output;
 
@@ -915,7 +915,7 @@ class Link {
 			 if(Auto_scroll==true){
 				global $main_smarty;
 				$content=	close_tags(utf8_substr($this->content, 0, StorySummary_ContentTruncate));
-				$content.="<div class=\"read_more_article\" storyid=\"".$this->id."\" ><a href=".$url_read."> ".$main_smarty->get_config_vars('KLIQQI_Visual_Read_More')."</a></div>" ;
+				$content.="<div class=\"read_more_article\" storyid=\"".$this->id."\" ><a href=".$url_read."> ".$main_smarty->get_config_vars('PLIKLI_Visual_Read_More')."</a></div>" ;
 				$content.="<div class=\"read_more_story".$this->id." hide\" >";
 				$content.=close_tags(utf8_substr($this->content, StorySummary_ContentTruncate,utf8_strlen($this->content) ));
 				$content.="</div>";
@@ -1203,7 +1203,7 @@ class Link {
 				return $cat->category_votes; 
 		}
 
-		return $main_smarty->get_config_vars('KLIQQI_Visual_Submit3Errors_NoCategory');
+		return $main_smarty->get_config_vars('PLIKLI_Visual_Submit3Errors_NoCategory');
 	}
 
 	function category_karma() {
@@ -1214,7 +1214,7 @@ class Link {
 				return $cat->category_karma; 
 		}
 
-		return $main_smarty->get_config_vars('KLIQQI_Visual_Submit3Errors_NoCategory');
+		return $main_smarty->get_config_vars('PLIKLI_Visual_Submit3Errors_NoCategory');
 	}
 
 	function category_name($id=0) {
@@ -1231,7 +1231,7 @@ class Link {
 			}
 		}
 
-		return $main_smarty->get_config_vars('KLIQQI_Visual_Submit3Errors_NoCategory');
+		return $main_smarty->get_config_vars('PLIKLI_Visual_Submit3Errors_NoCategory');
 	}
 
 	function category_safe_name($id=0) {
@@ -1456,7 +1456,7 @@ class Link {
 	}
 
 }
-class KliqqiHTTPRequest
+class PlikliHTTPRequest
 {
    var $_fp;        // HTTP socket
    var $_url;        // full URL
@@ -1495,7 +1495,7 @@ class KliqqiHTTPRequest
    }
 
    // constructor
-   function KliqqiHTTPRequest($url)
+   function PlikliHTTPRequest($url)
    {
 		$this->_url = $url;
 		$this->_scan_url();
@@ -1541,7 +1541,7 @@ class KliqqiHTTPRequest
        // redirection?
        if(isset($headers['location']))
        {
-           $http = new KliqqiHTTPRequest($headers['location']);
+           $http = new PlikliHTTPRequest($headers['location']);
            return($http->DownloadToString($http));
        }
        else

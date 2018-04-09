@@ -3,7 +3,7 @@ include_once (dirname(__FILE__) . '/../libs/db.php');
 
 if (!isset($dblang)) { $dblang='en'; }
 
-function kliqqi_createtables($conn) {
+function plikli_createtables($conn) {
 	global $dblang;
 
 	$sql = "CREATE TABLE `" . table_additional_categories . "` (
@@ -210,7 +210,7 @@ function kliqqi_createtables($conn) {
 	$sql = "CREATE TABLE `" . table_links . "` (
 	  `link_id` int(20) NOT NULL auto_increment,
 	  `link_author` int(20) NOT NULL default '0',
-	  `link_status` enum('discard','new','published','abuse','duplicate','page','spam','moderated') collate utf8_general_ci NOT NULL default 'discard',
+	  `link_status` enum('discard','new','published','abuse','duplicate','page','spam','moderated','draft','scheduled') collate utf8_general_ci NOT NULL default 'discard',
 	  `link_randkey` int(20) NOT NULL default '0',
 	  `link_votes` int(20) NOT NULL default '0',
 	  `link_reports` int(20) NOT NULL default '0',
@@ -297,12 +297,12 @@ function kliqqi_createtables($conn) {
 	
 	
 	$sql = "INSERT INTO `" . table_misc_data . "` ( `name` , `data` ) VALUES
-	('kliqqi_version', '4.0.0'),
+	('plikli_version', '4.0.0'),
 	('adcopy_lang', 'en'),
 	('adcopy_theme', 'white'),
-	('adcopy_pubkey', '1G9ho6tcbpytfUxJ0SlrSNt0MjjOB0l2'),
-	('adcopy_privkey', 'PjH8h3gpjQrBKihJ8dlLN8sbcmvW1nv-'),
-	('adcopy_hashkey', 'eq1xxSfyG55k4ll7CxPCO6XP9-cIWnTf'),
+	('adcopy_pubkey', 'Rp827COlEH2Zcc2ZHrXdPloU6iApn89K'),
+	('adcopy_privkey', '7lH2UFtscdc2Rb7z3NrT8HlDIzcWD.N1'),
+	('adcopy_hashkey', 'rWwIbi8Nd6rX-NYvuB6sQUJV6ihYHa74'),
 	('captcha_method', 'solvemedia'),
 	('validate', 0),
 	('captcha_comment_en', 'true'),
@@ -318,9 +318,9 @@ function kliqqi_createtables($conn) {
 	('karma_story_spam','-10000'),
 	('karma_comment_delete','-50'),
 	('modules_update_date',DATE_FORMAT(NOW(),'%Y/%m/%d')),
-	('modules_update_url','https://kliqqi.com/mods/version-update.txt'),
-	('kliqqi_update',''),
-	('kliqqi_update_url','http://www.kliqqi.com/download_kliqqi/'),
+	('modules_update_url','https://www.plikli.com/mods/version-update.txt'),
+	('plikli_update',''),
+	('plikli_update_url','https://www.plikli.com/download_plikli/'),
 	('modules_update_unins',''),
 	('modules_upd_versions','');";
 	mysql_query( $sql, $conn );
@@ -445,7 +445,9 @@ function kliqqi_createtables($conn) {
 	$sql = "insert into `" . table_totals . "` (`name`, `total`) values
 	('published', 0),
 	('new', 0),
-	('discard', 0);";
+	('discard', 0),
+	('draft', 0),
+	('scheduled', 0);";
 	mysql_query( $sql, $conn );
 	echo "<li>Added default 'totals' data...</li><br />";
 
@@ -557,8 +559,8 @@ function kliqqi_createtables($conn) {
 	$sql = "INSERT INTO `".table_widgets."` (`id`, `name`, `version`, `latest_version`, `folder`, `enabled`, `column`, `position`, `display`) VALUES 
 	(NULL, 'Dashboard Tools', 0.1, 0, 'dashboard_tools', 1, 'left', 4, ''),
 	(NULL, 'Statistics', 3.0, 0, 'statistics', 1, 'left', 1, ''),
-	(NULL, 'Kliqqi CMS', 1.0, 0, 'kliqqi_cms', 1, 'right', 5, ''),
-	(NULL, 'Kliqqi News', 0.1, 0, 'kliqqi_news', 1, 'right', 6, '');";
+	(NULL, 'Plikli CMS', 1.0, 0, 'plikli_cms', 1, 'right', 5, ''),
+	(NULL, 'Plikli News', 0.1, 0, 'plikli_news', 1, 'right', 6, '');";
 	mysql_query( $sql, $conn );
 	echo '<li>Added default widgets...</li><br />';
 
@@ -566,7 +568,7 @@ function kliqqi_createtables($conn) {
 	/* Inserting data in the config table*/
 	$stmt = file_get_contents(dirname(__FILE__) . '/install_config_table.sql');
 	$stmt = str_replace("INSERT INTO `table_config`", "INSERT INTO `".table_prefix."config`", $stmt);
-			$stmt = str_replace("'table_prefix', 'kliqqi_'", "'table_prefix', '" . table_prefix . "'", $stmt);
+			$stmt = str_replace("'table_prefix', 'plikli_'", "'table_prefix', '" . table_prefix . "'", $stmt);
 	$stmt = str_replace("{\$_SESSION[\'language\']}", "{$_SESSION['language']}", $stmt);
 			mysql_query($stmt);
 		if (mysql_error()) {

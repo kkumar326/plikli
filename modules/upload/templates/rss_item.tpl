@@ -29,6 +29,6 @@
 
 {if sizeof($images)}
 	{foreach from=$images item=image}
-		<media:content url="{$my_kliqqi_base}{$upload_directory}/{$image.file_name}" medium="image" />
+		<media:content url="{$my_plikli_base}{$upload_directory}/{$image.file_name}" medium="image" />
 	{/foreach}
 {/if}

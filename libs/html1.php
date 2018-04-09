@@ -209,17 +209,17 @@ $imgsize = '';
 		$imgsize = 'original';
 
 	// use the user uploaded avatars ?
-	$avatars = array( 'large' => my_base_url . my_kliqqi_base . Default_Gravatar_Large,
-			  'small' => my_base_url . my_kliqqi_base . Default_Gravatar_Small
+	$avatars = array( 'large' => my_base_url . my_plikli_base . Default_Gravatar_Large,
+			  'small' => my_base_url . my_plikli_base . Default_Gravatar_Small
 			);
 	if(Enable_User_Upload_Avatar == true && $avatarsource == "useruploaded"){
 	    if ($imgsize) {
-		$imgsrc = my_base_url . my_kliqqi_base . '/avatars/user_uploaded/' . $user_id . "_" . $imgsize . ".jpg";
+		$imgsrc = my_base_url . my_plikli_base . '/avatars/user_uploaded/' . $user_id . "_" . $imgsize . ".jpg";
 		if (file_exists(mnmpath.'avatars/user_uploaded/'.$user_id . "_" . $imgsize . ".jpg"))
 		    return latest_avatar($imgsrc, mnmpath.'avatars/user_uploaded/'.$user_id . "_" . $imgsize . ".jpg");
 		elseif (file_exists(mnmpath.'avatars/user_uploaded/'. $user_name . "_" . $imgsize . ".jpg"))
 		{
-		    $imgsrc = my_base_url . my_kliqqi_base . '/avatars/user_uploaded/' . $user_name . "_" . $imgsize . ".jpg";
+		    $imgsrc = my_base_url . my_plikli_base . '/avatars/user_uploaded/' . $user_name . "_" . $imgsize . ".jpg";
 		    return latest_avatar($imgsrc, mnmpath.'avatars/user_uploaded/'.$user_name . "_" . $imgsize . ".jpg");
 		}
 	    } else {
@@ -228,7 +228,7 @@ $imgsize = '';
         	    while (($file = readdir($dh)) !== false)
 			if (preg_match("/^$user_id\_(.+)\.jpg\$/", $file, $m))
 			{
-			    $imgsrc = my_base_url . my_kliqqi_base . '/avatars/user_uploaded/' . $file;
+			    $imgsrc = my_base_url . my_plikli_base . '/avatars/user_uploaded/' . $file;
 			    $avatars[$m[1]] = latest_avatar($imgsrc, $dir . $file);
 			    if ($m[1] == Avatar_Large)
 				$avatars['large'] = $avatars[$m[1]];
@@ -242,8 +242,8 @@ $imgsize = '';
 	} elseif (!$imgsize) 
 	    return $avatars;
 	
-	if ($size == "large") {return my_base_url . my_kliqqi_base . Default_Gravatar_Large;}
-	if ($size == "small") {return my_base_url . my_kliqqi_base . Default_Gravatar_Small;}
+	if ($size == "large") {return my_base_url . my_plikli_base . Default_Gravatar_Large;}
+	if ($size == "small") {return my_base_url . my_plikli_base . Default_Gravatar_Small;}
 }
 
 function do_sidebar($var_smarty, $navwhere = '') {
@@ -433,13 +433,13 @@ function do_pages($total, $page_size, $thepage, $fetch = false) {
 
 			if($current==1) {
 				// There are no previous pages, so don't show the "previous" link.
-				//$output .= '<li class="disabled"><span>&#171; '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Previous"). '</span></li>';
+				//$output .= '<li class="disabled"><span>&#171; '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Previous"). '</span></li>';
 			} else {
 				$i = $current-1;
 				if ((pagename == "index" || pagename == "published")  && $i==1)
-					$output .= '<li><a href="'.($query ? '?' : './').$query.'">&#171; '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Previous").'</a></li>';
+					$output .= '<li><a href="'.($query ? '?' : './').$query.'">&#171; '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Previous").'</a></li>';
 				else
-					$output .= '<li><a href="?page='.$i.$query.'">&#171; '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Previous").'</a></li>';
+					$output .= '<li><a href="?page='.$i.$query.'">&#171; '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Previous").'</a></li>';
 			}
 
 			if($start>1) {
@@ -468,10 +468,10 @@ function do_pages($total, $page_size, $thepage, $fetch = false) {
 			
 			if($current<$total_pages) {
 				$i = $current+1;
-				$output .= '<li><a href="?page='.$i.$query.'"> '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Next"). ' &#187;' . '</a></li>';
+				$output .= '<li><a href="?page='.$i.$query.'"> '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Next"). ' &#187;' . '</a></li>';
 			} else {
 				// There are no pages left, so don't add a "next" link.
-				//$output .= '<li><a href="?page='.$i.$query.'">'.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Next"). ' &#187;' . '</a></li>';
+				//$output .= '<li><a href="?page='.$i.$query.'">'.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Next"). ' &#187;' . '</a></li>';
 			}
 			$output .= "</ul></div>\n";
 		}	
@@ -501,54 +501,54 @@ function do_pages($total, $page_size, $thepage, $fetch = false) {
 
 			if($current==1) {
 				// There are no previous pages, so don't show the "previous" link.
-				//$output .= '<li class="disabled"><span>&#171; '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Previous"). '</span></li>';
+				//$output .= '<li class="disabled"><span>&#171; '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Previous"). '</span></li>';
 			} else {
 				$i = $current-1;
 				if (pagename == "admin_users") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/admin/'.pagename.'.php?page='.$i.'">&#171; '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Previous").'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/admin/'.pagename.'.php?page='.$i.'">&#171; '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Previous").'</a></li>';
 				}
 				elseif (pagename == "admin_links") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/admin/'.pagename.'.php?page='.$i.'">&#171; '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Previous").'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/admin/'.pagename.'.php?page='.$i.'">&#171; '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Previous").'</a></li>';
 				}
 				elseif (pagename == "index" || pagename == "published" ) {
-					$output .= '<li><a href="'.my_kliqqi_base.'/'.$query.($i>1 ? '/page/'.$i : '').'">&#171; '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Previous").'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/'.$query.($i>1 ? '/page/'.$i : '').'">&#171; '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Previous").'</a></li>';
 				}
 				elseif (pagename == "live_published") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/published/'.$query.'/page/'.$i.'">&#171; '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Previous").'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/live/published/'.$query.'/page/'.$i.'">&#171; '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Previous").'</a></li>';
 				}
 				elseif (pagename == "live_unpublished") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/new/'.$query.'/page/'.$i.'">&#171; '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Previous").'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/live/new/'.$query.'/page/'.$i.'">&#171; '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Previous").'</a></li>';
 				}
 				elseif (pagename == "live_comments") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/comments/'.$query.'/page/'.$i.'">&#171; '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Previous").'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/live/comments/'.$query.'/page/'.$i.'">&#171; '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Previous").'</a></li>';
 				}
 				else {
-					$output .= '<li><a href="'.my_kliqqi_base.'/'.pagename.'/'.$query.'/page/'.$i.'">&#171; '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Previous").'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/'.pagename.'/'.$query.'/page/'.$i.'">&#171; '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Previous").'</a></li>';
 				}
 			}
 
 			if($start>1) {
 				$i = 1;
 				if (pagename == "admin_users") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
 				}
 				elseif (pagename == "admin_links") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
 				}
 				elseif (pagename == "index" || pagename == "published" ) {
-					$output .= '<li><a href="'.my_kliqqi_base.'/'.$query.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/'.$query.'">'.$i.'</a></li>';
 				}
 				elseif (pagename == "live_published") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/published/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/live/published/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 				}
 				elseif (pagename == "live_unpublished") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/new/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/live/new/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 				}
 				elseif (pagename == "live_comments") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/comments/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/live/comments/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 				}
 				else {
-					$output .= '<li><a href="'.my_kliqqi_base.'/'.pagename.'/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/'.pagename.'/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 				}
 				$output .= '<li class="active"><a href="#">...</a></li>';
 			}
@@ -557,25 +557,25 @@ function do_pages($total, $page_size, $thepage, $fetch = false) {
 					$output .= '<li class="active"><a href="#">'.$i.'</a></li>';	} 
 				else {
 					if (pagename == "admin_users") {
-						$output .= '<li><a href="'.my_kliqqi_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
+						$output .= '<li><a href="'.my_plikli_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
 					}
 					elseif (pagename == "admin_links") {
-						$output .= '<li><a href="'.my_kliqqi_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
+						$output .= '<li><a href="'.my_plikli_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
 					}
 					elseif (pagename == "index" || pagename == "published" ) {
-						$output .= '<li><a href="'.my_kliqqi_base.'/'.$query.($i>1 ? '/page/'.$i : '').'">'.$i.'</a></li>';
+						$output .= '<li><a href="'.my_plikli_base.'/'.$query.($i>1 ? '/page/'.$i : '').'">'.$i.'</a></li>';
 					}
 					elseif (pagename == "live_published") {
-						$output .= '<li><a href="'.my_kliqqi_base.'/live/published/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+						$output .= '<li><a href="'.my_plikli_base.'/live/published/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 					}
 					elseif (pagename == "live_unpublished") {
-						$output .= '<li><a href="'.my_kliqqi_base.'/live/new/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+						$output .= '<li><a href="'.my_plikli_base.'/live/new/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 					}
 					elseif (pagename == "live_comments") {
-						$output .= '<li><a href="'.my_kliqqi_base.'/live/comments/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+						$output .= '<li><a href="'.my_plikli_base.'/live/comments/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 					}
 					else {
-						$output .= '<li><a href="'.my_kliqqi_base.'/'.pagename.'/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+						$output .= '<li><a href="'.my_plikli_base.'/'.pagename.'/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 					}
 				}	
 			}
@@ -584,54 +584,54 @@ function do_pages($total, $page_size, $thepage, $fetch = false) {
 				$i = $total_pages;
 				$output .= '<li class="active"><a href="#">...</a></li>';
 				if ($pagename == "admin_users") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
 				}
 				elseif (pagename == "admin_links") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/admin/'.pagename.'.php?page='.$i.'">'.$i.'</a></li>';
 				}
 				elseif (pagename == "index" || pagename == "published" ) {
-					$output .= '<li><a href="'.my_kliqqi_base.'/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 				}
 				elseif (pagename == "live_published") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/published/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/live/published/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 				}
 				elseif (pagename == "live_unpublished") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/new/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/live/new/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 				}
 				elseif (pagename == "live_comments") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/comments/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/live/comments/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 				}
 				else {
-					$output .= '<li><a href="'.my_kliqqi_base.'/'.pagename.'/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/'.pagename.'/'.$query.'/page/'.$i.'">'.$i.'</a></li>';
 				}
 			}
 			
 			if($current<$total_pages) {
 				$i = $current+1;
 				if (pagename == "admin_users") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/admin/'.pagename.'.php?page='.$i.'"> '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Next"). ' &#187;' . '</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/admin/'.pagename.'.php?page='.$i.'"> '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Next"). ' &#187;' . '</a></li>';
 				}
 				elseif (pagename == "admin_links") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/admin/'.pagename.'.php?page='.$i.'"> '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Next"). ' &#187;' . '</a></li>';
+					$output .= '<li><a href="'.my_plikli_base.'/admin/'.pagename.'.php?page='.$i.'"> '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Next"). ' &#187;' . '</a></li>';
 				}
 				elseif (pagename == "live_published") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/published/'.$query.'/page/'.$i.'"> '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Next"). ' &#187;' . '</a></li>'; 
+					$output .= '<li><a href="'.my_plikli_base.'/live/published/'.$query.'/page/'.$i.'"> '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Next"). ' &#187;' . '</a></li>'; 
 				}
 				elseif (pagename == "live_unpublished") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/new/'.$query.'/page/'.$i.'"> '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Next"). ' &#187;' . '</a></li>'; 
+					$output .= '<li><a href="'.my_plikli_base.'/live/new/'.$query.'/page/'.$i.'"> '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Next"). ' &#187;' . '</a></li>'; 
 				}
 				elseif (pagename == "live_comments") {
-					$output .= '<li><a href="'.my_kliqqi_base.'/live/comments/'.$query.'/page/'.$i.'"> '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Next"). ' &#187;' . '</a></li>'; 
+					$output .= '<li><a href="'.my_plikli_base.'/live/comments/'.$query.'/page/'.$i.'"> '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Next"). ' &#187;' . '</a></li>'; 
 				}
 				elseif (pagename == "index" || pagename == "published" ) {
-					$output .= '<li><a href="'.my_kliqqi_base.'/'.$query.'/page/'.$i.'"> '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Next"). ' &#187;' . '</a></li>'; 
+					$output .= '<li><a href="'.my_plikli_base.'/'.$query.'/page/'.$i.'"> '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Next"). ' &#187;' . '</a></li>'; 
 				} 
 				else {
-					$output .= '<li><a href="'.my_kliqqi_base.'/'.pagename.'/'.$query.'/page/'.$i.'"> '.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Next"). ' &#187;' . '</a></li>'; 
+					$output .= '<li><a href="'.my_plikli_base.'/'.pagename.'/'.$query.'/page/'.$i.'"> '.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Next"). ' &#187;' . '</a></li>'; 
 				} 
 			}		
 			else {
-				$output .= '<li class="active"><a href="#">'.$main_smarty->get_config_vars("KLIQQI_Visual_Page_Next"). ' &#187;' . '</a></li>';	}
+				$output .= '<li class="active"><a href="#">'.$main_smarty->get_config_vars("PLIKLI_Visual_Page_Next"). ' &#187;' . '</a></li>';	}
 			
 			$output .= "</ul></div>";
 			$output = str_replace("/group_story/","/groups/",$output);
@@ -701,7 +701,7 @@ function getmyurl($x, $var1="", $var2="", $var3="") {
 		elseif ($x == "search_url") $ret = "/search.php?search=" . $var1;
 		elseif ($x == "admin_login") $ret = "/admin/admin_login.php?return=" . $var1;
 		elseif ($x == "login") $ret = "/login.php?return=" . $var1;
-		elseif ($x == "logout") $ret = "/login.php?op=logout&return=".my_kliqqi_base; //return=" . $var1; /*Redwine: making both URL method 1 and 2 consistent by setting the return to the root.*/
+		elseif ($x == "logout") $ret = "/login.php?op=logout&return=".my_plikli_base; //return=" . $var1; /*Redwine: making both URL method 1 and 2 consistent by setting the return to the root.*/
 		elseif ($x == "user_edit") $ret = "/profile.php?login=$var1";
 		elseif ($x == "register") $ret = "/register.php";
 		elseif ($x == "category") $ret = "/index.php?category=" . $var1;
@@ -808,7 +808,7 @@ function getmyurl($x, $var1="", $var2="", $var3="") {
 		elseif ($x == "search_url") $ret = "/search/" . urlencode(str_replace('/','|',$var1)) . "/";
 		elseif ($x == "admin_login") $ret = "/admin/admin_login.php?return=" . urlencode($var1);
 		elseif ($x == "login") $ret = "/login.php?return=" . urlencode($var1);
-		elseif ($x == "logout") $ret = "/login.php?op=logout&return=".my_kliqqi_base;
+		elseif ($x == "logout") $ret = "/login.php?op=logout&return=".my_plikli_base;
 		elseif ($x == "register") $ret = "/register/";
 		elseif ($x == "submit") $ret = "/submit/";
 		elseif ($x == "story") $ret = "/story/" . $var1 . "/";
@@ -882,7 +882,7 @@ function getmyurl($x, $var1="", $var2="", $var3="") {
 		elseif ($x == "admin_categories_tasks") $ret = "/admin_categories_tasks/action/" . $var1 . "/";
 	}
 
-	return my_kliqqi_base . preg_replace('/\/+/', '/', $ret);
+	return my_plikli_base . preg_replace('/\/+/', '/', $ret);
 }
 
 function SetSmartyURLs($main_smarty) {
@@ -894,7 +894,7 @@ function SetSmartyURLs($main_smarty) {
 	}
 	$main_smarty->assign('URL_logout', htmlentities(getmyurl("logout", $_SERVER['REQUEST_URI'])));
 	
-	$main_smarty->assign('URL_home', getmyurl("kliqqi_index"));	
+	$main_smarty->assign('URL_home', getmyurl("plikli_index"));	
 	$main_smarty->assign('URL_register', getmyurl("register"));
 	$main_smarty->assign('URL_root', getmyurl("root"));
 	$main_smarty->assign('URL_index', getmyurl("index"));
@@ -1089,14 +1089,14 @@ function close_tags($html)
 //
 function check_referrer($post_url=false)
 {
-	global $my_base_url, $my_kliqqi_base, $xsfr_first_page, $_GET, $_POST;
+	global $my_base_url, $my_plikli_base, $xsfr_first_page, $_GET, $_POST;
 
 	if (sizeof($_GET)>0 || sizeof($_POST)>0)
 	{
 
 		if (isset($_SERVER['HTTP_REFERER']))
 		{
-			$base = $my_kliqqi_base;
+			$base = $my_plikli_base;
 
 			if (!$base) $base = '/';
 			$_SERVER['HTTP_REFERER'] = sanitize($_SERVER['HTTP_REFERER'],3);

@@ -4,8 +4,8 @@ var timestamp=0;
 var busy = false;
 var animating = false;
 var my_base_url='{$my_base_url}';
-var my_kliqqi_base='{$my_kliqqi_base}';
-var kliqqi_hours = '{#KLIQQI_Visual_Story_Times_Hours#}';
+var my_plikli_base='{$my_plikli_base}';
+var plikli_hours = '{#PLIKLI_Visual_Story_Times_Hours#}';
 var items = Array();
 var new_items = 0;
 var animation_colors = Array("#CFCFCF", "#D1D1D1", "#D4D4D4", "#D9D9D9", "#DEDEDE", "#E6E6E6", "#E8E8E8", "#F0F0F0", "#F5F5F5", "#FFFFFF");
@@ -122,27 +122,27 @@ function to_html(data) {
 	
 	var Xts = new Date();
 	var diff = (Xts - ts) / 60000; // how manys minutes since
-	if (diff > 1440) timeStr = '> 25 ' + kliqqi_hours; // 1440 = 60 mins/hr * 24 hrs/day
+	if (diff > 1440) timeStr = '> 25 ' + plikli_hours; // 1440 = 60 mins/hr * 24 hrs/day
 
 	html = '<td class="live2-ts">'+timeStr+'</td>';
 
 	if (data.type == 'problem')
 		html += '<td class="live2-type"><span class="live2-problem">'+data.type+'</span></td>';
 	else if (data.type == 'Submission')
-		html += '<td class="live2-type"><strong><a href="' + my_kliqqi_base + '/live_unpublished.php">'+data.type+'</a></strong></td>';
+		html += '<td class="live2-type"><strong><a href="' + my_plikli_base + '/live_unpublished.php">'+data.type+'</a></strong></td>';
 	else if (data.type == 'Published')
-		html += '<td class="live2-type"><strong><a href="' + my_kliqqi_base + '/live_published.php">'+data.type+'</a></strong></td>';	
+		html += '<td class="live2-type"><strong><a href="' + my_plikli_base + '/live_published.php">'+data.type+'</a></strong></td>';	
 	else if (data.type == 'Comment')
-		html += '<td class="live2-type"><strong><a href="' + my_kliqqi_base + '/live_comments.php">'+data.type+'</a></strong></td>';	
+		html += '<td class="live2-type"><strong><a href="' + my_plikli_base + '/live_comments.php">'+data.type+'</a></strong></td>';	
 	else
 		html += '<td class="live2-type">'+data.type+'</td>';
 
 	html += '<td class="live2-votes">'+data.votes+'</td>';
-	html += '<td class="live2-story"><a href="' + my_kliqqi_base + '/story.php?id='+data.link+'">'+data.title+'</a></td>';
+	html += '<td class="live2-story"><a href="' + my_plikli_base + '/story.php?id='+data.link+'">'+data.title+'</a></td>';
 	if (data.type == 'problem')
 		html += '<td class="live2-who"><span class="live2-problem">'+data.who+'</span></td>';
 	else if (data.uid > 0) 
-		html += '<td class="live2-who"><a href="' + my_kliqqi_base + '/user.php?login='+data.who+'">'+data.who+'</a></td>';
+		html += '<td class="live2-who"><a href="' + my_plikli_base + '/user.php?login='+data.who+'">'+data.who+'</a></td>';
 	else 
 		html += '<td class="live2-who">{/literal}{if $isAdmin eq 1}'+data.who+'{else}Anonymous{/if}{literal}</td>';
 	html += '<td class="live2-status">'+data.status+'</td>';

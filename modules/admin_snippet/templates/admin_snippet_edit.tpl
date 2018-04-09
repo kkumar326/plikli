@@ -1,6 +1,6 @@
 ﻿{config_load file=admin_snippet_lang_conf}
 
-<fieldset><legend>{#KLIQQI_Admin_Snippet_Add_New#}</legend>	
+<fieldset><legend>{#PLIKLI_Admin_Snippet_Add_New#}</legend>	
 
 {if $snippet_error}
 	<div class="alert alert-error fade in">
@@ -9,17 +9,17 @@
 	</div>
 {/if}
 
-	{#KLIQQI_Admin_Snippet_Instructions_2#}
+	{#PLIKLI_Admin_Snippet_Instructions_2#}
 	
 	<form action="" method="POST" id="thisform">
 		<table>
 			<tbody>
 				<tr>
-					<td><label><strong>{#KLIQQI_Admin_Snippet_Name#}: &nbsp;</strong></label></td>
+					<td><label><strong>{#PLIKLI_Admin_Snippet_Name#}: &nbsp;</strong></label></td>
 					<td><input type="text" name="snippet_name" id="snippet_name" value="{$snippet.snippet_name}" class="form-control" /></td>
 				</tr>
 				<tr>
-					<td><label><strong>{#KLIQQI_Admin_Snippet_Location#}: &nbsp;</strong></label></td>
+					<td><label><strong>{#PLIKLI_Admin_Snippet_Location#}: &nbsp;</strong></label></td>
 					<td>
 						<select name="snippet_location" class="form-control">
 						{foreach from=$admin_snippet_locations item=location}
@@ -29,7 +29,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><label><strong>{#KLIQQI_Admin_Snippet_Status#}<br />{#KLIQQI_Admin_Snippet_Status_active_inactive#} &nbsp;</strong></label></td>
+					<td><label><strong>{#PLIKLI_Admin_Snippet_Status#}<br />{#PLIKLI_Admin_Snippet_Status_active_inactive#} &nbsp;</strong></label></td>
 					<td>
 						<select name="snippet_status" class="form-control">
 							<option value='1' {if $snippet.snippet_status==1}selected{/if}>Active</option>
@@ -39,20 +39,20 @@
 				</tr>
 				{if $snippet.snippet_updated}
 					<tr>
-						<td><label><strong>{#KLIQQI_Admin_Snippet_Updated#}: &nbsp;</strong></label></td>
+						<td><label><strong>{#PLIKLI_Admin_Snippet_Updated#}: &nbsp;</strong></label></td>
 						<td><input type="text" id="snippet_updated" value="{$snippet.snippet_updated}" class="form-control" disabled readonly/></td>
 					</tr>
 				{/if}
 			</tbody>
 		</table>
 		
-		<label><strong>{#KLIQQI_Admin_Snippet_Content#}: </strong></label>
+		<label><strong>{#PLIKLI_Admin_Snippet_Content#}: </strong></label>
 		{* snippet_content must have "|escape" modifier to prevent bug with textarea code in textarea *}
 		<textarea id="textarea-1" name="snippet_content" rows="15" class="form-control">{$snippet.snippet_content|escape}</textarea>
 		<br />
-		<input type="submit" name="submit" value="{#KLIQQI_Admin_Snippet_Submit#}" class="btn btn-primary" />
+		<input type="submit" name="submit" value="{#PLIKLI_Admin_Snippet_Submit#}" class="btn btn-primary" />
 		<input type="hidden" name="snippet_id" value="{$snippet.snippet_id}" />
 	</form>
 </fieldset>
 
-{config_load file=admin_snippet_kliqqi_lang_conf}
+{config_load file=admin_snippet_plikli_lang_conf}

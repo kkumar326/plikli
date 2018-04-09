@@ -127,10 +127,10 @@ if( isset( $_REQUEST['adv'] ) && $_REQUEST['adv'] == 1 ){
 // breadcrumbs and page title
 $search->searchTerm = str_replace('/','',$search->searchTerm);
 
-$navwhere['text1'] = $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Search') . stripslashes(str_replace('/','',$search->searchTerm));
+$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Search') . stripslashes(str_replace('/','',$search->searchTerm));
 $navwhere['link1'] = getmyurl('search', urlencode($search->searchTerm));
 $main_smarty->assign('navbar_where', $navwhere);
-$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Breadcrumb_Search') . stripslashes($search->searchTerm));
+$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_Search') . stripslashes($search->searchTerm));
 
 //sidebar
 $main_smarty = do_sidebar($main_smarty);
@@ -142,7 +142,7 @@ $main_smarty->assign('URL_rss_page', getmyurl('rsssearch',sanitize($search->sear
 
 if(strlen($search->searchTerm) < 3 && strlen($search->url) < 3 && !$search->s_date)
 {
-	$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Search_Too_Short'));
+	$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Search_Too_Short'));
 	$main_smarty->assign('pagename', 'noresults');
 }
 else
@@ -162,7 +162,7 @@ else
 
 	include('./libs/link_summary.php'); // this is the code that show the links / stories
 	if($rows == false){
-		$main_smarty->assign('posttitle', $main_smarty->get_config_vars('KLIQQI_Visual_Search_NoResults') . ' ' . stripslashes($search->searchTerm) . stripslashes($search->url));
+		$main_smarty->assign('posttitle', $main_smarty->get_config_vars('PLIKLI_Visual_Search_NoResults') . ' ' . stripslashes($search->searchTerm) . stripslashes($search->url));
 		$main_smarty->assign('pagename', 'noresults');
 	}
 	
@@ -181,5 +181,5 @@ else
 
 // show the template
 $main_smarty->assign('tpl_center', $the_template . '/search_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 ?>

@@ -14,9 +14,9 @@ if(defined('mnminclude')){
 		module_add_action_tpl('tpl_header_admin_main_links', subscribe2comments_tpl_path . 'subscribe2comments_admin_main_link.tpl');
 		module_add_action('after_comment_submit', 'subscribe2comments_comment_submit', '' ) ;
 		module_add_action('do_submit3', 'subscribe2comments_story_submit', '' ) ;
-//module_add_action_tpl('tpl_kliqqi_content_start', subscribe2comments_tpl_path . 'subscribe2comments_unsubscribe.tpl');
-		module_add_action_tpl('tpl_kliqqi_head_end', subscribe2comments_tpl_path . 'subscribe2comments_js.tpl');
-		module_add_action_tpl('tpl_kliqqi_story_comments_individual_start', subscribe2comments_tpl_path . 'subscribe2comments_story_tools_end.tpl');
+//module_add_action_tpl('tpl_plikli_content_start', subscribe2comments_tpl_path . 'subscribe2comments_unsubscribe.tpl');
+		module_add_action_tpl('tpl_plikli_head_end', subscribe2comments_tpl_path . 'subscribe2comments_js.tpl');
+		module_add_action_tpl('tpl_plikli_story_comments_individual_start', subscribe2comments_tpl_path . 'subscribe2comments_story_tools_end.tpl');
 
 
 		module_add_action('profile_save', 'subscribe2comments_profile_save', '');

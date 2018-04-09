@@ -45,7 +45,7 @@ $main_smarty->assign('total_row_for_group', $rows);
 $numGr = $db->get_var("SELECT count(*) FROM " .table_groups . " WHERE `group_creator` = " . $current_user->user_id);
 $max_user_groups_allowed = $main_smarty->get_template_vars('max_user_groups_allowed');
 if ($numGr >= $max_user_groups_allowed) {
-	$error_max = $main_smarty->get_config_vars('KLIQQI_Visual_Submit_A_New_Group_Error');
+	$error_max = $main_smarty->get_config_vars('PLIKLI_Visual_Submit_A_New_Group_Error');
 	$main_smarty->assign('error_max', $error_max);
 }
 
@@ -102,5 +102,5 @@ function group_read($from_where,$order_by)
 
 // show the template
 $main_smarty->assign('tpl_center', $the_template . '/group_center');
-$main_smarty->display($the_template . '/kliqqi.tpl');
+$main_smarty->display($the_template . '/plikli.tpl');
 ?>

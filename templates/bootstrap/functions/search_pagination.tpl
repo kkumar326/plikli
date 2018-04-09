@@ -1,6 +1,6 @@
 <script type="text/javascript" language="javascript">
 	
-	var my_kliqqi_url = "{$my_base_url}{$my_kliqqi_base}";
+	var my_plikli_url = "{$my_base_url}{$my_plikli_base}";
 	var Pager_setting = "{$Pager_setting}";
 	var page_name = "{$pagename}";
 	var total_row_for_search = "{$total_row_for_search}";
@@ -17,7 +17,7 @@
 			{ 
 				var url = "";
 			
-			 	url = my_kliqqi_url+"/load_data_for_search.php";
+			 	url = my_plikli_url+"/load_data_for_search.php";
 			
 				var dataString = "start_up="+count+"&pagesize="+pageSize+"&sql="+sql;
 								
@@ -52,7 +52,7 @@
 		   } else if(Pager_setting==3){
 			   
 				if(parseInt(total_row_for_search)>count)  
-					$(".stories:last").after("<div class='btn btn-default contine_read_story'>{/literal}{#KLIQQI_Continue_Reading#}{literal}</div>"); 
+					$(".stories:last").after("<div class='btn btn-default contine_read_story'>{/literal}{#PLIKLI_Continue_Reading#}{literal}</div>"); 
 				
 				$(".contine_read_story").live("click", function(){
 					if(parseInt(total_row_for_search) > count){
@@ -60,7 +60,7 @@
 					}else{	
 						$(this).hide();
 						
-						$(".stories:last").after("<div class='btn btn-default no_stories_left'>{/literal}{#KLIQQI_No_More_Articles#}{literal}</div>"); 
+						$(".stories:last").after("<div class='btn btn-default no_stories_left'>{/literal}{#PLIKLI_No_More_Articles#}{literal}</div>"); 
 					}
 				});
 		   }

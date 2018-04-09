@@ -19,17 +19,17 @@ if(is_numeric($post_id) && $post_id > 0){
 	$link->read_basic();
 	
 	if ($current_user->user_id == 0 && !anonymous_vote) {
-		error($main_smarty->get_config_vars('KLIQQI_Visual_Vote_NoAnon'));
+		error($main_smarty->get_config_vars('PLIKLI_Visual_Vote_NoAnon'));
 	}
 
 	$post_user = sanitize($_POST['user'], 3);
 	if($current_user->user_id != $post_user) {
-		error($main_smarty->get_config_vars('KLIQQI_Visual_Vote_BadUser'));
+		error($main_smarty->get_config_vars('PLIKLI_Visual_Vote_BadUser'));
 	}
 
 	$md5=md5($post_user.$link->randkey);
 	if($md5 !== sanitize($_POST['md5'], 3)){
-		error($main_smarty->get_config_vars('KLIQQI_Visual_Vote_BadKey'));
+		error($main_smarty->get_config_vars('PLIKLI_Visual_Vote_BadKey'));
 	}
 
 	if($link->votes($current_user->user_id) > 0 || $link->reports($current_user->user_id) > 0) {
@@ -44,7 +44,7 @@ if(is_numeric($post_id) && $post_id > 0){
 	   // DB 11/10/08
 	   (votes_per_ip > 0 && $link->votes_from_ip() + $link->reports_from_ip() >= votes_per_ip)) {
 	   /////
-		error($main_smarty->get_config_vars('KLIQQI_Visual_Vote_AlreadyVoted'));
+		error($main_smarty->get_config_vars('PLIKLI_Visual_Vote_AlreadyVoted'));
 	}
 
 	$link->insert_vote($current_user->user_id, $value);
