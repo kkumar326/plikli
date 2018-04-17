@@ -35,7 +35,7 @@ class config {
 	var $_bool_false_regexp		= null;
 	var $_qstr_regexp		= null;
 
-	function config()
+	function __construct()
 	{
 		$this->_db_qstr_regexp = '"[^"\\\\]*(?:\\\\.[^"\\\\]*)*"';
 		$this->_bool_true_regexp = 'true|yes|on';

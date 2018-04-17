@@ -30,7 +30,7 @@ class backup extends db2{
      * Constructor
      * @access protected
      */
-	function backup(){
+	function __construct(){
 		global $GonxAdmin;
 		$this->compression = $GonxAdmin["compression_default"];
 	}

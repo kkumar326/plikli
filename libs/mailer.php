@@ -29,7 +29,7 @@ class PlikliMailer{
 	var $from = '';
 	var $to = '';
 
-	function PlikliMailer($subj = '', $body = '', $from = '', $to = '', $cc = '', $bcc = ''){
+	function __construct($subj = '', $body = '', $from = '', $to = '', $cc = '', $bcc = ''){
 
 		if($subj != ''){$this->subject = $subj;}
 		if($body != ''){$this->body = $body;}

@@ -34,7 +34,7 @@ class User {
 	var $extra = '';
 	
 
-	function User($id=0) {
+	function __construct($id=0) {
 		if ($id>0) {
 			$this->id = $id;
 			$this->read();

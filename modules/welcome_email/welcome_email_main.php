@@ -47,7 +47,7 @@ function welcome_email_send(&$registration_details)
 			$messageText .= "-----------------------------------------\n\n";		
 			$messageText .= "  Login URL: ".$installedURL.$installedBase."/login.php\n\n";
 			$messageText .= "  Username.: ".$thisUserName."\n";
-			$messageText .= "  Password.: (password choosen when registered)\n\n";
+			$messageText .= "  Password.: (password chosen when registered)\n\n";
 			$messageText .= "-----------------------------------------\n";		
 			$messageText .= "Email has been automatically generated on ".$thisDate." at ".$thisTime.".\n";
 			

@@ -12,6 +12,7 @@ if ($_GET['language'])
     $language = addslashes(strip_tags($_GET['language']));
 
 echo '<style type="text/css">
+h1{font-size:15px;}
 h2 {
 margin:0 0 5px 0;
 line-height:30px;
@@ -149,7 +150,7 @@ if (!$errors) {
     //end of if post submit is Yes.
     }
 //end of no errors
-echo file_get_contents("https://www.plikli.com/upgrade/congrats-upgrade-done.html");
+
 }
 else {
 	echo DisplayErrors($errors);

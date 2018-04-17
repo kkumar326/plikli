@@ -11,7 +11,7 @@ require_once(TEMPLATE_LITE_DIR . "class.template.php");
 
 class Smarty extends Template_Lite{
 
-    function Smarty()
+    function __construct()
     {
 	}
 }

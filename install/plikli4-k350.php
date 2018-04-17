@@ -829,7 +829,7 @@ $folder_path = $fetched['var_value'];
 						if ($sql_check_extra_fields) {
 							$row_cnt_extra_fields = $sql_check_extra_fields->num_rows;
 						}
-					if ($seoMethod['var_name'] == 'Enable_Extra_Fields' && $seoMethod['var_value'] == 'true') {
+					if ($seoMethod['var_name'] == 'Enable_Extra_Fields' && trim($seoMethod['var_value']) == 'true') {
 						if ($row_cnt_extra_fields > 0) {
 							echo 'We detected that Enable Extra Fields is set to true and one or more extra fields in links table are used. SEE ADDITIONAL INSTRUCTIONS AT THE END OF THE UPGRADE PROCESS!<br />';
 							$warnings[] = 'We detected that Enable Extra Fields is set to true and one or more extra fields in links table are used. YOU MUST COPY THE <strong><em>'.$folder_path.'/LIBS/EXTRA_FIELDS.PHP</em></strong> FILE FROM YOUR OLD CMS TO <strong><em>/'.$upgrade_folder.'/LIBS/ FOLDER</em></strong>.';
@@ -838,7 +838,7 @@ $folder_path = $fetched['var_value'];
 							$warnings[] = 'We detected that Enable Extra Fields is set to true but Extra fields in links table are not used. No action is required!<br />Should you decide to use the extra fields, you must edit the following files:<br /><strong><em>/libs/extra_fields.php <u>using the Extra Fields Editor in the Dashboard</u></em></strong>';
 						}
 
-					}elseif ($seoMethod['var_name'] == 'Enable_Extra_Fields' && $seoMethod['var_value'] == 'false') {
+					}elseif ($seoMethod['var_name'] == 'Enable_Extra_Fields' && trim($seoMethod['var_value']) == 'false') {
 						if ($row_cnt_extra_fields > 0) {
 							echo 'We detected that Enable Extra Fields is set to false and one or more extra fields in links table are used. SEE ADDITIONAL INSTRUCTIONS AT THE END OF THE UPGRADE PROCESS!<br />';
 							$warnings[] = 'We detected that Enable Extra Fields is set to false and one or more extra fields in links table are used. Should you decide to use the extra fields, you must set Enable Extra Fields to true and use the Extra Fields Editor in the Dashboard to edit extra_fields.php if needed!';
@@ -853,11 +853,11 @@ $folder_path = $fetched['var_value'];
 	echo '</ul></fieldset><br />';
 	
 	echo '<fieldset><legend>Renaming the original folder containing the old Kliqqi files</legend><ul>';
-		if ($_SERVER['SERVER_NAME'] == 'localhost') {
 			$sql = "SELECT `var_value` FROM `" . table_prefix."config` WHERE `var_name` = '\$my_plikli_base';";
 			$sql_get_base_folder = $handle->query($sql);
 			$result = $sql_get_base_folder->fetch_array(MYSQLI_ASSOC);
 			$result['var_value'] = substr($result['var_value'], 1, strlen($result['var_value']));
+	if ($_SERVER['SERVER_NAME'] == 'localhost') {
 			$success = rename($_SERVER['DOCUMENT_ROOT'].$result['var_value'],$_SERVER['DOCUMENT_ROOT'].$result['var_value'] . "-original");
 			if (!$success) {
 				$marks = $notok;
@@ -868,15 +868,22 @@ $folder_path = $fetched['var_value'];
 				echo '<li>RENAMED ' . $_SERVER['DOCUMENT_ROOT'].$result['var_value'] . ' to ' . $_SERVER['DOCUMENT_ROOT'].$result['var_value'] . '-original <img src="'.$marks.'" class="iconalign" /></li>';
 				$warnings_rename[] = '<span class="warn-delete">RENAMED ' . $_SERVER['DOCUMENT_ROOT'].$result['var_value'] . ' to ' . $_SERVER['DOCUMENT_ROOT'].$result['var_value'] . '-original</span>';
 			}
-		}else{
-			$warnings_rename[] = 'YOU HAVE to rename the folder ' . $_SERVER['DOCUMENT_ROOT'].$result['var_value'] . ' To ' . $_SERVER['DOCUMENT_ROOT'].$result['var_value'] . '-original!';
-		}
 		// getting the root folder of the current CMS (the new Plikli) to rename it as it is in the config table under $my_plikli_base
 		$arr = explode("/", $_SERVER['SCRIPT_NAME']);
 		$first = $arr[1];
 		$path = $_SERVER["DOCUMENT_ROOT"] . $first;
 		echo "<br />";
 		$warnings_rename[] = "you have to manually rename the current folder from:<br />". $path . " to " . $_SERVER["DOCUMENT_ROOT"] . $result['var_value'];
+	}else{
+		$warnings_rename[] = 'YOU HAVE to rename the folder ' . $result['var_value'] . ' To ' . $result['var_value'] . '-original!';
+		// getting the root folder of the current CMS (the new Plikli) to rename it as it is in the config table under $my_plikli_base
+		$arr = explode("/", $_SERVER['SCRIPT_NAME']);
+		$first = $arr[1];
+		$path = $_SERVER["DOCUMENT_ROOT"] . "/$first";
+		echo "<br />";
+		$warnings_rename[] = "you have to manually rename the current folder from:<br />". $path . " to " . $_SERVER["DOCUMENT_ROOT"] . "/".$result['var_value'];
+	}
+	
 	echo '</ul></fieldset><br />';
 	
 	//check the CMS version & name 
@@ -944,11 +951,11 @@ $folder_path = $fetched['var_value'];
 			$uploaded_groups = $row['UPLOADED'];
 		}
 	if ($result) {
-		if ($result['var_value'] == 'true' && $uploaded_groups > 0) {
+		if (trim($result['var_value']) == 'true' && $uploaded_groups > 0) {
 			$warnings[] = 'Allow Groups to upload own avatar is set to "'.$result['var_value']. '" in your config table, and some groups have uploaded their own avatar. You must copy the avatars from your old CMS '.$folder_path.'/avatars/groups_uploaded TO /'.$upgrade_folder.'/avatars/groups_uploaded';
-		}elseif ($result['var_value'] == 'true' && $uploaded_groups == 0) {
+		}elseif (trim($result['var_value']) == 'true' && $uploaded_groups == 0) {
 			$warnings[] = 'Allow Groups to upload own avatar is set to "'.$result['var_value']. '" in your config table, but no groups have already uploaded their own avatars. NO action is required!';
-		}elseif ($result['var_value'] == 'false' && $uploaded_groups > 0) {
+		}elseif (trim($result['var_value']) == 'false' && $uploaded_groups > 0) {
 			$warnings[] = 'Allow Groups to upload own avatar is set to "'.$result['var_value']. '" in your config table, but some groups have already uploaded their own avatars. Just in case you allow Groups to upload own avatar in the future, you must copy the avatars from your old CMS /avatars/groups_uploaded to the the same location in this CMS!';
 		}
 	}
@@ -962,11 +969,11 @@ $folder_path = $fetched['var_value'];
 			$uploaded_users = $row['UPLOADED'];
 		}
 	if ($result) {
-		if ($result['var_value'] == 'true' && $uploaded_users > 0) {
+		if (trim($result['var_value']) == 'true' && $uploaded_users > 0) {
 			$warnings[] = 'Allow User to Upload Avatars is set to "'.$result['var_value']. '" in your config table, and some users have uploaded their own avatar. You must copy the avatars from your old CMS '.$folder_path.'/avatars/user_uploaded TO /'.$upgrade_folder.'/avatars/user_uploaded';
-		}elseif ($result['var_value'] == 'true' && $uploaded_users = 0) {
+		}elseif (trim($result['var_value']) == 'true' && $uploaded_users = 0) {
 			$warnings[] = 'Allow User to Upload Avatars is set to "'.$result['var_value']. '" in your config table, but no users have already uploaded their own avatars. NO action is required!';
-		}elseif ($result['var_value'] == 'false' && $uploaded_users > 0) {
+		}elseif (trim($result['var_value']) == 'false' && $uploaded_users > 0) {
 			$warnings[] = 'Allow User to Upload Avatars is set to "'.$result['var_value']. '" in your config table, but some userss have already uploaded their own avatars. Just in case you allow Users to upload own avatar in the future, you must copy the avatars from your old CMS '.$folder_path.'/avatars/user_uploaded TO /'.$upgrade_folder.'/avatars/user_uploaded';
 		}
 	}
@@ -991,8 +998,17 @@ echo '<fieldset><legend>Renaming Directories Instructions!</legend><div class="a
 		}
 		echo $output;
 	}
+//end of no errors
+if ($_SERVER['SERVER_NAME'] == 'localhost') {
+	echo file_get_contents("https://www.plikli.com/upgrade/congrats-upgrade-done.html");
+}else{
+	$url = "https://www.plikli.com/upgrade/congrats-upgrade-done.html";
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	$data = curl_exec($ch);
+	curl_close($ch);
+	echo $data;
+}
 echo '</ul></div></fieldset><br />';
-//echo '<a id="upgrade" href="https://www.plikli.com/upgrade/congrats-upgrade.html" target="_blank">Plikli</a>'; 
-//echo file_get_contents("https://www.plikli.com/upgrade/congrats-upgrade-done.html"); 
-
 ?>

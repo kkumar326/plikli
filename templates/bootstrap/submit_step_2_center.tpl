@@ -18,7 +18,7 @@
 				{if $Multiple_Categories}
 					<strong>{#PLIKLI_Visual_Submit2_Category#}</strong>
 				{else}
-					<label for="category">{#PLIKLI_Visual_Submit2_Category#}</strong>
+					<label for="category">{#PLIKLI_Visual_Submit2_Category#}</label>
 				{/if}
 				<div class="controls select-category{if $Multiple_Categories} multi-select-category{/if}">
 					{if $Multiple_Categories}
@@ -378,7 +378,7 @@ $(document).ready(function(){
 
 //making sure that the draft is unchecked if the scheduled date is set
 $('#draft').change(function() {
-	if($(this).is(":checked") && $('#calendar').val() != '') {
+	if($(this).is(":checked") && $('#calendar').val() != '' && $('#calendar').val() != undefined) {
 		$('#draft').attr('checked', false);
 	}
 }); 	

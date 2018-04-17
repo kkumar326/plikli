@@ -9,7 +9,7 @@ class UserAuth {
 	var $authenticated = FALSE;
 
 
-	function UserAuth() {
+	function __construct() {
 		global $db, $cached_users, $language;
 
 		if(isset($_COOKIE['mnm_user']) && isset($_COOKIE['mnm_key']) && $_COOKIE['mnm_user'] !== '') {

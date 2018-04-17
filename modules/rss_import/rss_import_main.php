@@ -416,7 +416,6 @@ function smarty_function_feedsListplikliLinkFields($params, &$smarty){
 
 function checkfortable($table)
 {
-	global $db;
 	/* Redwine: creating a mysqli connection */
 	$handle = new mysqli(EZSQL_DB_HOST,EZSQL_DB_USER,EZSQL_DB_PASSWORD,EZSQL_DB_NAME);
 	/* check connection */

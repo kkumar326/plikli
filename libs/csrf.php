@@ -12,7 +12,7 @@ class CSRF {
 	// define other variables
 	var $datalog = ''; // an array of all the log items
 
-	function CSRF(){
+	function __construct(){
 		$this->start();
 	}
 

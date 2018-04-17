@@ -103,7 +103,7 @@ var $DBHost = EZSQL_DB_HOST;
 	 *	@return Int 3	If the database cannot be selected When connection to the Database done outside of the class
 	 *	@return Int 4	If Conection var is not correct
 	*/
-	function KMessaging($connect = false,$selectDB = false,$con = '')
+	function __construct($connect = false,$selectDB = false,$con = '')
 	{		
 		global $con;
 		if($connect)

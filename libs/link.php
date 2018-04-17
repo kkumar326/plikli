@@ -1495,7 +1495,7 @@ class PlikliHTTPRequest
    }
 
    // constructor
-   function PlikliHTTPRequest($url)
+   function __construct($url)
    {
 		$this->_url = $url;
 		$this->_scan_url();

@@ -39,12 +39,12 @@ if(!isset($dbuser)){
   $dbhost = $_POST['dbhost'];
 }
 
-if($conn = @mysql_connect($dbhost,$dbuser,$dbpass)) {
+if($conn = @mysqli_connect($dbhost,$dbuser,$dbpass)) {
 	
 	@$_SESSION['checked_step'] = 3;
 	
 	$output.= "<div style=\"direction:$site_direction\"><fieldset><p>" . $lang['ConnectionEstab'] . "</p>\n";
-	if(mysql_select_db($dbname, $conn)) {
+	if(mysqli_select_db($conn, $dbname)) {
 	$output.= "<p><strong>" . $lang['FoundDb'] . "</strong></p>\n";
 		if($handle = fopen($file, 'w')) {
 			$str  = "<?php\n";

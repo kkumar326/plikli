@@ -15,13 +15,21 @@ function mailer_start(){
 }
 
 function check_if_table_exists($table) {
-	global $db;
-	// checks to see if a table in the database exists
-	$result = $db->query('select * from ' . $table);
-	if (!$result) {
-		return false;
+	/* Redwine: creating a mysqli connection */
+	$handle = new mysqli(EZSQL_DB_HOST,EZSQL_DB_USER,EZSQL_DB_PASSWORD,EZSQL_DB_NAME);
+	/* check connection */
+	if (mysqli_connect_errno()) {
+		printf("Connect failed: %s\n", mysqli_connect_error());
+		exit();
 	}
-	return true;
+	
+	$result = $handle->query("SHOW TABLES LIKE '".$table."';");
+	$numRows = $result->num_rows;
+	if ($numRows < 1) {
+		return false;
+	}else{
+		return true;
+	}
 }
 
 function plikli_version(){

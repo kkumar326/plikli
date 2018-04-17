@@ -11,12 +11,12 @@ function plikli_createtables($conn) {
 	  `ac_cat_id` int(11) NOT NULL,
 	  UNIQUE KEY `ac_link_id` (`ac_link_id`,`ac_cat_id`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'additional_categories\'...</li><br />';
 
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_categories . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_categories . "` (
 	  `category__auto_id` int(11) NOT NULL auto_increment,
@@ -40,20 +40,20 @@ function plikli_createtables($conn) {
 	  KEY `category_parent` (`category_parent`),
 	  KEY `category_safe_name` (`category_safe_name`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'categories\'...</li><br />';
 
 	$sql = "INSERT INTO `" . table_categories . "` (`category__auto_id`, `category_lang`, `category_id`, `category_parent`, `category_name`, `category_safe_name`, `rgt`, `lft`, `category_enabled`, `category_order`, `category_desc`, `category_keywords`, `category_author_level`, `category_author_group`, `category_votes`) VALUES (0, '" . $dblang . "', 0, 0, 'all', 'all', 3, 0, 2, 0, '', '', 'normal', '', '');";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	$sql = "UPDATE `" . table_categories . "` SET `category__auto_id` = '0' WHERE `category_name` = 'all' LIMIT 1;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	$sql = "INSERT INTO `" . table_categories . "` (`category__auto_id`, `category_lang`, `category_id`, `category_parent`, `category_name`, `category_safe_name`, `rgt`, `lft`, `category_enabled`, `category_order`, `category_desc`, `category_keywords`, `category_author_level`, `category_author_group`, `category_votes`) VALUES (1, '" . $dblang . "', 1, 0, 'News', 'News', 2, 1, 1, 0, '', '', 'normal', '', '');";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Inserting default "All" and "News" categories...</li><br />';	
 
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_comments . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_comments . "` (
 	  `comment_id` int(20) NOT NULL auto_increment,
@@ -73,11 +73,11 @@ function plikli_createtables($conn) {
 	  KEY `comment_date` (`comment_date`),
 	  KEY `comment_parent` (`comment_parent`,`comment_date`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'comments\'...</li><br />';
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_config . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_config . "` (
 	  `var_id` int(11) NOT NULL auto_increment,
@@ -92,11 +92,11 @@ function plikli_createtables($conn) {
 	  `var_enclosein` varchar(5) collate utf8_general_ci default NULL,
 	  PRIMARY KEY  (`var_id`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'config\'....</li><br />';
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_formulas . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_formulas . "` (
 	  `id` int(11) NOT NULL auto_increment,
@@ -106,17 +106,17 @@ function plikli_createtables($conn) {
 	  `formula` text collate utf8_general_ci NOT NULL,
 	  PRIMARY KEY  (`id`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Creating table: \'formulas\'....</li><br />';
 	
 	// ********************************	
 	$sql = 'INSERT INTO `' . table_formulas . '` (`id`, `type`, `enabled`, `title`, `formula`) VALUES (1, \'report\', 1, \'Simple Story Reporting\', \'$reports > $votes * 3\');';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Inserted default formulas...</li><br />';
 
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_friends . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_friends . "` (
 	  `friend_id` int(11) NOT NULL auto_increment,
@@ -125,12 +125,12 @@ function plikli_createtables($conn) {
 	  PRIMARY KEY  (`friend_id`),
 	  UNIQUE KEY `friends_from_to` (`friend_from`,`friend_to`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'friends\'...</li><br />';
 	
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_groups . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	$sql = "CREATE TABLE `".table_groups."` (
 	  `group_id` int(20) NOT NULL auto_increment,
 	  `group_creator` int(20) NOT NULL,
@@ -154,12 +154,12 @@ function plikli_createtables($conn) {
 		KEY `group_name` (`group_name`(100)),
 		KEY `group_creator` (`group_creator`, `group_status`)
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Creating table: \'groups\'....</li><br />';
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_group_member . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	$sql = "CREATE TABLE `".table_group_member."` (
 		`member_id` INT( 20 ) NOT NULL auto_increment,
 		`member_user_id` INT( 20 ) NOT NULL ,
@@ -170,13 +170,13 @@ function plikli_createtables($conn) {
 		KEY `user_group` (`member_group_id`, `member_user_id`)
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'group members\'....</li><br />';
 
 	// ********************************
 	//group shared table
 	$sql = 'DROP TABLE IF EXISTS `' . table_group_shared . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	$sql = "CREATE TABLE `".table_group_shared."` (
 		`share_id` INT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 		`share_link_id` INT( 20 ) NOT NULL ,
@@ -184,12 +184,12 @@ function plikli_createtables($conn) {
 		`share_user_id` INT( 20 ) NOT NULL,
 		UNIQUE KEY `share_group_id` (`share_group_id`,`share_link_id`)
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'group shared\'....</li><br />';
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_login_attempts . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `". table_login_attempts ."` (
 		  `login_id` int(11) NOT NULL auto_increment,
@@ -200,12 +200,12 @@ function plikli_createtables($conn) {
 		  PRIMARY KEY  (`login_id`),
 		  UNIQUE KEY `login_username` (`login_ip`,`login_username`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'login_attempts\'....</li><br />';
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_links . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_links . "` (
 	  `link_id` int(20) NOT NULL auto_increment,
@@ -257,17 +257,17 @@ function plikli_createtables($conn) {
 	  FULLTEXT KEY `link_tags` (`link_tags`),
 	  FULLTEXT KEY `link_search` (`link_title`,`link_content`,`link_tags`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'links\'...</li><br />';
 
 	// ********************************
 	$sql = "INSERT INTO `" . table_links . "` (`link_id`, `link_author`, `link_status`, `link_randkey`, `link_votes`, `link_reports`, `link_comments`, `link_karma`, `link_modified`, `link_date`, `link_published_date`, `link_category`, `link_lang`, `link_url`, `link_url_title`, `link_title`, `link_title_url`, `link_content`, `link_summary`, `link_tags`, `link_field1`, `link_field2`, `link_field3`, `link_field4`, `link_field5`, `link_field6`, `link_field7`, `link_field8`, `link_field9`, `link_field10`, `link_field11`, `link_field12`, `link_field13`, `link_field14`, `link_field15`, `link_group_id`, `link_out`) VALUES (1, 1, 'page', 0, 0, 0, 0, '0.00', NOW(), NOW(), '0000-00-00 00:00:00', 0, 1, '', NULL, 'About', 'about', '<legend><strong>About Us</strong></legend>\r\n<p>Our site allows you to submit an article that will be voted on by other members. The most popular posts will be published to the front page, while the less popular articles are left in an \'New\' page until they acquire the set number of votes to move to the published page. This site is dependent on user contributed content and votes to determine the direction of the site.</p>\r\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0);";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created Sample About Page in the table \'links\'...</li><br />';
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_messages . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" .table_messages. "` (
 	  `idMsg` int(11) NOT NULL auto_increment,
@@ -280,19 +280,19 @@ function plikli_createtables($conn) {
 	  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	  PRIMARY KEY  (`idMsg`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'messages\'....</li><BR/>';
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_misc_data . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_misc_data . "` (
 		`name` VARCHAR( 20 ) collate utf8_general_ci NOT NULL ,
 		`data` TEXT collate utf8_general_ci NOT NULL ,
 		PRIMARY KEY ( `name` )
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-		mysql_query( $sql, $conn );
+		mysqli_query( $conn, $sql );
 		echo '<li>Created table: \'Misc Data\'....</li><br />';
 	
 	
@@ -323,19 +323,19 @@ function plikli_createtables($conn) {
 	('plikli_update_url','https://www.plikli.com/download_plikli/'),
 	('modules_update_unins',''),
 	('modules_upd_versions','');";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	//register validation//
 	$randkey = '';
 	for ($i=0; $i<32; $i++)
 		$randkey .= chr(rand(48,200));
 
 	$sql = "INSERT INTO `" . table_misc_data . "` ( `name` , `data` ) VALUES ('hash', '$randkey');";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Inserted Data into table: \'Misc Data\'....</li><br />';
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_modules . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_modules . "` (
 	  `id` int(11) NOT NULL auto_increment,
@@ -347,7 +347,7 @@ function plikli_createtables($conn) {
 	  `weight` INT NOT NULL,
 	  PRIMARY KEY  (`id`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'modules\'....</li><BR/>';
 
 	// Adding default modules.
@@ -358,12 +358,12 @@ function plikli_createtables($conn) {
 	('Sidebar Stories', 2.2, 0, 'sidebar_stories', 1,0),
 	('Sidebar Comments', 2.1, 0, 'sidebar_comments', 1,0),
 	('Karma module', 1.0, 0, 'karma', 1,0);";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Added default \'modules\'...</li><br />';
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_old_urls . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_old_urls ."` (
 	  `old_id` int(11) NOT NULL auto_increment,
@@ -372,12 +372,12 @@ function plikli_createtables($conn) {
 	  PRIMARY KEY  (`old_id`),
 	  KEY `old_title_url` (  `old_title_url` )
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'Old URLs\'....</li><br />';
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_redirects . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	$sql = "CREATE TABLE `" . table_redirects . "` (
 	  `redirect_id` int(11) NOT NULL auto_increment,
 	  `redirect_old` varchar(255) NOT NULL,
@@ -385,12 +385,12 @@ function plikli_createtables($conn) {
 	  PRIMARY KEY  (`redirect_id`),
 	  KEY `redirect_old` (`redirect_old`)
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'Redirects\'....</li><br />';
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_saved_links . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_saved_links ."` (
 	  `saved_id` int(11) NOT NULL auto_increment,
@@ -400,12 +400,12 @@ function plikli_createtables($conn) {
 	  PRIMARY KEY  (`saved_id`),
 	  KEY `saved_user_id` (  `saved_user_id` )
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'Saved Links\'....</li><br />';
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_tags . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_tags . "` (
 	  `tag_link_id` int(11) NOT NULL default '0',
@@ -416,30 +416,30 @@ function plikli_createtables($conn) {
 	  KEY `tag_lang` (`tag_lang`,`tag_date`),
 	  KEY `tag_words` (`tag_words`,`tag_link_id`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Creating table: \'tags\'...</li><br />';
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_tag_cache . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_tag_cache . "` (
 		  `tag_words` varchar(64) NOT NULL,
 		  `count` int(11) NOT NULL
 		) ENGINE =MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'Tag cache\'....</li><br />';
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_totals . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_totals . "` (
 		`name` varchar(10) NOT NULL,
 		`total` int(11) NOT NULL,
 		PRIMARY KEY  (`name`)
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'Totals\'....</li><br />';
 	
 	$sql = "insert into `" . table_totals . "` (`name`, `total`) values
@@ -448,12 +448,12 @@ function plikli_createtables($conn) {
 	('discard', 0),
 	('draft', 0),
 	('scheduled', 0);";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo "<li>Added default 'totals' data...</li><br />";
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_trackbacks . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_trackbacks . "` (
 	  `trackback_id` int(10) unsigned NOT NULL auto_increment,
@@ -472,12 +472,12 @@ function plikli_createtables($conn) {
 	  KEY `trackback_url` (`trackback_url`),
 	  KEY `trackback_date` (`trackback_date`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'trackbacks\'...</li><br />';
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_users . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_users . "` (
 	  `user_id` int(20) NOT NULL auto_increment,
@@ -512,12 +512,12 @@ function plikli_createtables($conn) {
 	  UNIQUE KEY `user_login` (`user_login`),
 	  KEY `user_email` (`user_email`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'users\'...</li><br />';
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_votes . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `" . table_votes . "` (
 	  `vote_id` int(20) NOT NULL auto_increment,
@@ -533,12 +533,12 @@ function plikli_createtables($conn) {
 	  KEY `link_id` (`vote_link_id`),
 	  KEY `vote_type` (`vote_type`,`vote_link_id`,`vote_user_id`,`vote_ip`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Creating table: \'votes\'...</li><br />';
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_widgets . '`;';
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "CREATE TABLE `".table_widgets."` (
 		  `id` int(11) NOT NULL auto_increment,
@@ -553,7 +553,7 @@ function plikli_createtables($conn) {
 		  PRIMARY KEY  (`id`),
 		  UNIQUE KEY `folder` (`folder`)
 	) ENGINE =MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Created table: \'widgets\'....</li><br />';
 
 	$sql = "INSERT INTO `".table_widgets."` (`id`, `name`, `version`, `latest_version`, `folder`, `enabled`, `column`, `position`, `display`) VALUES 
@@ -561,7 +561,7 @@ function plikli_createtables($conn) {
 	(NULL, 'Statistics', 3.0, 0, 'statistics', 1, 'left', 1, ''),
 	(NULL, 'Plikli CMS', 1.0, 0, 'plikli_cms', 1, 'right', 5, ''),
 	(NULL, 'Plikli News', 0.1, 0, 'plikli_news', 1, 'right', 6, '');";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	echo '<li>Added default widgets...</li><br />';
 
 	// ********************************
@@ -570,10 +570,10 @@ function plikli_createtables($conn) {
 	$stmt = str_replace("INSERT INTO `table_config`", "INSERT INTO `".table_prefix."config`", $stmt);
 			$stmt = str_replace("'table_prefix', 'plikli_'", "'table_prefix', '" . table_prefix . "'", $stmt);
 	$stmt = str_replace("{\$_SESSION[\'language\']}", "{$_SESSION['language']}", $stmt);
-			mysql_query($stmt);
-		if (mysql_error()) {
+			mysqli_query($conn, $stmt);
+		if (mysqli_error($conn)) {
 				print htmlentities($stmt);
-				print mysql_error();
+				print mysqli_error($conn);
 				exit;
 		}else{
 			echo "<li>Inserted data in the config table...</li><br />";

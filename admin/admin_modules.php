@@ -69,7 +69,7 @@ if($status=="uninstalled") {
 		$update_key = array();
 		$updatecount=0;
 		foreach($foundfolders as $key => $value) {
-			$text = '';
+			$text = array();
 			if($module_info = include_module_settings($value)) {
 				$text[] = $module_info['desc'];
 				$module_info_data[$i]['version'] = $module_info['version'];

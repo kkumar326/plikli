@@ -128,10 +128,10 @@ if (!$errors) {
 	$dbname = EZSQL_DB_NAME;
 	$dbhost = EZSQL_DB_HOST;
 
-	if($conn = @mysql_connect($dbhost,$dbuser,$dbpass))
+	if($conn = @mysqli_connect($dbhost,$dbuser,$dbpass))
 	 {
-		$db_selected = mysql_select_db($dbname, $conn);
-		if (!$db_selected) { die ('Error: '.$dbname.' : '.mysql_error()); }
+		$db_selected = mysqli_select_db($conn, $dbname);
+		if (!$db_selected) { die ('Error: '.$dbname.' : '.mysqli_error($conn)); }
 		define('table_prefix', $_POST['tableprefix']);
 
 		include_once '../libs/define_tables.php';
@@ -177,15 +177,15 @@ if (!$errors) {
 	$my_plikli_base=dirname($_SERVER["PHP_SELF"]); $my_plikli_base=str_replace("/".substr(strrchr($my_plikli_base, '/'), 1),'',$my_plikli_base);
 
 	$sql = "Update " . table_config . " set `var_value` = '" . $my_base_url . "' where `var_name` = '" . '$my_base_url' . "';";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$sql = "Update " . table_config . " set `var_value` = '" . $my_plikli_base . "' where `var_name` = '" . '$my_plikli_base' . "';";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 	
 	// Set the site language to what the user has been using during the installation
 	$language = addslashes(strip_tags($_REQUEST['language']));
 	$sql = "Update " . table_config . " set `var_value` = '" . $language . "' where `var_name` = '" . '$language' . "';";
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 
 	$config = new plikliconfig;
 	$config->create_file('../settings.php');
@@ -236,7 +236,7 @@ if (!$errors) {
 	';
 }
 
-	mysql_query( $sql, $conn );
+	mysqli_query( $conn, $sql );
 if (isset($errors)) {
 	$output=DisplayErrors($errors);
 	$output.='<p>' . $lang['Errors'] . '</p>';

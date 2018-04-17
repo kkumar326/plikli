@@ -12,7 +12,7 @@ class redirector {
 	var $old_url = '';
 	var $new_url = '';
 	
-	function redirector($old_url){
+	function __construct($old_url){
 		$this->check_old($old_url);
 	}
 

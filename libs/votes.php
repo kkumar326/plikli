@@ -10,7 +10,7 @@ class Vote {
 	var $link;
 	var $ip='';
 	
-	function Vote() {
+	function __construct() {
 		return;
 	}
 	

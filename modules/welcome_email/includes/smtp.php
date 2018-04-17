@@ -43,7 +43,7 @@
 		*             to fsockopen()
         */
 
-		function smtp($params = array()){
+		function __construct($params = array()){
 
 			if(!defined('CRLF'))
 				define('CRLF', "\r\n", TRUE);

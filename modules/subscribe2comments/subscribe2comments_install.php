@@ -5,7 +5,7 @@
 	$module_info['settings_url'] = '../module.php?module=subscribe2comments';
 	$module_info['homepage_url'] = 'https://www.plikli.com/mods/subscribe2comments.zip';
 	$module_info['update_url'] = '';
-	$module_info['creator'] = 'redwine';
+	$module_info['creator'] = 'Author Unknown & redwine';
 	/****************** Add new columns ******************
 		we use db_add_field because the function checks if the column exists; otherwise, if we use an ater add query we get an error when we uninstall and then reinstall the module.
 	******************************************************/	
@@ -19,7 +19,7 @@
 	  `notify_user_id` int(11) NOT NULL,
   	  UNIQUE KEY `notify_link_id` (`notify_link_id`,`notify_user_id`)
 	  ) ENGINE=MyISAM DEFAULT CHARSET=utf8");	
-	  
+	
 	//Inserting the default background and font colors that match the defaults used for the CMS
 	if (get_misc_data('cs_background')=='') {
 		global $db;

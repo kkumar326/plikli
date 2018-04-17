@@ -5,7 +5,7 @@ class PlikliDoc{
 	var $all_script;
 	var $top;
 	
-	function PlikliDoc(){
+	function __construct(){
 		$this->js=array();
 		$this->all_script="";
 		$this->top=0;

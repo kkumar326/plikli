@@ -1,9 +1,9 @@
 <?php
 
-$the_settings = links_settings();
+$links_settings = links_settings();
 
 function embed_videos($text, $type) {
-	global $the_settings;
+	global $links_settings;
 	
 	// wrap the image to make it responsive
 	if (preg_match('/(<img[^>]+\s{0,}\/?\s{0,}>)/si', $text, $regs)) {
@@ -15,9 +15,9 @@ function embed_videos($text, $type) {
 	$reg_facebook = "~https?://www.facebook.com/.*/videos/(?:t\.\d+/)?(\d+/)(\?type=\d+)?~i";
 // Check if there is a url in the text
 	if ($type == "articles") {
-		$correct_settings = $the_settings['fb_stories'];
+		$correct_settings = $links_settings['fb_stories'];
 	}elseif ($type == 'comms') {
-		$correct_settings = $the_settings['fb_comments'];
+		$correct_settings = $links_settings['fb_comments'];
 	}
 //match facebook video url
 	if ($correct_settings) {
@@ -30,9 +30,9 @@ function embed_videos($text, $type) {
 		}
 	}
 	if ($type == "articles") {
-		$correct_settings = $the_settings['yt_stories'];
+		$correct_settings = $links_settings['yt_stories'];
 	}elseif ($type == 'comms') {
-		$correct_settings = $the_settings['yt_comments'];
+		$correct_settings = $links_settings['yt_comments'];
 	}
 // match Youtube video url
 	if ($correct_settings) {
@@ -85,7 +85,7 @@ function embed_videos($text, $type) {
 					$text = preg_replace("#(?<!=\")($match)(?![^<>]*>)#ui", " <div class=\"videoWrapper\"><img src=\"$match\" /></div>", $text);
 			}else{
 				// matching all other urls that are not within html tags
-				if ($the_settings['nofollow'] == "1") {
+				if ($links_settings['nofollow'] == "1") {
 						$text = preg_replace("#(?<!=\")($match)(?![^<>]*>)#ui", " <a href=\"$match\" target=\"_blank\" rel=\"nofollow\">$match</a> ",$text);
 				}else{
 					$text = preg_replace('$(\s|^)(https?://[\p{L}a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$ui', " <a href=\"$match\" target=\"_blank\">$match</a> ",$text);
@@ -98,8 +98,8 @@ function embed_videos($text, $type) {
 }
 
 function links_show_comment_content(&$vars) {
-	global $smarty, $current_user, $to_convert, $converted, $converted_nofollow,$the_settings;
-	if ($the_settings['comments']) {
+	global $smarty, $current_user, $to_convert, $converted, $converted_nofollow,$links_settings;
+	if ($links_settings['comments']) {
 		$to_convert = $vars['comment_text'];
 		$converted = embed_videos($to_convert, 'comms');
 			
@@ -110,24 +110,24 @@ function links_show_comment_content(&$vars) {
 				$converted_nofollow = $to_convert;
 		}
 		/* Redwine: checking if the links module is granted to all user levels. */
-		if ($the_settings['all']) {
+		if ($links_settings['all']) {
 					$vars['comment_text'] = $converted;
 		}else{
 			$vars['comment_text'] = $to_convert;
 		}
 		
-		if ($the_settings['all'] == "") {
-			if ($the_settings['moderators'] && $current_user->user_level == "moderator") {
+		if ($links_settings['all'] == "") {
+			if ($links_settings['moderators'] && $current_user->user_level == "moderator") {
 					$vars['comment_text'] = $converted;
-			}elseif ($the_settings['admins'] && $current_user->user_level == "admin") {
+			}elseif ($links_settings['admins'] && $current_user->user_level == "admin") {
 					$vars['comment_text'] = $converted;
 				}
 			}
 		}
 	}
 function links_summary_fill_smarty(&$vars) {
-	global $smarty, $current_user, $to_convert, $converted, $converted_nofollow,$the_settings;
-	if ($the_settings['stories']) {
+	global $smarty, $current_user, $to_convert, $converted, $converted_nofollow,$links_settings;
+	if ($links_settings['stories']) {
 		$to_convert = $vars['smarty']->_vars['story_content'];
 		
 			$converted = embed_videos($to_convert, 'articles');
@@ -139,16 +139,16 @@ function links_summary_fill_smarty(&$vars) {
 				$converted_nofollow = $to_convert;
 		}
 		/* Redwine: checking if the links module is granted to all user levels. */
-		if ($the_settings['all']) {
+		if ($links_settings['all']) {
 				$vars['smarty']->_vars['story_content'] = $converted;
 		}else{
 			$vars['smarty']->_vars['story_content'] = $to_convert;
 		}
 		
-		if ($the_settings['all'] == "") {
-			if ($the_settings['moderators'] && $current_user->user_level == "moderator") {
+		if ($links_settings['all'] == "") {
+			if ($links_settings['moderators'] && $current_user->user_level == "moderator") {
 					$vars['smarty']->_vars['story_content'] = $converted;
-			}elseif ($the_settings['admins'] && $current_user->user_level == "admin") {
+			}elseif ($links_settings['admins'] && $current_user->user_level == "admin") {
 					$vars['smarty']->_vars['story_content'] = $converted;
 				}
 			}
@@ -213,7 +213,7 @@ function links_showpage(){
 		
 		if (!defined('pagename')) define('pagename', 'admin_modifylinks'); 
 		$main_smarty->assign('pagename', pagename);
-		$main_smarty->assign('settings', links_settings());
+		$main_smarty->assign('links_settings', links_settings());
 		$main_smarty->assign('tpl_center', links_tpl_path . 'links_main');
 		$main_smarty->display('/admin/admin.tpl');
 	}else{

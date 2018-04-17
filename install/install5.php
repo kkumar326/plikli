@@ -109,7 +109,6 @@ if (!$errors) {
 	$output = '<div class="jumbotron" style="padding:14px 25px;direction:'.$site_direction.'">
 		<h2>' . $lang['InstallSuccess'] . '</h2>
 		<p style="font-size:1.2em;">' . $lang['InstallSuccessMessage'] . '</p>
-		echo file_get_contents("https://www.plikli.com/upgrade/congrats-installation-done.html");
 	</div></fieldset>';
 	
 	$output .='<p><strong></strong></p>
@@ -130,6 +129,19 @@ if (isset($errors)) {
 }
 
 echo $output;
+if ($_SERVER['SERVER_NAME'] == 'localhost') {
+	echo file_get_contents("https://www.plikli.com/upgrade/congrats-installation-done.html");
+}else{
+	$url = "https://www.plikli.com/upgrade/congrats-installation-done.html";
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	$data = curl_exec($ch);
+	curl_close($ch);
+	echo $data;
+}
+echo '</ul></div></fieldset><br />';
+
 echo '</div>';
 
 ?>

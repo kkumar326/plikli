@@ -20,6 +20,7 @@ if ($language != 'english') {
 	chmod("../languages/$file_rename", 0777);
 }
 include ('header.php');
+include('db-mysqli.php');
 $tbl_prefix = '';
 $sitetitle = '';
 /* Redwine: Applies only to kliqqi 3.5.0. We want to find out if they copied 3.5.2 files and replaced the 3.5.0 ones or not. Because if they did, then we notify them that because they did so, only the Plikli version was updated in the misc_data table and n further actions is required. However, if they are upgrading from a different directory, then we have to detect certain settings to notify them that they must copy over some files from the old directory (UPLOAD module attachements) and, for instance, rename a certain language file if they have Allow users to change language set to 1, etc. */
@@ -124,7 +125,7 @@ if (isset($_POST['prefix'])) {
 	$tbl_prefix = $_POST['prefix'];
 	$_SESSION['table_prefix'] = $tbl_prefix;
 	$sql = "UPDATE `" . $tbl_prefix."config` SET `var_value` = 'bootstrap', `var_defaultvalue` = 'bootstrap', `var_optiontext` = 'Text' where `var_name` = '\$thetemp';";
-	$sql_thetemp = mysql_query($sql);
+	$sql_thetemp = $handle->query($sql);
 }else{
 	$tbl_prefix = '';
 }

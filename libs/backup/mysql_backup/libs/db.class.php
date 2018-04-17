@@ -70,8 +70,7 @@ class db2{
 		
 		switch($this->dbType){
 			case "mysql": 
-				$this->Link_ID = @mysql_connect($this->hostName, $this->dbUser, $this->dbPwd) or die (_CONNECTION_ERROR_);
-				@mysql_select_db($this->dbName) or die (_CONNECTION_ERROR_.$this->error()."<br><br>");
+				$this->Link_ID = @mysqli_connect($this->hostName, $this->dbUser, $this->dbPwd, $this->dbName) or die (_CONNECTION_ERROR_);
 			break;
 			
 		    case "postgresql": 
@@ -104,7 +103,7 @@ class db2{
 		switch($this->dbType)
 		{
 			case "mysql":
-				@mysql_close($this->Link_ID);
+				@mysqli_close($this->Link_ID);
 			break;
 			
 			case "postgresql":
@@ -135,7 +134,7 @@ class db2{
 		
 		switch($this->dbType){
 			case "mysql": 
-				$this->dbQryResult = @mysql_query($query) or die (_QUERY_ERROR_.mysql_error()."<br><br>");
+				$this->dbQryResult = @mysqli_query($this->Link_ID, $query) or die (_QUERY_ERROR_.mysqli_error($this->Link_ID)."<br><br>");
 			break;
 			
 		    case "postgresql": 
@@ -169,7 +168,7 @@ class db2{
 		switch($this->dbType)
 		{
 			case "mysql":
-				return mysql_free_result ($this->dbQryResult);
+				return mysqli_free_result ($this->dbQryResult);
 			break;
 			
 			case "postgresql":
@@ -200,7 +199,7 @@ class db2{
 		global $GonxAdmin;
 		switch($this->dbType){
 			case "mysql": 
-				$this->dbResultLine = @mysql_fetch_row($result);
+				$this->dbResultLine = @mysqli_fetch_row($result);
 			break;
 			
 		    case "postgresql": 
@@ -246,7 +245,7 @@ class db2{
 		global $GonxAdmin;
 		switch($this->dbType){
 			case "mysql": 
-				$this->dbResultLine = @mysql_fetch_array($result);
+				$this->dbResultLine = @mysqli_fetch_array($result);
 			break;
 			
 		    case "postgresql": 
@@ -278,7 +277,7 @@ class db2{
 		switch($this->dbType)
 		{
 			case "mysql":
-				return @mysql_num_rows($this->dbQryResult);
+				return @mysqli_num_rows($this->dbQryResult);
 			break;
 			
 			case "postgresql":
@@ -308,7 +307,7 @@ class db2{
 		global $GonxAdmin;
 		switch($this->dbType){
 			case "mysql": 
-				$this->dbResultLine = @mysql_query("SHOW TABLES FROM $dbname");
+				$this->dbResultLine = @mysqli_query($this->Link_ID, "SHOW TABLES FROM $dbname");
 			break;
 			
 		    case "postgresql": 
@@ -362,7 +361,7 @@ class db2{
 		global $GonxAdmin;
 		switch($this->dbType){
 			case "mysql": 
-				$this->dbResultLine = @mysql_list_dbs($this->Link_ID);
+				$this->dbResultLine = @mysqli_query($this->Link_ID, "SHOW DATABASES");
 			break;
 			
 		    case "postgresql": 
@@ -413,7 +412,7 @@ class db2{
 		global $GonxAdmin;
 		switch($this->dbType){
 			case "mysql": 
-				return @mysql_error();
+				return @mysqli_error($this->Link_ID);
 			break;
 			
 		    case "postgresql":
@@ -442,7 +441,7 @@ class db2{
 		global $GonxAdmin;
 		switch($this->dbType){
 			case "mysql": 
-				return mysql_escape_string($string);
+				return mysqli_real_escape_string($this->Link_ID, $string);
 			break;
 			
 		    case "postgresql": 

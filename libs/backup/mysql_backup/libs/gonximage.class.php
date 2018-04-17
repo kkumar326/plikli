@@ -14,7 +14,7 @@ class gonximage{
      * Constructor 
      * @access protected 
      */ 
-    function gonximage(){ 
+    function __construct(){ 
          
     } 
      

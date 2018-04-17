@@ -38,11 +38,14 @@ function DisplayErrors($errors) {
 
 function checkfortable($table)
 {
-	$result = mysql_query('select * from ' . $table);
-	if (!$result) {
+	global $handle;
+	$result = $handle->query("SHOW TABLES LIKE '".$table."';");
+	$numRows = $result->num_rows;
+	if ($numRows < 1) {
 		return false;
-	}
+	}else{
 	return true;
+	}
 }
 
 function check_lang_conf($version) {

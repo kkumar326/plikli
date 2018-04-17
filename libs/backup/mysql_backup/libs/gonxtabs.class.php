@@ -14,7 +14,7 @@ class gonxtabs{
      * Constructor
      * @access protected
      */
-	function gonxtabs(){
+	function __construct(){
 
 	}
 	

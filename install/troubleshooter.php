@@ -3,6 +3,21 @@ error_reporting(E_ALL^E_NOTICE);
 $page = 'troubleshooter';
 $include='header.php'; if (file_exists($include)) { include_once($include); }
 $include='functions.php'; if (file_exists($include)) { require_once($include); }
+if (isset($_POST['language'])) {
+	$selected_lang = $_POST['language'];
+	foreach ($selected_lang as $sel_lang){
+		if (file_exists("../languages/$sel_lang")) {
+			$torename = str_replace(".default", "", $sel_lang);
+			rename("../languages/$sel_lang", "../languages/$torename");
+			chmod("../languages/$torename", 0777);
+			
+		}
+	}
+	//header("Location: http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+//die();
+}else{ 
+	$selected_lang = "";
+}
 ?>
 <style type="text/css">
 .popover-inner {
@@ -49,15 +64,20 @@ $phpversion = phpversion();
 $required = 23; // This should be the number of checks being performed
 $tally = 0;
 $warning_php_version = '';
+$warning_mysql_version = '';
 if (glob("../languages/*.conf")) { $tally = $tally+1;}
-if ($phpversion > 5 && $phpversion < 6) {
+if ($phpversion >= 5.4 && $phpversion < 6) {
 	$tally = $tally+1; 
 }elseif ($phpversion > 6) {
-	$warning_php_version = "You have PHP version $phpversion and Plikli is NOT yet compatible with PHP version 7+; It is in progress!<br />Check the cPanel under SOFTWARE -> MultiPHP Manager. if it is available and you can select the PHP version you want, then set it to 5+. Otherwise, ask your host to install EasyApache so you can have access to MultiPHP Manager.";
-}elseif ($phpversion < 5) {
-	$warning_php_version = "You have PHP version $phpversion and Plikli is NOT compatible with PHP version $phpversion; as Plikli CMS uses functions that are designed for PHP 5+<br />Check the cPanel under SOFTWARE -> MultiPHP Manager. if it is available and you can select the PHP version you want, then set it to 5+. Otherwise, ask your host to install EasyApache so you can have access to MultiPHP Manager.";
+	$warning_php_version = "You have PHP version $phpversion and Plikli is NOT yet compatible with PHP version 7+; It is in progress!<br />Check the cPanel under SOFTWARE -> MultiPHP Manager. if it is available and you can select the PHP version you want, then set it to 5.4+. Otherwise, ask your host to install EasyApache so you can have access to MultiPHP Manager.";
+}elseif ($phpversion < 5.4) {
+	$warning_php_version = "You have PHP version $phpversion and Plikli is NOT compatible with PHP version $phpversion; as Plikli CMS uses functions that are designed for PHP 5.4+<br />Check the cPanel under SOFTWARE -> MultiPHP Manager. if it is available and you can select the PHP version you want, then set it to 5.4+. Otherwise, ask your host to install EasyApache so you can have access to MultiPHP Manager.";
 }
-if (version_compare($mysqlversion, '5.0.0', '>=')) { $tally = $tally+1; }
+if (version_compare($mysqlversion, '5.0.0', '>=')) {
+	$tally = $tally+1; 
+}else{
+	$warning_mysql_version = "You have MySQL version $mysqlversion and Plikli is NOT compatible with MySQL version $mysqlversion. You should have MySQl version 5+";
+}
 if (function_exists('curl_version')){ $tally = $tally+1; }
 if (function_exists('fopen')){ $tally = $tally+1; }
 if (function_exists('fwrite')){ $tally = $tally+1; }
@@ -86,8 +106,12 @@ $percent = percent($tally,$required);
 if ($tally < $required ){
 	echo '<div class="alert alert-warning">
 		<p><strong>Warning:</strong> Your server has only met <strong>'.$tally.'</strong> of  the <strong>'.$required.'</strong> requirements to run Plikli CMS. While not all of the items on this page are required to run Plikli, we suggest that you try to comply with the suggestions made on this page. Please see the list below to discover what issues need to be addressed.</p><br />';
-		echo $warning_php_version;
-		
+		if ($warning_php_version != '') {
+			echo "<p>$warning_php_version</p>";
+		}
+		if ($warning_mysql_version != '') {
+			echo "<p>$warning_mysql_version</p><br />";
+		}
 		echo '<div class="progress" style="margin-bottom: 9px;">
 				<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="'.$percent.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$percent.'%;">
 					<span class="sr-only">'.$percent.'% Complete</span>
@@ -106,21 +130,7 @@ if ($tally < $required ){
 ?>
 </div>
 <?php
-if (isset($_POST['language'])) {
-	$selected_lang = $_POST['language'];
-	foreach ($selected_lang as $sel_lang){
-		if (file_exists("../languages/$sel_lang")) {
-			$torename = str_replace(".default", "", $sel_lang);
-			rename("../languages/$sel_lang", "../languages/$torename");
-			chmod("../languages/$torename", 0777);
 			
-		}
-	}
-	header("Location: http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
-die();
-}else{ 
-	$selected_lang = "";
-}
 
 echo '<table class="table table-bordered table-striped">';
 echo '<thead><tr><th colspan="2">Checking for files need to be renamed</th></tr></thead>';
@@ -269,13 +279,13 @@ echo '<tbody>';
 
 // PHP
 echo '<tr><td>';
-if ($phpversion > 5 && $phpversion < 6) {
+if ($phpversion >= 5.4 && $phpversion < 6) {
 	echo '<i class="fa fa-check"></i>';
 }else{
 	echo '<i class="fa fa-times"></i>';
 
 }
-echo '</td><td><a id="phpversion" data-trigger="hover" data-content="Plikli has been tested on PHP version 5+. We have designed the content management system based on PHP 5+ technologies, so certain problems may occur when using older versions of PHP. We recommended that your server runs a minimum of PHP 5." rel="popover" href="http://us3.php.net/tut.php" data-original-title="PHP Version">PHP Version ('.$phpversion.')</a><br /><strong>NOTE that Plikli is NOT yet compatible with PHP version 7; It is in progress!</strong></td>';
+echo '</td><td><a id="phpversion" data-trigger="hover" data-content="Plikli has been tested on PHP version 5.4+. We have designed the content management system based on PHP 5.4+ technologies, so certain problems may occur when using older versions of PHP. We recommended that your server runs a minimum of PHP 5.4." rel="popover" href="http://us3.php.net/tut.php" data-original-title="PHP Version">PHP Version ('.$phpversion.')</a><br /><strong>NOTE that Plikli is NOT yet compatible with PHP version 7; It is in progress!</strong></td>';
 echo '</tr>';
 
 echo '<tr><td>';
@@ -284,7 +294,7 @@ if (version_compare($mysqlversion, '5.0.0', '>=')) {
 }else{
 	echo '<i class="fa fa-times"></i>';
 }
-echo '</td><td><a id="mysqlversion" data-trigger="hover" data-content="Plikli has been tested on both MySQL versions 4 and 5, during that process we have discovered that bugs will occasionally pop up if you are running MySQL 4. For this reason we recommended that you use a server with MySQL 5 or later to run a Plikli CMS website. MySQL 5 has been available for some time now and we hope that most major web hosts now support it. It offers features that are not built into MySQL 4, which we may have used when writing code for Plikli CMS." rel="popover" href="http://dev.mysql.com/doc/" data-original-title="Client API version">Mysql Client API version ('.$mysqlversion.')</a></td>';
+echo '</td><td><a id="mysqlversion" data-trigger="hover" data-content="Plikli has been tested on MySQL versions 4 and 5, during that process we have discovered that bugs will occasionally pop up if you are running MySQL 4. For this reason we recommend that you use a server with MySQL 5 or later to run a Plikli CMS website. MySQL 5 has been available for some time now and we hope that most major web hosts now support it. It offers features that are not built into MySQL 4, which we may have used when writing code for Plikli CMS." rel="popover" href="http://dev.mysql.com/doc/" data-original-title="Client API version">Mysql Client API version ('.$mysqlversion.')</a></td>';
 echo '</tr>';
 
 echo '<tr><td style="width:20px;">', function_exists('curl_version') ? '<i class="fa fa-check"></i></td>' : '<i class="fa fa-times"></i></td>';

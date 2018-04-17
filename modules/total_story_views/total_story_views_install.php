@@ -4,7 +4,7 @@
 	$module_info['version'] = 1.0;
 	$module_info['settings_url'] = '../module.php?module=total_story_views';
 	$module_info['update_url'] = '';
-	$module_info['homepage_url'] = total_story_views_path .'readme.html';
+	$module_info['homepage_url'] = 'https://www.plikli.com/mods/total_story_views.zip';
 	$module_info['creator'] = 'redwine';
 	
 	$module_info['db_add_table'][]=array(
