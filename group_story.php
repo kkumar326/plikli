@@ -205,10 +205,6 @@ if(isset($_POST["avatar"]) && $_POST["avatar"] == "uploaded")
 			}*/
 			//$user->avatar_source=$avatar_source;
 			//$user->store();
-		}
-	}else{
-		$main_smarty->assign('Avatar_uploaded', $error['Type']);
-	}
 	// create large avatar
 	include mnminclude . "class.pThumb.php";
 	$img=new pThumb();
@@ -217,6 +213,14 @@ if(isset($_POST["avatar"]) && $_POST["avatar"] == "uploaded")
 	$img->pCreate($newimage);
 	$img->pSave($user_image_path . $idname . "_".group_avatar_size_width.".jpg");
 	$img = "";
+			
+$redirect = getmyurl("group_story2", $requestTitle);
+header("Location: $redirect");
+		}
+	}else{
+		$main_smarty->assign('Avatar_uploaded', $error['Type']);
+	}
+	
 
 	/*// create small avatar
 	$img=new pThumb();

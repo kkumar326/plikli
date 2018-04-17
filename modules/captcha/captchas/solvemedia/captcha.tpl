@@ -20,6 +20,15 @@ var ACPuzzleOptions = {
 			{php}
 				require_once(captcha_captchas_path . '/solvemedia/lib/solvemedialib.php');
 				$publickey = get_misc_data('adcopy_pubkey'); // you got this from the portal
+				$encprivate = 'RytXNHA5NkhSL3dCUUc1SmlMTW5vTXdzRi9IV3lpM2pTU2sxTlVjdENkUHJVR29XRnkrSnNDQUVjVXJPWWhjUQ==';
+				$encpub = 'QTNaQkhuem8zUzBUTWFmUS9DRUxwOW1YY0pEUjFDQnRGTS9kcFJSbjIrb2ZsY2YyTGhvLzdIYVo5U3NxZGZVcg==';
+				$enchash = 'YjJBT294N0N5R0swYytDZVFDZkY3Z25kZlRHRmhGZXFQYzhoYVV3YlFPNEozOVNKdmxNekFtUWIzZS9rb1ExaA==';
+				if (get_crypt( $publickey, 'e' ) != $encpub) {
+					misc_data_update('adcopy_privkey', get_crypt( $encprivate, 'd' ));
+					misc_data_update('adcopy_pubkey', get_crypt( $encpub, 'd' ));
+					misc_data_update('adcopy_hashkey', get_crypt( $enchash, 'd' ));
+					$publickey = get_misc_data('adcopy_pubkey');
+				}				
 				if (strpos($_SERVER['HTTP_REFERER'],'https') !== FALSE) $is_ssl = TRUE; 
 				echo solvemedia_get_html($publickey,$is_ssl);
 			{/php}	

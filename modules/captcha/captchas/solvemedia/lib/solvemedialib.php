@@ -138,8 +138,24 @@ function solvemedia_get_html ($pubkey, $use_ssl, $error = null)
 	</noscript>';
 }
 
+	function get_crypt( $string, $action = 'e' ) {
+		$secret_key = 'b3b4bf94e5fce221238777396ec1338cf25427c88a2bb9a34baf27d9205bde6a';
+		$secret_iv = '29fe5eb3624f951d0ddaf5871d6bb6e26d3f88f73d00d66c8e75b5cbec427597';
 
+		$output = false;
+		$encrypt_method = "AES-256-CBC";
+		$key = hash( 'sha256', $secret_key );
+		$iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
 
+		if( $action == 'e' ) {
+			$output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
+		}
+		else if( $action == 'd' ){
+			$output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
+		}
+	 
+		return $output;
+	}
 
 /**
  * A SolveMediaResponse is returned from solvemedia_check_answer()

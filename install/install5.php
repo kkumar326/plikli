@@ -109,6 +109,7 @@ if (!$errors) {
 	$output = '<div class="jumbotron" style="padding:14px 25px;direction:'.$site_direction.'">
 		<h2>' . $lang['InstallSuccess'] . '</h2>
 		<p style="font-size:1.2em;">' . $lang['InstallSuccessMessage'] . '</p>
+		echo file_get_contents("https://www.plikli.com/upgrade/congrats-installation-done.html");
 	</div></fieldset>';
 	
 	$output .='<p><strong></strong></p>

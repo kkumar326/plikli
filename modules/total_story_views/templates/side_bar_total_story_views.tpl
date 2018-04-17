@@ -18,13 +18,13 @@
 
 			// -------------------------------------------------------------------------------------
 
-			global $the_template, $main_smarty, $db, $settings;
+			global $the_template, $main_smarty, $db, $total_views_settings;
 			//$user_logged_id = $main_smarty->get_template_vars('user_logged_id');
 			$sql = "SELECT t1.view_link_id, count(t1.view_link_id) as Count, t2.link_id, t2.link_title\n"
 				. "FROM ".table_prefix ."story_views t1\n"
 				. "inner join " .table_prefix ."links t2 on view_link_id = link_id\n"
 				. " group by `view_link_id`\n"
-				. "order by Count DESC LIMIT 0, " .$settings['count']. ";";
+				. "order by Count DESC LIMIT 0, " .$total_views_settings['count']. ";";
 			$list_mostviewed = $db->get_results($sql);
 			if($list_mostviewed)
 			{

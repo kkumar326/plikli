@@ -1,18 +1,17 @@
 <?php
 
-global $settings;
-$settings = get_scheduled_posts_settings();
+global $scheduled_settings;
+$scheduled_settings = get_scheduled_posts_settings();
 
 function check_scheduled() {
-	global $db, $settings;
+	global $db, $scheduled_settings;
 	
 	/*************
 	Redwine: first, we check if the Allow_Scheduled is set to true in the dashboard; if it is true, then we check in the misc_data table for the date the module last ran. If the value is empty or not equal to today's date, then the module will run and updates the date value in the misc_data table to the current date. If no scheduled posts were found, it also updates the date value to prevent it from running again in the same day. If it is false, then we save the queries and the module won't run.
 	*************/
 	
 	if (Allow_Scheduled == 1) {
-		if ($settings['run'] == '' || $settings['run'] != date('Y/m/d')) {
-			echo $settings['run'];
+		if ($scheduled_settings['run'] == '' || $scheduled_settings['run'] != date('Y/m/d')) {
 			$scheduled_available = $db->get_results("SELECT * FROM `".table_prefix."links` WHERE `link_status` = 'scheduled' and DATE_FORMAT(`link_date`, '%Y-%m-%d') = CURDATE();");
 			if ($scheduled_available) {
 				include_once(mnminclude.'link.php');

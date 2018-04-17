@@ -20,7 +20,7 @@
 <body>
 
 	<div class="layout wdth" style="display:block;margin-left: auto;margin-right: auto;">
-		<div class="centre" style="background-color:#183a52;">
+		<div class="centre" style="background-color:{$headingbg};">
 		{if $site_logo}
 			<img src="{$site_logo}" style="border:none;" />
 		{/if}

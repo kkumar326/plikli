@@ -25,7 +25,9 @@
 			</span>
 		 </div>
 	</form>
-
+	<div class="advanced-search">
+	<a href="{$URL_advancedsearch}">{#PLIKLI_Visual_Search_Advanced#}</a> 
+	</div>
 	<div style="clear:both;"></div>
 	<br />
 </div>
@@ -34,14 +36,18 @@
 {literal}
 <script type="text/javascript">
 $( document ).ready(function() {
+	/*
+	I used [`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/] versus [^\w\s-_] because JavaScript does not work well with UTF-8
+	and does not recognize the word boundaries in utf8. 
+	*/
 	$(function(){
 		$('#searchsite').keyup(function() {
 			var yourInput = $(this).val();
-			re = /[^\w\s-_]/gi;
+			re = /[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi;
 			var isSplChar = re.test(yourInput);
 			if(isSplChar)
 			{
-				var no_spl_char = yourInput.replace(/[^\w\s-_]/gi, '');
+				var no_spl_char = yourInput.replace(re, '');
 				$(this).val(no_spl_char);
 			}
 		});
@@ -50,7 +56,7 @@ $( document ).ready(function() {
 			  //get the value of the input text
 			  var data= $( '#searchsite' ).val() ;
 			  //replace the special characters to '' 
-			  var dataFull = data.replace(/[^\w\s-_]/gi, '');
+			  var dataFull = data.replace(/[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi, '');
 			  //set the new value of the input text without special characters
 			  $( '#searchsite' ).val(dataFull);
 			});

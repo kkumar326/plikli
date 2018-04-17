@@ -25,8 +25,8 @@
 		//Redwine: this below is needed to show the module's name and link in the left sidebar.
 		module_add_action_tpl('tpl_header_admin_main_links', total_story_views_tpl_path . 'total_story_views_admin_link.tpl');
 		// show the total views of the story under its title 
-		module_add_action_tpl($settings['place'], total_story_views_tpl_path . 'total_story_views_in_summary.tpl');
-		if ($settings['sidebar'] == 'on') {
+		module_add_action_tpl($total_views_settings['place'], total_story_views_tpl_path . 'total_story_views_in_summary.tpl');
+		if ($total_views_settings['sidebar'] == 'on') {
 		module_add_action_tpl('widget_sidebar', total_story_views_tpl_path . 'side_bar_total_story_views.tpl',array('weight'=>1));
 		}
 		
@@ -39,8 +39,8 @@
 		module_add_action_tpl('tpl_plikli_story_tab_end', total_story_views_tpl_path . 'total_story_views_add_views.tpl');
 		
 		// show the total views of the story under its title 
-		module_add_action_tpl($settings['place'], total_story_views_tpl_path . 'total_story_views_in_summary.tpl');
-		if ($settings['sidebar'] == 'on') {
+		module_add_action_tpl($total_views_settings['place'], total_story_views_tpl_path . 'total_story_views_in_summary.tpl');
+		if ($total_views_settings['sidebar'] == 'on') {
 		module_add_action_tpl('widget_sidebar', total_story_views_tpl_path . 'side_bar_total_story_views.tpl',array('weight'=>1));
 		}
 	}

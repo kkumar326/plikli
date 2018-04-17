@@ -1,10 +1,10 @@
 <?php
 
-global $settings;
-$settings = get_total_views_settings();
+global $total_views_settings;
+$total_views_settings = get_total_views_settings();
 
 function total_story_views_showpage(){
-	global $db, $main_smarty, $the_template,$settings;
+	global $db, $main_smarty, $the_template,$total_views_settings;
 		
 	include_once('config.php');
 	include_once(mnminclude.'html1.php');
@@ -56,7 +56,7 @@ function total_story_views_showpage(){
 		
 		define('pagename', 'admin_modifytotalviews'); 
 		$main_smarty->assign('pagename', pagename);
-		$main_smarty->assign('settings', str_replace('"','&#034;',get_total_views_settings()));
+		$main_smarty->assign('total_views_settings', str_replace('"','&#034;',get_total_views_settings()));
 		$main_smarty->assign('places',$upload_places);
 		$main_smarty->assign('tpl_center', total_story_views_tpl_path . 'total_story_views_main');
 		$main_smarty->display($template_dir . '/admin/admin.tpl');
@@ -77,7 +77,7 @@ function get_total_views_settings() {
 	return $settings1;
 }
 function add_total_views(&$vars){
-global $main_smarty, $db, $the_template,$settings;
+global $main_smarty, $db, $the_template,$total_views_settings;
 include_once('config.php');
 	include_once(mnminclude.'html1.php');
 	include_once(mnminclude.'link.php');
@@ -90,7 +90,7 @@ include_once('config.php');
 }
 
 function get_total_views($vars){
-	global $db, $main_smarty, $smarty, $dblang, $the_template, $linkres, $current_user,$settings;
+	global $db, $main_smarty, $smarty, $dblang, $the_template, $linkres, $current_user,$total_views_settings;
 	$link_id = $vars['smarty']->_vars['link_id'];
 	$viewed = $db->get_var("SELECT count(*) from " . table_prefix . "story_views WHERE view_link_id = '" .$db->escape($link_id). "'");
 	$vars['smarty']->_vars['total_link_views'] = number_format($viewed);

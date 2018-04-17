@@ -5,12 +5,37 @@ function subscribe2comments_comment_submit(&$vars)
 	include_once(mnmmodules.'subscribe2comments/subscribe2comments_settings.php');
 	global $db, $main_smarty, $current_user;
 
+	$subscribe2_settings = subscribe2comments_settings();
 	$main_smarty->config_load(subscribe2comments_plikli_lang_conf);
+	if ($subscribe2_settings['from_email'] !='') {
+		$fromEmail = $subscribe2_settings['from_email'];
+	}else{
 	$fromEmail = $main_smarty->get_config_vars("PLIKLI_PassEmail_From");
+	}
+	if ($subscribe2_settings['from'] !='') {
+		$fromSite = $subscribe2_settings['from'];
+	}else{
 	$fromSite = $main_smarty->get_config_vars("PLIKLI_Visual_Name");
+	}
+	if ($subscribe2_settings['background'] !='') {
+		$headingbg = $subscribe2_settings['background'];
+	}else{
+		$headingbg = '#183a52';
+	}
+	if ($subscribe2_settings['fontcolor'] !='') {
+		$headingfc = $subscribe2_settings['fontcolor'];
+	}else{
+		$headingbg = '#ffffff';
+	}
+	$main_smarty->assign('headingbg', $headingbg);
+	$main_smarty->assign('headingfc', $headingfc);
+	if ($subscribe2_settings['subject'] !='') {
+		$fromSubject = $subscribe2_settings['subject'];
+	}else{
+		$fromSubject = $main_smarty->get_config_vars("PLIKLI_Subscribe_2_Comments_Email_Subject");
+	}
 	$main_smarty->assign('site_title', $fromSite);
 	$main_smarty->config_load(subscribe2comments_lang_conf);
-	$fromSubject = $main_smarty->get_config_vars("PLIKLI_Subscribe_2_Comments_Email_Subject");
 
 	$comment = new Comment;
 	$comment->id = $vars['comment'];
@@ -45,13 +70,6 @@ function subscribe2comments_comment_submit(&$vars)
 		}
 		
 		$main_smarty->assign('comment_author', $user->username);
-		//$main_smarty->assign('comment', get_object_vars($comment));
-		/*$main_smarty->assign('image_facebook', my_base_url.my_plikli_base . '/modules/subscribe2comments/templates/images/facebook.png');
-		$main_smarty->assign('image_twitter', my_base_url.my_plikli_base . '/modules/subscribe2comments/templates/images/twitter.png');
-		$main_smarty->assign('image_header', my_base_url.my_plikli_base . '/modules/subscribe2comments/templates/images/email_header.jpg');
-		$main_smarty->assign('image_sidebar', my_base_url.my_plikli_base . '/modules/subscribe2comments/templates/images/email_sidebar.jpg');*/
-
-		$settings = subscribe2comments_settings();
 
 	    // Select users who subscribed to that story notifications
 	    $subs = $db->get_results($sql="SELECT * FROM `".table_prefix . "subscribe2comments` WHERE notify_link_id='{$linkres->id}' AND notify_user_id!={$comment->author}",ARRAY_A);
@@ -95,8 +113,6 @@ function subscribe2comments_comment_submit(&$vars)
 
 //
 // Subscribe author automatically on submit
-// Tested 04/11/11
-//
 function subscribe2comments_story_submit($vars)
 {
 	global $db, $main_smarty;
@@ -140,9 +156,11 @@ function subscribe2comments_showpage(){
 			    $level1 = join(',',$_REQUEST['subscribe2comments_profile_level']);
 
 			$_REQUEST = str_replace('"',"'",$_REQUEST);
-			misc_data_update('cs_from', mysql_real_escape_string($_REQUEST['subscribe2comments_from']));
-			misc_data_update('cs_from_email', mysql_real_escape_string($_REQUEST['subscribe2comments_from_email']));
-			misc_data_update('cs_subject', mysql_real_escape_string($_REQUEST['subscribe2comments_subject']));
+			misc_data_update('cs_from', $db->escape($_REQUEST['subscribe2comments_from']));
+			misc_data_update('cs_from_email', $db->escape($_REQUEST['subscribe2comments_from_email']));
+			misc_data_update('cs_subject', $db->escape($_REQUEST['subscribe2comments_subject']));
+			misc_data_update('cs_background', $db->escape($_REQUEST['subscribe2comments_backgroundcolor']));
+			misc_data_update('cs_fontcolor', $db->escape($_REQUEST['subscribe2comments_fontcolor']));
 		}
 		// breadcrumbs
 		$main_smarty->assign('navbar_where', $navwhere);
@@ -154,7 +172,7 @@ function subscribe2comments_showpage(){
 		define('pagename', 'admin_modifysubscribe2comments'); 
 		$main_smarty->assign('pagename', pagename);
 
-		$main_smarty->assign('settings', subscribe2comments_settings());
+		$main_smarty->assign('subscribe2_settings', subscribe2comments_settings());
 		$main_smarty->assign('tpl_center', subscribe2comments_tpl_path . 'subscribe2comments_main');
 		$main_smarty->display($template_dir . '/admin/admin.tpl');
 	}
@@ -172,7 +190,9 @@ function subscribe2comments_settings()
     return array(
 		'from' => get_misc_data('cs_from'), 
 		'from_email' => get_misc_data('cs_from_email'), 
-		'subject' => get_misc_data('cs_subject')
+		'subject' => get_misc_data('cs_subject'),
+		'background' => get_misc_data('cs_background'),
+		'fontcolor' => get_misc_data('cs_fontcolor'),
 		);
 }
 

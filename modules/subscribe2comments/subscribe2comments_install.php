@@ -20,6 +20,17 @@
   	  UNIQUE KEY `notify_link_id` (`notify_link_id`,`notify_user_id`)
 	  ) ENGINE=MyISAM DEFAULT CHARSET=utf8");	
 	  
+	//Inserting the default background and font colors that match the defaults used for the CMS
+	if (get_misc_data('cs_background')=='') {
+		global $db;
+		$db->query("REPLACE INTO `".table_prefix . "misc_data` (`name`,`data`) 
+			VALUES 
+			('cs_from', ''),
+			('cs_from_email', ''),
+			('cs_subject', ''),
+            ('cs_background', '#183a52'),
+			('cs_fontcolor', '#ffffff');");
+	}
 	//copying the unsubscribe.php to the root folder because we have to run the file from outside the modules folder otherwise we get multiple errors and the site won't load fully, due to many settings, namely the language files.
 	if (!file_exists(mnmpath.'unsubscribe.php')) {
 		if (!copy(mnmmodules.'subscribe2comments/unsubscribe.php', mnmpath. 'unsubscribe.php')) {

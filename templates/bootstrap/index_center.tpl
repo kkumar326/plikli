@@ -11,11 +11,11 @@
 		<p style="font-size:1.0em;">{#PLIKLI_Visual_Welcome_to_Message#}</p>
 		<p><a href="submit.php" class="btn btn-primary">{#PLIKLI_Visual_Welcome_to_Submit_First_Story#}</a></p>
 	</div>
+{else}
+	{$link_summary_output}
 {/if}
-
-{$link_summary_output}
-
-{checkActionsTpl location="tpl_kliqqi_pagination_start"}
+{checkActionsTpl location="tpl_plikli_pagination_start"}
+{if $link_summary_output neq ''}
 {$link_pagination}
 {/if}
 {checkActionsTpl location="tpl_plikli_pagination_end"}

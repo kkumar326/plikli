@@ -149,6 +149,7 @@ if (!$errors) {
     //end of if post submit is Yes.
     }
 //end of no errors
+echo file_get_contents("https://www.plikli.com/upgrade/congrats-upgrade-done.html");
 }
 else {
 	echo DisplayErrors($errors);

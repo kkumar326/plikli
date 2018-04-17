@@ -45,6 +45,7 @@ if (isset($_POST['save'])) {
 			if ($value == 'true' || $value == 'false') {
 				$entry .= "define('".$key."', ". $value.");\n";
 			}else{
+				$value = htmlentities($value, ENT_QUOTES | ENT_IGNORE, "UTF-8");
 				$entry .= "define('".$key."', '". $value."');\n";
 			}
 		}

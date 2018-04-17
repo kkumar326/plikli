@@ -14,9 +14,9 @@
 				<td style="min-width:130px;width:200px;"><label><a href="#">{#PLIKLI_Story_Total_Views_Place#}</a>:</label></td>
 				<td>
 					<select name="total_views_place" class="form-control">
-						<option {if $settings.place == 'story_total_views_custom'}selected{/if}>story_total_views_custom</option>
+						<option {if $total_views_settings.place == 'story_total_views_custom'}selected{/if}>story_total_views_custom</option>
 						{foreach from=$upload_places item=place}
-							<option {if $settings.place==$place}selected{/if}>{$place}</option>
+							<option {if $total_views_settings.place==$place}selected{/if}>{$place}</option>
 						{/foreach}
 					</select></td>
 			</tr>
@@ -25,7 +25,7 @@
 				<td>
 					<select name="total_views_sidebar" class="form-control">
 						
-							{if $settings.sidebar == 'on'}
+							{if $total_views_settings.sidebar == 'on'}
 								<option selected>on</option>
 								<option>off</option>
 							{else}
@@ -38,7 +38,7 @@
 			<tr>
 				<td style="min-width:130px;width:200px;"><label><a href="#">{#PLIKLI_Story_Total_Views_Sidebar_count#}</a>:</label></td>
 				<td>
-					<input type="text" class="form-control" style="width: 100px;" name="total_views_count" size="3" value="{$settings.count}" /></td>
+					<input type="text" class="form-control" style="width: 100px;" name="total_views_count" size="3" value="{$total_views_settings.count}" /></td>
 			</tr>
 			<tr>
 				<td></td>

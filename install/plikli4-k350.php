@@ -992,8 +992,7 @@ echo '<fieldset><legend>Renaming Directories Instructions!</legend><div class="a
 		echo $output;
 	}
 echo '</ul></div></fieldset><br />';
-echo '<a id="upgrade" href="https://www.plikli.com/upgrade/congrats-upgrade.html" target="_blank">Plikli</a>'; 
-
-echo file_get_contents("https://www.plikli.com/upgrade/congrats-upgrade-done.html"); 
+//echo '<a id="upgrade" href="https://www.plikli.com/upgrade/congrats-upgrade.html" target="_blank">Plikli</a>'; 
+//echo file_get_contents("https://www.plikli.com/upgrade/congrats-upgrade-done.html"); 
 
 ?>

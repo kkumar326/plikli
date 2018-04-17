@@ -326,6 +326,14 @@ function do_submit1() {
 		$vars = '';
 		check_actions('register_showform', $vars);
 	}
+	//Redwine: detect if ckeditor module is installed to know which textarea to hide.
+	$isCKEditor = $db->get_row("SELECT * FROM ".table_modules." WHERE `folder`='ckeditor'",ARRAY_A);
+	    if ($isCKEditor['folder']) {
+			$main_smarty->assign('isCKEditor', 'ckeditorinstalled');
+		}else{
+			$main_smarty->assign('isCKEditor', 'ckeditornotinstalled');
+		}
+	
 	
 	$main_smarty->assign('tpl_extra_fields', $the_template . '/submit_extra_fields');
 	$main_smarty->assign('tpl_center', $the_template . '/submit_step_2_center');

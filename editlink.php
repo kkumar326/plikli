@@ -191,7 +191,7 @@ if ($link) {
 			}
 
 				/* Redwine: since I introduced the draft feature, I also provided for changing the status by the author, I.e keeping it as a draft, posting or discarding it, from the editlink option. So I first check the the current status of the article; if it is a draft, then if the author changed the status in the edit article, I act accordingly.*/
-
+				$story_url = $linkres->get_internal_url();
 				if ($_POST['change_status'] == $linkres->status) { // status unchanged, we  stay on the story page
 			if ($linkres->status == 'draft') {
 						$story_url = getmyurl('user2', $login, 'draft');
