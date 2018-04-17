@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link id="colorPickerMod" rel="stylesheet" type="text/css" href="css/mod.css">
+	<script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<!-- <script type="text/javascript" src="../jqColorPicker.min.js"></script> -->
+	<script type="text/javascript" src="js/colors.js"></script>
+	<script type="text/javascript" src="js/jqColorPicker.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+</head>
+<body></body>
+
+<h2>Subscribe To Comments Module</h2>
+
+<h3>Description</h3>
+<p>This module gives users an option to follow on articles, by subscribing to email notifications anytime a comment is posted on articles they follow. This feature can be turned ON/OFF by subscribing/unsubscribing.</p>
+
+<img src="../modules/subscribe2comments/img/subscribe.png" alt="Subscribe" title="Subscribe" />&nbsp;&nbsp;&nbsp;<img src="../modules/subscribe2comments/img/unsubscribe.png" alt="Unsubscribe" title="Unsubscribe" />
+
+<h3>Installation</h3>
+<p>Install the module from the Dashboard -> Modules -> Uninstalled Modules tab</p>
+
+<h3>Settings</h3>
+<p>To visit the Module's settings, click on the "Subscribe to Comments Module link from the left sidebar under the Modules heading.</p>
+<p>The Module has 3 settings, "From Name", "From Email Address" and "Subject Prefix"<br />
+You can skip this phase and leave them empty, if you wish to use the default site email and visual name set in the language file, that you normally use to sending welcome and password reset emails, or you can set them up if you wish to use a different email and name. (see picture below)</p>
+<div style="float:left"><img src="../modules/subscribe2comments/img/settings-options1.png" alt="Settings options" title="Settings options" /></div><div style="float:left"><img src="../modules/subscribe2comments/img/settings-options2.png" alt="Settings options" title="Settings options" /></div>
+<br clear="all" /><br />
+
+<h3>How to subscribe to comments notifications</h3>
+<p>When Admins install the module, it inserts a column "auto_comment_alert" with a zero value, in the users table.</p>
+<p>Users can subscribe to automatic future comment notifications on all the articles they submit afterwards, by checking the box of "Auto notification to comments on my stories" in their profile settings tab.<br />Unfortunately, the module does not automatically subscribe the user on all the articles that were submitted prior to installing the module!</p>
+<img src="../modules/subscribe2comments/img/profile-settings.png" alt="Profile Settings options" title="Profile Settings options" />
+
+
+<p>Another way for the user to selectively subscribe/unsubscribe, on their articles and other users' as well, is by visiting the article (full view) and click on the "Notify me of new comments" button to subscribe, or "Unssubscribe from comments notification" to unsubscribe.<br /><strong>NOTE</strong> that users can also unsubscribe from individual comment notification by clciking the "Unsubscribe" link in the comment email notification they receive.</p>
+
+<h3>Sample comment email notification</h3>
+<img src="../modules/subscribe2comments/img/email-notification.png" alt="Sample notification email" title="Sample notification email" />
+
+<div id="content-wrapper">
+	<h3>Tiny jQuery colorPicker</h3>
+	<div class="input-toggles wrapper">
+		<input class="color" value="#B6BD79" />
+		<input class="color no-alpha" value="rgb(162, 63, 3)" />
+		<input class="color no-sliders" value="hsl(32, 95%, 23%)" />
+	</div>
+	<div class="div-toggles wrapper">
+		<div class="trigger" value="#556B2F"><div><div></div></div></div>
+		<div class="trigger" value="rgb(100, 86, 70)"><div><div></div></div></div>
+		<div class="trigger" value="hsla(167, 29%, 68%, 0.8)"><div><div></div></div></div>
+	</div>
+</div>
+
+<h3>Revision History</h3>
+<p>
+	<ul>
+		<li>Redwine: added correct reference to the module and Plikli language files, and made it compliant with Plikli.4.0.0</li>
+		<li>v1.3 05/09/2014 - Updated a template file to match the Pligg 2.0.1 user profile settings page. Adjusted some language elements.</li>	
+		<li>v1.2 07/17/2013 - Added homepage and update url to settings</li>
+		<li>v1.1 07/15/2012 - Update to work with Pligg 2.0</li>
+		<li>v1.0 06/20/2011 - First version</li>
+	</ul>
+</p>
+</body>
+</html>
