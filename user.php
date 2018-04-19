@@ -710,6 +710,8 @@ function do_new () {
 			$link->read();
 			$output .= $link->print_summary('summary', true);
 		}
+
+
 	}
 	$main_smarty->assign('user_page', $output);
 }

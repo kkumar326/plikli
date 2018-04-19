@@ -115,7 +115,6 @@ if($canIhaveAccess == 1) {
 	}
 	$filtered = $db->get_results("SELECT SQL_CALC_FOUND_ROWS * FROM " . table_links . " WHERE $filter_sql $search_sql $user_sql ORDER BY link_date DESC LIMIT $offset,$pagesize");
 	$rows = $db->get_var("SELECT FOUND_ROWS()");
-
 	// read links from database 
 	$user = new User;
 	$link = new Link;
@@ -129,14 +128,14 @@ if($canIhaveAccess == 1) {
 			$user->read();
 			/*Redwine: to restrict changing the story status where authors are admins, only to admins*/
 			if ($amIadmin) {
-			$template_stories[] = array(
-				'link_title_url' => $link->title_url,
-				'link_id' => $link->id,
-				'link_title' => $link->title,
-				'link_status' => $link->status,
-				'link_author' => $user->username,
-				'link_date' => date("d-m-Y",$link->date),
-			);
+				$template_stories[] = array(
+					'link_title_url' => $link->title_url,
+					'link_id' => $link->id,
+					'link_title' => $link->title,
+					'link_status' => $link->status,
+					'link_author' => $user->username,
+					'link_date' => date("d-m-Y",$link->date),
+				);
 			/*Redwine: moderators are restricted to changing the story status to normal level and moderators authors only*/
 			}elseif ($is_moderator && $user->level != 'admin') {
 				$template_stories[] = array(

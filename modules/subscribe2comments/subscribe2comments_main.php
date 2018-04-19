@@ -4,18 +4,18 @@ function subscribe2comments_comment_submit(&$vars)
 {
 	include_once(mnmmodules.'subscribe2comments/subscribe2comments_settings.php');
 	global $db, $main_smarty, $current_user;
-
+	
 	$subscribe2_settings = subscribe2comments_settings();
 	$main_smarty->config_load(subscribe2comments_plikli_lang_conf);
 	if ($subscribe2_settings['from_email'] !='') {
 		$fromEmail = $subscribe2_settings['from_email'];
 	}else{
-	$fromEmail = $main_smarty->get_config_vars("PLIKLI_PassEmail_From");
+		$fromEmail = $main_smarty->get_config_vars("PLIKLI_PassEmail_From");
 	}
 	if ($subscribe2_settings['from'] !='') {
 		$fromSite = $subscribe2_settings['from'];
 	}else{
-	$fromSite = $main_smarty->get_config_vars("PLIKLI_Visual_Name");
+		$fromSite = $main_smarty->get_config_vars("PLIKLI_Visual_Name");
 	}
 	if ($subscribe2_settings['background'] !='') {
 		$headingbg = $subscribe2_settings['background'];

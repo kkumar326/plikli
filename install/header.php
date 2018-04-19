@@ -151,4 +151,3 @@ include("menu.php");
 				( ( secure )  ? ";secure" : "" );
 				}
 				</script>
-				

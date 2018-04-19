@@ -188,7 +188,7 @@ $file = '../logs/bannedips.log';
 if (file_exists($file)) {
 	if (!is_writable($file)) {
 		chmod("$file", 0666);
-	}
+}
 	echo '<tr><td class="good"><i class="fa fa-check"></i></td><td>'.$file.'</td></tr>';
 }
 $file='../logs/domain-blacklist.log';
@@ -206,6 +206,9 @@ if (file_exists($file)) {
 	if (is_writable($file)) { echo '<tr><td class="good"><i class="fa fa-check"></i></td><td>'.$file.'</span></td></tr>'; }
 }
 echo '</tbody></table>';
+
+
+
 
 /* This causes a conflict if there is no lang_english.conf language file. */
 /*
@@ -333,4 +336,4 @@ $(function ()
 	$("#fgetwarning").popover();
 	$("#gdwarning").popover();
 });
-</script> 
+</script>

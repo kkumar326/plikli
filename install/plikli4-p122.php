@@ -1874,4 +1874,4 @@ $data = curl_exec($ch);
 curl_close($ch);
 echo $data;
 }
-echo '</ul></div></fieldset><br />';	
+echo '</ul></div></fieldset><br />';
