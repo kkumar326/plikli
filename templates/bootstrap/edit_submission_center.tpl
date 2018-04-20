@@ -154,7 +154,9 @@
 					<li><input type="radio" id="rd_tonew" name="change_status" value="to_new" /> <label for="rd_tonew">{#PLIKLI_Visual_Submit2_Edit_Draft_Post#}</li>
 				{/if}
 				{if $submit_stat eq 'new' || $submit_stat eq 'published'}
+					{if $Allow_Draft eq 1}
 					<li><input type="radio" id="rd_todraft" name="change_status" value="to_draft" title="WARNING: &#10;if your article is published, when you change it to draft &#10;and want to re-post it later, &#10;it might not go back to 'published' page; &#10;it dependds on the settings in the dashboard!" /> <label for="rd_todraft" title="WARNING: &#10;if your article is published, when you change it to draft &#10;and want to re-post it later, &#10;it might not go back to 'published' page; &#10;it dependds on the settings in the dashboard!">{#PLIKLI_Visual_Submit2_Edit_Draft#}</label></li>
+					{/if}
 				{/if}
 				<li><input type="radio" id="rd_discard" name="change_status" value="discard" /> <label for="rd_discard">{#PLIKLI_Visual_Submit2_Edit_Draft_Discard#}</li>
 			</ul>

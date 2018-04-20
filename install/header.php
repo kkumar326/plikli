@@ -150,4 +150,4 @@ include("menu.php");
 				( ( domain )  ? ";domain=" + domain : "" ) +
 				( ( secure )  ? ";secure" : "" );
 				}
-				</script>
+</script>
