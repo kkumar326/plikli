@@ -327,19 +327,19 @@ $( document ).ready(function() {
 	// Redwine: the following code deals with the Title, Tags input fields
 	$('#title').keyup(function() {
 		var yourInput = $(this).val();
-		re = /[^\w\s-!,]/gi;
+		re = /[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi;
 		var isSplChar = re.test(yourInput);
 		if(isSplChar) {
-			var no_spl_char = yourInput.replace(/[^\w\s-!,]/gi, '');
+			var no_spl_char = yourInput.replace(re, '');
 			$(this).val(no_spl_char);
 		}
 	});
 	$('#tags').keyup(function() {
 		var yourInput = $(this).val();
-		re = /[^\w\s-,]/gi;
+		re = /[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi;
 		var isSplChar = re.test(yourInput);
 		if(isSplChar) {
-			var no_spl_char = yourInput.replace(/[^\w\s-,]/gi, '');
+			var no_spl_char = yourInput.replace(re, '');
 			$(this).val(no_spl_char);
 		}
 	});
