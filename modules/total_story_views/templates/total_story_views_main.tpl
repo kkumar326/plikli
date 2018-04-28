@@ -15,7 +15,7 @@
 				<td>
 					<select name="total_views_place" class="form-control">
 						<option {if $total_views_settings.place == 'story_total_views_custom'}selected{/if}>story_total_views_custom</option>
-						{foreach from=$upload_places item=place}
+						{foreach from=$story_view_places item=place}
 							<option {if $total_views_settings.place==$place}selected{/if}>{$place}</option>
 						{/foreach}
 					</select></td>

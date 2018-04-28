@@ -9,7 +9,12 @@ include_once('config.php');
 	
 	$link_id = $main_smarty->get_template_vars('link_id'); //$vars['link_id'];
 	// add a view to the story
-	$db->query("INSERT INTO `". table_prefix . "story_views` (`view_link_id`) Values (".$link_id.")");
+	$sql_view_link_id = "SELECT  `view_link_id` FROM ". table_prefix . "story_views WHERE view_link_id = ".$link_id;
+	if ($db->get_var($sql_view_link_id)) {
+		$db->query("UPDATE ". table_prefix . "story_views SET `view_link_count` =  `view_link_count` + 1 WHERE view_link_id = ".$link_id.";");
+	}else{
+		$db->query("INSERT INTO ". table_prefix . "story_views (`view_link_id`, `view_link_count`) Values (".$link_id.", 1)");
+	}
 
 {/php}
 {config_load file=total_story_views_plikli_lang_conf}

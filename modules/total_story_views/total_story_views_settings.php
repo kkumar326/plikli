@@ -26,7 +26,7 @@ define('total_story_views_tpl_path', '../modules/total_story_views/templates/');
 // the path to the modules libraries. the probably shouldn't be changed unless you rename the total_story_views folder(s)
 define('total_story_views_lib_path', './modules/total_story_views/libs/');
 
-$upload_places = array(
+$story_view_places = array(
 "tpl_plikli_story_start",
 "tpl_plikli_story_end",
 "tpl_plikli_story_votebox_start",
@@ -41,7 +41,7 @@ $upload_places = array(
 "tpl_plikli_story_tools_start",
 "tpl_plikli_story_tools_end"
 );
-
+$main_smarty->assign('story_view_places', $story_view_places);
 // don't touch anything past this line.
 
 if(is_object($main_smarty)){

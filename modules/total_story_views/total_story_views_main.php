@@ -57,7 +57,6 @@ function total_story_views_showpage(){
 		define('pagename', 'admin_modifytotalviews'); 
 		$main_smarty->assign('pagename', pagename);
 		$main_smarty->assign('total_views_settings', str_replace('"','&#034;',get_total_views_settings()));
-		$main_smarty->assign('places',$upload_places);
 		$main_smarty->assign('tpl_center', total_story_views_tpl_path . 'total_story_views_main');
 		$main_smarty->display($template_dir . '/admin/admin.tpl');
 	}
@@ -86,13 +85,19 @@ include_once('config.php');
 	
 	$link_id = $vars['link_id'];
 	// add a view to the story
-	$db->query("INSERT INTO ". table_prefix . "story_views (view_link_id) Values (".$link_id.")");
+	//check if the link id exists in the table
+	$sql_view_link_id = "SELECT  `view_link_id` FROM ". table_prefix . "story_views WHERE view_link_id = ".$link_id;
+	if ($db->get_var($sql_view_link_id)) {
+		$db->query("UPDATE ". table_prefix . "story_views SET `view_link_count` =  `view_link_count` + 1 WHERE view_link_id = ".$link_id.";");
+	}else{
+		$db->query("INSERT INTO ". table_prefix . "story_views (`view_link_id`, `view_link_count`) Values (".$link_id.", 1)");
+}
 }
 
 function get_total_views($vars){
 	global $db, $main_smarty, $smarty, $dblang, $the_template, $linkres, $current_user,$total_views_settings;
 	$link_id = $vars['smarty']->_vars['link_id'];
-	$viewed = $db->get_var("SELECT count(*) from " . table_prefix . "story_views WHERE view_link_id = '" .$db->escape($link_id). "'");
+	$viewed = $db->get_var("SELECT `view_link_count` from " . table_prefix . "story_views WHERE view_link_id = '" .$db->escape($link_id). "'");
 	$vars['smarty']->_vars['total_link_views'] = number_format($viewed);
 }
 ?>
