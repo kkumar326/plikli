@@ -6,10 +6,10 @@
 	</div>
 	
 	<br/>
-	{config_load file=captcha_plikli_lang_conf}
+	
 	<form id="thisform">
 		<input type="button" onclick="gPageIsOkToExit=true; document.location.href='{$my_base_url}{$my_plikli_base}/{$pagename}.php?id={$link_id}';" value="{#PLIKLI_Visual_Submit3Errors_Back#}" class="btn btn-default" />
 	</form>
 	
 {/if}
-
+{config_load file=captcha_plikli_lang_conf}
