@@ -12,7 +12,7 @@
 				<span class="input-group-btn">
 					<input type="hidden" name="view" value="search">
 					<input type="text" name="keyword" class="form-control" placeholder="{#PLIKLI_Visual_User_Search_Users#}">
-					<button class="btn btn-primary" type="button">Search Accounts</button>
+					<button class="btn btn-primary" type="submit">Search Accounts</button>
 				</span>
 			</form>	
 		</div><!-- /input-group -->
