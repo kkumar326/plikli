@@ -8,7 +8,12 @@ include(mnminclude.'html1.php');
 include(mnminclude.'link.php');
 include(mnminclude.'smartyvariables.php');
 include_once(mnminclude.'user.php');
-
+/*Redwine: preventing the register page from loading if the user is already signed in! */
+global $current_user;
+if ($current_user->authenticated == 1) {
+	header('Location: '.my_base_url.my_plikli_base);
+}
+/*Redwine: END preventing the register page from loading if the user is already signed in! */
 $vars = '';
 check_actions('register_top', $vars);
 
