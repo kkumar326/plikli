@@ -1,7 +1,7 @@
 {* Display thumbnails of uploaded image on submit page 2 using AJAX *}
 
-{*config_load file=upload_lang_conf}
-{config_load file='../lang.conf'*}
+{*config_load file=upload_lang_conf*}
+{*config_load file='../lang.conf'*}
 {*#PLIKLI_Upload_Success#*}
 
 <fieldset style="border:1px solid #eee;padding:10px;margin-bottom:10px;" class="upload_ajax">
