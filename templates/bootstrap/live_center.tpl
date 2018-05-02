@@ -22,8 +22,4 @@
 	</tbody>
 </table>
 
-{section name=foo start=0 loop=$items_to_show step=1}
-	<div id="live2-{$templatelite.section.foo.index}" class="live2-item">&nbsp;</div>
-{/section}
-
 <!--/live_center.tpl -->
