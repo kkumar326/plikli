@@ -226,7 +226,7 @@ if ($link) {
 					$linkres->status = 'discard';
 					$story_url = getmyurl($linkres->status, '');
 			}
-			
+			tags_insert_string($linkres->id, $dblang, $linkres->tags);
 			$linkres->store();
 				$story_url = $my_base_url.str_replace("&amp;", "&", $story_url);
 			header('Location: ' . $story_url);
