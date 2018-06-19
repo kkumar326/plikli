@@ -160,20 +160,19 @@ if($canIhaveAccess == 1) {
 	
 	// if admin changes the link status
 	if (isset($_GET['action']) && sanitize($_GET['action'], 3) == "bulkmod" && isset($_POST['admin_acction'])) {
-		
-		$CSRF->check_expired('admin_links_edit');
-		if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'admin_links_edit')){
+		// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+		if (empty($_POST['token'])) {
+			$CSRF->show_invalid_error(1);
+			exit;
+		}
+		// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+		if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'admin_links_edit') == 2){
 			$comment = array();
-			
-			
 			$admin_acction=$_POST['admin_acction'];
-            		
 			foreach ($_POST["link"] as $key => $v) {
-			    
 				if($admin_acction=="published" || $admin_acction=="new" || $admin_acction=="discard" || $admin_acction=="moderated" || $admin_acction=="spam"){
 					$link_status=$db->get_var('select link_status from ' . table_links . '  WHERE link_id = "'.$key.'"');
 					if($link_status!=$admin_acction){
-								
 						if ($admin_acction == "published") {
 							$db->query('UPDATE `' . table_links . '` SET `link_status` = "published", link_published_date = now() WHERE `link_id` = "'.$key.'"');
 							$vars = array('link_id' => $key);
@@ -187,13 +186,10 @@ if($canIhaveAccess == 1) {
 						}
 						elseif ($admin_acction == "discard") {
 							$db->query('UPDATE `' . table_links . '` SET `link_status` = "discard" WHERE `link_id` = "'.$key.'"');
-		
 							$vars = array('link_id' => $key);
 							check_actions('story_discard', $vars);
 						}
 						elseif ($admin_acction == "spam") {
-							
-							
 							$user_id = $db->get_var($sql="SELECT link_author FROM `" . table_links . "` WHERE `link_id` = ".$key.";");
 							$db->query('UPDATE `' . table_links . '` SET `link_status` = "spam" WHERE `link_id` = "'.$key.'"');
 							$vars = array('link_id' => $key);
@@ -208,14 +204,9 @@ if($canIhaveAccess == 1) {
 								$killspammed[$user_id] = 1;
 								}
 							}
-					
-								
 						}
-					
 				}
-				
 			}
-			
 			totals_regenerate();
 			//header("Location: ".my_plikli_base."/admin/admin_links.php?page=".sanitize($_GET['page'],3));
 			$redirect_url=$_SERVER['HTTP_REFERER'];

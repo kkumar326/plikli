@@ -61,15 +61,15 @@ if($canIhaveAccess == 1)
 	$CSRF = new csrf();
 	
 	if(isset($_POST['frmsubmit'])) {
-	
 		if ($_POST["enabled"]) {
-			
-	    	$CSRF->check_expired('admin_users_list');
-			
-	    	if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'admin_users_list')){
-	        
+		// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+		if (empty($_POST['token'])) {
+			$CSRF->show_invalid_error(1);
+			exit;
+		}
+		// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+		if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'admin_users_list') == 2){
 				$value = $db->escape($_POST['admin_acction']);
-			
 				foreach($_POST["enabled"] as $id => $valuea) 
 				{
 					$_GET['id'] = $id = $db->escape($id);
@@ -119,11 +119,13 @@ if($canIhaveAccess == 1)
 	}
 
 	if (isset($_REQUEST["mode"]) && sanitize($_REQUEST["mode"], 3) == "newuser"){
-	   
-		$CSRF->check_expired('admin_users_create');
-		
-	    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'admin_users_create')){
-		
+		// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+		if (empty($_POST['token'])) {
+			$CSRF->show_invalid_error(1);
+			exit;
+		}
+		// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+	    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'admin_users_create') == 2){
 			$username=trim($db->escape($_POST['username']));
 			$password=trim($db->escape($_POST['password']));
 			$email=trim($db->escape($_POST['email']));
@@ -159,6 +161,7 @@ if($canIhaveAccess == 1)
 				header("Location:  ".my_plikli_base."/admin/admin_users.php");
 				die();
 			}
+		// Redwine: if invalid TOKEN, display TOKEN invalid error.	
 	    } else {
 			$CSRF->show_invalid_error(1);
 			exit;
@@ -168,7 +171,6 @@ if($canIhaveAccess == 1)
 	if(isset($_REQUEST["mode"])) {
 		// Create User Page
 		if ($_GET["mode"] == "create"){ // create user
-				
 			$CSRF->create('admin_users_create', true, true);
 			// breadcrumbs and page titles
 			$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
@@ -193,10 +195,6 @@ if($canIhaveAccess == 1)
 
 		}
 		if (sanitize($_GET["mode"], 3) == "view"){ // view single user
-
-			// code to prevent CSRF
-			$CSRF->create('admin_users_resetpass', true, true);
-	
 			$usersql = $db->get_results('SELECT * FROM ' . table_users . ' where user_id="'.sanitize($_GET["user"], 3).'" or user_login="'.sanitize($_GET["user"], 3).'"',ARRAY_A);
 			$userdata = array();				
 			foreach($usersql as $rows) array_push ($userdata, $rows);
@@ -287,10 +285,13 @@ if($canIhaveAccess == 1)
 			
 			//update user date
 			if(isset($_POST['token'])){
-			
-				$CSRF->check_expired('admin_users_edit');
-				if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'admin_users_edit')){
-					
+				// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+				if (empty($_POST['token'])) {
+					$CSRF->show_invalid_error(1);
+					exit;
+				}
+				// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+				if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'admin_users_edit') == 2){
 					$user_old = $db->get_row('SELECT * FROM ' . table_users . ' where user_id="'.sanitize($_GET["user_id"], 3).'"');
 					
 					$username=trim(sanitize($_POST["login"], 3));
@@ -397,21 +398,19 @@ if($canIhaveAccess == 1)
 		}	
 		
 		if (sanitize($_GET["mode"], 3) == "resetpass"){ // reset user password
-
-			// code to prevent CSRF
-//			$CSRF->check_expired('admin_users_resetpass');
-			$CSRF->check_expired('admin_users_edit');
-			// code to prevent CSRF
-		
-//			if ($CSRF->check_valid(sanitize($_GET['token'], 3), 'admin_users_resetpass'))
-			if ($CSRF->check_valid(sanitize($_GET['token'], 3), 'admin_users_edit'))
+			// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+			if (empty($_GET['token'])) {
+				$CSRF->show_invalid_error(1);
+				exit;
+			}
+			// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+			if ($CSRF->check_valid(sanitize($_GET['token'], 3), 'admin_users_edit') == 2)
 			{
 				$user= $db->get_row('SELECT * FROM ' . table_users . ' where user_login="'.sanitize($_GET["user"], 3).'"');
 				
 				canIChangeUser($user->user_level);
 				
 				if ($user) {
-//					$db->query('UPDATE `' . table_users . '` SET `user_pass` = "033700e5a7759d0663e33b18d6ca0dc2b572c20031b575750" WHERE `user_login` = "'.sanitize($_GET["user"], 3).'"');
 					$to = $user->user_email;
 					$subject = $main_smarty->get_config_vars("PLIKLI_Visual_Name").' '.$main_smarty->get_config_vars("PLIKLI_PassEmail_Subject");
 
@@ -461,7 +460,6 @@ if($canIhaveAccess == 1)
 				// create a new one or replace the existing.
 				$CSRF->create('admin_users_disable', true, true);
 			// code to prevent CSRF		
-		
 			if(sanitize($_GET["user"], 3) == "admin"){
 				echo "You can't disable this user";
 			} else {
@@ -500,11 +498,13 @@ if($canIhaveAccess == 1)
 		}
 
 		if (sanitize($_GET["mode"], 3) == "yesdisable"){ // diable user step 2
-			// code to prevent CSRF
-				$CSRF->check_expired('admin_users_disable');
-			// code to prevent CSRF
-
-			if ($CSRF->check_valid(sanitize($_GET['token'], 3), 'admin_users_disable'))
+			// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+			if (empty($_GET['token'])) {
+				$CSRF->show_invalid_error(1);
+				exit;
+			}
+			// Redwine: if valid TOKEN, proceed
+			if ($CSRF->check_valid(sanitize($_GET['token'], 3), 'admin_users_disable') == 2)
 			{
 				$user= $db->get_row('SELECT * FROM ' . table_users . ' where user_login="'.sanitize($_GET["user"], 3).'"');
 				
@@ -545,12 +545,53 @@ if($canIhaveAccess == 1)
 			}
 		}
 
-		if (sanitize($_GET["mode"], 3) == "enable")
+		if (sanitize($_GET["mode"], 3) == "enable"){ // enable user
+			// code to prevent CSRF
+				// doesn't matter if a token exists. if we're viewing this page, just
+				// create a new one or replace the existing.
+				$CSRF->create('admin_users_enable', true, true);
+			// code to prevent CSRF		
+			$user= $db->get_row('SELECT * FROM ' . table_users . ' where user_login="'.sanitize($_GET["user"], 3).'"');
+			canIChangeUser($user->user_level); 
+			if ($user) {
+				// breadcrumbs and page title
+				$navwhere['text1'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel');
+				$navwhere['link1'] = getmyurl('admin', '');
+					$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
+				$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
+				$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_User_Enable');
+				$main_smarty->assign('navbar_where', $navwhere);
+				$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
+				
+				$main_smarty->assign('user', sanitize($_GET["user"], 3));	
+							
+				// pagename
+				define('pagename', 'admin_users'); 
+				$main_smarty->assign('pagename', pagename);					
+			
+				// show the template
+				$main_smarty->assign('tpl_center', '/admin/user_enable');
+				if ($is_moderator == '1'){
+					$main_smarty->display('/admin/moderator.tpl');
+				} else {
+					$main_smarty->display('/admin/admin.tpl');
+				}
+			} else {
+				showmyerror('userdoesntexist');
+			}
+		}
+
+		if (sanitize($_GET["mode"], 3) == "yesenable"){ // enable user step 2
+			// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+			if (empty($_GET['token'])) {
+				$CSRF->show_invalid_error(1);
+				exit;
+			}
+			// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+			if ($CSRF->check_valid(sanitize($_GET['token'], 3), 'admin_users_enable') == 2)
 		{ 
 				$user= $db->get_row('SELECT * FROM ' . table_users . ' where user_login="'.sanitize($_GET["user"], 3).'"');
-				
 				canIChangeUser($user->user_level); 
-				
 				if ($user) {
 					$db->query('UPDATE `' . table_users . '` SET `user_enabled` = 1 WHERE `user_login` = "'.sanitize($_GET["user"], 3).'"');
 					
@@ -559,7 +600,7 @@ if($canIhaveAccess == 1)
 					$navwhere['link1'] = getmyurl('admin', '');
 					$navwhere['text2'] = $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel_1');
 					$navwhere['link2'] = my_plikli_base . "/admin/admin_users.php";
-					$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_User_Disable_2');
+					$navwhere['text3'] = $main_smarty->get_config_vars('PLIKLI_Visual_Breadcrumb_User_Enable_2');
 					$main_smarty->assign('navbar_where', $navwhere);
 					$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 					
@@ -572,6 +613,10 @@ if($canIhaveAccess == 1)
 				} else {
 					showmyerror('userdoesntexist');
 				}
+			} else {
+				// invalid token / timeout error
+				$CSRF->show_invalid_error(2);
+			}
 		}
 
 		if (sanitize($_GET["mode"], 3) == "killspam"){ // killspam user
@@ -622,11 +667,13 @@ if($canIhaveAccess == 1)
 		}
 		
 		if (sanitize($_GET["mode"], 3) == "yeskillspam"){ // killspam step 2
-			// code to prevent CSRF
-				$CSRF->check_expired('admin_users_killspam');
-			// code to prevent CSRF
-						
-			if ($CSRF->check_valid(sanitize($_GET['token'], 3), 'admin_users_killspam'))
+			// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+			if (empty($_POST['token'])) {
+				$CSRF->show_invalid_error(1);
+				exit;
+			}
+			// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+			if ($CSRF->check_valid(sanitize($_GET['token'], 3), 'admin_users_killspam') == 2)
 			{
 				$user= $db->get_row('SELECT * FROM ' . table_users .' where user_login="'.sanitize($_GET["user"], 3).'"');
 				killspam($user->user_id);
@@ -696,6 +743,7 @@ if($canIhaveAccess == 1)
 	
 	} else { // No options are selected, so show the list of users.			
 		$CSRF->create('admin_users_list', true, true);
+		$CSRF->create('admin_users_create', true, true);
 		global $offset, $top_users_size;
 		
 		// Items per page drop-down

@@ -44,9 +44,13 @@ if (Allow_User_Change_Templates && file_exists("./templates/".$_POST['template']
 	if (!strstr($domain,'.') || strpos($domain,'localhost:')===0) $domain='';
 	setcookie("template", $_POST['template'], time()+60*60*24*30,'/',$domain);
 }
-
-$CSRF->check_expired('user_settings');
-if (!$CSRF->check_valid(sanitize($_POST['token'], 3), 'user_settings')){
+// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+if (empty($_POST['token'])) {
+	$CSRF->show_invalid_error(1);
+	exit;
+}
+// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'user_settings') != 2){
     	$CSRF->show_invalid_error(1);
 	exit;
 }

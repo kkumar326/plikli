@@ -84,8 +84,13 @@ if($canIhaveAccess == 1)
 	}
 	
 	if($action == "save"){
-	    $CSRF->check_expired('category_manager');
-	    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'category_manager')){
+		// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+		if (empty($_POST['token'])) {
+			$CSRF->show_invalid_error(1);
+			exit;
+		}
+		// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+	    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'category_manager') == 2){
 		    if (!$_POST['safename'])
 		    {
 			$_POST['safename'] = makeCategoryFriendly($_POST['name']);
@@ -158,8 +163,13 @@ if($canIhaveAccess == 1)
 	    exit;
 	}
 	elseif($action == "add"){
-	    $CSRF->check_expired('category_manager');
-	    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'category_manager')){
+	    // Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+		if (empty($_POST['token'])) {
+			$CSRF->show_invalid_error(1);
+			exit;
+		}
+		// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+	    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'category_manager') == 2){
 		$sql = "insert into `" . table_categories . "` (`category_name`) VALUES ('new category');";
 		$db->query($sql);
 		$last_IDsql = $db->get_var("SELECT category__auto_id from " . table_categories . " where category_name = 'new category';");
@@ -191,8 +201,13 @@ if($canIhaveAccess == 1)
 		Cat_Safe_Names();
 	}
 	elseif($action == "remove"){
-	    $CSRF->check_expired('category_manager');
-	    if ($CSRF->check_valid(sanitize($_GET['token'], 3), 'category_manager')){
+		// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+		if (empty($_GET['token'])) {
+			$CSRF->show_invalid_error(1);
+			exit;
+		}
+		// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+	    if ($CSRF->check_valid(sanitize($_GET['token'], 3), 'category_manager') == 2){
 		$id = sanitize($_REQUEST['id'], 3);
 		if (!is_numeric($id)) die();
 
@@ -221,12 +236,18 @@ if($canIhaveAccess == 1)
 		header("Location: admin_categories.php");
 	    } else {
 		    $CSRF->show_invalid_error(1);
+			exit;
 	    }
+	    
+	    }
+        elseif($action == "changeparent"){
+		// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+		if (empty($_POST['token'])) {
+			$CSRF->show_invalid_error(1);
 	    exit;
 	}
-        elseif($action == "changeparent"){
-	    $CSRF->check_expired('category_manager');
-	    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'category_manager')){
+		// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+	    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'category_manager')== 2){
 		$id = utf8_substr(sanitize($_REQUEST['id'], 3), 9, 100);
 		$parent = utf8_substr(sanitize($_REQUEST['parent'], 3), 9, 100);
 		if (!is_numeric($id)) die();

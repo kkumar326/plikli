@@ -87,8 +87,13 @@ $main_smarty->assign('user_following', $user->getFollowingCount());
 
 	// uploading avatar
 	if(isset($_POST["avatar"]) && sanitize($_POST["avatar"], 3) == "uploaded" && Enable_User_Upload_Avatar == true){
-		if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'profile_change')){
-
+		// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+		if (empty($_POST['token'])) {
+			$CSRF->show_invalid_error(1);
+			exit;
+		}
+		// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+		if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'profile_change') == 2){
 			$user_image_path = "avatars/user_uploaded" . "/";
 			$user_image_apath = "/" . $user_image_path;
 			$allowedFileTypes = array("image/jpeg","image/gif","image/png",'image/x-png','image/pjpeg');
@@ -142,9 +147,12 @@ $main_smarty->assign('user_following', $user->getFollowingCount());
 			$db->query($sql="UPDATE ".table_users." SET user_avatar_source='useruploaded' WHERE user_id='$user->id'");	
 			unset($cached_users[$user->id]);
 		} else {
-			echo 'An error occured while uploading your avatar.';
+			$CSRF->show_invalid_error(1);
+			exit;
 		}
 			
+	}else{
+		echo 'An error occured while uploading your avatar.';
 	}		
 
 	if(isset($error) && is_array($error)) {
@@ -282,11 +290,13 @@ function show_profile() {
 
 function save_profile() {
 	global $user, $current_user, $db, $main_smarty, $CSRF, $canIhaveAccess, $language;
-  
-  
-
-	if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'profile_change')){
-	
+	// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+	if (empty($_POST['token'])) {
+		$CSRF->show_invalid_error(1);
+		exit;
+	}
+	// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+	if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'profile_change') == 2){
 		if(!isset($_POST['save_profile']) || !$_POST['process'] || (!$canIhaveAccess && sanitize($_POST['user_id'], 3) != $current_user->user_id)) return;
 		
 		if ($user->email!=sanitize($_POST['email'], 3))
@@ -474,7 +484,8 @@ function save_profile() {
 		}
 		return $saved;
 	} else {
-		return 'There was a token error.';
+		$CSRF->show_invalid_error(1);
+		exit;
 	}
 }
 

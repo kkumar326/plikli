@@ -36,8 +36,13 @@ if($canIhaveAccess == 0){
 }
 
 if (isset($_REQUEST["mode"]) && sanitize($_REQUEST["mode"], 3) == "newuser"){
-	    $CSRF->check_expired('admin_users_create');
-	    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'admin_users_create')){
+	    // Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+		if (empty($_POST['token'])) {
+			$CSRF->show_invalid_error(1);
+			exit;
+		}
+		// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+	    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'admin_users_create') == 2){
 		$username=trim($db->escape($_POST['username']));
 		$password=trim($db->escape($_POST['password']));
 		$email=trim($db->escape($_POST['email']));
@@ -65,6 +70,7 @@ if (isset($_REQUEST["mode"]) && sanitize($_REQUEST["mode"], 3) == "newuser"){
 				$db->query("INSERT IGNORE INTO " . table_users . " (user_login, user_level, user_email, user_pass, user_date) VALUES ('$username', '$level', '$email', '$saltedpass', now())");
 				echo "User Added successfully";
 			}
+	    // Redwine: if invalid TOKEN, display TOKEN invalid error.	
 	    } else {
 		$CSRF->show_invalid_error(1);
 		exit;

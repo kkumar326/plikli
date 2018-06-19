@@ -163,8 +163,13 @@ if(isset($_POST["avatar"]) && $_POST["avatar"] == "uploaded")
 {
 	check_referrer();
 
-    $CSRF->check_expired('edit_group');
-    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'edit_group')){
+    // Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+	if (empty($_POST['token'])) {
+		$CSRF->show_invalid_error(1);
+		exit;
+	}
+	// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'edit_group') == 2){
 
 	$user_image_path = "avatars/groups_uploaded" . "/";
 	$user_image_apath = "/" . $user_image_path;

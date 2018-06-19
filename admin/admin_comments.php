@@ -141,16 +141,17 @@ if($canIhaveAccess == 1) {
 	$main_smarty->assign('posttitle', " / " . $main_smarty->get_config_vars('PLIKLI_Visual_Header_AdminPanel'));
 	
 	if (isset($_GET['action']) && sanitize($_GET['action'], 3) == "bulkmod" && isset($_POST['admin_acction'])) {
-		$CSRF->check_expired('comments_edit');
+		// Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+		if (empty($_POST['token'])) {
+			$CSRF->show_invalid_error(1);
+			exit;
+		}
+
 		$killspammed = array();
 		$admin_acction=$_POST['admin_acction'];
-		
-		if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'comments_edit')){
-			
-			
-			
+		// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+		if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'comments_edit') == 2){
 			foreach($_POST["comment"] as $key => $value) {
-				
 				$comment_status=$db->get_var('select comment_status from ' . table_comments . '  WHERE comment_id = "'.$key.'"');
 				
 				if($comment_status!=$admin_acction){

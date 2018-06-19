@@ -60,8 +60,13 @@ $CSRF = new csrf();
 // uploading avatar
 if(isset($_POST["avatar"]) && $_POST["avatar"] == "uploaded")
 {
-    $CSRF->check_expired('edit_group');
-    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'edit_group')){
+    // Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+	if (empty($_POST['token'])) {
+		$CSRF->show_invalid_error(1);
+		exit;
+	}
+	// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'edit_group') == 2){
 		$user_image_path = "avatars/groups_uploaded" . "/";
 		$user_image_apath = "/" . $user_image_path;
 		$allowedFileTypes = array("image/jpeg","image/gif","image/png",'image/x-png','image/pjpeg');
@@ -115,8 +120,13 @@ if(isset($_POST["avatar"]) && $_POST["avatar"] == "uploaded")
 }
 elseif(isset($_POST["action"]))
 {
-    $CSRF->check_expired('edit_group');
-    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'edit_group')){
+    // Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+	if (empty($_POST['token'])) {
+		$CSRF->show_invalid_error(1);
+		exit;
+	}
+	// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'edit_group') == 2){
 	if(isset($_POST['group_title'])){
 		$group_title = $db->escape(stripslashes(strip_tags(trim($_POST['group_title']))));
 		$group_title = preg_replace('/[^A-Za-z0-9\-\s]/', ' ', $group_title);

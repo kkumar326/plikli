@@ -83,8 +83,13 @@ if(enable_group == "true" && (group_submit_level == $current_user_level || group
 		$group_status = 'disable';
 	if(isset($_POST['group_title']))
 	{
-	    $CSRF->check_expired('submit_group');
-	    if (!$CSRF->check_valid(sanitize($_POST['token'], 3), 'submit_group')){
+	    // Redwine: if TOKEN is empty, no need to continue, just display the invalid token error.
+		if (empty($_POST['token'])) {
+			$CSRF->show_invalid_error(1);
+			exit;
+		}
+		// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
+	    if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'submit_group') != 2){
 	    	$CSRF->show_invalid_error(1);
 		exit;
 	    }
