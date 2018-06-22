@@ -44,6 +44,7 @@ PLIKLI_Visual_404_Title = "Страница, которую вы ищите не
 PLIKLI_Visual_404_Description = "Возможно, она была удалена или вы перешли сюда с помощью правильного URL"
 PLIKLI_Visual_404_Options = "<li>Воспользуйтесь поиском, чтобы найти статью, которая Вас интересует.</li><li>Посетите главную страницу, чтобы увидеть самые последние статьи.</li><li>Воспользуйтесь категориями и метками, для поиска соответствующуей статьи.</li>"
 PLIKLI_Visual_Search_Title = "Поиск"
+PLIKLI_Visual_Page_Expires = "Эта страница будет таймаут через 5 минут, после чего вы должны обновить ее, прежде чем делать какие-либо действия / изменения!"
 
 //<SECTION>MAINPAGE</SECTION><ADDED>1.00</ADDED>
 PLIKLI_Visual_Published_News = "Опубликованные"
@@ -385,6 +386,8 @@ PLIKLI_Visual_Breadcrumb_Edit_User_Data_Saved = "Данные сохранены
 PLIKLI_Visual_Breadcrumb_User_Reset_Pass = "Сбросить пароль"
 PLIKLI_Visual_Breadcrumb_User_Disable = "Отключить пользователя"
 PLIKLI_Visual_Breadcrumb_User_Disable_2 = "Пользователь отключен"
+PLIKLI_Visual_Breadcrumb_User_Enable = "Включить пользователя"
+PLIKLI_Visual_Breadcrumb_User_Enable_2 = "Пользователь включен"
 PLIKLI_Visual_Breadcrumb_User_Killspam = "Удаление спамера"
 PLIKLI_Visual_Breadcrumb_View_Comments = "Просмотреть оставленные комментарии"
 PLIKLI_Visual_Breadcrumb_User_Does_Not_Exist = "Пользователь не существует"

@@ -65,6 +65,7 @@ function validate_all_user_action(){
 		{#PLIKLI_Visual_AdminPanel_Links#}
 	{/if}
 </legend>
+<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
 {if $moderated_submissions_count neq 0}
 	<div class="alert alert-warning">
 		There {if $moderated_submissions_count eq 1}is{else}are{/if} <strong>{$moderated_submissions_count} {if $moderated_submissions_count eq 1}story{else}stories{/if}</strong> awaiting moderation.<br />

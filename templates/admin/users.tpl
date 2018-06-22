@@ -83,6 +83,7 @@ function validate_all_user_action(){
 </script>
 {/literal}
 <legend>{#PLIKLI_Visual_AdminPanel_User_Manage#}</legend>
+<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
 {if $moderated_users_count > 0}
 	<div class="alert alert-warning">
 		There {if $moderated_users_count eq "1"}is{else}are{/if} <strong>{$moderated_users_count} {if $moderated_users_count eq "1"}user{else}users{/if}</strong> awaiting moderation.<br />

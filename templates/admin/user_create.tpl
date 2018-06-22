@@ -136,6 +136,7 @@ function checkPassword(val){
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title">{#PLIKLI_Visual_AdminPanel_New_User#}</h4>
 			</div>
+			<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
 			<div class="modal-body">
 
 				<form action="admin_users.php" method="post" id="createUserForm" class="form" onsubmit="return checkValidation()">

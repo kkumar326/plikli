@@ -65,6 +65,7 @@ function validate_all_user_action(){
 		{#PLIKLI_Visual_AdminPanel_Comments_Legend#}
 	{/if}
 </legend>
+<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
 {if $moderated_comments_count neq 0}
 	<div class="alert alert-warning">
 		There {if $moderated_comments_count eq 1}is{else}are{/if} <strong>{$moderated_comments_count} {if $moderated_comments_count eq 1}comment{else}comments{/if}</strong> awaiting moderation.<br />

@@ -3,6 +3,9 @@
 *************************************}
 <!-- group_story_center.tpl -->
 {if $enable_group eq "true"}
+	{if $isAdmin eq 1 || $isModerator eq 1 || $is_gr_Admin eq 1}
+		<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
+	{/if}
 	{checkActionsTpl location="tpl_plikli_group_start"}
 	{include file=$the_template."/group_summary.tpl"}
 	{checkActionsTpl location="tpl_plikli_group_end"}

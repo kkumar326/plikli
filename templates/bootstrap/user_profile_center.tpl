@@ -7,6 +7,9 @@
 <!-- user_profile_center.tpl -->
 {***********************************************************************************}
 {if $user_view eq 'profile'}
+{if $user_login eq $user_logged_in}
+	<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
+{/if}
 	<div id="profile_container" style="position: relative;">
 		<div class="row">
 			{checkActionsTpl location="tpl_plikli_profile_info_start"}

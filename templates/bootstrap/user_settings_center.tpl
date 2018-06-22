@@ -7,6 +7,9 @@
 {***********************************************************************************}
 {if $savemsg neq ""}<div class="alert alert-warning fade in"><a data-dismiss="alert" class="close">&times;</a>{$savemsg}</div>{/if} 
 {checkActionsTpl location="tpl_plikli_profile_info_start"}
+{if $user_login eq $user_logged_in}
+	<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
+{/if}
 <form action="" method="post" id="thisform" role="form">
 	<div id="profile_container" class="js-masonry">
 		{checkActionsTpl location="tpl_user_edit_fields"}

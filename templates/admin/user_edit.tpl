@@ -18,6 +18,7 @@
 	</script>
 	
 	<legend>{#PLIKLI_Visual_Breadcrumb_Edit_User#}: <a href="{$my_base_url}{$my_plikli_base}/user.php?login={$userdata[nr].user_login}">{$userdata[nr].user_login}</a></legend>
+	<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
 	<form id="form1" name="form1" method="post" action="" onsubmit="return check(this);">
     
     <input type="hidden" name="token" value="{$uri_token_admin_users_edit}" />

@@ -3,7 +3,9 @@
 *************************************}
 <!-- edit_group_center.tpl -->
 {*Redwine: Roles and permissions and Groups fixes*}
-{if $is_gr_creator eq '1' || $isAdmin eq '1' || $isModerator eq '1' || $is_gr_Admin eq '1' || $is_gr_Moderator eq '1'}
+{if $is_gr_creator eq '1' || $isAdmin eq '1' || $isModerator eq '1' || $is_gr_Admin eq '1'}
+	<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
+
 	{if !empty($errors)}
 		<div class="alert alert-warning">
 			<button class="close" data-dismiss="alert">&times;</button>

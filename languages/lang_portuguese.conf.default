@@ -40,7 +40,7 @@ PLIKLI_Visual_Search_Go = "Ir"
 PLIKLI_Visual_404_Title = "A página que você procura não existe!"
 PLIKLI_Visual_404_Description = "Talvez ele tenha sido removido ou você chegou aqui através de uma URL errada"
 PLIKLI_Visual_404_Options = "<li>Tente buscar pelo artigo que você procurava.</li><li>Visite a página principal para ver os artigos mais recentes.</li><li>Navegue categorias e tags para encontrar um artigo relacionado.</li>"
-
+PLIKLI_Visual_Page_Expires = "Esta página irá expirar em 5 minutos, após o qual você terá que atualizá-la antes de realizar qualquer ação / mudança!"
 
 //<SECTION>MAINPAGE</SECTION><ADDED>1.00</ADDED>
 PLIKLI_Visual_Published_News = "Artigos Publicados"
@@ -382,6 +382,8 @@ PLIKLI_Visual_Breadcrumb_Edit_User_Data_Saved = "Dados Salvos"
 PLIKLI_Visual_Breadcrumb_User_Reset_Pass = "Reinicialiar a Senha"
 PLIKLI_Visual_Breadcrumb_User_Disable = "Desativar Usuário"
 PLIKLI_Visual_Breadcrumb_User_Disable_2 = "Usuário Desativado"
+PLIKLI_Visual_Breadcrumb_User_Enable = "Ativar usuário"
+PLIKLI_Visual_Breadcrumb_User_Enable_2 = "Usuário está habilitado"
 PLIKLI_Visual_Breadcrumb_User_Killspam = "Matar Usuário"
 PLIKLI_Visual_Breadcrumb_View_Comments = "Ver Comentários Enviados"
 PLIKLI_Visual_Breadcrumb_User_Does_Not_Exist = "Usuário Não Existe"
@@ -1106,4 +1108,3 @@ PLIKLI_User_Profile_No_Content = "Esta página não possui conteúdo para ser ex
 // Start 2.0.3 Language File
 PLIKLI_Visual_Submit2_Cancel = "Cancelar"
 // End 2.0.3 Language File
-

@@ -16,7 +16,7 @@ class CSRF {
 	IMPORTANT: ONLY USE ON THE DEVELOPMENT LOCALHOST BECAUSE IT OUTPUTS ALL THE INFORMATION ON THE SCREEN!!!
 	**********************************/
 	var $do_debug = false;  // output debug info
-
+	
 	/**********************************
 	Redwine: the $do_debug_only_if_user option, when a value is entered (make sure to only enter your admin user_login), ONLY this user can log to a file or output on the screen.
 	IN OTHER WORDS:
@@ -81,8 +81,8 @@ class CSRF {
 		$this->log('Assigning token to smarty: ' . $name);
 	}
 
-	function check_valid($token, $name){
-		// see if the $token matches what the token was previously set to.
+function check_valid($token, $name) {
+	//see if the $token matches what the token was previously set to.
 	/***************************************************************
 	hash_equals (PHP 5 >= 5.6.0, PHP 7)
 	Redwine: for backward compatibility, I am using a function that is equal to hash_equals, I found at https://github.com/indigophp/hash-compat. I tweaked a bit to fit our needs!
@@ -93,7 +93,7 @@ class CSRF {
 	if (!function_exists('hash_equals')) {
 		defined('USE_MB_STRING') or define('USE_MB_STRING', function_exists('mb_strlen'));
 		/**
-		 * hash_equals — Timing attack safe string comparison
+		 * hash_equals â€” Timing attack safe string comparison
 		 *
 		 * Arguments are null by default, so an appropriate warning can be triggered
 		 *
@@ -160,12 +160,12 @@ class CSRF {
 	$score_expired = $this->check_expired($name);
 	if ($score_expired == 1) {
 		$this->log("\n\t\tFrom check_valid:\n\t\ttoken: " . $name . ' has not expired'); 
-		} else {
+	}else{
 		$this->log("\n\t\tFrom check_valid:\n\t\ttoken: " . $name . ' has expired -- token created: ' . $this->get_time($name) . ' -- token age: ' . $token_age);
-		}
-	return $score_valid + $score_expired;
 	}
-
+	return $score_valid + $score_expired;
+}
+	
 	function check_expired($name, $time = 300){
 		// check to see if time (seconds) has passed since the token was created.
 		$token_age = time() - $this->get_time($name);
@@ -185,13 +185,13 @@ class CSRF {
 		global $current_user;
 		if ($this->do_debug_only_if_user != '' && ($this->do_debug_only_if_user == $current_user->user_login && $current_user->user_level == 'admin')) {
 		
-		if($this->do_log == true){
-			$this->datalog[] = $action;
+			if($this->do_log == true){
+				$this->datalog[] = $action;
 				$fh=fopen(mnmpath.'/logs/log_csrf.log',"a");
 				fwrite($fh,$action . "\n");
 				fclose($fh);
-		}
-		if($this->do_debug == true){
+			}
+			if($this->do_debug == true){
 				echo $action . '<br />';
 			}
 		}

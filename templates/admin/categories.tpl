@@ -1,5 +1,6 @@
 ﻿<!-- categories.tpl -->
 <legend>{#PLIKLI_Visual_AdminPanel_Category_Manage#}</legend>
+<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
 <br />
 {literal}
 <script>
