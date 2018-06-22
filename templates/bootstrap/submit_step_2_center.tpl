@@ -336,7 +336,7 @@ $( document ).ready(function() {
 	});
 	$('#tags').keyup(function() {
 		var yourInput = $(this).val();
-		re = /[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi;
+		re = /[`~!@#$%^&*()|+=?;:'".<>\{\}\[\]\\\/]/gi;
 		var isSplChar = re.test(yourInput);
 		if(isSplChar) {
 			var no_spl_char = yourInput.replace(re, '');
