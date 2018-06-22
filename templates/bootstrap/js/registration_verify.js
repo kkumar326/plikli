@@ -1,5 +1,5 @@
 $(function() {
-    $(".reg_username").change(function() 
+    $(".reg_username").blur(function() 
     {
 		
 	  var oparation = 'username';
@@ -8,6 +8,7 @@ $(function() {
 	  var parent = $(".reg_usernamecheckitvalue");
 	  $.ajax({
 	  type: "POST",
+	  async: false,
 	  url:my_base_url+my_plikli_base+"/checkfield.php",
 	  data: dataString,
 	  beforeSend: function() {
@@ -26,7 +27,7 @@ $(function() {
 	});
 	
 	
-	 $(".reg_email").change(function() 
+	 $(".reg_email").blur(function() 
     {
 		
 	  var oparation = 'email';
@@ -35,6 +36,7 @@ $(function() {
 	  var parent = $(".reg_emailcheckitvalue");
 	  $.ajax({
 	  type: "POST",
+	  async: false,
 	  url:my_base_url+my_plikli_base+"/checkfield.php",
 	  data: dataString,
 	  beforeSend: function() {
