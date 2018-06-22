@@ -128,7 +128,7 @@
 											
 										{/if}
 										{checkActionsTpl location="tpl_plikli_profile_friend_td"}										
-										{if $user_authenticated eq true && $myfriend.is_mutual eq 'mutual' || $myfriend.is_mutual eq 'following'}
+										{if $user_authenticated eq true && $myfriend.is_mutual eq 'mutual' || $myfriend.is_mutual eq 'following' || $is_friend eq 'mutual'}
 											<td>
 												<a class="btn btn-danger" href="{$removeURL}">{#PLIKLI_Visual_User_Profile_Remove_Friend#}</a>
 											</td>
