@@ -10,7 +10,42 @@
 {if $user_login eq $user_logged_in}
 	<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
 {/if}
-<form action="" method="post" id="thisform" role="form">
+{literal}
+	<!-- Check breached password against HIBP's API -->
+<script> {/literal}
+var pwned = "{#PLIKLI_Visual_Register_Error_PwnedPass#}";
+{literal}
+function checkBreachedPassword() {
+	var password = document.getElementById("newpassword").value;
+	var passwordDigest = new Hashes.SHA1().hex(password);
+	var digestFive = passwordDigest.substring(0, 5).toUpperCase();
+	var queryURL = "https://api.pwnedpasswords.com/range/" + digestFive;
+	var checkDigest = passwordDigest.substring(5, 41).toUpperCase();
+	var parent = $(".reg_userpasscheckitvalue");
+	var result;
+
+	$.ajax({
+		url: queryURL,
+		type: 'GET',
+		async: false,
+		beforeSend: function() {
+		parent.addClass("loader");
+		},
+		cache: false,
+		success: function(res) {
+			if (res.search(checkDigest) > -1){
+				result = false;
+				parent.html('<div class="alert alert-block alert-danger fade in"><button data-dismiss="alert" class="close">&times;</button>' + pwned +'<div>');
+			} else {
+				result = true;
+			}
+		}
+	  });
+	  return result;
+}
+</script>
+{/literal}
+<form action="" method="post" id="thisform" name="thisform" role="form" {if $validate_password eq '1'}onsubmit="return checkBreachedPassword();"{/if}>
 	<div id="profile_container" class="js-masonry">
 		{checkActionsTpl location="tpl_user_edit_fields"}
 		{checkActionsTpl location="tpl_plikli_profile_info_middle"}
@@ -159,7 +194,7 @@
 					</tr>
 					<tr>
 						<td><label>{#PLIKLI_Visual_Profile_NewPass#}:</label></td>
-						<td><input type="password" class="form-control" id="newpassword" name="newpassword" size="25" tabindex="14"/></td>
+						<td><input type="password" class="form-control" id="newpassword" name="newpassword" size="25" tabindex="14"/><span class="reg_userpasscheckitvalue"></span></td>
 					</tr>
 					<tr>
 						<td><label>{#PLIKLI_Visual_Profile_VerifyNewPass#}:</label></td>

@@ -4,22 +4,56 @@
 	<script>
 		var message = "{#PLIKLI_Visual_Register_Error_NoPassMatch#}";
 		{literal}
-		function check(form)
-		{
-			if (form.password.value != form.password2.value)
-			{
+		$(function() {
+			$("#password2").blur(function() {				
+				if ($('#password').val() != $('#password2').val()) {
 				alert(message);
-				form.password.focus();
+					$('#password').focus();
 				return false;
 			}
 			return true;
-		}
+			});
+		});
 		{/literal}
 	</script>
 	
+	<!-- Check breached password against HIBP's API -->
+<script>
+var pwned = "{#PLIKLI_Visual_Register_Error_PwnedPass#}";
+{literal}
+function checkBreachedPassword() {
+	var password = document.getElementById("password").value;
+	var passwordDigest = new Hashes.SHA1().hex(password);
+	var digestFive = passwordDigest.substring(0, 5).toUpperCase();
+	var queryURL = "https://api.pwnedpasswords.com/range/" + digestFive;
+	var checkDigest = passwordDigest.substring(5, 41).toUpperCase();
+	var parent = $(".reg_userpasscheckitvalue");
+	var result;
+
+	$.ajax({
+		url: queryURL,
+		type: 'GET',
+		async: false,
+		beforeSend: function() {
+		parent.addClass("loader");
+		},
+		cache: false,
+		success: function(res) {
+			if (res.search(checkDigest) > -1){
+				result = false;
+				parent.html('<div class="alert alert-block alert-danger fade in"><button data-dismiss="alert" class="close">&times;</button>' + pwned +'<div>');
+			} else {
+				result = true;
+			}
+		}
+	  });
+	  return result;
+}
+</script>
+{/literal}
 	<legend>{#PLIKLI_Visual_Breadcrumb_Edit_User#}: <a href="{$my_base_url}{$my_plikli_base}/user.php?login={$userdata[nr].user_login}">{$userdata[nr].user_login}</a></legend>
 	<div class="alert alert-warning expires-warning">{#PLIKLI_Visual_Page_Expires#}</div>
-	<form id="form1" name="form1" method="post" action="" onsubmit="return check(this);">
+	<form id="form1" name="form1" method="post" action="" {if $validate_password eq '1'}onsubmit="return checkBreachedPassword();"{/if}>
     
     <input type="hidden" name="token" value="{$uri_token_admin_users_edit}" />
     
@@ -73,11 +107,11 @@
 			</tr>
 			<tr>
 				<td><label>{#PLIKLI_Visual_Profile_NewPass#}:</label></td>
-				<td><input name="password" class="form-control" type="password"></td>
+				<td><input id="password" name="password" class="form-control" type="password"><span class="reg_userpasscheckitvalue"></span></td>
 			</tr>
 			<tr>
 				<td><label>{#PLIKLI_Visual_Profile_VerifyNewPass#}:</label></td>
-				<td><input name="password2" class="form-control" type="password"></td>
+				<td><input id="password2" name="password2" class="form-control" type="password"></td>
 			</tr>
 			{checkActionsTpl location="tpl_admin_user_edit_center_fields"}
 			<tr>

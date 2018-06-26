@@ -5,10 +5,45 @@
 {if $allow_registration neq '1'}
 <div class="alert alert-danger">{$disallow_registration_message}</div>
 {else}
+{literal}
+	<!-- Check breached password against HIBP's API -->
+<script> {/literal}
+var pwned = "{#PLIKLI_Visual_Register_Error_PwnedPass#}";
+{literal}
+function checkBreachedPassword() {
+	var password = document.getElementById("reg_password").value;
+	var passwordDigest = new Hashes.SHA1().hex(password);
+	var digestFive = passwordDigest.substring(0, 5).toUpperCase();
+	var queryURL = "https://api.pwnedpasswords.com/range/" + digestFive;
+	var checkDigest = passwordDigest.substring(5, 41).toUpperCase();
+	var parent = $(".reg_userpasscheckitvalue");
+	var result;
+
+	$.ajax({
+		url: queryURL,
+		type: 'GET',
+		async: false,
+		beforeSend: function() {
+		parent.addClass("loader");
+		},
+		cache: false,
+		success: function(res) {
+			if (res.search(checkDigest) > -1){
+				result = false;
+				parent.html('<div class="alert alert-block alert-danger fade in"><button data-dismiss="alert" class="close">&times;</button>' + pwned +'<div>');
+			} else {
+				result = true;
+			}
+		}
+	  });
+	  return result;
+}
+</script>
+{/literal}
 <div class="row register-wrapper">
 	<div class="col-md-4 register-left">
 		{checkActionsTpl location="tpl_plikli_register_start"}
-		<form action="{$URL_register}" class="form-horizontal" method="post" id="thisform">
+		<form action="{$URL_register}" class="form-horizontal" method="post" id="thisform" name="thisform" {if $validate_password eq '1'}onsubmit="return checkBreachedPassword();"{/if}>
 			<div class="control-group">
 				<label class="control-label">{#PLIKLI_Visual_Register_Username#}</label>
 				<div class="controls">
@@ -52,6 +87,7 @@
 						{ /foreach }
 					{/if}
 					<input type="password" class="form-control" id="reg_password" name="reg_password" value="{if isset($reg_password)}{$reg_password}{/if}" size="25" tabindex="14"/>
+					<span class="reg_userpasscheckitvalue"></span>
 					<p class="help-inline">{#PLIKLI_Visual_Register_FiveChar#}</p>
 				</div>
 			</div>

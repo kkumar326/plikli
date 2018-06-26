@@ -3,7 +3,7 @@
 //<VERSION>2.0.2</VERSION>
 
 //<SECTION>GENERAL</SECTION><ADDED>1.00</ADDED>
-PLIKLI_Visual_Name = "Plikli"
+PLIKLI_Visual_Name = "Plikli CMS"
 PLIKLI_Visual_Welcome_to = "Welcome to"
 PLIKLI_Visual_Welcome_to_Message = "It looks like you've just set up your website. Now would be a good time to submit your first article and then publish it to the Home or the New page depending on your settings in Dashboard -> Settings -> Voting -> Votes to publish"
 PLIKLI_Visual_Welcome_to_Submit_First_Story = "Submit Your First Story!"
@@ -117,6 +117,7 @@ PLIKLI_Visual_Register_Error_UserExists = "The username requested already exists
 PLIKLI_Visual_Register_Error_BadCode = "The security code provided is not correct"
 PLIKLI_Visual_Register_Error_NoPassMatch = "The passwords provided do not match"
 PLIKLI_Visual_Register_Error_FiveCharPass = "Your password must be at least 5 characters long"
+PLIKLI_Visual_Register_Error_PwnedPass = "You entered a common and unsafe password!"
 PLIKLI_Visual_Register_Error_Secret_Code = "The Information emailed to you does not match what you entered! In order to protect the account owner from any hack attempt!<br />An email was sent to you just now with new instructions to reset your password!"
 PLIKLI_Visual_Register_Error_EmailExists = "Another user with that email address exists"
 PLIKLI_Visual_Register_Error_BadEmail = "The email address provided is not correct"

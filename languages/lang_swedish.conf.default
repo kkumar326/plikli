@@ -3,7 +3,7 @@
 //<VERSION>2.0.1</VERSION>
 
 //<SECTION>GENERAL</SECTION><ADDED>1.00</ADDED>
-PLIKLI_Visual_Name = "Plikli"
+PLIKLI_Visual_Name = "Plikli CMS"
 PLIKLI_Visual_Welcome_to = "Välkommen till"
 PLIKLI_Visual_Welcome_to_Message = "Det ser ut som du har bara sätta upp din webbplats. Nu skulle vara en bra tid att skicka in din första artikel och sedan publicera den på Hem eller Ny sida beroende på inställningarna i Admin Panel -> Settings -> Voting -> Votes to publish"
 PLIKLI_Visual_Welcome_to_Submit_First_Story = "Skicka in din första artikel!"
@@ -108,6 +108,7 @@ PLIKLI_Visual_Register_Error_UserExists = "Användarnamnet existerar redan"
 PLIKLI_Visual_Register_Error_BadCode = "Säkerhetskoden är ej korrekt"
 PLIKLI_Visual_Register_Error_NoPassMatch = "Lösenorden matchar inte varandra"
 PLIKLI_Visual_Register_Error_FiveCharPass = "Ditt lösenord måste vara minst 5 tecken långt"
+PLIKLI_Visual_Register_Error_PwnedPass = "Du har skrivit in ett vanligt och osäkert lösenord!"
 PLIKLI_Visual_Register_Error_EmailExists = "En annan användare med den epostadressen finns redan"
 PLIKLI_Visual_Register_Error_BadEmail = "Epostadressen du skrev in är inte korrekt"
 PLIKLI_Visual_Register_Error_UserInvalid = "Ditt användarnamn innehåller ogiltiga tecken"

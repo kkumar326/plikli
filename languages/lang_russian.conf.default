@@ -3,7 +3,7 @@
 //<VERSION>2.0.1</VERSION>
 
 //<SECTION>GENERAL</SECTION><ADDED>1.00</ADDED>
-PLIKLI_Visual_Name = "Plikli"
+PLIKLI_Visual_Name = "Plikli CMS"
 PLIKLI_Visual_Welcome_to = "Добро пожаловать в"
 PLIKLI_Visual_Welcome_to_Message = "Похоже, вы только что создали свой сайт. Теперь было бы хорошее время, чтобы представить свой первый статью, а затем опубликовать его в приют или Нью странице в зависимости от настроек в Admin Panel -> Settings -> Voting -> Votes to publish"
 PLIKLI_Visual_Welcome_to_Submit_First_Story = "Разместите свою первую статью!"
@@ -108,6 +108,7 @@ PLIKLI_Visual_Register_Error_UserExists = "Введенное имя польз�
 PLIKLI_Visual_Register_Error_BadCode = "Введен неверный код проверки"
 PLIKLI_Visual_Register_Error_NoPassMatch = "Введенные пароли не совпадают"
 PLIKLI_Visual_Register_Error_FiveCharPass = "Длина вашего пароля должна быть не менее 5 символов"
+PLIKLI_Visual_Register_Error_PwnedPass = "Вы ввели общий и небезопасный пароль!"
 PLIKLI_Visual_Register_Error_EmailExists = "Уже существует пользователь с введенным адресом email"
 PLIKLI_Visual_Register_Error_BadEmail = "Введен неверный адрес email"
 PLIKLI_Visual_Register_Error_UserInvalid = "Введенное имя пользователя содержит недопустимые символы"

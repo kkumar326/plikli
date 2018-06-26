@@ -3,7 +3,7 @@
 //<VERSION>2.0.1</VERSION>
 
 //<SECTION>GENERAL</SECTION><ADDED>1.00</ADDED>
-PLIKLI_Visual_Name = "Plikli"
+PLIKLI_Visual_Name = "Plikli CMS"
 PLIKLI_Visual_Welcome_to = "مرحبا بكم في"
 PLIKLI_Visual_Welcome_to_Message = "يبدو أن موقعكم ما زال حديثاً. الأن هو الوقت المناسب لإضافة خبر جديد و نشره على صفحة المشاركات المنشورة او القادمة، حسب الإعدادات التي إخترتموها في Admin Panel -> Settings -> Voting -> Votes to publish"
 PLIKLI_Visual_Welcome_to_Submit_First_Story = "إرسل أول مشاركة!"
@@ -108,6 +108,7 @@ PLIKLI_Visual_Register_Error_UserExists = "اسم المستخدم مسجل من
 PLIKLI_Visual_Register_Error_BadCode = "الكود الأمني غير صحيح"
 PLIKLI_Visual_Register_Error_NoPassMatch = "كلمة السر غير متطابقة"
 PLIKLI_Visual_Register_Error_FiveCharPass = "كلمة السر يجب ألا تقل عن خمسة أحرف"
+PLIKLI_Visual_Register_Error_PwnedPass = "لقد أدخلت كلمة مرور مشتركة وغير آمنة!"
 PLIKLI_Visual_Register_Error_EmailExists = "البريد الالكتروني مسجل من قبل مستخدم آخر"
 PLIKLI_Visual_Register_Error_BadEmail = "البريد الالكتروني غير صحيح"
 PLIKLI_Visual_Register_Error_UserInvalid = "اسم المستخدم يحتوي على أحرف غير مقبولة"

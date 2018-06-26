@@ -145,6 +145,7 @@
 	<![endif]-->
 	
 	<script type="text/javascript" src="{$my_plikli_base}/templates/{$the_template}/js/registration_verify.js"></script>
+	<script type="text/javascript" src="{$my_plikli_base}/templates/{$the_template}/js/hashes.min.js"></script>
 	<script type="text/javascript" src="{$my_plikli_base}/templates/{$the_template}/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="{$my_plikli_base}/templates/{$the_template}/js/bootstrap-fileupload.js"></script>
 	<script type="text/javascript" src="{$my_plikli_base}/templates/{$the_template}/js/jquery/jquery.pnotify.min.js"></script>

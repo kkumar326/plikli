@@ -197,7 +197,7 @@ if (!$errors) {
 
 	$output='<div class="instructions" style="direction:'.$site_direction.'"><p>' . $lang['EnterAdmin'] . '</p>
 	<table>
-		<form id="form1" name="form1" action="install.php" method="post">
+		<form id="form1" name="form1" action="install.php" method="post" onsubmit="return checkBreachedPassword();">
 			<tr>
 				<td><label>' . $lang['AdminLogin'] . '</label></td>
 				<td><input name="adminlogin" type="text" class="form-control" value="" placeholder="Admin" /></td>
@@ -205,7 +205,7 @@ if (!$errors) {
 			
 			<tr>
 				<td><label>' . $lang['AdminPassword'] . '</label></td>
-				<td><input name="adminpassword" type="password" class="form-control" value="" /></td>
+				<td><input id="adminpassword" name="adminpassword" type="password" class="form-control" value="" /><span class="reg_userpasscheckitvalue"></span></td>
 			</tr>
 			
 			<tr>

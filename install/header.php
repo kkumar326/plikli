@@ -123,7 +123,38 @@ input[type=submit] {
 	</style>
 	
 	<title>Plikli CMS <?php $lang['installer'] ?></title>
-		
+	<script type="text/javascript" src="../templates/bootstrap/js/hashes.min.js"></script>
+<script>
+function checkBreachedPassword() {
+	var password = document.getElementById("adminpassword").value;
+	var passwordDigest = new Hashes.SHA1().hex(password);
+	var digestFive = passwordDigest.substring(0, 5).toUpperCase();
+	var queryURL = "https://api.pwnedpasswords.com/range/" + digestFive;
+	var checkDigest = passwordDigest.substring(5, 41).toUpperCase();
+	var pwned = "<?php echo $lang['pwndPassword']; ?>";
+	var parent = $(".reg_userpasscheckitvalue");
+	var result;
+
+	$.ajax({
+		url: queryURL,
+		type: 'GET',
+		async: false,
+		beforeSend: function() {
+		parent.addClass("loader");
+		},
+		cache: false,
+		success: function(res) {
+			if (res.search(checkDigest) > -1){
+				result = false;
+				parent.html('<div class="alert alert-block alert-danger fade in"><button data-dismiss="alert" class="close">&times;</button>' + pwned + '<div>');
+			} else {
+				result = true;
+			}
+		}
+	  });
+	  return result;
+}
+</script>		
 </head>
 <body>
 <?php

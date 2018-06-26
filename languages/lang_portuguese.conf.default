@@ -3,7 +3,7 @@
 //<VERSION>2.0.3</VERSION>
 
 //<SECTION>GENERAL</SECTION><ADDED>1.00</ADDED>
-PLIKLI_Visual_Name = "Plikli"
+PLIKLI_Visual_Name = "Plikli CMS"
 PLIKLI_Visual_Home = "Home"
 PLIKLI_Visual_Profile = "Perfil"
 PLIKLI_Visual_Profile_2 = "Ver"
@@ -104,6 +104,7 @@ PLIKLI_Visual_Register_Error_UserExists = "O usuário solicitado já existe"
 PLIKLI_Visual_Register_Error_BadCode = "O código de segurança fornecido não está correto"
 PLIKLI_Visual_Register_Error_NoPassMatch = "As senhas fornecidas não conferem"
 PLIKLI_Visual_Register_Error_FiveCharPass = "Sua senha deve ter ao menos 5 caracteres"
+PLIKLI_Visual_Register_Error_PwnedPass = "Você digitou uma senha comum e insegura!"
 PLIKLI_Visual_Register_Error_EmailExists = "Outro usuário com este e-mail já existe"
 PLIKLI_Visual_Register_Error_BadEmail = "O endereço de e-mail fornecido não está correto"
 PLIKLI_Visual_Register_Error_UserInvalid = "O usuário solicitado possui caracteres inválidos"

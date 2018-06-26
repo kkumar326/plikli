@@ -80,6 +80,7 @@
 	$lang['AdminEmail'] = 'Admin E-mail';
 	$lang['SiteTitleLabel'] = 'Website Name';
 	$lang['CreateAdmin'] = 'Create Admin Account';
+	$lang['pwndPassword'] = 'You entered a common and unsafe password!';
 
 // Step 5
 	$lang['Error5-1'] = 'Please fill all fields for admin account.';

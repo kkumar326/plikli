@@ -28,7 +28,7 @@
 	<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/bootstrap-fileupload.min.js"></script>
     <script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery_cookie.js"></script>
     <script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/leftmenu.js"></script>
-	 
+	<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/hashes.min.js"></script> 
 	{if $pagename eq "admin_index"}
 		<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.ui.widget.js"></script> 
 		<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.ui.mouse.js"></script> 
