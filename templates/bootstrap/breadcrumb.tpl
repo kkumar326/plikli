@@ -43,7 +43,7 @@
 	{/if}
 	{if $pagename eq "noresults"}<li class="active">{$posttitle}
 	{* Redwine: modifcation to the line below to make sure the breadcrumb is set to the date or from date to date search terms instead of displaying a hyphen in SEO URL method 2 and just the date in URL method 1 *}
-	{elseif isset($get.search)}<li class="active">{#PLIKLI_Visual_Search_SearchResults#} &quot;{if $get.date && $get.date_to}{$get.date} => {$get.date_to}{elseif $get.date}{$get.date}{else}{$get.search|replace:'/':''}{/if}&quot;{/if}
+	{elseif isset($get.search)}<li class="active">{#PLIKLI_Visual_Search_SearchResults#} &quot; {if $get.date && $get.date_to}<strong>{$get.search|replace:'/':''}</strong> <strong>FROM</strong>: {$get.date} <strong>TO</strong>: {$get.date_to} {elseif $get.date}{$get.date}{else}<strong>{$get.search|replace:'/':''}</strong> {/if}&quot;{/if}
 	{if isset($get.q)}<li class="active">{#PLIKLI_Visual_Search_SearchResults#} &quot;{$get.q}&quot;{/if} 
 	{if $pagename eq "index" || $pagename eq "published" || $pagename eq "new" || isset($get.search) || isset($get.q)}
 		{if isset($navbar_where.link2) && $navbar_where.link2 neq ""} <li> <a href="{$navbar_where.link2}">{$navbar_where.text2}</a> </li> {elseif isset($navbar_where.text2) && $navbar_where.text2 neq ""} <li> {$navbar_where.text2} </li> {/if}

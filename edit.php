@@ -11,6 +11,8 @@ include(mnminclude.'smartyvariables.php');
 
 check_referrer();
 
+settype($_GET['id'], "integer");
+settype($_GET['commentid'], "integer");
 if(is_numeric($_GET['id'])) {
 
 	$link = new Link;

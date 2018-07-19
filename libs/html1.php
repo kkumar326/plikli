@@ -128,7 +128,10 @@ function cat_safe_name($cat_id) {
 
 function sanitize($var, $santype = 1, $allowable_tags = ''){
 
-	if ($santype == 1) {
+	if ($santype == 0) {
+		return htmlentities($var);
+	}
+	elseif ($santype == 1) {
 		return strip_tags($var, $allowable_tags = '');
 	}
 	elseif ($santype == 2) {

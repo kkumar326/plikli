@@ -16,6 +16,7 @@ elseif (isset($_REQUEST["approve"]) && is_numeric($_REQUEST["approve"]))
     $db->query("UPDATE ".table_groups." SET group_status='Enable' WHERE group_id=".$db->escape(sanitize($_REQUEST["approve"],3)));
 
 	if (isset($_REQUEST['keyword'])) {
+		$_REQUEST['keyword']= preg_replace('/[^\p{L}\p{N}-_\s]/u', ' ', $_REQUEST['keyword']);
 		$keyword = $db->escape(sanitize(trim($_REQUEST['keyword']), 3));
 		if (!empty($keyword))
 		{

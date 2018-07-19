@@ -28,7 +28,7 @@
 								{assign var=searchboxtext value=''}
 							{/if}
 							<div class="col-md-8">
-								<input type="text" class="form-control" name="keyword" value="{$searchboxtext}" placeholder="{#PLIKLI_Visual_Search_SearchDefaultText#}" onfocus="if(this.value == '{$searchboxtext}') {ldelim}this.value = '';{rdelim}" onblur="if (this.value == '') {ldelim}this.value = '{$searchboxtext}';{rdelim}">
+								<input type="text" class="form-control" id="keyword" name="keyword" value="{$searchboxtext}" placeholder="{#PLIKLI_Visual_Search_SearchDefaultText#}" onfocus="if(this.value == '{$searchboxtext}') {ldelim}this.value = '';{rdelim}" onblur="if (this.value == '') {ldelim}this.value = '{$searchboxtext}';{rdelim}">
 							</div>
 							<div class="col-md-4">
 								<button class="btn btn-primary" type="submit">{#PLIKLI_Visual_Group_Search_Groups#}</button>
@@ -60,4 +60,37 @@
 			</script>
       {/literal}
    {/if}
+ 
+ {literal}
+<script type="text/javascript">
+$( document ).ready(function() {
+	/*
+	I used [`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/] versus [^\w\s-_] because JavaScript does not work well with UTF-8
+	and does not recognize the word boundaries in utf8. 
+	*/
+	$(function(){
+		$('#keyword').keyup(function() {
+			var yourInput = $(this).val();
+			re = /[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi;
+			var isSplChar = re.test(yourInput);
+			if(isSplChar)
+			{
+				var no_spl_char = yourInput.replace(re, '');
+				$(this).val(no_spl_char);
+			}
+		});
+		$('#keyword').bind("paste", function() {
+			setTimeout(function() { 
+			  //get the value of the input text
+			  var data= $( '#keyword' ).val() ;
+			  //replace the special characters to '' 
+			  var dataFull = data.replace(/[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+			  //set the new value of the input text without special characters
+			  $( '#keyword' ).val(dataFull);
+			});
+		});
+	});
+});
+</script>
+{/literal}
 <!-- group_center.tpl -->

@@ -129,7 +129,7 @@ elseif(isset($_POST["action"]))
     if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'edit_group') == 2){
 	if(isset($_POST['group_title'])){
 		$group_title = $db->escape(stripslashes(strip_tags(trim($_POST['group_title']))));
-		$group_title = preg_replace('/[^A-Za-z0-9\-\s]/', ' ', $group_title);
+		$group_title = preg_replace('/[^\p{L}\p{N}-_\s]/u', ' ', $group_title);
 	}
 	if(isset($_POST['group_description'])){
 		$group_description = $db->escape(stripslashes(strip_tags(trim($_POST['group_description']))));

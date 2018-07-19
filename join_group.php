@@ -13,16 +13,17 @@ include(mnminclude.'smartyvariables.php');
 check_referrer();
 
 //to join and unjoin the group
-if(isset($_REQUEST['id']))
-{
-	$gid = $_REQUEST['id'];
-	$privacy = $_REQUEST['privacy'];
+settype($_REQUEST['id'], "integer");
+
+if(isset($_REQUEST['id']) && $_REQUEST['id'] > 0) {
+	$gid = sanitize($_REQUEST['id'], 3);
+	$privacy = sanitize($_REQUEST['privacy'],3);
 	/* Redwine: added a query to get the group's title to fix the redirect and properly redirect to the same group after joining and unjoining. */
 	$requestTitle = $db->get_var("SELECT group_safename FROM " . table_groups . " WHERE group_id = $gid");
-	if($_REQUEST['join'] == "true"){
+	if(sanitize($_REQUEST['join'],3) == "true"){
 		joinGroup($gid,$privacy);
 	}
-	if($_REQUEST['join'] == "false"){
+	if(sanitize($_REQUEST['join'],3) == "false"){
 		unjoinGroup($gid,$privacy);
 	}
 	//page redirect
@@ -31,6 +32,9 @@ if(isset($_REQUEST['id']))
 	$redirect = getmyurl("group_story_title", $requestTitle);
 	header("Location: $redirect");
 	die;
+}else{
+	$redirect = getmyurl("groups");
+	header("Location: $redirect");
 }
 /* Redwine: Roles and permissions and Groups fixes. To activate/dectivate a group member. Added  && $_REQUEST['activate'] != "withdraw" because when a user request to witdraw the request to join a private or restricted group, and error from line 86 was generated as the if( isset($_REQUEST['activate'])) { with checking for a parameter was processed first and before the if(isset($_REQUEST['activate'])) && $_REQUEST['activate'] == 'withdraw')*/
 if( isset($_REQUEST['activate']) && $_REQUEST['activate'] != "withdraw") {
