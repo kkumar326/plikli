@@ -16,7 +16,7 @@
 			<p>{#PLIKLI_Visual_Login_Have_Account#}</p>
 			<form action="{$URL_login}" method="post">	
 				<strong>{#PLIKLI_Visual_Login_Username#}/{#PLIKLI_Visual_Register_Email#}:</strong><br />
-				<input autofocus="autofocus" type="text" id="username" name="username" class="form-control" value="{if isset($login_username)}{$login_username}{/if}" tabindex="1" /><br />
+				<input autofocus="autofocus" type="text" name="username" class="form-control" value="{if isset($login_username)}{$login_username}{/if}" tabindex="1" /><br />
 				
 				<strong>{#PLIKLI_Visual_Login_Password#}:</strong><br />
 				<input type="password" name="password" class="form-control" tabindex="2" /><br />
@@ -53,36 +53,4 @@
 
 	{checkActionsTpl location="tpl_login_bottom"}
 </div>
- {literal}
-<script type="text/javascript">
-$( document ).ready(function() {
-	/*
-	I used [`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/] versus [^\w\s-_] because JavaScript does not work well with UTF-8
-	and does not recognize the word boundaries in utf8. 
-	*/
-	$(function(){
-		$('#username').keyup(function() {
-			var yourInput = $(this).val();
-			re = /[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi;
-			var isSplChar = re.test(yourInput);
-			if(isSplChar)
-			{
-				var no_spl_char = yourInput.replace(re, '');
-				$(this).val(no_spl_char);
-			}
-		});
-		$('#username').bind("paste", function() {
-			setTimeout(function() { 
-			  //get the value of the input text
-			  var data= $( '#username' ).val() ;
-			  //replace the special characters to '' 
-			  var dataFull = data.replace(/[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-			  //set the new value of the input text without special characters
-			  $( '#username' ).val(dataFull);
-			});
-		});
-	});
-});
-</script>
-{/literal}
 <!--/login_center.tpl -->

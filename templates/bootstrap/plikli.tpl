@@ -17,7 +17,7 @@
 	{/if}
 	
 	<script type="text/javascript" src="{$my_plikli_base}/templates/{$the_template}/js/modernizr.js"></script>	
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	{if $pagename eq 'editlink' || $pagename eq 'submit'}
 		<script type="text/javascript" src="{$my_plikli_base}/templates/{$the_template}/js/xss.js"></script>
 		<script type="text/javascript" src="{$my_plikli_base}/templates/{$the_template}/js/jstz.min.js"></script>
@@ -137,8 +137,8 @@
 	{include file=$the_template"/functions/bookmark.tpl"}
 	{checkActionsTpl location="tpl_plikli_body_end"}
 	
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-	<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" media="all" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" media="all" rel="stylesheet" type="text/css" />
 	
 	<!--[if lt IE 7]>
 	<script type="text/javascript" src="{$my_plikli_base}/templates/{$the_template}/js/jquery/jquery.dropdown.js"></script>

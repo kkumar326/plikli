@@ -46,35 +46,6 @@
 
 		document.location.href=form.action+datastr+'adv/1';
 	}
-
-$( document ).ready(function() {
-	/*
-	I used [`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/] versus [^\w\s-_] because JavaScript does not work well with UTF-8
-	and does not recognize the word boundaries in utf8. 
-	*/
-	$(function(){
-		$('#search').keyup(function() {
-			var yourInput = $(this).val();
-			re = /[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi;
-			var isSplChar = re.test(yourInput);
-			if(isSplChar)
-			{
-				var no_spl_char = yourInput.replace(re, '');
-				$(this).val(no_spl_char);
-			}
-		});
-		$('#search').bind("paste", function() {
-			setTimeout(function() { 
-			  //get the value of the input text
-			  var data= $( '#search' ).val() ;
-			  //replace the special characters to '' 
-			  var dataFull = data.replace(/[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-			  //set the new value of the input text without special characters
-			  $( '#search' ).val(dataFull);
-			});
-		});
-	});
-});	
 	{/literal}
 </script>
 
@@ -84,7 +55,7 @@ $( document ).ready(function() {
 			<div class="control-group">
 				<label for="search" class="control-label">{#PLIKLI_Visual_Search_Keywords#}</label>
 				<div class="controls">
-					<input autofocus="autofocus" id="search" name="search" type="text" class="form-control" />
+					<input autofocus="autofocus" name="search" type="text" class="form-control" />
 					<p class="help-block">{#PLIKLI_Visual_Search_Keywords_Instructions#}</p>
 				</div>
 			</div>

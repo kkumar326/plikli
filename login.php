@@ -45,7 +45,6 @@ if(isset($_GET["op"])){
 if( (isset($_POST["processlogin"]) && is_numeric($_POST["processlogin"])) || (isset($_GET["processlogin"]) && is_numeric($_GET["processlogin"])) ){
 	if($_POST["processlogin"] == 1) { // users logs in with username and password
 		$username = sanitize(trim($_POST['username']), 3);
-		$username = preg_replace('/[^\p{L}\p{N}-_\s]/u', '', $username);
 		$password = sanitize(trim($_POST['password']), 3);
 		if(isset($_POST['persistent'])){$persistent = sanitize($_POST['persistent'], 3);}else{$persistent = '';}
 

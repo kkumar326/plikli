@@ -84,6 +84,7 @@ class Search {
 				
 				$this->searchTerm = "commented";
 			}	
+				
 		} else {
 			
 			if ($this->filterToTimeFrame == 'today') 
@@ -126,7 +127,6 @@ class Search {
 					$from_where .= " AND ac_cat_id NOT IN ($sqlGeticategory)"; 
 			}
 		}
-		
 		//should we filter to just this category?
 		if(isset($this->category))
 		{
@@ -180,7 +180,6 @@ class Search {
 		    foreach($groups as $group)
 			$group_ids[] = $group->member_group_id;
 		    $group_list = join(",",$group_ids);
-			//$from_where = str_replace("WHERE", "", $from_where);
 		    $from_where .= " AND (".table_groups.".group_privacy!='private' OR ISNULL(".table_groups.".group_privacy) OR ".table_groups.".group_id IN($group_list)) ";
 		}
 		else
@@ -390,6 +389,7 @@ class Search {
 			}		
 			if( $this->s_date_to ){
 				$this->s_date_to = date('Y-m-d',strtotime($this->s_date_to));
+				/* Rediwne: we have to comment the line below becausse it was rendering the query with an error. */
 				$search_AND_params[] = " DATE(".table_links.".link_date) >='{$this->s_date}' AND DATE(".table_links.".link_date) <= '{$this->s_date_to}' ";
 				$this->searchTerm = $bufferOrig;				
 			}		
@@ -416,7 +416,7 @@ class Search {
 			$this->searchTerm = $buffKeyword;
 		}
 
-		
+		#echo $this->sql."<br><br>";
 		###### END Advanced Search ######
 		
 		
@@ -571,9 +571,7 @@ class Search {
 					$SearchMethod = $this->determine_search_method($words);
 				}
 				$matchfields = '';
-				
-				/*Redwine: to enhance the search result, I commented out the if($SearchMethod == 1){ & if($SearchMethod == 2){ statements. So the search conditions apply now to both.*/
-				/*if($SearchMethod == 1){
+				if($SearchMethod == 1){
 					// use SQL "against" for searching
 					// doesn't work with "stopwords" or less than 4 characters
 
@@ -604,8 +602,8 @@ class Search {
 						$words = '+'.join(" +",$m[1]);
 					$where = " AND MATCH (link_title, link_content, link_tags $matchfields) AGAINST ('$words' IN BOOLEAN MODE) ";
 
-				}*/
-				//if($SearchMethod == 2){
+				}
+				if($SearchMethod == 2){
 					// use % for searching
 
 					if($this->search_extra_fields == true){
@@ -635,7 +633,8 @@ class Search {
 					$where .= $this->explode_search('link_content', $words) . " ) OR (";
 					$where .= $this->explode_search('link_tags', $words);
 					$where .= ") $matchfields) ";
-				//}
+					
+				}
 			}
 			return $where;
 		} else {
