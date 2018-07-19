@@ -151,9 +151,9 @@ $main_smarty->assign('user_following', $user->getFollowingCount());
 			exit;
 		}
 			
-	}else{
+	}/*else{
 		echo 'An error occured while uploading your avatar.';
-	}		
+	}*/		
 
 	if(isset($error) && is_array($error)) {
 		while(list($key, $val) = each($error)) {
