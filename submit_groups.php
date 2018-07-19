@@ -47,7 +47,7 @@ if(enable_group == "true" && (group_submit_level == $current_user_level || group
 {
 	if(isset($_POST['group_title'])){
 		$group_title = $db->escape(stripslashes(strip_tags(trim($_POST['group_title']))));
-		$group_title = preg_replace('/[^\w-\s]/', ' ', $group_title);
+		$group_title = preg_replace('/[^\p{L}\p{N}-_\s]/u', ' ', $group_title);
 	}else{
 		$group_title = '';
 	}

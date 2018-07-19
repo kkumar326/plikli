@@ -171,7 +171,7 @@ if(is_numeric($requestID)) {
     $main_smarty->assign('story_url',$story_url);
 	$main_smarty->assign('the_story', $link->print_summary('full', true));
 	
-	
+	settype($_GET['comment_id'], "integer");
 	$parent_comment_id=sanitize($_GET['comment_id'], 3);
 	
 	if(isset($_GET['reply']) && !empty($parent_comment_id)){
