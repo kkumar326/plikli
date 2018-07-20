@@ -5,7 +5,7 @@ anonymous,0.1
 anonymous_comments,0.1
 anonymous_story,0.1
 captcha,2.5
-ckeditor,2.0
+ckeditor,2.1
 karma,1.0
 links,2.0
 rss_import,2.1
