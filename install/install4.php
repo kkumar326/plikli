@@ -84,7 +84,7 @@ color: #ffffff;
 margin: 0 10px 0 10px;
 padding:5px;
 }
-li{marging-left:30px;}
+li{margin-left:30px;}
 a:link, a:hover, a:visited, a:active{color:#000000}
 .btn-primary, btn {margin-left:10px}
 input[type=text] {
