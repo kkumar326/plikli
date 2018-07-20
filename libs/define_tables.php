@@ -25,7 +25,6 @@ if(!defined('tables_defined')){
 	define('table_groups', table_prefix . "groups" );
 	define('table_group_member', table_prefix . "group_member" );
 	define('table_group_shared', table_prefix . "group_shared" );
-	define('table_pageviews', table_prefix . "pageviews" );
 	define('table_tag_cache', table_prefix . "tag_cache" );
 	define('table_login_attempts', table_prefix . "login_attempts" );
 	define('table_widgets', table_prefix . "widgets" );
