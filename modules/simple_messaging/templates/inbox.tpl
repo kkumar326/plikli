@@ -2,7 +2,7 @@
 
 	{checkActionsTpl location="tpl_plikli_module_simple_messaging_start"}
 	{include file="./modules/simple_messaging/templates/menu.tpl"}
-	{config_load file=$simple_messaging_lang_conf}
+	{config_load file=simple_messaging_lang_conf}
 
 	<form name="bulk_moderate" action="{$my_plikli_base}/module.php?module=simple_messaging&view=inbox&action=bulkmod" method="post">
 		<table class="table">

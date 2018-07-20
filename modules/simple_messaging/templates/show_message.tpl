@@ -2,7 +2,7 @@
 
 	{include file="./modules/simple_messaging/templates/menu.tpl"}
 
-	{config_load file=$simple_messaging_lang_conf}
+	{config_load file=simple_messaging_lang_conf}
 
 	{literal}
 		<style type="text/css">

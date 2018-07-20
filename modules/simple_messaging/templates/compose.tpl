@@ -1,7 +1,7 @@
 ﻿<div class="simple_messaging_wrapper">
 
 	{include file="./modules/simple_messaging/templates/menu.tpl"}
-	{config_load file=$simple_messaging_lang_conf}
+	{config_load file=simple_messaging_lang_conf}
 	
 	<h4>{#PLIKLI_MESSAGING_SendAMessageTo#}<a href="{$my_plikli_base}/user.php?login={$msgToName}">{$msgToName}</a></h4>
 

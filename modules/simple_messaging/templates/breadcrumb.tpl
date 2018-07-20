@@ -1,4 +1,4 @@
-{config_load file=$simple_messaging_lang_conf}
+{config_load file=simple_messaging_lang_conf}
 <li>{if $modulename_sm neq "simple_messaging_inbox"}<a href="{$URL_simple_messaging_inbox}">{/if}{#PLIKLI_MESSAGING_Inbox#}{if $modulename_sm neq "simple_messaging_inbox"}</a>{/if}</li>
 {if $modulename_sm eq "simple_messaging_viewmsg"}<li>{#PLIKLI_MESSAGING_Message#}</li>{/if}
 {if $modulename_sm eq "simple_messaging_sent"}<li>{#PLIKLI_MESSAGING_Sent#}</li>{/if}

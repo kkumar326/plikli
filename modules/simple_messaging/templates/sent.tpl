@@ -1,6 +1,6 @@
 <div class="simple_messaging_wrapper">
 	{include file="./modules/simple_messaging/templates/menu.tpl"}
-	{config_load file=$simple_messaging_lang_conf}
+	{config_load file=simple_messaging_lang_conf}
 	<form name="bulk_moderate" action="{$my_plikli_base}/module.php?module=simple_messaging&view=sent&action=bulkmod" method="post"> 
 		<table class="table table-striped table-hover">
 			<thead>
