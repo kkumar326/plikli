@@ -1,7 +1,7 @@
 AddDefaultCharset UTF-8
 ############################################################################################################
 ## 404 Error Page
-## IF PLIKLI IS INSTALLED IN A SUBFOLDER, change the below line to ErrorDocument 404 /NAME-OF-SUBFOLDER/error_404.php
+## IF PLIKLI IS INSTALLED IN A SUBFOLDER, change LINE 7 to ErrorDocument 404 /NAME-OF-SUBFOLDER/error_404.php
 ############################################################################################################
 ErrorDocument 404 /error_404.php
 
@@ -10,7 +10,7 @@ ErrorDocument 404 /error_404.php
 Options +FollowSymlinks -MultiViews
 RewriteEngine on
 ############################################################################################################
-###### IF PLIKLI IS INSTALLED IN A SUBFOLDER, change the below line to RewriteBase /NAME-OF-SUBFOLDER ######
+###### IF PLIKLI IS INSTALLED IN A SUBFOLDER, change LINE 18 to RewriteBase /NAME-OF-SUBFOLDER ######
 ############################################################################################################
 RewriteBase /
 
@@ -20,35 +20,52 @@ RewriteBase /
 RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
 
 ############################################################################################################
-### IF INSTALLED IN A SUBFOLDER, you will need to add that directory after {HTTP_HOST} on the next line. ###
+### IF INSTALLED IN A SUBFOLDER, you will need to add that directory after {HTTP_HOST} on LINE 31. ###
 ##Example:
-##RewriteRule (.*)([^/])$ http%1://%{HTTP_HOST}/NAME-OF-SUBFOLDER/$1$2/ [R=301,L] 
-## FIRST CHECKING IF HTTPS IS ON; IF ON, THEN WE USE THE CAPTURED (S) TO ADD IT TO THE HTTP BELOW
-############################################################################################################
-RewriteCond %{HTTPS}s ^on(s)|
-RewriteRule (.*)([^/])$ http%1://%{HTTP_HOST}/$1$2/ [R=301,L]
+## RewriteRule (.*)([^/])$ http://%{HTTP_HOST}/NAME-OF-SUBFOLDER/$1$2/ [R=301,L] #########################
+
+RewriteRule (.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [R=301,L]
 
 ############################################################################################################
-########### IF INSTALLED IN A SUBFOLDER you may need to add ## to the beginning of the next line ###########
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.php\ HTTP/
+########### IF INSTALLED IN A SUBFOLDER you may need to add ## to the beginning of LINE 36 #################
+
+##RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.php\ HTTP/
 
 ############################################################################################################
-## COMMENT OUT OR REMOVE THESE FOUR LINES (40 TO 43) IF YOU HAVE:
-## 1- a sub-domain like: http(S)://subdomain.plikli.com or
-## 2- http://localhost
-##
-## KEEP IF YOUR SITE IS LIKE: http(S)://www.plikli.com TO FORCE WWW
+######################### TO FORCE WWW ONLY ( KEEP THEM COMMENTED IF YOU ARE ON LOCALHOST ) ################
+##### UNCOMMENT LINE 43, 44, 45 AND 46
 ############################################################################################################
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteCond %{HTTP_HOST} !^localhost
-RewriteCond %{HTTPS}s ^on(s)|
-RewriteRule .* http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+##RewriteCond %{HTTP_HOST} !^$
+##RewriteCond %{HTTP_HOST} !^www\. [NC]
+##RewriteCond %{HTTPS}s ^on(s)|
+##RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+############################################################################################################
+######################### TO FORCE HTTPS ONLY ( KEEP THEM COMMENTED IF YOU ARE ON LOCALHOST ) ################
+##### UNCOMMENT LINE 53 AND 54
+############################################################################################################
+
+##RewriteCond %{HTTPS} !=on
+##RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+############################################################################################################
+##### TO FORCE WWW AND HTTPS ( KEEP THEM COMMENTED IF YOU ARE ON LOCALHOST ) ###############################
+##### UNCOMMENT LINE 61, 62, 63, 64, 65 AND 66
+############################################################################################################
+
+##RewriteCond %{HTTP_HOST} !^$
+##RewriteCond %{HTTP_HOST} !^www\. [NC]
+##RewriteCond %{HTTPS}s ^on(s)|
+##RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+##RewriteCond %{HTTPS} off
+##RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 ###################################### RE-DIRECTING END ####################################################
 
 ##################### THE SETTINGS THAT YOU SHOULD CONFIGURE ARE ALL ABOVE THIS LINE. ######################
 
-############################################################################################################
+######################################   DO NOT TOUCH AT ALL   #############################################
 ############################# CONTINUE BELOW ONLY IF YOU ARE AN ADVANCED USER. #############################
 ############################################################################################################
 
