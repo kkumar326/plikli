@@ -465,9 +465,9 @@ if(!defined('mnminclude')){header('Location: ../error_404.php');die();}
 				$endtime = $mtime; 
 				$totaltime = ($endtime - $starttime); 
 				//if($totaltime > 0.001) {echo '<hr />' . $totaltime . ' - ' . $query . '<hr />';}
-				
+				$display = date('Y-m-d h:i:s',time());
 				$fh=fopen($this->logpath,"a");
-				fwrite($fh,$totaltime . ' - ' . $query . "\n");
+				fwrite($fh,$display . ' - ' . $totaltime . ' - ' . $query . "\n");
 				fclose($fh);
 			}
 			
