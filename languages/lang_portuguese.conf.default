@@ -1016,7 +1016,7 @@ PLIKLI_Visual_View_User_Groups_Belongs = "Grupos aos quais o Usuário pertence"
 PLIKLI_Visual_View_User_Groups_Created = "Grupos foram criados"
 PLIKLI_Visual_Page_Delete_Confirm = "Tem certeza que quer remover esta página?"
 PLIKLI_PassEmail_Name = "Administrador"
-PLIKLI_Visual_AdminPanel_Module_Description = "Módulos adicionam novas funcionalidades ao seu site de CMS Plikli sem que você tenha que modificar nada no código-fonte 'núcleo'. Você pode personalizar seu site adicionando novas funcionalidades, ou alterando funcionalidades existentes embutidas no Plikli através de Módulos. Faça upload de módulos para o diretório /modules do seu servidor."
+PLIKLI_Visual_AdminPanel_Module_Description = "Os módulos adicionam novos recursos ao seu site Plikli CMS sem que você tenha que modificar nenhum código 'principal'. Você pode personalizar seu site adicionando novos recursos ou alterar os recursos existentes incorporados ao Plikli por meio dos módulos. Carregar módulos no diretório / modules do seu servidor.<br /><strong style=\"text-decoration:underline;background-color:#ffff00\">Antes de instalar um módulo, clique no nome do módulo para ler as instruções sobre como ele funciona e as configurações necessárias!<br />After installing a module, make sure to visit the Installed Module and check if it has settings That you need to set!Depois de instalar um módulo, certifique-se de visitar o Módulo Instalado e verificar se ele possui configurações que você precisa definir!</strong>"
 PLIKLI_Visual_AdminPanel_Widget_Description = "Widgets são caixas de informação que aparecem no seu painel de administração. Você pode incluir, remover, minimizar, personalizar e organizar widgets, fazendo o Painel de Administração se ajustar às suas necessidades. Clique na barra de títulos de um widget e arraste para organizar a ordem de exibição. Clique no ícone chave de boca na barra de título para exibir a área de configurações para selecionar widgets."
 PLIKLI_Visual_AdminPanel_Cleared_Cache = "Diretórios cache foram limpos"
 PLIKLI_Visual_AdminPanel_Cleared_Cache_Message = "Seus diretórios cache foram limpos com sucesso!<br /><br />Remover o conteúdo dos diretórios cache (/cache) é frequentemente necessário quando seus templates são alterados, ou quando módulos e widgets são adicionados ou removidos."
@@ -1109,3 +1109,4 @@ PLIKLI_User_Profile_No_Content = "Esta página não possui conteúdo para ser ex
 // Start 2.0.3 Language File
 PLIKLI_Visual_Submit2_Cancel = "Cancelar"
 // End 2.0.3 Language File
+
