@@ -509,16 +509,13 @@ if($canIhaveAccess == 1)
 				$user= $db->get_row('SELECT * FROM ' . table_users . ' where user_login="'.sanitize($_GET["user"], 3).'"');
 				
 				canIChangeUser($user->user_level); 
-				
-/*				$randomstring = "abcdefghijklmnopqrstuvwxyz0123456789";
-				for($i=0;$i<49;$i++){
-					$pos = rand(0,36);
-					$str .= $randomstring{$pos};
+				//Redwine: to prevent disabling the Admin, creator of the site.
+				if ($user->user_level == 'admin' && $user->user_id == 1) {
+					$CSRF->show_invalid_error(1);
+					exit;
 				}
-*/				
+				
 				if ($user) {
-//					$db->query('UPDATE `' . table_users . '` SET `user_pass` = "'.$str.'" WHERE `user_login` = "'.sanitize($_GET["user"], 3).'"');
-//					$db->query('UPDATE `' . table_users . '` SET `user_email` = "'.$user->user_email.'-disable" WHERE `user_login` = "'.sanitize($_GET["user"], 3).'"');
 					$db->query('UPDATE `' . table_users . '` SET `user_enabled` = 0 WHERE `user_login` = "'.sanitize($_GET["user"], 3).'"');
 					
 					// breadcrumbs and page titles

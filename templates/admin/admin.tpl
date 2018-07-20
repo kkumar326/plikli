@@ -18,8 +18,8 @@
 	<title>{#PLIKLI_Visual_Name#} Admin Panel</title>
 	
 	<link rel="icon" href="{$my_base_url}{$my_plikli_base}/favicon.ico" type="image/x-icon"/>	
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.easing.1.3.js"></script>
 	<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.coda-slider-2.0.js"></script> 
 	<script type="text/javascript" src="{$my_base_url}{$my_plikli_base}/templates/admin/js/jquery/jquery.pnotify.js"></script>
