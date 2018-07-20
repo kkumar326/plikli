@@ -78,4 +78,9 @@ function getfiles($dirname=".") {
 	return($files);
 }
 
+function CheckmysqlServerVersion() {
+	global $handle;
+	$theMySqlVersion = $handle->server_info;
+	return $theMySqlVersion;
+}
 ?>

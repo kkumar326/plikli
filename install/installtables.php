@@ -3,17 +3,54 @@ include_once (dirname(__FILE__) . '/../libs/db.php');
 
 if (!isset($dblang)) { $dblang='en'; }
 
+echo '<style>
+.create-success{border: 2px solid #ffffff;padding: 10px;}
+.alert-danger, .alert-error-tbl {
+background-color: #FF0000;
+border: 2px solid #ffffff;
+padding: 10px;
+color: #ffffff;
+}
+.info-alert{color:#31708f;background-color:#d9edf7;border: 2px solid #ffffff;padding: 10px;}
+li{list-style: none;margin-top:10px;}
+li .create-success, li .alert-error-tbl{margin-top:10px;}
+</style>';
+
+function checktableexists($table)
+{
+	global $conn;
+	$result = $conn->query("SHOW TABLES LIKE '".$table."';");
+	$numRows = $result->num_rows;
+	if ($numRows < 1) {
+		return false;
+	}else{
+	return true;
+	}
+}
+
 function plikli_createtables($conn) {
 	global $dblang;
-
+	$notok = 'notok.png';
+	$ok = 'ok.png';
+	$warnings = array();
+	$sql = 'DROP TABLE IF EXISTS `' . table_additional_categories . '`;';
+	mysqli_query( $conn, $sql );
 	$sql = "CREATE TABLE `" . table_additional_categories . "` (
 	  `ac_link_id` int(11) NOT NULL,
 	  `ac_cat_id` int(11) NOT NULL,
 	  UNIQUE KEY `ac_link_id` (`ac_link_id`,`ac_cat_id`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'additional_categories\'...</li><br />';
-
+	$successful = checktableexists(table_additional_categories);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_additional_categories.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_additional_categories.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_additional_categories.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_categories . '`;';
 	mysqli_query( $conn, $sql );
@@ -41,15 +78,35 @@ function plikli_createtables($conn) {
 	  KEY `category_safe_name` (`category_safe_name`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'categories\'...</li><br />';
+	$successful = checktableexists(table_categories);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_categories.' ... <img src="'.$ok.'" class="iconalign" />';
 
 	$sql = "INSERT INTO `" . table_categories . "` (`category__auto_id`, `category_lang`, `category_id`, `category_parent`, `category_name`, `category_safe_name`, `rgt`, `lft`, `category_enabled`, `category_order`, `category_desc`, `category_keywords`, `category_author_level`, `category_author_group`, `category_votes`) VALUES (0, '" . $dblang . "', 0, 0, 'all', 'all', 3, 0, 2, 0, '', '', 'normal', '', '');";
 	mysqli_query( $conn, $sql );
+		echo '<ul>';
+		echo '<li>INSERTING default into '. table_categories . '...<br />';
+		printf("Affected rows (INSERT): %d\n", $conn->affected_rows);
+		echo '</li>';
+		
 	$sql = "UPDATE `" . table_categories . "` SET `category__auto_id` = '0' WHERE `category_name` = 'all' LIMIT 1;";
 	mysqli_query( $conn, $sql );
+		echo '<li>UPDATING '. table_categories . '...<br />';
+		printf("Affected rows (UPDATE): %d\n", $conn->affected_rows);
+		echo '</li>';
+		
 	$sql = "INSERT INTO `" . table_categories . "` (`category__auto_id`, `category_lang`, `category_id`, `category_parent`, `category_name`, `category_safe_name`, `rgt`, `lft`, `category_enabled`, `category_order`, `category_desc`, `category_keywords`, `category_author_level`, `category_author_group`, `category_votes`) VALUES (1, '" . $dblang . "', 1, 0, 'News', 'News', 2, 1, 1, 0, '', '', 'normal', '', '');";
 	mysqli_query( $conn, $sql );
-	echo '<li>Inserting default "All" and "News" categories...</li><br />';	
+		echo '<li>INSERTING default "All" and "News" categories...<br />';
+		printf("Affected rows (INSERT): %d\n", $conn->affected_rows);
+		echo '</li></ul></li>';	
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_categories.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_categories.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_comments . '`;';
@@ -74,7 +131,17 @@ function plikli_createtables($conn) {
 	  KEY `comment_parent` (`comment_parent`,`comment_date`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'comments\'...</li><br />';
+	$successful = checktableexists(table_comments);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_comments.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_comments.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_comments.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
+	
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_config . '`;';
 	mysqli_query( $conn, $sql );
@@ -93,7 +160,17 @@ function plikli_createtables($conn) {
 	  PRIMARY KEY  (`var_id`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'config\'....</li><br />';
+	$successful = checktableexists(table_config);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_config.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_config.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_config.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
+	
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_formulas . '`;';
 	mysqli_query( $conn, $sql );
@@ -107,12 +184,23 @@ function plikli_createtables($conn) {
 	  PRIMARY KEY  (`id`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Creating table: \'formulas\'....</li><br />';
-	
-	// ********************************	
+	$successful = checktableexists(table_formulas);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_formulas.' ... <img src="'.$ok.'" class="iconalign" />';
+		echo '<ul>';
 	$sql = 'INSERT INTO `' . table_formulas . '` (`id`, `type`, `enabled`, `title`, `formula`) VALUES (1, \'report\', 1, \'Simple Story Reporting\', \'$reports > $votes * 3\');';
 	mysqli_query( $conn, $sql );
-	echo '<li>Inserted default formulas...</li><br />';
+		
+		echo '<li>INSERTING formula into '. table_formulas . '...<br />';
+		printf("Affected rows (INSERT): %d\n", $conn->affected_rows);
+		echo '</li></ul></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_formulas.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_formulas.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_friends . '`;';
@@ -126,7 +214,16 @@ function plikli_createtables($conn) {
 	  UNIQUE KEY `friends_from_to` (`friend_from`,`friend_to`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'friends\'...</li><br />';
+	$successful = checktableexists(table_friends);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_friends.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_friends.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_friends.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 	
 	// ********************************	
 	$sql = 'DROP TABLE IF EXISTS `' . table_groups . '`;';
@@ -155,7 +252,16 @@ function plikli_createtables($conn) {
 		KEY `group_creator` (`group_creator`, `group_status`)
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Creating table: \'groups\'....</li><br />';
+	$successful = checktableexists(table_groups);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_groups.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_groups.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_groups.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_group_member . '`;';
@@ -171,10 +277,18 @@ function plikli_createtables($conn) {
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'group members\'....</li><br />';
+	$successful = checktableexists(table_group_member);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_group_member.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_group_member.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_group_member.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 
 	// ********************************
-	//group shared table
 	$sql = 'DROP TABLE IF EXISTS `' . table_group_shared . '`;';
 	mysqli_query( $conn, $sql );
 	$sql = "CREATE TABLE `".table_group_shared."` (
@@ -185,7 +299,16 @@ function plikli_createtables($conn) {
 		UNIQUE KEY `share_group_id` (`share_group_id`,`share_link_id`)
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'group shared\'....</li><br />';
+	$successful = checktableexists(table_group_shared);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_group_shared.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_group_shared.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_group_shared.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_login_attempts . '`;';
@@ -201,8 +324,42 @@ function plikli_createtables($conn) {
 		  UNIQUE KEY `login_username` (`login_ip`,`login_username`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'login_attempts\'....</li><br />';
+	$successful = checktableexists(table_login_attempts);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_login_attempts.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_login_attempts.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_login_attempts.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
+	
+	// ********************************
+	/**********************************
+	Redwine: checking for the MySQL Server version. If it is older than 5.0.3, then `link_url` varchar will be the maximum of 255; otherwise, we set it to 512 to accommodate long urlencoded.
+	**********************************/
+	$pattern = '/[^0-9-.]/i';
+	$replacement = '';
+	$mysqlServerVersion = $conn->server_info;
+	$mysqlServerVersion = preg_replace($pattern, $replacement, $mysqlServerVersion);
+	$mysqlServerVersion = strstr($mysqlServerVersion, '-', true);
 
+	if ($mysqlServerVersion < '5.0.3') {
+		$urllength = '255';
+	}else{
+		$urllength = '512';
+	}
+
+	echo '<li class="info-alert">';
+	printf("Your MySQL Server version is: %s\n", $mysqlServerVersion);
+	echo "<br />";
+	printf("The varchar maximum character length compatible with your $mysqlServerVersion version to be set for `link_url`, in the links table, is: %s\n", $urllength);
+	echo '</li>';
+	
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_links . '`;';
 	mysqli_query( $conn, $sql );
@@ -221,7 +378,7 @@ function plikli_createtables($conn) {
 	  `link_published_date` timestamp NOT NULL,
 	  `link_category` int(11) NOT NULL default '0',
 	  `link_lang` int(11) NOT NULL default '1',
-	  `link_url` varchar(512) collate utf8_general_ci NOT NULL default '',
+	  `link_url` varchar($urllength) collate utf8_general_ci NOT NULL default '',
 	  `link_url_title` text collate utf8_general_ci,
 	  `link_title` text collate utf8_general_ci NOT NULL,
 	  `link_title_url` varchar(255) collate utf8_general_ci default NULL,
@@ -258,12 +415,22 @@ function plikli_createtables($conn) {
 	  FULLTEXT KEY `link_search` (`link_title`,`link_content`,`link_tags`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'links\'...</li><br />';
-
-	// ********************************
+	$successful = checktableexists(table_links);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_links.' ... <img src="'.$ok.'" class="iconalign" />';
+		echo '<ul>';
 	$sql = "INSERT INTO `" . table_links . "` (`link_id`, `link_author`, `link_status`, `link_randkey`, `link_votes`, `link_reports`, `link_comments`, `link_karma`, `link_modified`, `link_date`, `link_published_date`, `link_category`, `link_lang`, `link_url`, `link_url_title`, `link_title`, `link_title_url`, `link_content`, `link_summary`, `link_tags`, `link_field1`, `link_field2`, `link_field3`, `link_field4`, `link_field5`, `link_field6`, `link_field7`, `link_field8`, `link_field9`, `link_field10`, `link_field11`, `link_field12`, `link_field13`, `link_field14`, `link_field15`, `link_group_id`, `link_out`) VALUES (1, 1, 'page', 0, 0, 0, 0, '0.00', NOW(), NOW(), '0000-00-00 00:00:00', 0, 1, '', NULL, 'About', 'about', '<legend><strong>About Us</strong></legend>\r\n<p>Our site allows you to submit an article that will be voted on by other members. The most popular posts will be published to the front page, while the less popular articles are left in an \'New\' page until they acquire the set number of votes to move to the published page. This site is dependent on user contributed content and votes to determine the direction of the site.</p>\r\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0);";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created Sample About Page in the table \'links\'...</li><br />';
+		echo '<li>INSERTED sample page into  '. table_links . '...<br />';
+		printf("Affected rows (INSERT): %d\n", $conn->affected_rows);
+		echo '</li></ul></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_links.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_links.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_messages . '`;';
@@ -281,7 +448,16 @@ function plikli_createtables($conn) {
 	  PRIMARY KEY  (`idMsg`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'messages\'....</li><BR/>';
+	$successful = checktableexists(table_messages);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_messages.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_messages.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_messages.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_misc_data . '`;';
@@ -293,9 +469,11 @@ function plikli_createtables($conn) {
 		PRIMARY KEY ( `name` )
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 		mysqli_query( $conn, $sql );
-		echo '<li>Created table: \'Misc Data\'....</li><br />';
+	$successful = checktableexists(table_misc_data);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_misc_data.' ... <img src="'.$ok.'" class="iconalign" />';
 	
-	
+		echo '<ul>';
 	$sql = "INSERT INTO `" . table_misc_data . "` ( `name` , `data` ) VALUES
 	('plikli_version', '4.0.0'),
 	('adcopy_lang', 'en'),
@@ -324,6 +502,10 @@ function plikli_createtables($conn) {
 	('modules_update_unins',''),
 	('modules_upd_versions','');";
 	mysqli_query( $conn, $sql );
+		echo '<li>INSERTED data into  '. table_misc_data . '...<br />';
+		printf("Affected rows (INSERT): %d\n", $conn->affected_rows);
+		echo '</li>';
+		
 	//register validation//
 	$randkey = '';
 	for ($i=0; $i<32; $i++)
@@ -331,7 +513,16 @@ function plikli_createtables($conn) {
 
 	$sql = "INSERT INTO `" . table_misc_data . "` ( `name` , `data` ) VALUES ('hash', '$randkey');";
 	mysqli_query( $conn, $sql );
-	echo '<li>Inserted Data into table: \'Misc Data\'....</li><br />';
+		echo '<li>INSERTED hash key into  '. table_misc_data . '...<br />';
+		printf("Affected rows (INSERT): %d\n", $conn->affected_rows);
+		echo '</li></ul></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_misc_data.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_misc_data.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_modules . '`;';
@@ -348,8 +539,10 @@ function plikli_createtables($conn) {
 	  PRIMARY KEY  (`id`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'modules\'....</li><BR/>';
-
+	$successful = checktableexists(table_modules);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_config.' ... <img src="'.$ok.'" class="iconalign" />';
+		echo '<ul>';
 	// Adding default modules.
 	$sql = "INSERT INTO `" . table_modules . "` (`name`, `version`, `latest_version`, `folder`, `enabled`, `weight`) VALUES 
 	('Admin Modify Language', 2.1, 0, 'admin_language', 1,0),
@@ -359,7 +552,16 @@ function plikli_createtables($conn) {
 	('Sidebar Comments', 2.1, 0, 'sidebar_comments', 1,0),
 	('Karma module', 1.0, 0, 'karma', 1,0);";
 	mysqli_query( $conn, $sql );
-	echo '<li>Added default \'modules\'...</li><br />';
+		echo '<li>INSERTED default Modules into '. table_modules . '...<br />';
+		printf("Affected rows (INSERT): %d\n", $conn->affected_rows);
+		echo '</li></ul></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_modules.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_modules.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_old_urls . '`;';
@@ -373,7 +575,16 @@ function plikli_createtables($conn) {
 	  KEY `old_title_url` (  `old_title_url` )
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'Old URLs\'....</li><br />';
+	$successful = checktableexists(table_old_urls);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_old_urls.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_old_urls.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_old_urls.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_redirects . '`;';
@@ -386,7 +597,16 @@ function plikli_createtables($conn) {
 	  KEY `redirect_old` (`redirect_old`)
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'Redirects\'....</li><br />';
+	$successful = checktableexists(table_redirects);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_redirects.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_redirects.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_redirects.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_saved_links . '`;';
@@ -401,7 +621,16 @@ function plikli_createtables($conn) {
 	  KEY `saved_user_id` (  `saved_user_id` )
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'Saved Links\'....</li><br />';
+	$successful = checktableexists(table_saved_links);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_saved_links.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_saved_links.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_saved_links.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_tags . '`;';
@@ -417,7 +646,16 @@ function plikli_createtables($conn) {
 	  KEY `tag_words` (`tag_words`,`tag_link_id`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Creating table: \'tags\'...</li><br />';
+	$successful = checktableexists(table_tags);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_tags.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_tags.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_tags.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_tag_cache . '`;';
@@ -428,7 +666,16 @@ function plikli_createtables($conn) {
 		  `count` int(11) NOT NULL
 		) ENGINE =MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'Tag cache\'....</li><br />';
+	$successful = checktableexists(table_tag_cache);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_tag_cache.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_tag_cache.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_tag_cache.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 	
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_totals . '`;';
@@ -440,8 +687,11 @@ function plikli_createtables($conn) {
 		PRIMARY KEY  (`name`)
 		) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'Totals\'....</li><br />';
+	$successful = checktableexists(table_totals);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_totals.' ... <img src="'.$ok.'" class="iconalign" />';
 	
+		echo '<ul>';
 	$sql = "insert into `" . table_totals . "` (`name`, `total`) values
 	('published', 0),
 	('new', 0),
@@ -449,7 +699,16 @@ function plikli_createtables($conn) {
 	('draft', 0),
 	('scheduled', 0);";
 	mysqli_query( $conn, $sql );
-	echo "<li>Added default 'totals' data...</li><br />";
+		echo '<li>INSERTED default totals into '. table_totals . '...<br />';
+		printf("Affected rows (INSERT): %d\n", $conn->affected_rows);
+		echo '</li></ul></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_totals.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_totals.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_trackbacks . '`;';
@@ -473,7 +732,16 @@ function plikli_createtables($conn) {
 	  KEY `trackback_date` (`trackback_date`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'trackbacks\'...</li><br />';
+	$successful = checktableexists(table_trackbacks);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_trackbacks.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_trackbacks.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_trackbacks.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_users . '`;';
@@ -513,7 +781,16 @@ function plikli_createtables($conn) {
 	  KEY `user_email` (`user_email`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'users\'...</li><br />';
+	$successful = checktableexists(table_users);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_users.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_users.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_users.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_votes . '`;';
@@ -534,7 +811,16 @@ function plikli_createtables($conn) {
 	  KEY `vote_type` (`vote_type`,`vote_link_id`,`vote_user_id`,`vote_ip`)
 	) ENGINE = MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Creating table: \'votes\'...</li><br />';
+	$successful = checktableexists(table_votes);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_votes.' ... <img src="'.$ok.'" class="iconalign" /></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_votes.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_votes.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 
 	// ********************************
 	$sql = 'DROP TABLE IF EXISTS `' . table_widgets . '`;';
@@ -554,15 +840,27 @@ function plikli_createtables($conn) {
 		  UNIQUE KEY `folder` (`folder`)
 	) ENGINE =MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 	mysqli_query( $conn, $sql );
-	echo '<li>Created table: \'widgets\'....</li><br />';
+	$successful = checktableexists(table_widgets);
+	if($successful == true) {
+		echo '<li class="create-success">Successfully Created Table: '.table_widgets.' ... <img src="'.$ok.'" class="iconalign" />';
 
+		echo '<ul>';
 	$sql = "INSERT INTO `".table_widgets."` (`id`, `name`, `version`, `latest_version`, `folder`, `enabled`, `column`, `position`, `display`) VALUES 
 	(NULL, 'Dashboard Tools', 0.1, 0, 'dashboard_tools', 1, 'left', 4, ''),
 	(NULL, 'Statistics', 3.0, 0, 'statistics', 1, 'left', 1, ''),
 	(NULL, 'Plikli CMS', 1.0, 0, 'plikli_cms', 1, 'right', 5, ''),
 	(NULL, 'Plikli News', 0.1, 0, 'plikli_news', 1, 'right', 6, '');";
 	mysqli_query( $conn, $sql );
-	echo '<li>Added default widgets...</li><br />';
+		echo '<li>INSERTED default Widgets into '. table_widgets . '...<br />';
+		printf("Affected rows (INSERT): %d\n", $conn->affected_rows);
+		echo '</li></ul></li>';
+	}else{
+		echo '<li class="alert-error-tbl">Table: '.table_widgets.' was not successfully created! <img src="'.$notok.'" class="iconalign" /></li>';
+		$warnings[] = 'Table: '.table_widgets.' was not successfully created!';
+	}
+	flush();
+    ob_flush();
+    time_nanosleep(0, 500000000);
 
 	// ********************************
 	/* Inserting data in the config table*/
@@ -576,9 +874,23 @@ function plikli_createtables($conn) {
 				print mysqli_error($conn);
 				exit;
 		}else{
-			echo "<li>Inserted data in the config table...</li><br />";
+			echo '<li class="create-success">INSERTED data in the Config Table...</li><br />';
 			}
+	if (empty($warnings)) {
 	return 1;
+	}else{
+		echo '<fieldset><legend>Additional Instructions to follow!</legend><div class="alert alert-danger"><ul>';
+		echo '<li><span style="background-color:#ffffff;color:#000000;font-weight:bold;">There was a problem creating all the tables!</span></li>';
+		$output = '';
+		if ($warnings) {
+			foreach ($warnings as $warning) {
+				$output.="<li>$warning</li><br />";
+			}
+			echo $output;
+		}
+		echo '</ul></div></fieldset><br />';
+		return 0;
+	}
 }
 
 ?>
