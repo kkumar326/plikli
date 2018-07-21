@@ -408,7 +408,7 @@
 		<tr>
 			<td>
 				<strong>
-				{#PLIKLI_Statistics_Widget_MySQL_Version#}:
+				{#PLIKLI_Statistics_Widget_MySQL_Server_Version#}:
 				</strong>
 			</td>
 			<td>
@@ -423,7 +423,54 @@
 					}
 					 
 					/* print server version */
-					printf("%s\n", $mysqli->server_info);
+					$pattern = '/[^0-9.]/i';
+					$replacement = '';
+
+					printf("%s\n", preg_replace($pattern, $replacement, $mysqli->server_info));
+					 
+					/* close connection */
+					$mysqli->close();
+				{/php}
+			</td>
+		</tr>
+	{/if}
+	{if $sw_members eq "1"}
+		<tr>
+			<td>
+				<strong>
+				{#PLIKLI_Statistics_Widget_MySQL_Client_Version#}:
+				</strong>
+			</td>
+			<td>
+				{php}
+					{* Redwine: Fix to the Statistics Widget to accurately get the MySql Version. https://github.com/Pligg/pligg-cms/commit/1ed283f70f5e8c08c1b2bdc34e6c61c40ef7b01a *}
+					/* Redwine: creating a mysqli connection */
+					$mysqli = new mysqli(EZSQL_DB_HOST,EZSQL_DB_USER,EZSQL_DB_PASSWORD,EZSQL_DB_NAME);
+					/* check connection */
+					if (mysqli_connect_errno()) {
+						printf("Connect failed: %s\n", mysqli_connect_error());
+						exit();
+					}
+					 
+					ob_start();
+					phpinfo();
+					$info = ob_get_contents();
+					ob_end_clean();
+					$start = explode("<h2><a name=\"module_mysql\">mysql</a></h2>",$info,1000);
+					if(count($start) < 2){
+						$mysqlClientversion = '0';
+					}else{
+						$again = explode("<tr><td class=\"e\">Client API version </td><td class=\"v\">",$start[1],1000);
+						$last_time = explode(" </td></tr>",$again[1],1000);
+						$mysqlClientversion = $last_time[0];
+					} 
+					$pattern = '/[^0-9-.]/i';
+					$replacement = '';
+
+					$mysqlClientversion = preg_replace($pattern, $replacement, $mysqlClientversion); 
+					$mysqlClientversion = strstr($mysqlClientversion, '-', true);
+					
+					printf("%s\n", preg_replace($pattern, $replacement, $mysqlClientversion));
 					 
 					/* close connection */
 					$mysqli->close();
