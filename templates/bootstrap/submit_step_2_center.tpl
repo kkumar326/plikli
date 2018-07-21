@@ -334,6 +334,16 @@ $( document ).ready(function() {
 			$(this).val(no_spl_char);
 		}
 	});
+	$('#title').bind("paste", function() {
+		setTimeout(function() { 
+		  //get the value of the input text
+		  var data= $( '#title' ).val() ;
+		  //replace the special characters to '' 
+		  var dataFull = data.replace(/[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+		  //set the new value of the input text without special characters
+		  $( '#title' ).val(dataFull);
+		});
+	});
 	$('#tags').keyup(function() {
 		var yourInput = $(this).val();
 		re = /[`~!@#$%^&*()|+=?;:'".<>\{\}\[\]\\\/]/gi;
@@ -343,6 +353,17 @@ $( document ).ready(function() {
 			$(this).val(no_spl_char);
 		}
 	});
+	$('#tags').bind("paste", function() {
+		setTimeout(function() { 
+		  //get the value of the input text
+		  var data= $( '#tags' ).val() ;
+		  //replace the special characters to '' 
+		  var dataFull = data.replace(/[`~!@#$%^&*()|+=?;:'".<>\{\}\[\]\\\/]/gi, '');
+		  //set the new value of the input text without special characters
+		  $( '#tags' ).val(dataFull);
+		});
+	});
+	
 	// Redwine: End code deals with the Title, Tags input fields
 	// Redwine: the following code deals with the Title, Tags, Category in the preview area
 	$(function() {
@@ -362,7 +383,7 @@ $( document ).ready(function() {
 			var option = $('select[name="category"').find(":selected").text();
 			$(".prev_category").html(option);
 		});
-		$("#tags").keyup(function() {
+		$("#tags").on('change keyup', function() {
 			var tags=$(this).val();
 			$(".tags").html(tags);
 			return false;
