@@ -127,6 +127,9 @@ if (!$errors) {
 			}elseif ($cms_name == 'kliqqi_version' && $old_version == '350' || $cms_name == 'kliqqi_version' && $old_version == '352') {
 				echo "<li>upgrading from Kliqqi $old_version to Plikli " . $lang['plikli_version'] . "</li></ul></fieldset>";
 				include_once('plikli4-k350.php');
+			}elseif ($cms_name == 'plikli_version' && $old_version == '400') {
+				echo "<li>upgrading from Plikli $old_version to Plikli " . $lang['plikli_version'] . "</li></ul></fieldset>";
+				include_once('plikli410-plikli400.php');
 			}
 
 		echo '<fieldset><legend>Recalculating Totals, clearing the cache and creating the settings.php file</legend><ul><li>Regenerating the totals table</li>';

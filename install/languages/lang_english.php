@@ -1,6 +1,6 @@
 ﻿<?php
 // header
-	$lang['plikli_version'] = '4.0.0';
+	$lang['plikli_version'] = '4.1.0';
 	$lang['installer'] = 'Installer';
 	$lang['Welcome'] = 'Welcome';
 	$lang['Install'] = 'Install';
@@ -17,7 +17,7 @@
 	$lang['Troubleshooter_instruct'] = 'The Troubleshooter will detect common problems such as incorrect folder permissions';
 
 // intro / step 1
-	$lang['WelcomeToInstaller'] = 'Welcome to the Plikli CMS Installer!';
+	$lang['WelcomeToInstaller'] = 'Welcome to Plikli CMS Installer!';
 	$lang['Introduction'] = 'Introduction';
 	$lang['WelcomeToThe'] = 'Welcome to <a href="https://www.plikli.com" target="_blank">Plikli</a>, the CMS that powers thousands of community websites. If this is your first time installing Plikli CMS, please read all of the provided instructions carefully so that you don\'t miss any important directions.';
 	$lang['Bugs'] = 'Please familiarize yourself with some of the documentation provided by the Plikli community at the <a href="https://www.plikli.com/forum-2/">Plikli Forum</a> website. We also suggest that you register an account so that you will have access to free support, modules, widgets, templates and other great resources.';
@@ -103,7 +103,7 @@
 	<li>IF YOU ARE USING OTHER THAN THE DEFAULT BOOTSTRAP TEMPLATE, MAKE SURE YOU MERGE ITS FILES WITH THE KLIQQI BOOTSTRAP TEMPLATE BECAUSE QUITE SOME CHANGES HAVE BEEN MADE TO THE CODE. (SEE NOTES AFTER THE UPGRADE HAS FINISHED)</li>
 	</ul>
 	<br />
-	Upgrading your old Pligg or Kliqqi versions to Plikli '. $lang['plikli_version'] . ' will modify your database tables to the latest version.<br />';
+	Upgrading your old Pligg or Kliqqi or Plikli 4.0.0 versions to Plikli '. $lang['plikli_version'] . ' will modify your database tables to the latest version.<br />';
 	$lang['UpgradeAreYouSure'] = 'Are you sure you want to upgrade your database and language file?';
 	$lang['UpgradeYes'] = 'Proceed with Upgrade';
 	$lang['UpgradeLanguage'] = 'Success, Plikli updated your language file. It now includes the latest language items.';

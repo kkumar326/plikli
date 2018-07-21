@@ -3,8 +3,6 @@ error_reporting(E_ALL^E_NOTICE);
 $page = 'troubleshooter';
 $include='header.php'; if (file_exists($include)) { include_once($include); }
 $include='functions.php'; if (file_exists($include)) { require_once($include); }
-$include='../libs/dbconnect.php'; if (file_exists($include)) { require_once($include); }
-include('db-mysqli.php');
 if (isset($_POST['language'])) {
 	$selected_lang = $_POST['language'];
 	foreach ($selected_lang as $sel_lang){
@@ -61,18 +59,13 @@ $replacement = '';
 $mysqlClientversion = preg_replace($pattern, $replacement, $mysqlClientversion); 
 $mysqlClientversion = strstr($mysqlClientversion, '-', true);
 
-//Redwine: retrieving the MySQL Server version
-$mysqlServerVersion = CheckmysqlServerVersion();
-$mysqlServerVersion = preg_replace($pattern, $replacement, $mysqlServerVersion);
-$mysqlServerVersion = strstr($mysqlServerVersion, '-', true);
-
 $phpversion = phpversion();
 
 // Tally up how many items are fulfilled.
-$required = 24; // This should be the number of checks being performed
+$required = 23; // This should be the number of checks being performed
 $tally = 0;
 $warning_php_version = '';
-$warning_mysql_version = '';
+$warning_mysql_Client_version = '';
 if (glob("../languages/*.conf")) { $tally = $tally+1;}
 if ($phpversion >= 5.4 && $phpversion < 6) {
 	$tally = $tally+1; 
@@ -81,16 +74,10 @@ if ($phpversion >= 5.4 && $phpversion < 6) {
 }elseif ($phpversion < 5.4) {
 	$warning_php_version = "You have PHP version $phpversion and Plikli is NOT compatible with PHP version $phpversion; as Plikli CMS uses functions that are designed for PHP 5.4+<br />Check the cPanel under SOFTWARE -> MultiPHP Manager. if it is available and you can select the PHP version you want, then set it to 5.4+. Otherwise, ask your host to install EasyApache so you can have access to MultiPHP Manager.";
 }
-if (version_compare($mysqlServerVersion, '5.0.3', '>=')) {
+if (version_compare($mysqlClientversion, '5.0.0', '>=')) {
 	$tally = $tally+1; 
 }else{
-	$warning_mysql_version = "You have MySQL version $mysqlServerVersion and Plikli is NOT compatible with MySQL version $mysqlClientversion. You should have MySQl version 5.0.3+";
-}
-
-if (version_compare($mysqlClientversion, '5.0.3', '>=')) {
-	$tally = $tally+1; 
-}else{
-	$warning_mysql_version = "You have MySQL version $mysqlClientversion and Plikli is NOT compatible with MySQL version $mysqlClientversion. You should have MySQl version 5+";
+	$warning_mysql_Client_version = "You have MySQL Client Server version $mysqlClientversion it may not have newest API to access MySQL Server. If the site experiences some issues, update the MySQL Client Server!";
 }
 if (function_exists('curl_version')){ $tally = $tally+1; }
 if (function_exists('fopen')){ $tally = $tally+1; }
@@ -120,8 +107,8 @@ if ($tally < $required ){
 		if ($warning_php_version != '') {
 			echo "<p>$warning_php_version</p>";
 		}
-		if ($warning_mysql_version != '') {
-			echo "<p>$warning_mysql_version</p><br />";
+		if ($warning_mysql_Client_version != '') {
+			echo "<p>$warning_mysql_Client_version</p><br />";
 		}
 		echo '<div class="progress" style="margin-bottom: 9px;">
 				<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="'.$percent.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$percent.'%;">
@@ -303,16 +290,8 @@ echo '</td><td><a id="phpversion" data-trigger="hover" data-content="Plikli has 
 echo '</tr>';
 
 echo '<tr><td>';
-if (version_compare($mysqlServerVersion, '5.0.3', '>=')) {
-	echo '<i class="fa fa-check"></i>';
-}else{
-	echo '<i class="fa fa-times"></i>';
-}
-echo '</td><td><a id="mysqlServerVersion" data-trigger="hover" data-content="Plikli has been tested on MySQL versions 4 and 5, during that process we have discovered that bugs will occasionally pop up if you are running MySQL 4. For this reason we recommend that you use a server with MySQL 5.0.3 or later to run a Plikli CMS website. MySQL 5.0.3 has been available for some time now and we hope that most major web hosts now support it. It offers features that are not built into MySQL 4, which we may have used when writing code for Plikli CMS." rel="popover" href="http://dev.mysql.com/doc/" data-original-title="MySQL Server version">MySQL Server version ('.$mysqlServerVersion.')</a></td>';
-echo '</tr>';
 
-echo '<tr><td>';
-if (version_compare($mysqlClientversion, '5.0.3', '>=')) {
+if (version_compare($mysqlClientversion, '5.0.0', '>=')) {
 	echo '<i class="fa fa-check"></i>';
 }else{
 	echo '<i class="fa fa-times"></i>';
@@ -349,7 +328,6 @@ $(function ()
 	$("#langfiles").popover();
 	$("#chmod").popover();
 	$("#phpversion").popover();
-	$("#mysqlServerVersion").popover();
 	$("#mysqlClientversion").popover();
 	$("#curlwarning").popover();
 	$("#fopenwarning").popover();

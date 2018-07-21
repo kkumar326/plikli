@@ -83,4 +83,18 @@ function CheckmysqlServerVersion() {
 	$theMySqlVersion = $handle->server_info;
 	return $theMySqlVersion;
 }
+
+function CheckIfFileExists ($file, $default) {
+	if (!file_exists($file)) {
+		if (file_exists($default)) {
+			rename("$default", "$file");
+			chmod("$file", 0666);
+			return true;
+		}else{
+			return false;
+		}
+	}else{
+		return true;
+	}
+}
 ?>

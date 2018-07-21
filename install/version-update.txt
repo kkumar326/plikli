@@ -26,4 +26,4 @@ users_extra_fields,0.2
 welcome_email,0.2
 welcome_privmsg,2.0
 xml_sitemaps,3.0
-plikli_new_version,4.0.0
+plikli_new_version,4.1.0

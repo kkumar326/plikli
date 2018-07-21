@@ -60,6 +60,21 @@ if($conn = @mysqli_connect($dbhost,$dbuser,$dbpass)) {
 			if(fwrite($handle, $str)) {
 				$output.= "<p>" . $lang['dbconnect'] . "</p>\n";
 				fclose($handle);
+				
+				$include='../libs/dbconnect.php'; if (file_exists($include)) { require_once($include); }
+				include('db-mysqli.php');
+				
+				$mysqlServerVersion = $handle->server_info;
+				$pattern = '/[^0-9-.]/i';
+				$replacement = '';
+				$mysqlServerVersion = preg_replace($pattern, $replacement, $mysqlServerVersion);
+				$mysqlServerVersion = strstr($mysqlServerVersion, '-', true);				
+				//echo "Your MySQL Server version is => $theMySqlVersion";
+				if (version_compare($mysqlServerVersion, '5.0.3', '>=')) {
+					$warning_mysql_Server_version = "You have what Plikli CMS needs to function properly, MySQL Server Version ". $mysqlServerVersion; 
+				}else{
+					$warning_mysql_Server_version = "You have MySQL Server version $mysqlServerVersion and Plikli is NOT compatible with MySQL version $mysqlClientversion. You should have MySQl version 5.0.3+ YOU MAY CONTINUE, HOWEVER, IF YOU ENCOUNTER ISSUES WITH THE FUNCTIONALITY OF THE SITE, YOU HAVE TO UPGRADE MYSQL SERVER VERSION!";
+				}
 			} 
 			else {
 				$_SESSION['checked_step'] = 0;
@@ -84,6 +99,7 @@ else {
 if($check_errors !== false){
   if (!$errors) {
   	$output.='<div class="instructions"><p>' . $lang['NoErrors'] . '</p>
+	<div class="jumbotron">'. $warning_mysql_Server_version .'</div> 
   	<form id="form2" name="form2" method="post">
   	  <input type="hidden" name="dbuser" value="'.addslashes(strip_tags($_POST['dbuser'])).'" />
   	  <input type="hidden" name="dbpass" value="'.addslashes(strip_tags($_POST['dbpass'])).'" />

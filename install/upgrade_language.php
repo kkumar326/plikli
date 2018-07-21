@@ -133,7 +133,7 @@ $tbl_prefix = $_SESSION['table_prefix'];
 			}elseif ($_SESSION['cms_name'] == 'kliqqi_version' && $old_version < '300') {
 				echo '<br /><fieldset><legend>ATTENTION!</legend><div class="alert-danger">Sorry, your CMS is ' . $plv->name . ' ' . $plv->data. ' There is no Kliqqi version '. $old_version . '</div><br /></fieldset>';
 				die();
-			}elseif ($_SESSION['cms_name'] == 'plikli_version' && $old_version == '400') {
+			}elseif ($_SESSION['cms_name'] == 'plikli_version' && $old_version == '410') {
 				echo '<br /><fieldset><legend>ATTENTION!</legend><div class="alert-danger">Your CMS is ' . $plv->name . ' ' . $plv->data. ' You already have the latest Plikli version '. $old_version . '</div><br /></fieldset>';
 				die();
 				}

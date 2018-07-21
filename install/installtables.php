@@ -475,7 +475,7 @@ function plikli_createtables($conn) {
 	
 		echo '<ul>';
 	$sql = "INSERT INTO `" . table_misc_data . "` ( `name` , `data` ) VALUES
-	('plikli_version', '4.0.0'),
+	('plikli_version', '4.1.0'),
 	('adcopy_lang', 'en'),
 	('adcopy_theme', 'white'),
 	('adcopy_pubkey', 'Rp827COlEH2Zcc2ZHrXdPloU6iApn89K'),

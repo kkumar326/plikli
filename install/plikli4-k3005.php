@@ -85,14 +85,15 @@ echo '<fieldset><legend>MODIFICATIONS TO THE CONFIG Table.</legend><ul>';
 	(NULL, 'Comments', 'disable_Comments_message', 'Comments are temporarily disabled!', '', 'Text', 'Message to display when Comments are disallowed', 'Enter the message you want to display.', 'define', NULL),
 	(NULL, 'Groups', 'allow_groups_avatar', 'true', 'true', 'true/false', 'Allow Groups to upload own avatar', 'Should groups be allowed to upload own avatar?', 'define', 'NULL'),
 	(NULL, 'Groups', 'max_group_avatar_size', '200', '200KB', 'number', 'Maximum image size allowed to upload', 'Set the maximum image size for the group avatar to upload.', 'define', 'NULL'),
-	(NULL, 'Avatars', 'max_avatar_size', '200', '200KB', 'number', 'Maximum image size allowed to upload', 'Set the maximum image size a user can upload.', 'define', '''');";
+	(NULL, 'Avatars', 'max_avatar_size', '200', '200KB', 'number', 'Maximum image size allowed to upload', 'Set the maximum image size a user can upload.', 'define', ''''),
+	(NULL, 'Misc', 'validate_password', 'false', 'false', 'true / false', 'Validate user password', 'Validate user password, when registering/password reset, to check if it is safe and not pwned?<br />If you set to true, then a check is done using HIBP API. If the provided password has been pwned, the registration is not submitted until they provide a different password!.<br /><a href=\"https://haveibeenpwned.com/\" target=\"_blank\">Have I Been Pwned?</a>', 'define', '');";
 	$sql_new_config = $handle->query($sql);
 	if (!$sql_new_config) {
 		$marks = $notok;
 	}else{
 		$marks = $ok;
 	}
-	$warnings[] = "Added new settings to the CONFIG Table:<ol><strong>Under Logo Section</strong><li>New configuration to set the site logo</li><strong>Under Location Installed Section</strong><li>allow_registration: Allows Admins to enable/disable registration to the site.</li><li>disallow_registration_message: Message to display when allow_registration is set to false.</li><li>maintenance_mode: Admins can set the maintenance mode ON/OFF.</li><strong>Under Submit Section</strong><li>Enable_Submit: Admins can enable/disable the Submit articles feature.</li><li>disable_Submit_message: Message to display when Submit is disabled.</li><li>Allow_Draft: Admins can allow/disallow users to submit Draft (saved) articles for later publishing.</li><li>Allow_Scheduled: Admins can allow/disallow users to submit Scheduled articles to be posted at a set later date.</li><strong>Under Story Section</strong><li>link_nofollow: Enable/disable link nofollow for the story URL that is linked in the title on the Story page and the original site that appears in the toolsbar under the title</li><strong>Under Comments Section</strong><li>Enable_Comments: Admins can enable/disable the Comments feature.</li><li>disable_Comments_message: Message to display when Comments are disabled.</li><strong>Under Groups Section</strong><li>allow_groups_avatar: Admins can allow/disallow groups avatar.</li><li>max_group_avatar_size: Admins can set the maximum group avatar to be uploaded.</li><strong>Under Avatars Section</strong><li>max_avatar_size: Admins can set now the user avatar size to be uploaded.</li></ol>";
+	$warnings[] = "Added new settings to the CONFIG Table:<ol><strong>Under Logo Section</strong><li>New configuration to set the site logo</li><strong>Under Location Installed Section</strong><li>allow_registration: Allows Admins to enable/disable registration to the site.</li><li>disallow_registration_message: Message to display when allow_registration is set to false.</li><li>maintenance_mode: Admins can set the maintenance mode ON/OFF.</li><strong>Under Submit Section</strong><li>Enable_Submit: Admins can enable/disable the Submit articles feature.</li><li>disable_Submit_message: Message to display when Submit is disabled.</li><li>Allow_Draft: Admins can allow/disallow users to submit Draft (saved) articles for later publishing.</li><li>Allow_Scheduled: Admins can allow/disallow users to submit Scheduled articles to be posted at a set later date.</li><strong>Under Story Section</strong><li>link_nofollow: Enable/disable link nofollow for the story URL that is linked in the title on the Story page and the original site that appears in the toolsbar under the title</li><strong>Under Comments Section</strong><li>Enable_Comments: Admins can enable/disable the Comments feature.</li><li>disable_Comments_message: Message to display when Comments are disabled.</li><strong>Under Groups Section</strong><li>allow_groups_avatar: Admins can allow/disallow groups avatar.</li><li>max_group_avatar_size: Admins can set the maximum group avatar to be uploaded.</li><strong>Under Avatars Section</strong><li>max_avatar_size: Admins can set now the user avatar size to be uploaded.</li><li>validate_password with HIBP API</li></ol>";
 	printf("Affected rows (INSERT): %d\n", $handle->affected_rows);
 	echo '<li>INSERTED many new settings in the CONFIG Table (read the notes at the end of the upgrade process) <img src="'.$marks.'" class="iconalign" /></li>';
 	
@@ -266,6 +267,17 @@ printf("Affected rows (DELETE): %d\n", $handle->affected_rows);
 	}
 	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
 	echo '<li>Updated title of Allow User to Upload Avatars <img src="'.$marks.'" class="iconalign" /></li>';
+	
+	// Update dblang description
+	$sql = "UPDATE `" . table_prefix."config` set `var_desc` = 'Database language.<br /><strong style=\"color:#ff0000;\">DO NOT CHANGE THIS VALUE \"en\" IT WILL MESS UP THE URLS OF THE CATEGORIES!</STRONG>' WHERE `var_name` =  '\$dblang';";
+	$sql_dbland = $handle->query($sql);
+	if (!$sql_dbland) {
+		$marks = $notok;
+	}else{
+		$marks = $ok;
+	}
+	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
+	echo '<li>Updated dblang description <img src="'.$marks.'" class="iconalign" /></li>';
 	
 	$sql = "UPDATE `" . table_prefix."config` SET `var_desc` = 'Allow users to change Plikli language<br /><strong>When SET to 1, you have to rename the language file that you want to allow in /languages/ folder.</strong> Ex: <span style=\"font-style:italic;color:#004dff\">RENAME lang_italian.conf.default</span> to <span style=\"font-style:italic;color:#004dff\">lang_italian.conf</span>' WHERE `var_name` = 'user_language';";
 	$sql_user_language = $handle->query($sql);

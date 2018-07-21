@@ -72,19 +72,6 @@ $warnings_rename = array();
 echo '<fieldset><legend>MODIFICATIONS TO THE CONFIG Table.</legend><ul>';
 	//Inserting new rows 
 	$sql = "INSERT INTO `" . table_prefix."config` (`var_id`, `var_page`, `var_name`, `var_value`, `var_defaultvalue`, `var_optiontext`, `var_title`, `var_desc`, `var_method`, `var_enclosein`)VALUES
-			(NULL, 'Location Installed', 'allow_registration', 'true', 'true', 'true / false', 'Allow registration?', 'If for a reason you want to suspend registration, permanently or definitely, set it to false!', 'define', ''),
-			(NULL, 'Location Installed', 'disallow_registration_message', 'Registration is temporarily suspended!', '', 'Text', 'Message to display when Registration is suspended', 'Enter the message you want to display.', 'define', ''),
-			(NULL, 'Location Installed', '\$maintenance_mode', 'false', 'false', 'true / false', 'Maintenance Mode', 'Set the mode to true when you want to notify the users of the unavailability of the site (upgrade, downtime, etc.)<br /><strong>NOTE that only Admin can still access the site during maintenance mode!</strong>', 'normal', ''''),
-			(NULL, 'Submit', 'Enable_Submit', 'true', 'true', 'true / false', 'Allow Submit', 'Allow users to submit articles?', 'define', NULL),
-			(NULL, 'Submit', 'disable_Submit_message', 'Submitting articles is temporarily disabled!', '', 'Text', 'Message to display when Submitting articles is disallowed', 'Enter the message you want to display.', 'define', NULL),
-			(NULL, 'Submit', 'Allow_Draft', 'false', 'false', 'true / false', 'Allow Draft Articles?', 'Set it to true to allow users to save draft articles', 'define', ''),
-			(NULL, 'Submit', 'Allow_Scheduled', 'false', 'false', 'true / false', 'Allow Scheduled Articles?', 'Set it to true to allow users to save scheduled articles.<br /><strong>If you set to true, then you MUST install the <u>scheduled_posts</u> Module.</strong>', 'define', ''),
-			(NULL, 'Story', 'link_nofollow', 'true', 'true', 'true / false', 'Use rel=\"nofollow\"', 'nofollow is a value that can be assigned to the rel attribute of an HTML a element to instruct some search engines that the hyperlink should not influence the ranking of the link''s target in the search engine''s index.<br /><a href=\"https://support.google.com/webmasters/answer/96569?hl=en\" target=\"_blank\">Google: policies</a>', 'define', NULL),
-			(NULL, 'Comments', 'Enable_Comments', 'true', 'true', 'true / false', 'Allow Comments', 'Allow users to comment on articles?', 'define', NULL),
-			(NULL, 'Comments', 'disable_Comments_message', 'Comments are temporarily disabled!', '', 'Text', 'Message to display when Comments are disallowed', 'Enter the message you want to display.', 'define', NULL),
-			(NULL, 'Groups', 'allow_groups_avatar', 'true', 'true', 'true/false', 'Allow Groups to upload own avatar', 'Should groups be allowed to upload own avatar?', 'define', 'NULL'),
-			(NULL, 'Groups', 'max_group_avatar_size', '200', '200KB', 'number', 'Maximum image size allowed to upload', 'Set the maximum image size for the group avatar to upload.', 'define', 'NULL'),
-			(NULL, 'Avatars', 'max_avatar_size', '200', '200KB', 'number', 'Maximum image size allowed to upload', 'Set the maximum image size a user can upload.', 'define', ''''),
 			(NULL, 'Misc', 'validate_password', 'false', 'false', 'true / false', 'Validate user password', 'Validate user password, when registering/password reset, to check if it is safe and not pwned?<br />If you set to true, then a check is done using HIBP API. If the provided password has been pwned, the registration is not submitted until they provide a different password!.<br /><a href=\"https://haveibeenpwned.com/\" target=\"_blank\">Have I Been Pwned?</a>', 'define', '');";
 	$sql_new_config = $handle->query($sql);
 	if (!$sql_new_config) {
@@ -92,168 +79,9 @@ echo '<fieldset><legend>MODIFICATIONS TO THE CONFIG Table.</legend><ul>';
 	}else{
 		$marks = $ok;
 	}
-	$warnings[] = "Added new settings to the CONFIG Table:<ol><strong>Under Location Installed Section</strong><li>allow_registration: Allows Admins to enable/disable registration to the site.</li><li>disallow_registration_message: Message to display when allow_registration is set to false.</li><li>maintenance_mode: Admins can set the maintenance mode ON/OFF.</li><strong>Under Submit Section</strong><li>Enable_Submit: Admins can enable/disable the Submit articles feature.</li><li>disable_Submit_message: Message to display when Submit is disabled.</li><li>Allow_Draft: Admins can allow/disallow users to submit Draft (saved) articles for later publishing.</li><li>Allow_Scheduled: Admins can allow/disallow users to submit Scheduled articles to be posted at a set later date.</li><strong>Under Story Section</strong><li>link_nofollow: Enable/disable link nofollow for the story URL that is linked in the title on the Story page and the original site that appears in the toolsbar under the title</li><strong>Under Comments Section</strong><li>Enable_Comments: Admins can enable/disable the Comments feature.</li><li>disable_Comments_message: Message to display when Comments are disabled.</li><strong>Under Groups Section</strong><li>allow_groups_avatar: Admins can allow/disallow groups avatar.</li><li>max_group_avatar_size: Admins can set the maximum group avatar to be uploaded.</li><strong>Under Avatars Section</strong><li>max_avatar_size: Admins can set now the user avatar size to be uploaded.</li><li>validate_password with HIBP API</li></ol>";
+	$warnings[] = "Added new settings to the CONFIG Table:<ol><strong>Under Miscellenaeous<li>validate_password with HIBP API</li></ol>";
 	printf("Affected rows (INSERT): %d\n", $handle->affected_rows);
 	echo '<li>INSERTED many new settings in the CONFIG Table (read the notes at the end of the upgrade process) <img src="'.$marks.'" class="iconalign" /></li>';	
-
-	$sql = "DELETE FROM `" . table_prefix."config` WHERE `var_name` = 'SubmitSummary_Allow_Edit';";
-	$sql_del_allow_summary = $handle->query($sql);
-	if (!$sql_del_allow_summary) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (DELETE): %d\n", $handle->affected_rows);
-	echo '<li>Deleted the obsolete SubmitSummary_Allow_Edit entry <img src="'.$marks.'" class="iconalign" /></li>';
-
-	// Update urlmethod desc.
-	$sql = "UPDATE `" . table_prefix."config` SET `var_desc` ='<strong>1</strong> = Non-SEO Links.<br /> Example: /story.php?title=Example-Title<br /><strong>2</strong> SEO Method. <br />Example: /Category-Title/Story-title/.<br /><strong>Note:</strong> You must rename htaccess.default to .htaccess <strong>AND EDIT IT WHERE MODIFICATIONS ARE NOTED!</strong>' where `var_name` = '\$URLMethod';";
-	$sql_urlmethod = $handle->query($sql);
-	if (!$sql_urlmethod) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated description of the "urlmethod" <img src="'.$marks.'" class="iconalign" /></li>';
-
-	// Update allow extra fields desc.
-	$sql = "UPDATE `" . table_prefix."config` SET `var_desc` ='Enable extra fields when submitting stories?<br /><strong>When SET to TRUE, you have to edit the /libs/extra_fields.php file, using the NEW <a href=\"../admin/admin_xtra_fields_editor.php\" target=\"_blank\">Extra Fields Editor</a> in the Dashboard!</strong>' where `var_name` = 'Enable_Extra_Fields';";
-	$sql_extra_fields = $handle->query($sql);
-	if (!$sql_extra_fields) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated description of the "Enable_Extra_Fields" <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	// Update Story_Content_Tags_To_Allow_Normal title.
-	$sql = "UPDATE `" . table_prefix."config` SET `var_desc` = 'leave blank to not allow tags. Examples are: &lt;br&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;u&gt;&lt;s&gt;&lt;sub&gt;&lt;sup&gt;&lt;ol&gt;&lt;ul&gt;&lt;li&gt;&lt;blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;big&gt;&lt;small&gt;&lt;tt&gt;&lt;code&gt;&lt;kbd&gt;&lt;samp&gt;&lt;var&gt;&lt;del&gt;&lt;ins&gt;&lt;hr&gt;&lt;pre&gt;<br /><strong style=\"color:#ff0000;\">NEVER ALLOW OTHER THAN THESE TAGS, ESPECIALLY FORM, SCRIPT, IMG, SVG AND IFRAME TAGS!</strong>' where `var_name` = 'Story_Content_Tags_To_Allow_Normal';";
-	$sql_Story_Content_Tags_To_Allow_Normal = $handle->query($sql);
-	if (!$sql_Story_Content_Tags_To_Allow_Normal) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated description of "Story_Content_Tags_To_Allow_Normal" <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	// Update the title of Story_Content_Tags_To_Allow_Admin
-	$sql = "UPDATE `" . table_prefix."config` set `var_desc` = 'leave blank to not allow tags. Examples are: &lt;br&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;u&gt;&lt;s&gt;&lt;sub&gt;&lt;sup&gt;&lt;ol&gt;&lt;ul&gt;&lt;li&gt;&lt;blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;big&gt;&lt;small&gt;&lt;tt&gt;&lt;code&gt;&lt;kbd&gt;&lt;samp&gt;&lt;var&gt;&lt;del&gt;&lt;ins&gt;&lt;hr&gt;&lt;pre&gt;<br /><strong style=\"color:#ff0000;\">NEVER ALLOW OTHER THAN THESE TAGS, ESPECIALLY FORM, SCRIPT, IMG, SVG AND IFRAME TAGS!</strong>' WHERE `var_name` =  'Story_Content_Tags_To_Allow_Admin';";
-	$sql_Story_Content_Tags_To_Allow_Admin = $handle->query($sql);
-	if (!$sql_Story_Content_Tags_To_Allow_Admin) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated description of "Story_Content_Tags_To_Allow_Admin" <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	// Update the title of Story_Content_Tags_To_Allow_God
-	$sql = "UPDATE `" . table_prefix."config` set `var_desc` = 'leave blank to not allow tags. Examples are: &lt;br&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;u&gt;&lt;s&gt;&lt;sub&gt;&lt;sup&gt;&lt;ol&gt;&lt;ul&gt;&lt;li&gt;&lt;blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;big&gt;&lt;small&gt;&lt;tt&gt;&lt;code&gt;&lt;kbd&gt;&lt;samp&gt;&lt;var&gt;&lt;del&gt;&lt;ins&gt;&lt;hr&gt;&lt;pre&gt;<br /><strong style=\"color:#ff0000;\">NEVER ALLOW OTHER THAN THESE TAGS, ESPECIALLY FORM, SCRIPT, IMG, SVG AND IFRAME TAGS!</strong>' WHERE `var_name` =  'Story_Content_Tags_To_Allow_God';";
-	$sql_Story_Content_Tags_To_Allow_God = $handle->query($sql);
-	if (!$sql_Story_Content_Tags_To_Allow_God) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated description of "Story_Content_Tags_To_Allow_God" <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	// Update the description of Show the URL Input Box
-	$sql = "UPDATE `" . table_prefix."config` set `var_desc` = 'Show the URL input box in submit step 1.<br /><strong>It is by default set to true. If you plan on allowing both URL and Editorial story submission, then you keep it set to true. However, if you only want to allow Editorial story submission, then set it to false!</strong>' WHERE `var_name` =  'Submit_Show_URL_Input';";
-	$sql_Submit_Show_URL_Input = $handle->query($sql);
-	if (!$sql_Submit_Show_URL_Input) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated description of "Submit_Show_URL_Input" <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	// Update the description of Use Story Title as External Link
-	$sql = "UPDATE `" . table_prefix."config` set `var_desc` = 'Use the story title as link to story\'s website. <strong>NOTE that if you set it to true, the title will link directly to the original story link even when the story is displayed in summary mode!</strong>' WHERE `var_name` =  'use_title_as_link';";
-	$sql_Story_Title_as_External_Link = $handle->query($sql);
-	if (!$sql_Story_Title_as_External_Link) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated description of Story Title as External Link <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	//replacing kliqqi instances with plikli in trackback
-	$sql = "UPDATE `" . table_prefix."config` set `var_value` = 'plikli.com', `var_defaultvalue` = 'plikli.com', `var_optiontext` = 'plikli.com' WHERE `var_name` = '\$trackbackURL';";
-	$sql_trackbackURL = $handle->query($sql);
-	if (!$sql_trackbackURL) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated the trackbackURL value, default value and optiontext to plikli.com <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	$sql = "UPDATE `" . table_prefix."config` SET `var_desc` = REPLACE(`var_desc`, 'kliqqi', 'plikli') WHERE `var_name` = '\$my_base_url';";
-	$sql_mybaseurl = $handle->query($sql);
-	if (!$sql_mybaseurl) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated the description of my base url, replacing kliqqi instances with plikli. <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	$sql = "UPDATE `" . table_prefix."config` SET `var_name` = '\$my_plikli_base', `var_title` = REPLACE(`var_title`, 'Kliqqi', 'Plikli'), `var_desc` = REPLACE(`var_desc`, 'kliqqi', 'plikli') WHERE `var_name` = '\$my_kliqqi_base';";
-	$sql_mypliklibase = $handle->query($sql);
-	if (!$sql_mypliklibase) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated the title and description of my kliqqi base, replacing kliqqi instances with plikli. <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	$sql = "UPDATE `" . table_prefix."config` SET `var_desc` = REPLACE(`var_desc`, 'Kliqqi', 'Plikli') WHERE `var_name` = '\$USER_SPAM_RULESET';";
-	$sql_USER_SPAM_RULESET = $handle->query($sql);
-	if (!$sql_USER_SPAM_RULESET) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated the description of USER SPAM RULESET, replacing kliqqi instances with plikli. <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	$sql = "UPDATE `" . table_prefix."config` SET `var_defaultvalue` = REPLACE(`var_defaultvalue`, 'kliqqi', 'plikli'), `var_desc` = REPLACE(`var_desc`, 'kliqqi', 'plikli') WHERE `var_name` = 'table_prefix';";
-	$sql_table_prefix = $handle->query($sql);
-	if (!$sql_table_prefix) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated the defaultvalue and description of table prefix, replacing kliqqi instances with plikli. <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	$sql = "UPDATE `" . table_prefix."config` SET `var_desc` = 'Allow users to change Plikli language<br /><strong>When SET to 1, you have to rename the language file that you want to allow in /languages/ folder.</strong> Ex: <span style=\"font-style:italic;color:#004dff\">RENAME lang_italian.conf.default</span> to <span style=\"font-style:italic;color:#004dff\">lang_italian.conf</span>' WHERE `var_name` = 'user_language';";
-	$sql_user_language = $handle->query($sql);
-	if (!$sql_user_language) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated the description of user language. <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	// Update the title of Use Allow User to Upload Avatars
-	$sql = "UPDATE `" . table_prefix."config` set `var_title` = 'Allow User to Upload Avatars' WHERE `var_name` =  'Enable_User_Upload_Avatar';";
-	$sql_Allow_User_Upload_Avatars = $handle->query($sql);
-	if (!sql_Allow_User_Upload_Avatars) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated title of Allow User to Upload Avatars <img src="'.$marks.'" class="iconalign" /></li>';
 	
 	// Update dblang description
 	$sql = "UPDATE `" . table_prefix."config` set `var_desc` = 'Database language.<br /><strong style=\"color:#ff0000;\">DO NOT CHANGE THIS VALUE \"en\" IT WILL MESS UP THE URLS OF THE CATEGORIES!</STRONG>' WHERE `var_name` =  '\$dblang';";
@@ -460,10 +288,10 @@ echo '<fieldset><legend>Updating the misc_data table. If an entry needs updating
 echo '</ul></fieldset><br />';	
 //end work on misc_data table, setting all captcha and solvemedia entries
 
-//start work on misc_data table, replacing kliqqi with plikli
+//start work on misc_data table
 echo '<fieldset><legend>Renaming some values in the misc_data table to work with Plikli.</legend><ul>';	
 		// Update CMS version.
-			$sql = "UPDATE `" . table_prefix."misc_data` SET `data` = '". $lang['plikli_version'] ."'  WHERE `name` = 'kliqqi_version';";
+			$sql = "UPDATE `" . table_prefix."misc_data` SET `data` = '". $lang['plikli_version'] ."'  WHERE `name` = 'plikli_version';";
 			$sql_CMS_name = $handle->query($sql);
 			if (!$sql_CMS_name) {
 				$marks = $notok;
@@ -473,18 +301,6 @@ echo '<fieldset><legend>Renaming some values in the misc_data table to work with
 			printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
 			echo '<li>Updated name to plikli_version and version to '. $lang['plikli_version'] .' <img src="'.$marks.'" class="iconalign" /></li>';
 			
-	//replace all instances of kliqqi with plikli
-	$sql = "UPDATE `" . table_prefix."misc_data` SET `name` = REPLACE(`name`, 'kliqqi', 'plikli') , `data` = REPLACE(`data`, 'kliqqi', 'plikli');";
-	$sql_update_data_column = $handle->query($sql);
-	if (!$sql_update_data_column) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated data column to replace all instances of tpl_kliqqi with tpl_plikli <img src="'.$marks.'" class="iconalign" /></li>';
-	
-	
 	// updating and installing Plikli and module updates
 	$sql = "select * from `" . table_prefix."misc_data` where `name` like 'modules_%';";
 	$sql_modules_update = $handle->query($sql);
@@ -547,75 +363,6 @@ echo '<fieldset><legend>Renaming some values in the misc_data table to work with
 		
 echo '</ul></fieldset><br />';
 
-echo '<fieldset><legend>Changing Columns in Links table.</legend><ul>';
-	$sql = "ALTER TABLE  `" . table_prefix."links`  
-	CHANGE 	`link_status` `link_status` enum('discard','new','published','abuse','duplicate','page','spam','moderated','draft','scheduled') NOT NULL DEFAULT 'discard',
-	CHANGE  `link_url`  `link_url` VARCHAR( 512 ) NOT NULL DEFAULT '';";
-	$sql_alter_links - $handle->query($sql);
-	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated links Table link_status enum and link_url to VARCHAR 512</li>';
-	
-echo '</ul></fieldset><br />';
-
-echo '<fieldset><legend>Inserting 2 new link statuses in the Totals table.</legend><ul>';
-	$sql = "INSERT INTO `" . table_prefix."totals` (`name`, `total`) VALUES ('draft', 0), ('scheduled', 0);";
-	$sql_insert_totals = $handle->query($sql);
-	if ($handle->affected_rows < 1) {
-		$marks = $notok;
-	}else{
-		$marks = $ok;
-	}
-	echo '<li>'.printf("Affected rows (INSERTED 2 new link statuses in the Totals table): %d\n", $handle->affected_rows) . '<img src="'.$marks.'" class="iconalign" /></li>';
-echo '</ul></fieldset><br />';
-
-	// widgets
-echo '<fieldset><legend>Updating data in Widgets table.</legend><ul>';
-	$sql = "select `name` from `" . table_prefix."widgets`";
-	$sql_widgets = $handle->query($sql);
-	if ($sql_widgets) {
-		$row_cnt = $sql_widgets->num_rows;
-		if ($row_cnt) {
-			while ($widget = $sql_widgets->fetch_assoc()) {	
-				if (in_array('Kliqqi CMS',$widget)) {
-					// Update table widgets; changing the name of Kliqqi CMS to Plikli CMS
-					$sql = "UPDATE `" . table_prefix."widgets` SET `name` = 'Plikli CMS', `folder` = 'plikli_cms', `version` = '1.0' WHERE `name` = 'Kliqqi CMS';";
-					$sql_widget_plikli_cms = $handle->query($sql);
-					if (!$sql_widget_plikli_cms) {
-						$marks = $notok;
-					}else{
-						$marks = $ok;
-					}
-					printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-					echo '<li>Updated table widgets; changing the name of Kliqqi CMS to Plikli CMS <img src="'.$marks.'" class="iconalign" /></li>';
-				}elseif (in_array('Kliqqi News',$widget)) {
-					// Update table widgets; changing the name of Kliqqi News to Plikli News
-					$sql = "UPDATE `" . table_prefix."widgets` SET `name` = 'Plikli News', `folder` = 'plikli_news' WHERE `name` = 'Kliqqi News';";
-					$sql_widget_plikli_news = $handle->query($sql);
-					if (!$sql_widget_plikli_news) {
-						$marks = $notok;
-					}else{
-						$marks = $ok;
-					}
-					printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-					echo '<li>Update table widgets; changing the name of Kliqqi News to Plikli News <img src="'.$marks.'" class="iconalign" /></li>';
-					
-					// Update misc_data table; setting the news count in case it does not exist.
-					$sql = "UPDATE IGNORE `" . table_prefix."misc_data` SET `name` = 'news_count', `data` = '3';";
-					$sql_news_count = $handle->query($sql);
-					if (!$sql_news_count) {
-						$marks = $notok;
-					}else{
-						$marks = $ok;
-					}
-					printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-					echo '<li>Update misc_data table setting the new_count to 3 for plikli News widgets <img src="'.$marks.'" class="iconalign" /></li>';
-				}
-			}
-			
-		}
-	}
-echo '</ul></fieldset><br />';
-	
 /* Redwine: checking if we have to detect certain settings and modules or not, to give further instructions. */
 //get the CMS folder name
 $sql = "SELECT `var_value` FROM `" . table_prefix."config` WHERE `var_name` = '\$my_plikli_base';";
@@ -654,7 +401,7 @@ $folder_path = $fetched['var_value'];
 			$warnings[] = "Check the Links module because we added few settings to it <strong style=\"text-decoration:underline;background-color:#0100ff\">YOU HAVE TO GO TO ITS SETTINGS AND SELECT THE NEW OPTIONS THAT YOU WANT; OTHERWISE IT WILL NOT WORK UNTIL YOU DO SO!</strong>!";
 		}		
 		if ($module['folder'] == "upload") {
-			$warnings[] = "We noticed you have the UPLOAD module installed. You have to copy the files from the old Kliqqi folder, in ".$folder_path."/modules/upload/attachments/ TO the same folder in the new Plikli /".$upgrade_folder."/modules/upload/attachments/.";
+			$warnings[] = "We noticed you have the UPLOAD module installed. You have to copy the files from the old Plikli folder, in ".$folder_path."/modules/upload/attachments/ TO the same folder in the new Plikli /".$upgrade_folder."/modules/upload/attachments/.";
 			/*Redwine: correcting the default upload fileplace!*/
 			$sql_upload_fileplace = "select `data` from `" . table_prefix."misc_data` WHERE `name` = 'upload_fileplace'";
 			$sql_fileplace = mysqli_fetch_assoc($handle->query($sql_upload_fileplace));
