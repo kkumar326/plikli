@@ -165,4 +165,54 @@
 	<input type="submit" value="{#PLIKLI_Visual_Submit2_Continue#}" class="btn btn-primary" />
 </form>
 {checkActionsTpl location="tpl_plikli_submit_step2_after_form"}
+
+ {literal}
+<script type="text/javascript">
+$( document ).ready(function() {
+	/*
+	I used [`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/] versus [^\w\s-_] because JavaScript does not work well with UTF-8
+	and does not recognize the word boundaries in utf8. 
+	*/
+	// Redwine: the following code deals with the Title, Tags input fields
+	$('#title').keyup(function() {
+		var yourInput = $(this).val();
+		re = /[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi;
+		var isSplChar = re.test(yourInput);
+		if(isSplChar) {
+			var no_spl_char = yourInput.replace(re, '');
+			$(this).val(no_spl_char);
+		}
+	});
+	$('#title').bind("paste", function() {
+		setTimeout(function() { 
+		  //get the value of the input text
+		  var data= $( '#title' ).val() ;
+		  //replace the special characters to '' 
+		  var dataFull = data.replace(/[`~!@#$%^&*()|+=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+		  //set the new value of the input text without special characters
+		  $( '#title' ).val(dataFull);
+		});
+	});
+	$('#tags').keyup(function() {
+		var yourInput = $(this).val();
+		re = /[`~!@#$%^&*()|+=?;:'".<>\{\}\[\]\\\/]/gi;
+		var isSplChar = re.test(yourInput);
+		if(isSplChar) {
+			var no_spl_char = yourInput.replace(re, '');
+			$(this).val(no_spl_char);
+		}
+	});
+	$('#tags').bind("paste", function() {
+		setTimeout(function() { 
+		  //get the value of the input text
+		  var data= $( '#tags' ).val() ;
+		  //replace the special characters to '' 
+		  var dataFull = data.replace(/[`~!@#$%^&*()|+=?;:'".<>\{\}\[\]\\\/]/gi, '');
+		  //set the new value of the input text without special characters
+		  $( '#tags' ).val(dataFull);
+		});
+	});
+});
+</script>
+{/literal}
 <!--/edit_submission_center.tpl -->
