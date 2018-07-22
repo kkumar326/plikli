@@ -10,30 +10,81 @@
 	include(mnminclude.'search.php');
 	include(mnminclude.'smartyvariables.php');
 
-//Redwine: FOR SEO URL METHOD 1. creating an array to hold all the sanitezed _GET elements. The we assign it to _GET and _REQUEST 
-$sanitezedGET = array();
-foreach ($_GET as $key => $value) {
-	$sanitezedGET[$key] = sanitize($value, 2);
-}
-$_GET = $_REQUEST = $sanitezedGET;
-
-//Redwine: sanitize and filter the search GET and then make the seacrh REQUEST equal to it.
-$_GET['search'] = htmlentities(sanitize($_GET['search'], 2));
-$_GET['search'] = preg_replace('/[^\p{L}\p{N}-_\s\/]/u', ' ', $_GET['search']);
-$_REQUEST['search'] = $_GET['search'];
-
 	/*Redwine: function to validate the provided date*/
 	function validateDate($date, $format = 'Y-m-d') {
 		$d = DateTime::createFromFormat($format, $date);
 		return $d && $d->format($format) == $date;
 	}
 	
+//Redwine: FOR SEO URL METHOD 1. creating an array to hold all the sanitezed _GET elements. The we assign it to _GET and _REQUEST 
+$sanitezedGET = array();
+$isdate_Valid = false;
+$joined = '';
+$purified = '';
+
 	/* Redwine: declaring arrays for each expected form value to check against the submitted values */
-	$expected_slink_values = array('1','2','3');
+$expected_slink_values = array('3','1','2');
 	$expected_status_values = array('all','published','new');
 	$expected_scomments_values = array('1','0');
 	$expected_stags_values = array('1','0');
 	$expected_suser_values = array('1','0');
+$expected_sgroups_values = array('3','1','2');
+$expected_adv_values = array('1','0');
+
+//Redwine: relevant to advance search & $URLMethod 2 
+if (strstr($_REQUEST['search'],'/') && $URLMethod == 2 && strstr($_REQUEST['search'],'/adv/1')) {
+		preg_match_all("/([^\/]+)\/([^\/]+)/", $_REQUEST['search'], $p);
+	//Redwine: $p matches holds the keys in $p[1] and values in $p[2]
+	$search_elements = array_combine($p[1], $p[2]);
+	foreach ($search_elements as $key => $value) {
+		$purified = sanitize($value, 2);
+		if ($key == 'slink') $purified = in_array($purified, $expected_slink_values) ? $purified : 3; 
+		if ($key == 'scategory') $purified = (int)$purified ? $purified : 0; 
+		if ($key == 'sgroup') $purified = in_array($purified, $expected_sgroups_values) ? $purified : 3;
+		if ($key == 'status') $purified = in_array($purified, $expected_status_values) ? $purified : 'all';
+		if ($key == 'scomments') $purified = in_array($purified, $expected_scomments_values) ? $purified : 1;
+		if ($key == 'stags') $purified = in_array($purified, $expected_stags_values) ? $purified : 1;
+		if ($key == 'suser') $purified = in_array($purified, $expected_suser_values) ? $purified : 1;
+		if ($key == 'date') $purified = validateDate($purified) ? $purified : '';
+		if ($key == 'date_to') $purified = validateDate($purified) ? $purified : '';
+		if ($key == 'search') $purified = preg_replace('/[^\p{L}\p{N}-_\s\/]/u', '', $purified); 
+		if ($key == 'adv') $purified = in_array($purified, $expected_adv_values) ? $purified : 1;
+		if ($key == 'advancesearch') $purified = 'Search '; 
+		if ($key == 'date' && $purified != '') {$isdate_Valid = true;}
+		if ($key == 'date_to' && $isdate_Valid == false) {$purified = '';}
+		$search_elements[$key] = $purified;
+	}
+	foreach ($search_elements as $key => $value){
+		$joined .= $key . "/" . $value . "/";
+	}
+	$_GET['search'] = $_REQUEST['search'] = $joined;
+//Redwine: if not advance search 
+}else{
+	foreach ($_GET as $key => $value) {
+		$purified = sanitize($value, 2);
+		if ($key == 'slink') $purified = in_array($purified, $expected_slink_values) ? $purified : 3; 
+		if ($key == 'scategory') $purified = (int)$purified ? $purified : 0; 
+		if ($key == 'sgroup') $purified = in_array($purified, $expected_sgroups_values) ? $purified : 3;
+		if ($key == 'status') $purified = in_array($purified, $expected_status_values) ? $purified : 'new';
+		if ($key == 'scomments') $purified = in_array($purified, $expected_scomments_values) ? $purified : 1;
+		if ($key == 'stags') $purified = in_array($purified, $expected_stags_values) ? $purified : 1;
+		if ($key == 'suser') $purified = in_array($purified, $expected_suser_values) ? $purified : 1;
+		if ($key == 'date') $purified = validateDate($purified) ? $purified : '';
+		if ($key == 'date_to') $purified = validateDate($purified) ? $purified : '';
+		if ($key == 'search') $purified = preg_replace('/[^\p{L}\p{N}-_\s\/]/u', '', $purified); 
+		if ($key == 'adv') $purified = in_array($purified, $expected_adv_values) ? $purified : 1;
+		if ($key == 'advancesearch') $purified = 'Search '; 
+		if ($key == 'date' && $purified != '') {$isdate_Valid = true;}
+		if ($key == 'date_to' && $isdate_Valid == false) {$purified = '';}
+		$sanitezedGET[$key] = $purified;
+	}
+	$_GET = $_REQUEST = $sanitezedGET;
+}
+
+//Redwine: sanitize and filter the search GET and then make the seacrh REQUEST equal to it.
+$_GET['search'] = htmlentities(sanitize($_GET['search'], 2));
+$_GET['search'] = preg_replace('/[^\p{L}\p{N}-_\s\/]/u', ' ', $_GET['search']);
+$_REQUEST['search'] = $_GET['search'];
 	
 
 	
@@ -48,32 +99,6 @@ $_REQUEST['search'] = $_GET['search'];
 	//Redwine: now we have to make GET array equal to REQUEST
 	$_REQUEST = $_GET;
 
-	/*Redwine: the str_replace was not escaped correctly!*/
-	/*********
-	Redwine: I added  && strstr($_REQUEST['search'],'/adv/1') because the regular search $_REQUEST['search'] is always equal to the search word and a forward slash (/) at the end, therefore the first condition strstr($_REQUEST['search'],'/') is true and the second one is also true when in SEO URL Method 2. This creates a problem because the data process in this conditional statement should only apply when the advanced search is used and not the regular search. The condition I added will make sure to determine if the regular or advanced search is used.
-	*********/
-		
-	/*****
-	Redwine: making sure, when $_REQUEST['search'] contains "/" and $URLMethod == 2, that adv/ is always set to 1
-	example: if someone modified the search URL to search/blabla/slink/1/scategory/0/sgroup/3/status/all/stags/1/adv/0/ or search/blabla/slink/1/scategory/0/sgroup/3/status/all/stags/1/adv/<script>alert('123')</script>/
-	it will be reset to adv/1/
-	*****/
-		
-	if (strstr($_REQUEST['search'],'/') && $URLMethod == 2 && !strstr($_REQUEST['search'],'/adv/1')) {
-		preg_match_all("/([^\/]+)\/([^\/]+)/", $_REQUEST['search'], $p);
-		//Redwine: $p matches holds the keys in $p[1] and values in $p[2]
-		$search_elements = array_combine($p[1], $p[2]);
-		foreach ($search_elements as $key => $value) {
-			if ($key == 'adv' && $value != 1) {
-				$search_elements['adv'] = 1;
-			}
-		}
-		foreach ($search_elements as $key => $value){
-			$joined .= $key . "/" . $value . "/";
-		}
-		$_GET['search'] = $_REQUEST['search'] = $joined;
-	}
-		
 	if (strstr($_REQUEST['search'],'/') && $URLMethod == 2 && strstr($_REQUEST['search'],'/adv/1')) {
 		/************************
 		Redwine: in seo url method 2, the search request value is transmitted as a slash delimited string: 
