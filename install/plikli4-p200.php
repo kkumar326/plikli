@@ -64,6 +64,22 @@ a:link, a:hover, a:visited, a:active{color:#000000}
 $arr_script = explode("/", $_SERVER['SCRIPT_NAME']);
 $upgrade_folder = $arr_script[1];
 
+// ********************************
+/**********************************
+Redwine: checking for the MySQL Server version. If it is older than 5.0.3, then `link_url` varchar will be the maximum of 255; otherwise, we set it to 512 to accommodate long urlencoded.
+**********************************/
+$pattern = '/[^0-9-.]/i';
+$replacement = '';
+$mysqlServerVersion = $handle->server_info;
+$mysqlServerVersion = preg_replace($pattern, $replacement, $mysqlServerVersion);
+$mysqlServerVersion = strstr($mysqlServerVersion, '-', true);
+
+if ($mysqlServerVersion < '5.0.3') {
+	$urllength = '255';
+}else{
+	$urllength = '512';
+}
+
 $notok = 'notok.png';
 $ok = 'ok.png';
 $warnings = array();
@@ -485,14 +501,14 @@ echo '</ul></fieldset><br />';
 echo '<fieldset><legend>Changing Columns in Links table.</legend><ul>';
 	$sql = "ALTER TABLE  `" . table_prefix."links`  
 	CHANGE 	`link_status` `link_status`  enum('discard','new','published','abuse','duplicate','page','spam','moderated','draft','scheduled') NOT NULL DEFAULT 'discard',
-	CHANGE  `link_url`  `link_url` VARCHAR( 512 ) NOT NULL DEFAULT '';";
+	CHANGE  `link_url`  `link_url` VARCHAR( $urllength ) NOT NULL DEFAULT '';";
 	$sql_alter_links = $handle->query($sql);
 	if (!$sql_alter_links) {
 		$marks = $notok;
 	}else{
 		$marks = $ok;
 	}
-	echo '<li>ALTERED the ENUM of `link_status` <img src="'.$marks.'" class="iconalign" /></li>';
+	echo '<li>ALTERED the ENUM of `link_status` and `link_url` varchar to '.$urllength.' <img src="'.$marks.'" class="iconalign" /></li>';
 	
 	$sql = "INSERT INTO `".table_prefix."links` (`link_id`, `link_author`, `link_status`, `link_randkey`, `link_votes`, `link_reports`, `link_comments`, `link_karma`, `link_modified`, `link_date`, `link_published_date`, `link_category`, `link_lang`, `link_url`, `link_url_title`, `link_title`, `link_title_url`, `link_content`, `link_summary`, `link_tags`, `link_field1`, `link_field2`, `link_field3`, `link_field4`, `link_field5`, `link_field6`, `link_field7`, `link_field8`, `link_field9`, `link_field10`, `link_field11`, `link_field12`, `link_field13`, `link_field14`, `link_field15`, `link_group_id`, `link_group_status`, `link_out`) VALUES
 	(NULL, 1, 'page', 0, 0, 0, 0, '0.00', '2016-10-06 17:19:46', '2016-10-06 17:19:46', '0000-00-00 00:00:00', 0, 1, '', NULL, 'About', 'about', '<legend><strong>About Us</strong></legend>\r\n<p>Our site allows you to submit an article that will be voted on by other members. The most popular posts will be published to the front page, while the less popular articles are left in an ''New'' page until they acquire the set number of votes to move to the published page. This site is dependent on user contributed content and votes to determine the direction of the site.</p>\r\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'new', 0);";

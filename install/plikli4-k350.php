@@ -64,6 +64,22 @@ a:link, a:hover, a:visited, a:active{color:#000000}
 $arr_script = explode("/", $_SERVER['SCRIPT_NAME']);
 $upgrade_folder = $arr_script[1];
 
+// ********************************
+/**********************************
+Redwine: checking for the MySQL Server version. If it is older than 5.0.3, then `link_url` varchar will be the maximum of 255; otherwise, we set it to 512 to accommodate long urlencoded.
+**********************************/
+$pattern = '/[^0-9-.]/i';
+$replacement = '';
+$mysqlServerVersion = $handle->server_info;
+$mysqlServerVersion = preg_replace($pattern, $replacement, $mysqlServerVersion);
+$mysqlServerVersion = strstr($mysqlServerVersion, '-', true);
+
+if ($mysqlServerVersion < '5.0.3') {
+	$urllength = '255';
+}else{
+	$urllength = '512';
+}
+
 $notok = 'notok.png';
 $ok = 'ok.png';
 $warnings = array();
@@ -550,10 +566,10 @@ echo '</ul></fieldset><br />';
 echo '<fieldset><legend>Changing Columns in Links table.</legend><ul>';
 	$sql = "ALTER TABLE  `" . table_prefix."links`  
 	CHANGE 	`link_status` `link_status` enum('discard','new','published','abuse','duplicate','page','spam','moderated','draft','scheduled') NOT NULL DEFAULT 'discard',
-	CHANGE  `link_url`  `link_url` VARCHAR( 512 ) NOT NULL DEFAULT '';";
+	CHANGE  `link_url`  `link_url` VARCHAR( $urllength ) NOT NULL DEFAULT '';";
 	$sql_alter_links - $handle->query($sql);
 	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
-	echo '<li>Updated links Table link_status enum and link_url to VARCHAR 512</li>';
+	echo '<li>Updated links Table link_status enum and link_url to VARCHAR '.$urllength.'</li>';
 	
 echo '</ul></fieldset><br />';
 
