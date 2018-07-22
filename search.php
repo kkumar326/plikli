@@ -10,6 +10,13 @@
 	include(mnminclude.'search.php');
 	include(mnminclude.'smartyvariables.php');
 
+//Redwine: FOR SEO URL METHOD 1. creating an array to hold all the sanitezed _GET elements. The we assign it to _GET and _REQUEST 
+$sanitezedGET = array();
+foreach ($_GET as $key => $value) {
+	$sanitezedGET[$key] = sanitize($value, 2);
+}
+$_GET = $_REQUEST = $sanitezedGET;
+
 //Redwine: sanitize and filter the search GET and then make the seacrh REQUEST equal to it.
 $_GET['search'] = htmlentities(sanitize($_GET['search'], 2));
 $_GET['search'] = preg_replace('/[^\p{L}\p{N}-_\s\/]/u', ' ', $_GET['search']);
