@@ -28,7 +28,7 @@
 								{assign var=searchboxtext value=''}
 							{/if}
 							<div class="col-md-8">
-								<input type="text" class="form-control" id="keyword" name="keyword" value="{$searchboxtext}" placeholder="{#PLIKLI_Visual_Search_SearchDefaultText#}" onfocus="if(this.value == '{$searchboxtext}') {ldelim}this.value = '';{rdelim}" onblur="if (this.value == '') {ldelim}this.value = '{$searchboxtext}';{rdelim}">
+								<input type="text" class="form-control" id="keyword" name="keyword" value="{$searchboxtext}" placeholder="{#PLIKLI_Visual_Search_SearchDefaultText#}" onfocus="if(this.value == 'encodeURIComponent({$searchboxtext})') {ldelim}this.value = '';{rdelim}" onblur="if (this.value == '') {ldelim}this.value = 'encodeURIComponent({$searchboxtext})'{rdelim}">
 							</div>
 							<div class="col-md-4">
 								<button class="btn btn-primary" type="submit">{#PLIKLI_Visual_Group_Search_Groups#}</button>

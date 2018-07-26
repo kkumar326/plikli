@@ -9,6 +9,12 @@ include(mnminclude.'group.php');
 include(mnminclude.'smartyvariables.php');
 include mnminclude.'extra_fields_smarty.php';
 
+$sanitezedREQUEST = array();
+foreach ($_REQUEST as $key => $value) {
+	$sanitezedREQUEST[$key] = preg_replace('/[^\p{L}\p{N}-_\s\/]/u', '', $value);
+}
+$_GET = $_REQUEST = $sanitezedREQUEST;
+
 $from_where = "1";
 if (!checklevel('admin'))
     $from_where .= " AND group_status = 'Enable' ";
@@ -22,6 +28,7 @@ elseif (isset($_REQUEST["approve"]) && is_numeric($_REQUEST["approve"]))
 		{
 			$from_where .= " AND (group_name LIKE '%$keyword%' OR group_description LIKE '%$keyword%')";
 			$main_smarty->assign('search', $keyword);
+			$main_smarty->assign('get', $_GET);
 		}
 	}
 $order_by = "";

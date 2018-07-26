@@ -7,6 +7,19 @@ include('config.php');
 include(mnminclude.'html1.php');
 include(mnminclude.'link.php');
 include(mnminclude.'smartyvariables.php');
+
+$sanitezedPOST = array();
+foreach ($_POST as $key => $value) {
+	$sanitezedPOST[$key] = preg_replace('/[^\p{L}\p{N}-_\s\/]/u', '', $value);
+}
+$_REQUEST = $_POST = $sanitezedPOST;
+
+$sanitezedGET = array();
+foreach ($_GET as $key => $value) {
+	$sanitezedGET[$key] = preg_replace('/[^\p{L}\p{N}-_\s\/]/u', '', $value);
+}
+$_GET = $sanitezedGET;
+
 /*Redwine: preventing the register page from loading if the user is already signed in! */
 global $current_user;
 if ($current_user->authenticated == 1) {

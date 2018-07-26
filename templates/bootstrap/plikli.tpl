@@ -57,6 +57,7 @@
 			{else}
 				<div class="col-md-9">
 			{/if}
+			{checkActionsTpl location="tpl_plikli_main_col_start"}
 					<!-- START BREADCRUMB -->
 						{include file=$the_template"/breadcrumb.tpl"}
 					<!-- END BREADCRUMB -->

@@ -129,7 +129,7 @@ function cat_safe_name($cat_id) {
 function sanitize($var, $santype = 1, $allowable_tags = ''){
 
 	if ($santype == 0) {
-		return htmlentities($var);
+		return htmlspecialchars($var,ENT_QUOTES,'UTF-8');
 	}
 	elseif ($santype == 1) {
 		return strip_tags($var, $allowable_tags = '');

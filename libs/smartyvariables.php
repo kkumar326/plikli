@@ -35,7 +35,7 @@ $main_smarty->config_load(lang_loc . "/languages/lang_" . plikli_language . ".co
 if(isset($_GET['id']) && is_numeric($_GET['id'])){$main_smarty->assign('request_id', $_GET['id']);}
 if(isset($_GET['category']) && sanitize($_GET['category'], 3) != ''){$main_smarty->assign('request_category', sanitize($_GET['category'], 3));}
 if(isset($_GET['search']) && sanitize($_GET['search'], 3) != ''){$main_smarty->assign('request_search', sanitize($_GET['search'], 3));}
-if(isset($_POST['username']) && sanitize($_POST['username'], 3) != ''){$main_smarty->assign('login_username', sanitize($_POST['username'], 3));}
+if(isset($_POST['username']) && sanitize($_POST['username'], 0) != ''){$main_smarty->assign('login_username', sanitize($_POST['username'], 0));}
 
 $main_smarty->assign('votes_per_ip', votes_per_ip);
 $main_smarty->assign('dblang', $dblang);

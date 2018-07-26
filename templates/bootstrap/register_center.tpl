@@ -56,7 +56,8 @@ function checkBreachedPassword() {
 						{ /foreach }
 					{/if}
 					<input autofocus="autofocus" type="text" class="form-control reg_username" id="reg_username" name="reg_username" value="{if isset($reg_username)}{$reg_username}{/if}" size="25" tabindex="10" maxlength="32"/>
-					<br/><span class="reg_usernamecheckitvalue"></span>
+					<p class="help-inline">A username can only contain alphanumeric characters and underscores.</p>
+					<span class="reg_usernamecheckitvalue"></span>
 				</div>
 			</div>
 			<div class="control-group">
@@ -86,8 +87,9 @@ function checkBreachedPassword() {
 							</div>
 						{ /foreach }
 					{/if}
-					<input type="password" class="form-control" id="reg_password" name="reg_password" value="{if isset($reg_password)}{$reg_password}{/if}" size="25" tabindex="14"/>
+					<input type="password" class="form-control reg_password" id="reg_password" name="reg_password" value="{if isset($reg_password)}{$reg_password}{/if}" size="25" tabindex="14"/>
 					<span class="reg_userpasscheckitvalue"></span>
+					<span class="reg_userpasscheckshort"></span>
 					<p class="help-inline">{#PLIKLI_Visual_Register_FiveChar#}</p>
 				</div>
 			</div>

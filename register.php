@@ -38,6 +38,7 @@ if($plikli_regfrom != ''){
 	switch($plikli_regfrom){
 		case 'full':
 			$username = sanitize($_POST["reg_username"], 3);
+			$username = preg_replace('/[^\p{L}\p{N}_\s\/]/u', '', $username);
 			$email = sanitize($_POST["reg_email"], 3);
 			$password = sanitize($_POST["reg_password"], 3);
 			$password2 = sanitize($_POST["reg_password2"], 3);
@@ -46,6 +47,7 @@ if($plikli_regfrom != ''){
 
 		case 'sidebar':
 			$username = sanitize($_POST["username"], 3);
+			$username = preg_replace('/[^\p{L}\p{N}_\s\/]/u', '', $username);
 			$email = sanitize($_POST["email"], 3);
 			$password = sanitize($_POST["password"], 3);
 			$password2 = sanitize($_POST["password2"], 3);	
@@ -124,9 +126,11 @@ function register_check_errors($username, $email, $password, $password2){
 		$form_email_error[] = $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_BadEmail');
 		$error = true;
 	}
+	if(check_email(trim($email))) {
 	if(email_exists(trim($email)) ) { // if email already exists
 		$form_email_error[] = $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_EmailExists');
 		$error = true;
+	}
 	}
 	if(strlen($password) < 5 ) { // if password is less than 5 characters
 		$form_password_error[] = $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_FiveCharPass');

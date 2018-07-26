@@ -9,6 +9,8 @@ include_once(mnminclude.'smartyvariables.php');
 
 $type=sanitize($_REQUEST['type'], 2);
 $name=js_urldecode($_POST["name"]);
+$email=js_urldecode($_POST["email"]);
+$password=$_POST["password"];
 
 switch ($type) {
 	case 'username':
@@ -39,23 +41,25 @@ switch ($type) {
 			echo "OK";
 		break;
 	case 'email':
-		if (!check_email($name)) { // if email contains invald characters
+		if (!check_email($email)) { // if email contains invald characters
 			echo $main_smarty->get_config_vars("PLIKLI_Visual_CheckField_EmailInvalid");
 			return;
 		}
-		if(email_exists($name)) { // if email already exists
+		if (check_email($email)) {
+			if(email_exists($email)) { // if email already exists
 			echo $main_smarty->get_config_vars("PLIKLI_Visual_CheckField_EmailExists");
 			return;
 		}
-		$vars = array('email' => $name);
+			$vars = array('email' => $email);
 		check_actions('register_check_field', $vars);
 		if (isset($vars['error']))
 			echo $vars['error'];
 		else
 			echo "OK";
 		break;
+		}
 	case 'password':
-		if(strlen($name) < 5 ) { // if password is less than 5 characters
+		if(strlen($password) < 5 ) { // if password is less than 5 characters
 		 echo $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_FiveCharPass');
 		 return;
 		}else{
