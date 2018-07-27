@@ -2,6 +2,8 @@
 
 <legend>{#PLIKLI_Admin_Snippet#}</legend>
 <p>{#PLIKLI_Admin_Snippet_Instructions_1#}</p>
+<legend>{#PLIKLI_Admin_Snippet_Instructions#}</legend>
+{#PLIKLI_Admin_Snippet_Instructions_Example#}
 <br />
 
 {if $snippet_error}
