@@ -28,16 +28,7 @@ $_REQUEST = $_POST = $sanitezedPOST;
 
 $sanitezedGET = array();
 foreach ($_GET as $key => $value) {
-	if ($key == 'returrn') {
-		if (strstr($value, my_plikli_base)) {
 			$sanitezedGET[$key] = filter_var($value, FILTER_SANITIZE_STRING);
-		}else{
-			$sanitezedGET[$key] = '';
-		}
-	}else{
-		$sanitezedGET[$key] = filter_var($value, FILTER_SANITIZE_STRING);
-	}
-	
 }
 $_GET = $sanitezedGET;
 
