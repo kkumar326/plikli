@@ -10,13 +10,34 @@ include(mnminclude.'smartyvariables.php');
 
 $sanitezedPOST = array();
 foreach ($_POST as $key => $value) {
-	$sanitezedPOST[$key] = preg_replace('/[^\p{L}\p{N}-_\s\/]/u', '', $value);
+	if ($key == 'username') {
+		if (filter_var(filter_var($value, FILTER_SANITIZE_EMAIL), FILTER_VALIDATE_EMAIL)) {
+			$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_EMAIL);
+		}else{
+			$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_STRING); 
+		}
+	}elseif ($key == 'processlogin') {
+		if (filter_var(filter_var($value, FILTER_SANITIZE_NUMBER_INT), FILTER_VALIDATE_INT)) {
+			$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+		}
+	}else{
+		$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_STRING);
+	}
 }
 $_REQUEST = $_POST = $sanitezedPOST;
 
 $sanitezedGET = array();
 foreach ($_GET as $key => $value) {
-	$sanitezedGET[$key] = preg_replace('/[^\p{L}\p{N}-_\s\/]/u', '', $value);
+	if ($key == 'returrn') {
+		if (strstr($value, my_plikli_base)) {
+			$sanitezedGET[$key] = filter_var($value, FILTER_SANITIZE_STRING);
+		}else{
+			$sanitezedGET[$key] = '';
+		}
+	}else{
+		$sanitezedGET[$key] = filter_var($value, FILTER_SANITIZE_STRING);
+	}
+	
 }
 $_GET = $sanitezedGET;
 
@@ -58,7 +79,6 @@ if(isset($_GET["op"])){
 if( (isset($_POST["processlogin"]) && is_numeric($_POST["processlogin"])) || (isset($_GET["processlogin"]) && is_numeric($_GET["processlogin"])) ){
 	if($_POST["processlogin"] == 1) { // users logs in with username and password
 		$username = sanitize(trim($_POST['username']), 3);
-		$username = preg_replace('/[^\p{L}\p{N}-_\s]/u', '', $username);
 		$password = sanitize(trim($_POST['password']), 3);
 		if(isset($_POST['persistent'])){$persistent = sanitize($_POST['persistent'], 3);}else{$persistent = '';}
 
