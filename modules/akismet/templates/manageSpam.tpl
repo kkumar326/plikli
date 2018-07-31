@@ -20,7 +20,7 @@
 					<tr>
 						<td><strong>{$link.link_title|truncate:50}</strong></td>
 						<td><a href="{$my_plikli_base}/admin/admin_users.php?mode=view&user={$link.user_login}">{$link.user_login|truncate:20}</a></td>
-						<td><a href="{$link.link_url}" target="_blank">{$link.link_url|truncate:70}</a></td>
+						<td><a href="{$link.link_url}" target="_blank" rel="noopener noreferrer">{$link.link_url|truncate:70}</a></td>
 						<td style="text-align:center;">
 							{if $link.link_status eq "moderated"}
 								<img src="{$my_plikli_base}/modules/akismet/images/page_white_error.png" alt="{#PLIKLI_Akismet_status_moderated#}" title="{#PLIKLI_Akismet_status_moderated#}" />

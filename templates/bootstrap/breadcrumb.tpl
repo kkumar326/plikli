@@ -32,7 +32,7 @@
 			<li>{#PLIKLI_Visual_User_Search_Users#}</li>
 		{else}
 			<li>{if $user_view neq 'profile'}<a href="{$user_url_personal_data2}">{/if}{$username}{if $user_view neq 'profile'}</a></li> {/if}
-			{if $user_view neq 'profile'}<li class="active">{$page_header} <a href="{$user_rss}{if !empty($view_href)}{$view_href}{/if}" target="_blank"><i class="fa fa-rss-square opacity_reset" style="color:#EEA639;"></i></a></li>{/if}
+			{if $user_view neq 'profile'}<li class="active">{$page_header} <a href="{$user_rss}{if !empty($view_href)}{$view_href}{/if}" target="_blank" rel="noopener noreferrer"><i class="fa fa-rss-square opacity_reset" style="color:#EEA639;"></i></a></li>{/if}
 		{/if}
 	{/if}
 	{if $pagename eq "published" && $get.category eq '' || $pagename eq "index"}<li class="active">{#PLIKLI_Visual_Published_News#}{/if}

@@ -1,6 +1,6 @@
 <!-- page_edit.tpl -->
 <legend>{#PLIKLI_Visual_AdminPanel_Page_Edit#}</legend>
-<a class="btn btn-default" href="{$my_base_url}{$my_plikli_base}/page.php?page={$page_url}" target="_blank">Visit {$page_title} Page</a>
+<a class="btn btn-default" href="{$my_base_url}{$my_plikli_base}/page.php?page={$page_url}" target="_blank" rel="noopener noreferrer">Visit {$page_title} Page</a>
 <br /><br />
 <form action="" class="form-horizontal" method="POST" id="thisform">
 	<div class="control-group">

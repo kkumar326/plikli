@@ -86,9 +86,9 @@ function embed_videos($text, $type) {
 			}else{
 				// matching all other urls that are not within html tags
 				if ($links_settings['nofollow'] == "1") {
-						$text = preg_replace("#(?<!=\")($match)(?![^<>]*>)#ui", " <a href=\"$match\" target=\"_blank\" rel=\"nofollow\">$match</a> ",$text);
+						$text = preg_replace("#(?<!=\")($match)(?![^<>]*>)#ui", " <a href=\"$match\" target=\"_blank\" rel=\"nofollow noopener noreferrer\">$match</a> ",$text);
 				}else{
-					$text = preg_replace('$(\s|^)(https?://[\p{L}a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$ui', " <a href=\"$match\" target=\"_blank\">$match</a> ",$text);
+					$text = preg_replace('$(\s|^)(https?://[\p{L}a-zA-Z0-9_.%#/?=&-]+)(?![^<>]*>)$ui', " <a href=\"$match\" target=\"_blank\" rel=\"noopener noreferrer\">$match</a> ",$text);
 				}
 			}
 		}

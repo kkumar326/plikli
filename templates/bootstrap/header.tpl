@@ -35,7 +35,7 @@
 							{/if}
 							<li><a href="{$URL_topusers}">{#PLIKLI_Visual_Top_Users#}</a></li>
 							{if !empty($URL_rss_page)}
-								<li><a href="{$URL_rss_page}" target="_blank">RSS</a></li>
+								<li><a href="{$URL_rss_page}" target="_blank" rel="noopener noreferrer">RSS</a></li>
 							{/if}
 							<li><a href="{$my_base_url}{$my_plikli_base}/rssfeeds.php">{#PLIKLI_Visual_RSS_Feeds#}</a></li>
 							{checkActionsTpl location="tpl_plikli_header_more_end"}

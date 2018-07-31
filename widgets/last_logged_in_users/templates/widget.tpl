@@ -205,7 +205,7 @@ td {word-wrap:break-word;}
 							}else{
 								echo "#F09";
 							}
-							echo "\"><a href=\"{$my_base_url}{$my_plikli_base}/user/{$row['user_login']}\" target=\"_blank\">{$row['user_login']}</a></span></td>";
+							echo "\"><a href=\"{$my_base_url}{$my_plikli_base}/user/{$row['user_login']}\" target=\"_blank\" rel=\"noopener noreferrer\">{$row['user_login']}</a></span></td>";
 							echo "<td><span class=\"ttip\" id=\"ttip{$record}\"> ".rel_time($row['user_lastlogin'])."</span>";
 							echo "<table style=\"table-layout: fixed; width: 100%\"><tr><td><strong>Last in:</strong></td><td>{$row['user_lastlogin']}</td></tr><tr><td><strong>Email:</strong></td><td>{$row['user_email']}</td></tr><tr><td><strong>Registered:</strong></td><td>{$row['user_date']}</td></tr><tr><td><strong>IP:</strong></td><td>{$row['user_ip']}</td></tr><tr><td><strong>Recent IP:</strong></td><td>{$row['user_lastip']}</td></tr></table></td>";
 						echo "</tr>";

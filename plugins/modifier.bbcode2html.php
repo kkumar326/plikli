@@ -30,8 +30,8 @@ function tpl_modifier_bbcode2html($data)
 	$replace = array(
 		"<a href=\"mailto:\\1\">\\1</a>",
 		"<a href=\"mailto:\\1\">\\2</a>",
-		"<a href=\"\\1\" target=\"_blank\">\\1</a>",
-		"<a href=\"\\1\" target=\"_blank\">\\2</a>",
+		"<a href=\"\\1\" target=\"_blank\" rel=\"noopener noreferrer\">\\1</a>",
+		"<a href=\"\\1\" target=\"_blank\" rel=\"noopener noreferrer\">\\2</a>",
 		"<img src=\"\\1\" border=\"0\">",
 		"<p><blockquote><font size=\"1\">code:</font><hr noshade size=\"1\"><pre>\\1</pre><br><hr noshade size=\"1\"></blockquote></p>",
 		"<pre>\\1<br></pre>",

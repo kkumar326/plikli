@@ -135,7 +135,7 @@ if($status=="uninstalled") {
 				
 					if(isset($module_info['homepage_url'])) {
 					$homepage_url = $module_info['homepage_url'];
-					$module_info_data[$i]['homepage_url']= " <a class='btn btn-default btn-xs' href='" . $homepage_url . "' target='_blank'>Homepage</a>";
+					$module_info_data[$i]['homepage_url']= " <a class='btn btn-default btn-xs' href='" . $homepage_url . "' target='_blank' rel='noopener noreferrer'>Homepage</a>";
 				} else {
 					$module_info_data[$i]['homepage_url']="&nbsp;";	
 				}

@@ -51,7 +51,7 @@
 					{if strpos($image.file_name,'http')===0}
 						<a href="{$image.file_name}"><img src='{$image.file_name}' height="{$image_height}" width="{$image_width}" class="upload_ajax_image_preview"  style='max-width:520px;margin-top:5px'/></a>
 					{elseif $image.file_size=='orig'}
-						<a href="{$my_plikli_base}{$upload_directory}/{$image.file_name}" target="_blank"><img  src='{$my_plikli_base}{$upload_directory}/{$image.file_name}' height="{$image_height}" width="{$image_width}" class="upload_ajax_image_preview"  style='max-width:520px;margin-top:5px'/></a>
+						<a href="{$my_plikli_base}{$upload_directory}/{$image.file_name}" target="_blank" rel="noopener noreferrer"><img  src='{$my_plikli_base}{$upload_directory}/{$image.file_name}' height="{$image_height}" width="{$image_width}" class="upload_ajax_image_preview"  style='max-width:520px;margin-top:5px'/></a>
 					{else}
 						<img src='{$my_plikli_base}{$upload_thdirectory}/{$image.file_name}' height="{$image_height}" width="{$image_width}" class="upload_ajax_image_preview"  style='max-width:520px;margin-top:5px'/>
 					{/if}

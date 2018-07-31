@@ -10,7 +10,7 @@
 <hr />
 <p><strong>{#PLIKLI_Visual_Change_Link_Title#}:</strong> {$link_title} </p>
 <br />
-<p><strong>{#PLIKLI_Visual_Change_Link_URL#}:</strong> <a href="{$link_url}" target="_blank">{$link_url}</a> &ndash; <a href = "{$my_base_url}{$my_plikli_base}/admin/domain_management.php?id={$link_id}&add={$banned_domain_url}">{#PLIKLI_Visual_Ban_This_URL#}</a></p>
+<p><strong>{#PLIKLI_Visual_Change_Link_URL#}:</strong> <a href="{$link_url}" target="_blank" rel="noopener noreferrer">{$link_url}</a> &ndash; <a href = "{$my_base_url}{$my_plikli_base}/admin/domain_management.php?id={$link_id}&add={$banned_domain_url}">{#PLIKLI_Visual_Ban_This_URL#}</a></p>
 <br />
 <p><strong>{#PLIKLI_Visual_Change_Link_Content#}:</strong> {$link_content}</p>
 <!--/submission_status.tpl -->

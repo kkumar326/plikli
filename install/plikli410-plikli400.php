@@ -98,7 +98,7 @@ echo '</ul></fieldset><br />';
 echo '<fieldset><legend>MODIFICATIONS TO THE CONFIG Table.</legend><ul>';
 	//Inserting new rows 
 	$sql = "INSERT INTO `" . table_prefix."config` (`var_id`, `var_page`, `var_name`, `var_value`, `var_defaultvalue`, `var_optiontext`, `var_title`, `var_desc`, `var_method`, `var_enclosein`)VALUES
-			(NULL, 'Misc', 'validate_password', 'false', 'false', 'true / false', 'Validate user password', 'Validate user password, when registering/password reset, to check if it is safe and not pwned?<br />If you set to true, then a check is done using HIBP API. If the provided password has been pwned, the registration is not submitted until they provide a different password!.<br /><a href=\"https://haveibeenpwned.com/\" target=\"_blank\">Have I Been Pwned?</a>', 'define', '');";
+			(NULL, 'Misc', 'validate_password', 'true', 'true', 'true / false', 'Validate user password', 'Validate user password, when registering/password reset, to check if it is safe and not pwned?<br />If you set to true, then a check is done using HIBP API. If the provided password has been pwned, the registration is not submitted until they provide a different password!.<br /><a href=\"https://haveibeenpwned.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Have I Been Pwned?</a>', 'define', '');";
 	$sql_new_config = $handle->query($sql);
 	if (!$sql_new_config) {
 		$marks = $notok;
@@ -107,7 +107,7 @@ echo '<fieldset><legend>MODIFICATIONS TO THE CONFIG Table.</legend><ul>';
 	}
 	$warnings[] = "Added new settings to the CONFIG Table:<ol><strong>Under Miscellenaeous<li>validate_password with HIBP API</li></ol>";
 	printf("Affected rows (INSERT): %d\n", $handle->affected_rows);
-	echo '<li>INSERTED many new settings in the CONFIG Table (read the notes at the end of the upgrade process) <img src="'.$marks.'" class="iconalign" /></li>';	
+	echo '<li>INSERTED new settings in the CONFIG Table (read the notes at the end of the upgrade process) <img src="'.$marks.'" class="iconalign" /></li>';	
 	
 	// Update dblang description
 	$sql = "UPDATE `" . table_prefix."config` set `var_desc` = 'Database language.<br /><strong style=\"color:#ff0000;\">DO NOT CHANGE THIS VALUE \"en\" IT WILL MESS UP THE URLS OF THE CATEGORIES!</STRONG>' WHERE `var_name` =  '\$dblang';";

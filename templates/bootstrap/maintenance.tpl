@@ -27,7 +27,7 @@
 				<div id="footer">
 					<span class="subtext"> 
 						Copyright &copy; {php} echo date('Y'); {/php} {#PLIKLI_Visual_Name#} 
-						| <a href="http://plikli.com/" target="_blank">Plikli CMS</a> 
+						| <a href="https://www.plikli.com/" target="_blank" rel="noopener noreferrer">Plikli CMS</a> 
 					</span>
 				</div>
 			</footer>

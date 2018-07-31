@@ -92,20 +92,20 @@
     {else}
 	{if $image.link_name}
 		{if strpos($image.link_name,'http')===0}
-			<a href='{$image.link_name}' {if $open_in_new_window eq true} target="_blank"{/if} {if $story_status neq "published"}rel="nofollow"{/if}>
+			<a href='{$image.link_name}' {if $open_in_new_window eq true} target="_blank" rel="noopener noreferrer"{/if} {if $story_status neq "published"}rel="nofollow noopener noreferrer"{/if}>
 		{else}
-			<a href='{$my_plikli_base}{$image.link_name}' {if $open_in_new_window eq true} target="_blank"{/if}>
+			<a href='{$my_plikli_base}{$image.link_name}' {if $open_in_new_window eq true} target="_blank" rel="noopener noreferrer"{/if}>
 		{/if}
 	{else}
 			{if $use_title_as_link eq true}
 				{if $url_short neq "http://" && $url_short neq "://"}
-					<a href="{$url}" {if $open_in_new_window eq true} target="_blank"{/if} {if $story_status neq "published"}rel="nofollow"{/if}>
+					<a href="{$url}" {if $open_in_new_window eq true} target="_blank" rel="noopener noreferrer"{/if} {if $story_status neq "published"}rel="nofollow noopener noreferrer"{/if}>
 				{else}
-					<a href="{$story_url}" {if $open_in_new_window eq true} target="_blank"{/if}>
+					<a href="{$story_url}" {if $open_in_new_window eq true} target="_blank" rel="noopener noreferrer"{/if}>
 				{/if}
 			 {else}
 				{if $pagename eq "story" && $url_short neq "http://" && $url_short neq "://"}
-					<a href="{$url}" {if $open_in_new_window eq true} target="_blank"{/if} {if $story_status neq "published"}rel="nofollow"{/if}>
+					<a href="{$url}" {if $open_in_new_window eq true} target="_blank" rel="noopener noreferrer"{/if} {if $story_status neq "published"}rel="nofollow noopener noreferrer"{/if}>
 				{else} 
 				  <a href="{$story_url}">
 				{/if}

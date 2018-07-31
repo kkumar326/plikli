@@ -79,7 +79,7 @@
 							if ($versionupdate > 0){
 								if(isset($widget_info['homepage_url'])){
 									$homepage_url = $widget_info['homepage_url'];
-									echo " <a class='btn btn-default' href='" . $homepage_url . "' target='_blank'>Upgrade $versionupdate</a>";
+									echo " <a class='btn btn-default' href='" . $homepage_url . "' target='_blank' rel='noopener noreferrer'>Upgrade $versionupdate</a>";
 								}
 							}
 						*/

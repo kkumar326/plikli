@@ -8,7 +8,7 @@ Forum : http://forum.articles-host.com
 Download plikli api website at http://api.jum.name
 Release date : 09/27/08
 
-About: http://plikli.com/blog/1596/plikli-cms-api/
+About: http://pligg.com/blog/1596/pligg-cms-api/
 
 ############ Installation  ###############
 1. Config Plikli API by edit api.php

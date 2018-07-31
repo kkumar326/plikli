@@ -68,7 +68,7 @@ if(!empty($page_id)) {
 	foreach($page_id as $page_results){
 	$page_title .= '<tr>
 						<td class="page_td_title">
-							<a href="'.getmyurl("page", $page_results->link_title_url).'" title="'.$page_results->link_title.'" target="_blank">'.$page_results->link_title.'</a>
+							<a href="'.getmyurl("page", $page_results->link_title_url).'" title="'.$page_results->link_title.'" target="_blank" rel="noopener noreferrer">'.$page_results->link_title.'</a>
 						</td>
 						<td class="page_td_edit">
 							<a class="btn btn-default" href="'.$my_base_url.$my_plikli_base.'/admin/edit_page.php?link_id='.$page_results->link_id.'"><i class="fa fa-edit" title="'. $main_smarty->get_config_vars("PLIKLI_Visual_AdminPanel_Page_Edit") .'"></i></a>

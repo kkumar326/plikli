@@ -200,7 +200,7 @@
 							{if $url_short neq "http://" && $url_short neq "://"}
 								<i class="fa fa-globe"></i>
 								{* Redwine: temporary solution to eliminate the warnings "Undefined index: story_status" *}
-								<a href="{$url}" {if $open_in_new_window eq true} target="_blank"{/if}  {if !empty($story_status) && $story_status neq "published"}rel="nofollow"{/if}>{$url_short}</a>
+								<a href="{$url}" {if $open_in_new_window eq true} target="_blank" rel="noopener noreferrer"{/if}  {if !empty($story_status) && $story_status neq "published"}rel="nofollow noopener noreferrer"{/if}>{$url_short}</a>
 							{/if}
 						</span>
 					</div><!-- /.title -->

@@ -14,9 +14,9 @@
 			| <a href="{$URL_tagcloud}">{#PLIKLI_Visual_Tags#}</a>
 		{/if}
 		| <a href="{$URL_topusers}">{#PLIKLI_Visual_Top_Users#}</a>
-		| Made with <a href="https://www.plikli.com/" target="_blank">Plikli CMS</a> 
+		| Made with <a href="https://www.plikli.com/" target="_blank" rel="noopener noreferrer">Plikli CMS</a> 
 		{if !empty($URL_rss_page)}
-			| <a href="{$URL_rss_page}" target="_blank">{$pagename|capitalize} RSS Feed</a>
+			| <a href="{$URL_rss_page}" target="_blank" rel="noopener noreferrer">{$pagename|capitalize} RSS Feed</a>
 		{/if}
 		| <a href="{$my_base_url}{$my_plikli_base}/rssfeeds.php">{#PLIKLI_Visual_RSS_Feeds#}</a> 
 	</span>

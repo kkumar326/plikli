@@ -104,7 +104,7 @@ foreach($users as $dbuser) {
 	If ($user->url != '') {
 		$sContributorLines = $sContributorLines . ' (<a href="';
 		If (substr($user->url, 0, 4) != 'http') $sContributorLines = $sContributorLines . 'http://';
-		$sContributorLines = $sContributorLines . $user->url . '" target="_blank">website</a>)';
+		$sContributorLines = $sContributorLines . $user->url . '" target="_blank" rel="noopener noreferrer">website</a>)';
 	}
 	$sContributorLines = $sContributorLines . "</li>\n";
 }

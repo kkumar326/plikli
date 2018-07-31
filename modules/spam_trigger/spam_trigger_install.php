@@ -3,7 +3,7 @@
 	$module_info['desc'] = 'This module will check all submitted comments and stories for common spam words';
 	$module_info['version'] = 3.0;
 	$module_info['update_url'] = '';
-	$module_info['homepage_url'] = 'http://www.plikli.com/mods/spam_trigger.zip';
+	$module_info['homepage_url'] = 'https://www.plikli.com/mods/spam_trigger.zip';
 	$module_info['settings_url'] = '../module.php?module=spam_trigger';
 
 

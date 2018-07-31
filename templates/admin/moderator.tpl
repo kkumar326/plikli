@@ -111,7 +111,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="http://plikli.com/"><img src="{$my_base_url}{$my_plikli_base}/templates/admin/img/plikli.png" /></a>
+				<a class="navbar-brand" href="https://www.plikli.com/"><img src="{$my_base_url}{$my_plikli_base}/templates/admin/img/plikli.png" /></a>
 			</div>
 			<nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
 				<ul class="nav navbar-nav">
@@ -181,7 +181,7 @@
 		</div><!-- /row -->
 		<hr />
 		<footer>
-			<p>Powered by <a href="http://plikli.com/">Plikli CMS</a></p>
+			<p>Powered by <a href="https://www.plikli.com/">Plikli CMS</a></p>
 			{checkActionsTpl location="tpl_plikli_admin_footer_end"}
 		</footer>
 	</div><!-- /container -->

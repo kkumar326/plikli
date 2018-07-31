@@ -201,7 +201,7 @@ function validate_all_user_action(){
 						{else}
 							<a data-toggle="modal" href="{$my_base_url}{$my_plikli_base}/admin/admin_user_validate.php?id={$userlist[nr].user_id}" title="{#PLIKLI_Visual_AdminPanel_Unconfirmed_Email#}"><i class="fa fa-warning unconfirmed-email" rel="tooltip" data-placement="left" data-toggle="tooltip" data-original-title="{#PLIKLI_Visual_AdminPanel_Unconfirmed_Email#}"></i></a>
 						{/if}
-						<a href="mailto:{$userlist[nr].user_email}" target="_blank">{$userlist[nr].user_email|truncate:25:"...":true}</a>
+						<a href="mailto:{$userlist[nr].user_email}" target="_blank" rel="noopener noreferrer">{$userlist[nr].user_email|truncate:25:"...":true}</a>
 {* Redwine: Roles and permissions and Groups fixes *}
 						{/if}
 					</td>

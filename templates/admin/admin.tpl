@@ -144,7 +144,7 @@
 								</div>
 								<div class="accordion-body " id="CollapseVersion">
 									<ul class="accordion-inner">
-										<li>{if $update_plikli neq ''}<a href="{$update_plikli_url}" target="_blank">Plikli Version {$update_plikli} is available</a>{else}You have the latest version {$version_number}!{/if}</li>
+										<li>{if $update_plikli neq ''}<a href="{$update_plikli_url}" target="_blank" rel="noopener noreferrer">Plikli Version {$update_plikli} is available</a>{else}You have the latest version {$version_number}!{/if}</li>
 									</ul>
 								</div>
 							</div>

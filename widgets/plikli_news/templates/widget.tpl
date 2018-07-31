@@ -52,7 +52,7 @@ function feedMe($feed,$items) {
 			$title = $rss->channel->item[$i]->title;
 			$desc = $rss->channel->item[$i]->description;
 			if ($title != "" && $desc != "") {
-				echo '<h4 class="plikli_news_title"><a href="'.$url.'" target="_blank">'.$title.'</a></h4><p class="plikli_news_paragraph">'.$desc.'</p>';
+				echo '<h4 class="plikli_news_title"><a href="'.$url.'" target="_blank" rel="noopener noreferrer">'.$title.'</a></h4><p class="plikli_news_paragraph">'.$desc.'</p>';
 			}
 		}
 	}

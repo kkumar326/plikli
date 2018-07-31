@@ -6,7 +6,7 @@
 	<footer class="footer">
 		<div id="footer">
 			<span class="subtext"> 
-				<a href="https://www.plikli.com/" target="_blank">Plikli Content Management System</a>  
+				<a href="https://www.plikli.com/" target="_blank" rel="noopener noreferrer">Plikli Content Management System</a>  
 			</span>
 		</div>
 	</footer>

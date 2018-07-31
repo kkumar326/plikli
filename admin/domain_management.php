@@ -49,7 +49,7 @@ if($canIhaveAccess == 1){
 	
 	// if spam checking is not enabled in the admin panel
 	if(CHECK_SPAM == false){
-		$main_smarty->assign('errorText', "<b>Error:</b> You have <b>Enable spam checking</b> set to false. Please set it to true in the <a href='$my_base_url$my_plikli_base/admin/admin_config.php?page=AntiSpam' target='_blank'>admin panel</a>.");
+		$main_smarty->assign('errorText', "<b>Error:</b> You have <b>Enable spam checking</b> set to false. Please set it to true in the <a href='$my_base_url$my_plikli_base/admin/admin_config.php?page=AntiSpam' target='_blank' rel='noopener noreferrer'>admin panel</a>.");
 		$main_smarty->assign('tpl_center', '/admin/domain_blacklist_add');
 		if ($is_moderator == '1'){
 			$main_smarty->display('/admin/moderator.tpl');
