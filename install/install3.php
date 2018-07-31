@@ -25,6 +25,14 @@ if($language == 'arabic'){
 	include_once('./languages/lang_russian.php');
 }elseif($language == 'thai'){
 	include_once('./languages/lang_thai.php');
+} elseif($language == 'spanish'){
+	include_once('./languages/lang_spanish.php');
+} elseif($language == 'italian'){
+	include_once('./languages/lang_italian.php');
+} elseif($language == 'portuguese'){
+	include_once('./languages/lang_portuguese.php');
+} elseif($language == 'swedish'){
+	include_once('./languages/lang_swedish.php');
 } else {
 	$language = 'english';
 	include_once('./languages/lang_english.php');

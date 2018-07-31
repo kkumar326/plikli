@@ -23,6 +23,14 @@ if($language == 'arabic'){
 	include_once('./languages/lang_russian.php');
 }elseif($language == 'thai'){
 	include_once('./languages/lang_thai.php');
+} elseif($language == 'spanish'){
+	include_once('./languages/lang_spanish.php');
+} elseif($language == 'italian'){
+	include_once('./languages/lang_italian.php');
+} elseif($language == 'portuguese'){
+	include_once('./languages/lang_portuguese.php');
+} elseif($language == 'swedish'){
+	include_once('./languages/lang_swedish.php');
 } else {
 	include_once('./languages/lang_english.php');
 }
@@ -55,7 +63,7 @@ if (!$errors) {
 //	echo "Adding the Admin user account...<br />";
 	$userip=$db->escape($_SERVER['REMOTE_ADDR']);
 	$saltedpass=generateHash($_POST['adminpassword']);
-	$sql = "INSERT INTO `" . table_users . "` (`user_id`, `user_login`, `user_level`, `user_modification`, `user_date`, `user_pass`, `user_email`, `user_names`, `user_karma`, `user_url`, `user_lastlogin`, `user_ip`, `user_lastip`, `last_reset_request`, `user_enabled`) VALUES (1, '".$db->escape($_POST['adminlogin'])."', 'admin', now(), now(), '$saltedpass', '".$db->escape($_POST['adminemail'])."', '', '10.00', 'http://plikli.com', now(), '0', '0', now(), '1');";
+	$sql = "INSERT INTO `" . table_users . "` (`user_id`, `user_login`, `user_level`, `user_modification`, `user_date`, `user_pass`, `user_email`, `user_names`, `user_karma`, `user_url`, `user_lastlogin`, `user_ip`, `user_lastip`, `last_reset_request`, `user_enabled`) VALUES (1, '".$db->escape($_POST['adminlogin'])."', 'admin', now(), now(), '$saltedpass', '".$db->escape($_POST['adminemail'])."', '', '10.00', 'https://www.plikli.com', now(), '0', '0', now(), '1');";
 	$db->query( $sql );
 
 	// If user specified a site title, change language files.

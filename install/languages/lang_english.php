@@ -19,7 +19,7 @@
 // intro / step 1
 	$lang['WelcomeToInstaller'] = 'Welcome to Plikli CMS Installer!';
 	$lang['Introduction'] = 'Introduction';
-	$lang['WelcomeToThe'] = 'Welcome to <a href="https://www.plikli.com" target="_blank">Plikli</a>, the CMS that powers thousands of community websites. If this is your first time installing Plikli CMS, please read all of the provided instructions carefully so that you don\'t miss any important directions.';
+	$lang['WelcomeToThe'] = 'Welcome to <a href="https://www.plikli.com" target="_blank" rel="noopener noreferrer">Plikli</a>, the CMS that powers thousands of community websites. If this is your first time installing Plikli CMS, please read all of the provided instructions carefully so that you don\'t miss any important directions.';
 	$lang['Bugs'] = 'Please familiarize yourself with some of the documentation provided by the Plikli community at the <a href="https://www.plikli.com/forum-2/">Plikli Forum</a> website. We also suggest that you register an account so that you will have access to free support, modules, widgets, templates and other great resources.';
 	$lang['Installation'] = 'Installation (Please Read Carefully)';
 	$lang['OnceFamiliar'] = '<p>If this is your first time installing Plikli you should continue on this page after carefully following the directions below. If you need to <a href="./upgrade.php">upgrade your site</a> from a previous version, please run the upgrade script by clicking on the Upgrade link above. WARNING: running the installation process on an existing Plikli site database will overwrite all the data, so please make sure that you want to perform an installation if you choose to continue below.</p><br />
@@ -28,19 +28,21 @@
 		<li>Rename /languages/lang_english.conf.default to lang_english.conf</li>
 		<li>Rename /libs/dbconnect.php.default to dbconnect.php</li>
 		<li>Rename the directory /logs.default to /logs</li>
-		<li>CHMOD 0777 the following folders:</li>
-		<ol>
-			<li>/admin/backup/</li>
-			<li>/avatars/groups_uploaded/</li>
-			<li>/avatars/user_uploaded/</li>
-			<li>/cache/</li>
-			<li>/languages/ (CHMOD 0777 all of the files contained within this folder)</li>
-		</ol>
-		<li>CHMOD 0666 the following files</li>
-		<ol>
-			<li>/libs/dbconnect.php</li>
-			<li>settings.php</li>
-		</ol>
+		<li>CHMOD 0777 the following folders:
+			<ol>
+				<li>/admin/backup/</li>
+				<li>/avatars/groups_uploaded/</li>
+				<li>/avatars/user_uploaded/</li>
+				<li>/cache/</li>
+				<li>/languages/ (CHMOD 0777 all of the files contained within this folder)</li>
+			</ol>
+		</li>
+		<li>CHMOD 0666 the following files:
+			<ol>
+				<li>/libs/dbconnect.php</li>
+				<li>settings.php</li>
+			</ol>
+		</li>
 	</ol>
 	<p>You\'re now past the hardest part! Proceed to the next step to install Plikli onto your MySQL database.</p>';
 

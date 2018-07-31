@@ -23,6 +23,14 @@ if($language == 'arabic'){
 	include_once('./languages/lang_russian.php');
 }elseif($language == 'thai'){
 	include_once('./languages/lang_thai.php');
+} elseif($language == 'spanish'){
+	include_once('./languages/lang_spanish.php');
+} elseif($language == 'italian'){
+	include_once('./languages/lang_italian.php');
+} elseif($language == 'portuguese'){
+	include_once('./languages/lang_portuguese.php');
+} elseif($language == 'swedish'){
+	include_once('./languages/lang_swedish.php');
 } else {
 	$language = 'english';
 	include_once('./languages/lang_english.php');
@@ -47,7 +55,10 @@ elseif (!is_writable($file)) { $errors[]="$file " . $lang['NotEditable'] ; }
 
 $language = addslashes(strip_tags($_REQUEST['language']));
 $file="../languages/lang_$language.conf";
-if (!file_exists($file)) { $errors[]="$file " . $lang['LangNotFound'] ; }
+if (!file_exists($file)) { 
+//$errors[]="$file " . $lang['LangNotFound'] ; 
+rename("../languages/lang_$language.conf.default", "../languages/lang_$language.conf");
+}
 elseif (!is_writable($file)) { $errors[]="$file " . $lang['NotEditable'] ; }
 echo '<style type="text/css">
 body{direction:'.$site_direction.';}

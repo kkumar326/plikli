@@ -1,112 +1,125 @@
 <?php
 // header
+	$lang['plikli_version'] = '4.1.0';
 	$lang['installer'] = 'Installer';
-	$lang['Welcome'] = 'willkommen';
+	$lang['Welcome'] = 'Willkommen';
 	$lang['Install'] = 'Installieren';
-	$lang['Upgrade'] = 'aktualisieren';
-	$lang['Troubleshooter'] = 'Störungssucher';
+	$lang['Upgrade'] = 'Upgrade';
+	$lang['Upgrade-Kliqqi'] = 'Upgrade-Kliqqi';
+	$lang['Upgrade-Pligg'] = 'Upgrade-Pligg';
+	$lang['Troubleshooter'] = 'Troubleshooter';
 	$lang['Step'] = 'Schritt';
 	$lang['Readme'] = 'Readme';
-	$lang['Admin'] = 'Instrumententafel';
+	$lang['Admin'] = 'Dashboard';
 	$lang['Home'] = 'Zuhause';
-	$lang['Install_instruct'] = 'Bitte halten Sie Ihre MySQL Informationen griffbereit. Siehe Upgrade auf eine bestehende Website zu aktualisieren.';
-	$lang['Upgrade_instruct'] = 'Upgrade wird Änderungen an Ihrer MySQL-Datenbank zu machen. Achten Sie darauf, bevor Sie fortfahren sichern.';
-	$lang['Troubleshooter_instruct'] = 'Der Troubleshooter wird häufig auftretende Probleme wie falsche Ordnerberechtigungen erkennen';
+	$lang['Install_instruct'] = 'Bitte halten Sie Ihre MySQL Informationen bereit. Siehe Upgrade, um eine bestehende Site zu aktualisieren. ';
+	$lang['Upgrade_instruct'] = 'Durch die Aktualisierung werden Änderungen an Ihrer MySQL-Datenbank vorgenommen. Stellen Sie sicher, dass Sie ein Backup durchführen, bevor Sie fortfahren. ';
+	$lang['Troubleshooter_instruct'] = 'Der Troubleshooter erkennt häufig auftretende Probleme wie falsche Ordnerberechtigungen';
 
 // intro / step 1
-	$lang['WelcomeToInstaller'] = 'Willkommen in der Kliqqi CMS Installer!';
+	$lang['WelcomeToInstaller'] = 'Willkommen bei Plikli CMS Installer!';
 	$lang['Introduction'] = 'Einführung';
-	$lang['WelcomeToThe'] = 'Willkommen bei <a href="http://kliqqi.com" target="_blank">Kliqqi Content Management System</a>, der CMS, die Befugnisse Tausende von Community-Websites. Wenn dies Ihr erster Zeit mit der Installation Kliqqi, lesen Sie bitte alle den bereitgestellten Anweisungen sorgfältig, so dass Sie don\'t miss alle wichtigen Richtungen. Im Namen der Kliqqi Entwickler, würde Ich mag zu wünschen Ihnen und Ihrer neuen Webseite viel Glück.';
-	$lang['Bugs'] = 'Bitte machen Sie sich mit einigen der Unterlagen durch das Kliqqi Gemeinschaft an den vorgesehenen <a href="http://kliqqi.com/support/">Kliqqi Support</a> website. Wir schlagen auch vor, dass Sie ein Konto registrieren, so dass Sie Zugriff auf kostenlosen Support, Module, Widgets, Vorlagen und andere große Ressourcen haben wird. Wenn Sie irgendwelche Fehler, oder wenn Sie wollen einfach nur ein neues Feature vorschlagen entdecken, bitte senden Sie Ihr Feedback zu unseren ganz eigenen<a href="http://kliqqi.com/demo/">Kliqqi Demo website</a>.';
-	$lang['Installation'] = 'Installation (bitte sorgfältig gelesen)';
-	$lang['OnceFamiliar'] = '<p>Wenn dies Ihr erster Zeit mit der Installation Kliqqi sollten Sie auf dieser Seite nach sorgfältig nach den Anweisungen unten fort. Wenn Sie <a href="./upgrade.php">Rüsten Sie Ihre Website</a> von einer früheren Version, führen Sie das Upgrade-Skript, indem Sie auf den Upgrade-Link oben. ACHTUNG: läuft die Installation auf einer vorhandenen Website Kliqqi Datenbank werden alle Geschichten und Einstellungen zu überschreiben, so stellen Sie bitte sicher, dass Sie eine Installation durchführen, wenn Sie unten weiter wählen möchten.
+	$lang['WelcomeToThe'] = 'Willkommen bei <a href="https://www.plikli.com" target="_blank" rel="noopener noreferrer"> Plikli </a>, dem CMS, das tausende von Benutzern unterstützt Community-Websites. Wenn Sie das Plikli CMS zum ersten Mal installieren, lesen Sie bitte alle bereitgestellten Anweisungen sorgfältig durch, damit Sie keine wichtigen Anweisungen verpassen. ';
+	$lang['Bugs'] = 'Bitte machen Sie sich mit der Dokumentation der Plikli-Community im <a href="https://www.plikli.com/forum-2/"> Plikli Forum </a vertraut > Webseite. Wir empfehlen Ihnen außerdem, ein Konto zu registrieren, damit Sie auf kostenlosen Support, Module, Widgets, Vorlagen und andere großartige Ressourcen zugreifen können. ';
+	$lang['Installation'] = 'Installation (Bitte sorgfältig lesen)';
+	$lang['OnceFamiliar'] = '<p> Wenn Sie Plikli zum ersten Mal installieren, sollten Sie auf dieser Seite fortfahren, nachdem Sie die Anweisungen unten genau befolgt haben. Wenn Sie <a href="./upgrade.php"> Ihre Website </a> von einer früheren Version aktualisieren müssen, führen Sie das Upgrade-Skript aus, indem Sie oben auf den Link "Upgrade" klicken. WARNUNG: Wenn Sie den Installationsprozess auf einer vorhandenen Plikli-Standortdatenbank ausführen, werden alle Daten überschrieben. Stellen Sie daher sicher, dass Sie eine Installation durchführen möchten, wenn Sie unten fortfahren. </p> <br />
 	<ol>
-		<li>Benennen settings.php.default to settings.php</li>
-		<li>Benennen /languages/lang_english.conf.default to lang_english.conf</li>
-		<li>Benennen /libs/dbconnect.php.default to dbconnect.php</li>
-		<li>Benennen the directory /logs.default to /logs</li>
-		<li>CHMOD 0777 die folgenden Ordner:</li>
-		<ol>
-			<li>/admin/backup/</li>
-			<li>/avatars/groups_uploaded/</li>
-			<li>/avatars/user_uploaded/</li>
-			<li>/cache/</li>
-			<li>/languages/ (CHMOD 0777 alle Dateien in diesem Ordner enthaltenen)</li>
-		</ol>
-		<li>CHMOD 0666 die folgenden Dateien</li>
-		<ol>
-			<li>/libs/dbconnect.php</li>
-			<li>settings.php</li>
-		</ol>
+		<li> Benenne settings.php.default in settings.php </li> um
+		<li> Benennen Sie /languages/lang_english.conf.default in lang_english.conf </li> um
+		<li> Benennen Sie /libs/dbconnect.php.default in dbconnect.php </li> um
+		<li> Benennen Sie das Verzeichnis /logs.default in /logs </li> um
+		<li> CHMOD 0777 die folgenden Ordner:
+			<ol>
+				<li> /admin/backup/ </li>
+				<li> /avatars/groups_uploaded/ </li>
+				<li> /avatars/user_uploaded/ </li>
+				<li> /cache/ </li>
+				<li> /languages​​/ (CHMOD 0777 alle Dateien in diesem Ordner) </li>
+			</ol>
+		</li>
+		<li> CHMOD 0666 die folgenden Dateien:
+			<ol>
+				<li> /libs/dbconnect.php </li>
+				<li> settings.php </li>
+			</ol>
+		</li>
 	</ol>
-	Sie sind jetzt an der schwierigste Teil! Fahren Sie mit dem nächsten Schritt Kliqqi auf Ihre MySQL-Datenbank installieren.</p>';
+	<p> Sie haben jetzt den schwierigsten Teil hinter sich! Fahren Sie mit dem nächsten Schritt fort, um Plikli in Ihrer MySQL-Datenbank zu installieren. </p> ';
 
 // step 2
-	$lang['EnterMySQL'] = 'Geben Sie Ihre MySQL-Datenbank-Einstellungen unten. Wenn Sie don\'t wissen, dass Ihr MySQL-Datenbank-Einstellungen sollten Sie Ihre Webhost Dokumentation oder wenden Sie sich direkt.';
-	$lang['DatabaseName'] = 'Datenbank-Name';
-	$lang['DatabaseUsername'] = 'Database Benutzername';
-	$lang['DatabasePassword'] = 'Database Password';
-	$lang['DatabaseServer'] = 'Database Server';
-	$lang['TablePrefix'] = 'Table Prefix';
-	$lang['PrefixExample'] = '(ie: "kliqqi_" makes the tables for users become kliqqi_users)';
+	$lang['EnterMySQL'] = 'Geben Sie unten Ihre MySQL-Datenbankeinstellungen ein. Wenn Sie Ihre MySQL-Datenbankeinstellungen nicht kennen, sollten Sie Ihre Webhost-Dokumentation überprüfen oder sie direkt kontaktieren. ';
+	$lang['DatabaseName'] = 'Datenbankname';
+	$lang['DatabaseUsername'] = 'Datenbank Benutzername';
+	$lang['DatabasePassword'] = 'Datenbank Passwort';
+	$lang['DatabaseServer'] = 'Datenbankserver';
+	$lang['TablePrefix'] = 'Tabellenpräfix';
+	$lang['PrefixExample'] = '(zB: "plikli_" macht die Tabellen für Benutzer zu plikli_users)';
 	$lang['CheckSettings'] = 'Einstellungen überprüfen';
-	$lang['Errors'] = 'Bitte korrigieren Sie die obige Fehlermeldung (en), then <a class="btn btn-default btn-xs" onClick="document.location.reload(true)">Aktualisieren Sie die Seite</a>';
-	$lang['LangNotFound'] = 'wurde nicht gefunden. Bitte entfernen Sie die. Standardmäßig Erweiterung aus allen Sprachdateien und versuchen Sie es erneut.';
+	$lang['Errors'] = '<br /> <br /> Bitte beheben Sie die obigen Fehler, dann <a class = "btn btn-default btn-xs" onClick = "document.location.reload (true ) "> Aktualisieren Sie die Seite </a>';
+	$lang['LangNotFound'] = 'wurde nicht gefunden. Bitte entfernen Sie die Erweiterung \'.Default\' aus allen Sprachdateien und versuchen Sie es erneut. ';
 
 // step 3
-	$lang['ConnectionEstab'] = 'Database-Verbindung aufgebaut...';
-	$lang['FoundDb'] = 'gefunden Datenbank...';
+	$lang['ConnectionEstab'] = 'Datenbankverbindung hergestellt ...';
+	$lang['FoundDb'] = 'Datenbank gefunden ...';
 	$lang['dbconnect'] = '\'/libs/dbconnect.php\' wurde erfolgreich aktualisiert.';
-	$lang['NoErrors'] = 'Es gab keine Fehler, auf dem nächsten Schritt fort...';
-	$lang['Next'] = 'Next Step';
-	$lang['GoBack'] = 'Zurück und erneut versuchen';
-	$lang['Error2-1'] = 'Konnte nicht zu schreiben \'libs/dbconnect.php\' file.';
-	$lang['Error2-2'] = 'Konnte nicht geöffnet werden \'/libs/dbconnect.php\' file for writing.';
-	$lang['Error2-3'] = 'Verbunden mit der Datenbank, aber die Datenbank ist falsch.';
-	$lang['Error2-4'] = 'Kann keine Verbindung zur Datenbank <b> Server verbinden </ b> mit der bereitgestellten Informationen.';
+	$lang['NoErrors'] = 'Es gab keine Fehler, gehe weiter zum nächsten Schritt ...';
+	$lang['Next'] = 'Nächster Schritt';
+	$lang['GoBack'] = 'Geh zurück und versuche es noch einmal';
+	$lang['Error2-1'] = 'Konnte nicht in die \'/libs/dbconnect.php\' Datei schreiben.';
+	$lang['Error2-2'] = 'Die Datei \'/libs/dbconnect.php\' konnte nicht zum Schreiben geöffnet werden.';
+	$lang['Error2-3'] = 'Verbunden mit der Datenbank, aber der Datenbankname ist falsch.';
+	$lang['Error2-4'] = 'Kann mit den bereitgestellten Informationen keine Verbindung zum Datenbankserver herstellen.';
 
 // step 4
-	$lang['CreatingTables'] = 'Erstellen Datenbanktabellen';
-	$lang['TablesGood'] = '<strong>Tische wurden erfolgreich erstellt!</strong>';
-	$lang['Error3-1'] = '<p>Es gab ein Problem beim Erstellen der Tabellen.</p>';
-	$lang['Error3-2'] = '<p>Konnte keine Verbindung zu Datenbank herstellen.</p>';
-	$lang['EnterAdmin'] = '<p><strong>Geben Sie Ihren Administrator-Account Details unten:</strong><br />Bitte notieren Sie diese Kontoinformationen, weil es benötigt, um sich einzuloggen und konfigurieren Sie Ihre Website sein.</p>';
+	$lang['CreatingTables'] = 'Erstellen von Datenbanktabellen';
+	$lang['TablesGood'] = '<strong> Tabellen wurden erfolgreich erstellt! </strong>';
+	$lang['Error3-1'] = '<p> Beim Erstellen der Tabellen ist ein Problem aufgetreten. </p>';
+	$lang['Error3-2'] = '<p> Verbindung zur Datenbank konnte nicht hergestellt werden. </p>';
+	$lang['EnterAdmin'] = '<p> <strong> Geben Sie unten Ihre Administratorkontodaten ein: </strong> <br /> Bitte notieren Sie sich diese Kontoinformationen, da sie für die Anmeldung und Konfiguration Ihrer Website benötigt werden. < / p> ';
 	$lang['AdminLogin'] = 'Admin Login';
-	$lang['AdminPassword'] = 'Admin Password';
+	$lang['AdminPassword'] = 'Admin Passwort';
 	$lang['ConfirmPassword'] = 'Passwort bestätigen';
-	$lang['AdminEmail'] = 'Admin E-mail';
-	$lang['SiteTitleLabel'] = 'Website Name';
-	$lang['CreateAdmin'] = 'Create Admin Account';
+	$lang['AdminEmail'] = 'Admin E-Mail';
+	$lang['SiteTitleLabel'] = 'Name der Webseite';
+	$lang['CreateAdmin'] = 'Admin Account erstellen';
+	$lang['pwndPassword'] = 'Sie haben ein allgemeines und unsicheres Passwort eingegeben!';
 
 // Step 5
-	$lang['Error5-1'] = 'Bitte füllen Sie alle Felder für die Admin-Konto.';
-	$lang['Error5-2'] = 'Passwort stimmen nicht überein. Bitte gehen Sie zurück und geben Sie die Passwort-Felder.';
-	$lang['AddingAdmin'] = 'Hinzufügen des Admin Benutzerkonto...';
+	$lang['Error5-1'] = 'Bitte füllen Sie alle Felder für das Administratorkonto aus.';
+	$lang['Error5-2'] = 'Passwortfelder stimmen nicht überein. Bitte gehen Sie zurück und geben Sie die Passwortfelder erneut ein. ';
+	$lang['AddingAdmin'] = 'Hinzufügen des Admin-Benutzerkontos ...';
 	$lang['InstallSuccess'] = 'Installation abgeschlossen!';
-	$lang['InstallSuccessMessage'] = 'Glückwunsch, Sie haben eine Website eingerichtet Kliqqi CMS! Während Ihrer Website ist voll funktionsfähig an diesem Punkt, werden Sie wollen, um ein wenig aufräumen, indem Sie die nachstehenden Anweisungen, um Ihre Website zu sichern tun.';
-	$lang['WhatToDo'] = 'Was als nächstes zu tun:';
-	$lang['WhatToDoList'] = '		<li><p>chmod "/libs/dbconnect.php" back to 644, wir nicht brauchen, um dieses Bild wieder ändern.</p></li>
-		<li><p><strong>DELETE</strong> the "/install" directory from your server if you have successfully installed Kliqqi.</p></li>
-		<li><p>Login to the <a href="../admin/admin_index.php">Instrumententafel</a> mit dem Benutzer eingegebenen Informationen aus dem vorherigen Schritt. Sobald Sie in sollten Sie mit mehr Informationen darüber, wie Sie verwenden Kliqqi vorgestellt anmelden.</p></li>
-		<li><p><a href="../admin/admin_config.php">Configure your site</a> using the Instrumententafel.</p></li>
-		<li><p>Visit the <a href="http://kliqqi.com/">Kliqqi Support</a> website if you have any questions.</p></li>';
-	$lang['ContinueToSite'] = 'Continue to Your New Website';
+	$lang['InstallSuccessMessage'] = 'Herzlichen Glückwunsch, Sie haben eine Plikli CMS Website eingerichtet! Während Ihre Website zu diesem Zeitpunkt voll funktionsfähig ist, sollten Sie ein wenig aufräumen, indem Sie die unten stehenden Anweisungen befolgen, um Ihre Website zu sichern. ';
+	$lang['WhatToDo'] = 'Was nun zu tun ist:';
+	$lang['WhatToDoList'] = '<li> chmod "/libs/dbconnect.php" Zurück zu 644, wir müssen diese Datei nicht mehr ändern. </li>
+	<li> <strong> LÖSCHEN Sie </strong> das Verzeichnis "/install" von Ihrem Server, wenn Sie Plikli erfolgreich installiert haben. </li>
+	<li> Melden Sie sich am <a href="../admin/admin_index.php"> Dashboard </a> mit den Benutzerinformationen an, die Sie im vorherigen Schritt eingegeben haben. Sobald Sie sich eingeloggt haben, sollten Sie weitere Informationen zur Verwendung von Plikli erhalten. </Li>
+	<li> <a href="../admin/admin_config.php"> Konfigurieren Sie Ihre Website </a> mithilfe des Dashboards. </li>
+	<li> Besuchen Sie die <a href="https://www.plikli.com/forum-2/"> Plikli-Support </a> -Website, falls Sie Fragen haben. </li> ';
+	$lang['ContinueToSite'] = 'Weiter zu Ihrer neuen Website';
+	
 // Upgrade
-	$lang['UpgradeHome'] = '<p>Durch einen Klick auf den untenstehenden Button, wird Kliqqi Ihre Datenbank auf die neueste Version aktualisieren. Es wird auch neue Sätze durch Anhängen der neuesten Ergänzungen der Unterseite Ihres Sprachdatei. Sie müssen noch die neuen Dateien hochladen und manuell aktualisieren Sie Ihre Vorlagen, um vollständig kompatibel mit der neuesten Version.</p> <p>We recommend that you back up your website and database to your local computer before proceeding because the upgrade process will make permanent changes to your MySQL database.';
-	$lang['UpgradeAreYouSure'] = 'Sind Sie sicher, dass Sie Sie Datenbank-und Sprach-Datei aktualisieren möchten?';
-	$lang['UpgradeYes'] = 'Fahren Sie mit dem Upgrade-';
-	$lang['UpgradeLanguage'] = 'Erfolg, Kliqqi your language Datei aktualisiert. Es enthält nun die neuesten Produkte Sprache.';
-	$lang['UpgradingTables'] = '<strong>Aktualisieren Datenbank...</strong>';
-	$lang['LanguageUpdate'] = '<strong>Upgrading Language File...</strong>';
-	$lang['IfNoError'] = 'Wenn es keine Fehler angezeigt wird, ist Upgrade abgeschlossen!';
-	$lang['PleaseFix'] = 'gefallen fix the above error(s), upgrade halted!';
+	$lang['UpgradeHome'] = '<p style="text-decoration:underline"> Durch das Upgrade werden <STRONG> IRREVERSIBLE </STRONG> Änderungen an Ihrer Datenbank vorgenommen. BACKUP YOUR DATABASE TABLES, BEVOR SIE WEITERE WEITERE VERFAHREN UND SICHERSTELLEN, DASS IHRE DATENBANK MIT DEM ÜBERPRÜFTEN "DROP TABLE IF EXISTS" EXPORTIERT IST! </P> <p> VERWENDEN SIE DAS UPGRADE NICHT, WENN SIE IHRE KERNDATEIEN ANGEPASST HABEN. Zunächst müssen Sie Folgendes tun: </p>
+	<ul>
+	<li> VERWENDEN SIE EINE KOPIE DER GESPEICHERTEN DATEIEN, FÜGEN SIE IHRE DATEIEN MIT DEN NEUEN KLIQQI-DATEIEN MIT WINMERGE ODER EINER ÄHNLICHEN SOFTWARE ZUSAMMEN! </li>
+	<li> WENN SIE EINE ANDERE ALS DIE STANDARD-BOOTSTRAP-SCHABLONE VERWENDEN, VERGEWISSERN SIE SICH, DASS SIE IHRE DATEIEN MIT DER KLIQQI-BOOTSTRAP-SCHABLONE VERBINDEN, DA VIELE ÄNDERUNGEN AM CODE GEMACHT WORDEN SIND. (SIEHE HINWEISE NACH DEM UPGRADE) </li>
+	</ul>
+	<br />
+	Aktualisieren Sie Ihre alten Pligg oder Kliqqi oder Plikli 4.0.0 Versionen auf Plikli '. $lang['plikli_version']. 'wird Ihre Datenbanktabellen auf die neueste Version ändern. <br />';
+	$lang['UpgradeAreYouSure'] = 'Sind Sie sicher, dass Sie Ihre Datenbank und Sprachdatei aktualisieren möchten?';
+	$lang['UpgradeYes'] = 'Mit Upgrade fortfahren';
+	$lang['UpgradeLanguage'] = 'Erfolg, Plikli hat Ihre Sprachdatei aktualisiert. Es enthält jetzt die neuesten Sprachelemente. ';
+	$lang['UpgradeTables'] = '<strong> Datenbank wird aktualisiert ... </strong>';
+	$lang['LanguageUpdate'] = '<strong> Sprachdatei wird aktualisiert ... </strong>';
+	$lang['IfNoError'] = 'Wenn keine Fehler angezeigt wurden, ist das Upgrade abgeschlossen!';
+	$lang['PleaseFix'] = 'Bitte beheben Sie die oben genannten Fehler, Upgrade gestoppt!';
 	
 // Errors
 	$lang['NotFound'] = 'wurde nicht gefunden!';
-	$lang['CacheNotFound'] = 'wurde nicht gefunden! Create a directory called /cache in your root directory and set it to CHMOD 777.';
-	$lang['DbconnectNotFound'] = 'wurde nicht gefunden! Try renaming dbconnect.php.default to dbconnect.php';
-	$lang['SettingsNotFound'] = 'wurde nicht gefunden! Try renaming settings.php.default to settings.php';
-	$lang['ZeroBytes'] = 'is 0 bytes.';
-	$lang['NotEditable'] = 'ist nicht beschreibbar. gefallen CHMOD it to 777';
+	$lang['CacheNotFound'] = 'wurde nicht gefunden! Erstellen Sie in Ihrem Stammverzeichnis ein Verzeichnis namens / cache und setzen Sie es auf CHMOD 777. ';
+	$lang['DbconnectNotFound'] = 'wurde nicht gefunden! Versuchen Sie, dbconnect.php.default in dbconnect.php umzubenennen ';
+	$lang['SettingsNotFound'] = 'wurde nicht gefunden! Versuchen Sie, settings.php.default in settings.php umzubenennen. ';
+	$lang['ZeroBytes'] = 'ist 0 Bytes.';
+	$lang['NotEditable'] = 'ist nicht beschreibbar. Bitte CHMOD es auf 777 ';
 	
 ?>
