@@ -1,5 +1,5 @@
 <?php
-
+header('Content-Type: text/html; charset=utf-8');
 include_once('internal/Smarty.class.php');
 $main_smarty = new Smarty;
 
@@ -8,6 +8,23 @@ include(mnminclude.'html1.php');
 include(mnminclude.'link.php');
 include(mnminclude.'smartyvariables.php');
 include_once(mnminclude.'user.php');
+
+$sanitezedPOST = array();
+foreach ($_POST as $key => $value) {
+	if ($key == 'reg_username') {
+		$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_STRING); 
+	}elseif ($key == 'reg_email') {
+		if (filter_var(filter_var($value, FILTER_SANITIZE_EMAIL), FILTER_VALIDATE_EMAIL)) {
+			$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_EMAIL);
+		}else{
+			$sanitezedPOST[$key] = '';
+		}
+	}else{
+		$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_STRING);
+	}
+}
+$_REQUEST = $_POST = $sanitezedPOST;
+
 /*Redwine: preventing the register page from loading if the user is already signed in! */
 global $current_user;
 if ($current_user->authenticated == 1) {
@@ -143,8 +160,8 @@ function register_check_errors($username, $email, $password, $password2){
 
 	$vars = array('username' => $username, 'email' => $email, 'password' => $password);
 	check_actions('register_check_errors', $vars);
-
-	if(isset($vars['error']) && $vars['error'] == true){
+	/*** Redwine: the above 2 lines check for errors in /modules/captcha/captcha_main.php. The return was not registering the errors found by function register_check_errors on line 120. I corrected the if statement by adding  || $error == true to assign the errors to smarty and display them in the register form ***/
+	if((isset($vars['error']) && $vars['error'] == true) || $error == true){
 		$error = true;
 		if ($vars['username_error'])
 		    $form_username_error[] = $vars['username_error'];
