@@ -129,7 +129,7 @@ if($canIhaveAccess == 1)
 			$username=trim($db->escape($_POST['username']));
 			$password=trim($db->escape($_POST['password']));
 			$email=trim($db->escape($_POST['email']));
-			$saltedpass=generateHash($password);
+			$saltedpass=generatePassHash($password);
 			
 			// Only Admin accounts can create moderators and other admins
 			if ($amIadmin){
@@ -415,7 +415,7 @@ if($canIhaveAccess == 1)
 					$subject = $main_smarty->get_config_vars("PLIKLI_Visual_Name").' '.$main_smarty->get_config_vars("PLIKLI_PassEmail_Subject");
 
 					$password = substr(md5(uniqid(rand(), true)),0,8);
-					$saltedPass = generateHash($password);
+					$saltedPass = generatePassHash($password);
 					$db->query('UPDATE `' . table_users . "` SET `user_pass` = '$saltedPass' WHERE `user_login` = '".sanitize($_GET["user"], 3)."'");
 					$body = sprintf($main_smarty->get_config_vars("PLIKLI_PassEmail_PassBody"),
 						$main_smarty->get_config_vars("PLIKLI_Visual_Name"),

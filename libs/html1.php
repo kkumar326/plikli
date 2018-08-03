@@ -657,6 +657,36 @@ function generateHash($plainText, $salt = null){
     return $salt . sha1($salt . $plainText);
 }
 
+function generatePassHash($plainText){
+	if (!function_exists('password_hash')) {
+		require "password.php";
+		$salt = substr(md5(uniqid(rand(), true)), 0, SALT_LENGTH);
+		return 'bcrypt:' . $salt . password_hash (sha1 ($salt . $plainText) , PASSWORD_BCRYPT);
+	}else{
+		$salt = substr(md5(uniqid(rand(), true)), 0, SALT_LENGTH);
+		return 'bcrypt:' . $salt . password_hash (sha1 ($salt . $plainText) , PASSWORD_BCRYPT);
+	}
+}
+
+function verifyPassHash($plainText, $hashedPass){
+    $hashTrim = substr($hashedPass, (SALT_LENGTH + 7));
+    $salt = substr($hashedPass, 7, SALT_LENGTH);
+	if (!function_exists('password_verify')) {
+		require "password.php";
+		if(password_verify(sha1($salt.$plainText), $hashTrim)){
+			return true;
+		} else{
+			return false;
+		}
+	}else{
+		if(password_verify(sha1($salt.$plainText), $hashTrim)){
+			return true;
+		} else{
+			return false;
+		}
+	}
+}
+
 function getmyFullurl($x, $var1="", $var2="", $var3="") {
 	return my_base_url . getmyurl($x, $var1, $var2, $var3);
 }

@@ -965,6 +965,14 @@ echo '<fieldset><legend>Update Admin user_url in users table</legend><ul>';
 	echo '<li>'.printf("Affected rows (UPDATED user_url for admin user in the users table): %d\n", $handle->affected_rows).' <img src="'.$marks.'" class="iconalign" /></li>';
 echo '</ul></fieldset><br />';
 
+echo '<fieldset><legend>modifying user_password column in Users table.</legend><ul>';
+	$sql = "ALTER TABLE  `" . table_prefix."users`  
+	CHANGE COLUMN `user_pass` `user_pass` VARCHAR(80) NOT NULL DEFAULT '';";
+	$sql_alter_user_password - $handle->query($sql);
+	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
+	echo '<li>Updated user_password column in Users table to VARCHAR(80)</li>';
+echo '</ul></fieldset><br />';
+
 echo '<fieldset><legend>Updating data in Widgets table.</legend><ul>';
 	$sql = "select `name` from `" . table_prefix."widgets`";
 	$sql_widgets = $handle->query($sql);

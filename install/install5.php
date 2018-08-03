@@ -62,7 +62,7 @@ if (!$errors) {
 	
 //	echo "Adding the Admin user account...<br />";
 	$userip=$db->escape($_SERVER['REMOTE_ADDR']);
-	$saltedpass=generateHash($_POST['adminpassword']);
+	$saltedpass=generatePassHash($_POST['adminpassword']);
 	$sql = "INSERT INTO `" . table_users . "` (`user_id`, `user_login`, `user_level`, `user_modification`, `user_date`, `user_pass`, `user_email`, `user_names`, `user_karma`, `user_url`, `user_lastlogin`, `user_ip`, `user_lastip`, `last_reset_request`, `user_enabled`) VALUES (1, '".$db->escape($_POST['adminlogin'])."', 'admin', now(), now(), '$saltedpass', '".$db->escape($_POST['adminemail'])."', '', '10.00', 'https://www.plikli.com', now(), '0', '0', now(), '1');";
 	$db->query( $sql );
 

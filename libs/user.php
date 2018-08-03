@@ -53,7 +53,7 @@ function Create(){
 
 			require_once(mnminclude.'check_behind_proxy.php');
 			$userip=check_ip_behind_proxy();
-			$saltedpass=generateHash($this->pass);
+			$saltedpass=generatePassHash($this->pass);
 			
 			if(plikli_validate()){
 				if ($db->query("INSERT IGNORE INTO " . table_users . " (user_login, user_email, user_pass, user_date, user_ip,user_categories) VALUES ('".$this->username."', '".$this->email."', '".$saltedpass."', now(), '".$userip."', '')")) {
@@ -136,7 +136,7 @@ function Create(){
 		$user_pinterest = $db->escape(htmlentities($this->pinterest));
 		$user_avatar_source = $db->escape($this->avatar_source);
 		if (strlen($user_pass) < 49){
-			$saltedpass=generateHash($user_pass);}
+			$saltedpass=generatePassHash($user_pass);}
 		else{
 			$saltedpass=$user_pass;}
 			

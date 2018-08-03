@@ -47,7 +47,7 @@ if (isset($_REQUEST["mode"]) && sanitize($_REQUEST["mode"], 3) == "newuser"){
 		$password=trim($db->escape($_POST['password']));
 		$email=trim($db->escape($_POST['email']));
 		$level=trim($db->escape($_POST['level']));
-		$saltedpass=generateHash($password);
+		$saltedpass=generatePassHash($password);
 			if (!isset($username) || strlen($username) < 3) {
 				$main_smarty->assign(username_error, $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_UserTooShort'));			
 			}

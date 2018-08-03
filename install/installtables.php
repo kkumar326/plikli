@@ -753,7 +753,7 @@ function plikli_createtables($conn) {
 	  `user_level` enum('normal','moderator','admin','Spammer') collate utf8_general_ci NOT NULL default 'normal',
 	  `user_modification` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	  `user_date` timestamp NOT NULL,
-	  `user_pass` varchar(64) collate utf8_general_ci NOT NULL default '',
+	  `user_pass` varchar(80) collate utf8_general_ci NOT NULL default '',
 	  `user_email` varchar(128) collate utf8_general_ci NOT NULL default '',
 	  `user_names` varchar(128) collate utf8_general_ci NOT NULL default '',
 	  `user_karma` decimal(10,2) default '0.00',

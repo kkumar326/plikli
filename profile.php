@@ -11,6 +11,9 @@ include(mnminclude.'user.php');
 include(mnminclude.'csrf.php');
 include(mnminclude.'smartyvariables.php');
 
+$_GET['login'] = sanitize($_GET['login'], 3);
+$_REQUEST['login'] = $_GET['login'] = preg_replace('/[^\p{L}\p{N}_\s\/]/u', '', $_GET['login']);
+
 #ini_set('display_errors', 1);
 error_reporting(E_ALL ^ E_NOTICE);
 
@@ -298,6 +301,56 @@ function save_profile() {
 	// Redwine: if valid TOKEN, proceed. A valid integer must be equal to 2.
 	if ($CSRF->check_valid(sanitize($_POST['token'], 3), 'profile_change') == 2){
 		if(!isset($_POST['save_profile']) || !$_POST['process'] || (!$canIhaveAccess && sanitize($_POST['user_id'], 3) != $current_user->user_id)) return;
+		//Redwine: sanitizing the POST and REQUEST
+		$sanitezedPOST = array();
+		foreach ($_REQUEST as $key => $value) {
+			if ($key == 'login') {
+				$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_STRING);
+			}elseif ($key == 'user_login') {
+				$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_STRING); 
+			}elseif ($key == 'email') {
+				if (filter_var(filter_var($value, FILTER_SANITIZE_EMAIL), FILTER_VALIDATE_EMAIL)) {
+					$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_EMAIL);
+				}else{
+					$sanitezedPOST[$key] = '';
+				}
+			}elseif ($key == 'public_email') {
+				if (filter_var(filter_var($value, FILTER_SANITIZE_EMAIL), FILTER_VALIDATE_EMAIL)) {
+					$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_EMAIL);
+				}else{
+					$sanitezedPOST[$key] = '';
+				}
+			}elseif ($key == 'url') {
+				if (filter_var(filter_var($value, FILTER_SANITIZE_URL), FILTER_VALIDATE_URL)) {
+					$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_URL);
+				}else{
+					$sanitezedPOST[$key] = '';
+				}
+			}elseif ($key == 'process') {
+				if (filter_var(filter_var($value, FILTER_SANITIZE_NUMBER_INT), FILTER_VALIDATE_INT)) {
+					$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+				}else{
+					$sanitezedPOST[$key] = '';
+				}
+			}elseif ($key == 'user_id') {
+				if (filter_var(filter_var($value, FILTER_SANITIZE_NUMBER_INT), FILTER_VALIDATE_INT)) {
+					$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+				}else{
+					$sanitezedPOST[$key] = '';
+				}
+			}elseif ($key == 'chack') {
+				foreach ($_REQUEST['chack'] as $k => $v) {
+					if (filter_var(filter_var($v, FILTER_SANITIZE_NUMBER_INT), FILTER_VALIDATE_INT)) {
+						$sanitezedPOST[$key][$k] = filter_var($v, FILTER_SANITIZE_NUMBER_INT);
+					}else{
+						$sanitezedPOST[$key][$k] = '';
+					}
+				}
+			}else{
+				$sanitezedPOST[$key] = filter_var($value, FILTER_SANITIZE_STRING);
+			}
+		}
+		$_POST = $_REQUEST = $sanitezedPOST;
 		
 		if ($user->email!=sanitize($_POST['email'], 3))
 		{
@@ -430,7 +483,7 @@ function save_profile() {
 			 $user_login=sanitize($_POST['user_login'], 2);
 				
 			if (preg_match('/\pL/u', 'a')) {	// Check if PCRE was compiled with UTF-8 support
-			if (!preg_match('/^[_\-\d\p{L}\p{M}]+$/iu',$user_login)) { // if username contains invalid characters
+			if (!preg_match('/^[_\d\p{L}\p{M}]+$/iu',$user_login)) { // if username contains invalid characters
 			$savemsg = $main_smarty->get_config_vars('PLIKLI_Visual_Register_Error_UserInvalid');
 			return $savemsg;
 			}
@@ -456,15 +509,14 @@ function save_profile() {
 	    }
 	
 		if(!empty($_POST['newpassword']) || !empty($_POST['newpassword2'])) {
-			$oldpass = sanitize($_POST['oldpassword'], 2);
+			$oldpass = sanitize($_POST['oldpassword'], 0);
 			$userX=$db->get_row("SELECT user_id, user_pass, user_login FROM " . table_users . " WHERE user_login = '".$user->username."'");
-			$saltedpass=generateHash($oldpass, substr($userX->user_pass, 0, SALT_LENGTH));
-			if($userX->user_pass == $saltedpass){
+            if(verifyPassHash($oldpass, $userX->user_pass)){
 				if(sanitize($_POST['newpassword'], 3) !== sanitize($_POST['newpassword2'], 3)) {
 					$savemsg = $main_smarty->get_config_vars("PLIKLI_Visual_Profile_BadPass");
 					return $savemsg;
 				} else {
-					$saltedpass=generateHash(sanitize($_POST['newpassword'], 3));
+					$saltedpass=generatePassHash(sanitize($_POST['newpassword'], 3));
 					$user->pass = $saltedpass;
 					$saved['pass']=1;
 				}
@@ -477,7 +529,7 @@ function save_profile() {
 		$user->store();
 		$user->read();
 		if($saved['pass']==1 || $saved['username']==1)
-		 $current_user->Authenticate($user->username, $user->pass, false, $user->pass);
+		 $current_user->Authenticate($user->username, $user->pass, false);
 		else{
 		 $current_user->Authenticate($user->username, $user->pass);
 		 $saved['profile']=1;

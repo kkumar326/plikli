@@ -306,6 +306,14 @@ printf("Affected rows (DELETE): %d\n", $handle->affected_rows);
 	echo '<li>Updated the description of user language, replacing kliqqi instances with plikli. <img src="'.$marks.'" class="iconalign" /></li>';
 //end work on CONFIG Table
 
+echo '<fieldset><legend>modifying user_password column in Users table.</legend><ul>';
+	$sql = "ALTER TABLE  `" . table_prefix."users`  
+	CHANGE COLUMN `user_pass` `user_pass` VARCHAR(80) NOT NULL DEFAULT '';";
+	$sql_alter_user_password - $handle->query($sql);
+	printf("Affected rows (UPDATE): %d\n", $handle->affected_rows);
+	echo '<li>Updated user_password column in Users table to VARCHAR(80)</li>';
+echo '</ul></fieldset><br />';
+
 //start work on misc_data table, setting all captcha and solvemedia entries
 echo '<fieldset><legend>Updating the misc_data table. If an entry needs updating it is marked <img src="ok.png" class="iconalign" />; else, it is marked <img src="notok.png" class="iconalign" /></legend><ul>';
 	$sql = "select * from `" . table_prefix."misc_data` where name like '%adcopy%'";

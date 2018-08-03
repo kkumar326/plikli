@@ -429,7 +429,7 @@ $sql = "ALTER TABLE  `" . table_prefix."users`
 CHANGE  `user_login` `user_login` varchar(32) NOT NULL DEFAULT '',
 CHANGE  `user_level`  `user_level` ENUM(  'normal',  'moderator',  'admin', 'Spammer' ) NOT NULL DEFAULT 'normal',
 CHANGE  `user_modification` `user_modification` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-CHANGE  `user_pass` `user_pass` varchar(64) NOT NULL DEFAULT '',
+CHANGE  `user_pass` `user_pass` varchar(80) NOT NULL DEFAULT '',
 CHANGE  `user_email` `user_email` varchar(128) NOT NULL DEFAULT '',
 CHANGE  `user_names` `user_names` varchar(128) NOT NULL DEFAULT '',
 CHANGE  `user_url` `user_url` varchar(128) NOT NULL DEFAULT '',

@@ -127,7 +127,7 @@ if($user){
 				
 				if (mail($to, $subject, $body, $headers))
 				{
-					$saltedPass = generateHash($password);
+					$saltedPass = generatePassHash($password);
 					$db->query("UPDATE `" . table_users . "` SET `user_pass` = '".$saltedPass."', `last_reset_request` = FROM_UNIXTIME('".time()."'), `last_reset_code` = '' WHERE `user_login` = '".$user->user_login."'");
 				
 					$current_user->Authenticate($user->user_login, $password);
