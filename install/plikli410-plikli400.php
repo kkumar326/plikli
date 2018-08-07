@@ -72,7 +72,11 @@ $pattern = '/[^0-9-.]/i';
 $replacement = '';
 $mysqlServerVersion = $handle->server_info;
 $mysqlServerVersion = preg_replace($pattern, $replacement, $mysqlServerVersion);
+if (strpos($mysqlServerVersion, '-') > 0){ 
 $mysqlServerVersion = strstr($mysqlServerVersion, '-', true);
+}else{
+	$mysqlServerVersion = $mysqlServerVersion;
+}
 
 if ($mysqlServerVersion < '5.0.3') {
 	$urllength = '255';

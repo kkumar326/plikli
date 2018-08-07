@@ -76,7 +76,11 @@ if($conn = @mysqli_connect($dbhost,$dbuser,$dbpass)) {
 				$pattern = '/[^0-9-.]/i';
 				$replacement = '';
 				$mysqlServerVersion = preg_replace($pattern, $replacement, $mysqlServerVersion);
+				if (strpos($mysqlServerVersion, '-') > 0){ 
 				$mysqlServerVersion = strstr($mysqlServerVersion, '-', true);				
+				}else{
+					$mysqlServerVersion = $mysqlServerVersion;
+				}				
 				//echo "Your MySQL Server version is => $theMySqlVersion";
 				if (version_compare($mysqlServerVersion, '5.0.3', '>=')) {
 					$warning_mysql_Server_version = "You have what Plikli CMS needs to function properly, MySQL Server Version ". $mysqlServerVersion; 

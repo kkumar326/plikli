@@ -57,7 +57,11 @@ $pattern = '/[^0-9-.]/i';
 $replacement = '';
 
 $mysqlClientversion = preg_replace($pattern, $replacement, $mysqlClientversion); 
+if (strpos($mysqlClientversion, '-') > 0){ 
 $mysqlClientversion = strstr($mysqlClientversion, '-', true);
+}else{
+	$mysqlClientversion = $mysqlClientversion;
+}
 
 $phpversion = phpversion();
 
