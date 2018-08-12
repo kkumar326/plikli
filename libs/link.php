@@ -214,7 +214,7 @@ class Link {
 		$link_title = $db->escape($this->title);
 		$link_title_url = $db->escape($this->title_url);
 		if($link_title_url == ""){$link_title_url = makeUrlFriendly($this->title, $this->id);}
-		$link_tags = $db->escape($this->tags);
+		$link_tags = preg_replace('/[^\p{L}\p{N}_\s\,]/u', '', $this->tags); //$db->escape($this->tags);
 		$link_content = $db->escape($this->content);
 		$link_field1 = $db->escape($this->link_field1);
 		$link_field2 = $db->escape($this->link_field2);

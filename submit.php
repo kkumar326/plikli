@@ -167,9 +167,10 @@ function do_submit1() {
 	{
 	    $linkres->get($url);
 	    if (isset($_POST['title']) && !empty($_POST['title']))
-	    	$linkres->title = $db->escape(stripslashes(sanitize($_POST['title'], 4, $Story_Content_Tags_To_Allow)));
+	    	$linkres->title = $db->escape(stripslashes(sanitize(trim($_POST['title']), 4, $Story_Content_Tags_To_Allow)));
 	    if (isset($_POST['tags']) && !empty($_POST['tags']))
 	    	$linkres->tags = stripslashes(sanitize($_POST['tags'], 4));
+			$linkres->tags = preg_replace('/[^\p{L}\p{N}_\s\,]/u', '', $linkres->tags);
 	    if (isset($_POST['description']) && !empty($_POST['description']))
 	    	$linkres->content = stripslashes(sanitize($_POST['description'], 4, $Story_Content_Tags_To_Allow));
 
@@ -395,7 +396,7 @@ function do_submit2() {
 	$thecat = get_cached_category_data('category_id', $linkres->category);
 	$main_smarty->assign('request_category_name', $thecat->category_name);
 
-	$linkres->title = stripslashes(sanitize($_POST['title'], 3));
+	$linkres->title = stripslashes(sanitize(trim($_POST['title']), 3));
 	$linkres->title_url = makeUrlFriendly($linkres->title, $linkres->id);
 	$linkres->tags = tags_normalize_string(stripslashes(sanitize($_POST['tags'], 3)));
 	$linkres->content = close_tags(stripslashes(sanitize($_POST['bodytext'], 4, $Story_Content_Tags_To_Allow)));
