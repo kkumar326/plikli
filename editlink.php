@@ -101,8 +101,8 @@ if ($link) {
 						if ($linkres->category != sanitize($_POST["category"], 3)){
 							$body = $body . $main_smarty->get_config_vars('PLIKLI_Visual_Submit2_Category') . " change\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_PreviousText') . ": " . GetCatName($linkres->category) . "\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_NewText') . ": " . GetCatName(sanitize($_POST["category"], 3)) . "\r\n\r\n";
 						}
-						if ($linkres->title != sanitize($_POST["title"], 4, $Story_Content_Tags_To_Allow)){
-							$body = $body . $main_smarty->get_config_vars('PLIKLI_Visual_Submit2_Title') . " change\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_PreviousText') . ": " . $linkres->title . "\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_NewText') . ": " . sanitize($_POST["title"], 3) . "\r\n\r\n";
+						if ($linkres->title != sanitize(trim($_POST["title"]), 4, $Story_Content_Tags_To_Allow)){
+							$body = $body . $main_smarty->get_config_vars('PLIKLI_Visual_Submit2_Title') . " change\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_PreviousText') . ": " . $linkres->title . "\r\n\r\n" . $main_smarty->get_config_vars('PLIKLI_Visual_EditStory_Email_NewText') . ": " . sanitize(trim($_POST["title"]), 3) . "\r\n\r\n";
 						}      
 					
 						if ($linkres->content != close_tags(sanitize($_POST["bodytext"], 4, $Story_Content_Tags_To_Allow))) {
@@ -145,8 +145,8 @@ if ($link) {
 				}else{
 					$linkres->category=sanitize($_POST['category'], 3);
 			}
-			if($linkres->title != stripslashes(sanitize($_POST['title'], 3))){
-				$linkres->title = stripslashes(sanitize($_POST['title'], 3));
+			if($linkres->title != stripslashes(sanitize(trim($_POST['title']), 3))){
+				$linkres->title = stripslashes(sanitize(trim($_POST['title']), 3));
 				$linkres->title_url = makeUrlFriendly($linkres->title, $linkres->id);
 			}
 			
